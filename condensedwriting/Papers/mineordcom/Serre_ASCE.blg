@@ -7,11 +7,9 @@ Database file #1: Serre_ASCE.bib
 Warning--string name "pa" is undefined
 --line 735 of file Serre_ASCE.bib
 Warning--empty title in Bonneton-Lannes-2009-16601
-`address' is a missing field, not a string, for entry Zoppou-2014
-while executing---line 3269 of file ascelike.bst
 You've used 24 entries,
             2831 wiz_defined-function locations,
-            771 strings with 9311 characters,
+            772 strings with 9335 characters,
 and the built_in function-call counts, 12804 in all, are:
 = -- 1289
 > -- 429
@@ -50,4 +48,4 @@ warning$ -- 1
 while$ -- 70
 width$ -- 0
 write$ -- 315
-(There was 1 error message)
+(There were 2 warnings)
