@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{G for soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{Cell Averaged G}
+We have:
+\[G = uh - \frac{\partial}{\partial x} \left(\frac{h^3}{3} \frac{\partial u}{\partial x}\right)\]
+
+For a soliton we have:
+\[h(x,t) = a_0 + a_1 sech^2\left(\kappa \left(x -ct\right)\right)\]
+\[u(x,t) = c \left(1 - \frac{a_0}{h(x,t)}\right)\]
+%Typo in theses!!!
+\[\kappa = \frac{\sqrt{3a_1}}{2a_0 \sqrt{a_0 + a_1}}\]
+\[ c = \sqrt{g(a_0 + a_1)}\]
+
+Let's focus on $t = 0$
+
+\[h(x) = a_0 + a_1 sech^2\left(\kappa x\right)\]
+\[u(x) = c \left(1 - \frac{a_0}{h(x)}\right)\]
+\[\kappa = \frac{\sqrt{3a_1}}{2 \sqrt{a_0 \left(a_0 + a_1\right)}}\]
+\[ c = \sqrt{g(a_0 + a_1)}\]
+So we have
+\[ \frac{\partial}{\partial x }u(x,t) =  - ca_0 \frac{\partial}{\partial x } \left(\frac{1}{h(x,t)}\right)\]
+
+\[ = ca_0 \left[\frac{\partial h}{\partial x}\frac{1}{h^2}\right]\]
+
+Multiplying by $\frac{h^3}{3}$
+
+\[\frac{h^3}{3} \frac{\partial}{\partial x }u(x,t) = \frac{ca_0}{3}h  \left[\frac{\partial h}{\partial x}\right]\]
+
+Taking the derivative:
+\[\frac{\partial}{\partial x} \left(\frac{h^3}{3} \frac{\partial}{\partial x }u \right) =\frac{\partial}{\partial x} \left(\frac{ca_0}{3}h \frac{\partial h}{\partial x} \right)\]
+
+\[= \frac{ca_0}{3} \frac{\partial}{\partial x} \left(h \frac{\partial h}{\partial x} \right)\]
+
+\[= \frac{ca_0}{3} \left(h \frac{\partial^2 h}{\partial x^2} + \left(\frac{\partial h}{\partial x}\right)^2  \right)\]
+
+So we have:
+\[\frac{\partial}{\partial x} \left(\frac{h^3}{3} \frac{\partial}{\partial x }u \right) = \frac{ca_0}{3} \left(h \frac{\partial^2 h}{\partial x^2} + \left(\frac{\partial h}{\partial x}\right)^2  \right) \]
+
+Looking at momentum we have:
+\[uh = c \left(h - a_0\right) \]
+
+So G is:
+
+\[G =  c \left(h - a_0\right) - \frac{ca_0}{3} \left(h \frac{\partial^2 h}{\partial x^2} + \left(\frac{\partial h}{\partial x}\right)^2  \right)  \]
+
+
+We will now calculate the derivatives of h:
+\[h = a_0 + a_1 sech^2\left(\kappa x\right)\]
+
+\[\frac{\partial h}{\partial x} =  a_1 \frac{\partial }{\partial x}  sech^2\left(\kappa x \right)\]
+
+\[ = a_1 \times 2 \times \kappa \times - tanh(\kappa x)sech(\kappa x) \times sech(\kappa x)\]
+
+\[ \frac{\partial h}{\partial x} = - 2a_1\kappa tanh(\kappa x )sech^2(\kappa x )\]
+
+\[ \frac{\partial^2 h}{\partial x^2} = - 2a_1\kappa \frac{\partial}{\partial x} \left(tanh(\kappa x)sech^2(\kappa(x )\right)\]
+
+%from wolfram (do some working somwhere else, I think the form befoire was correct as well)
+\[ \frac{\partial^2 h}{\partial x^2} = - 2a_1\kappa \left(-\kappa \left(cosh(2 \kappa x) - 2\right)sech^4(\kappa x)\right)\]
+
+\[ \frac{\partial^2 h}{\partial x^2} = 2a_1\kappa^2 \left(\left(cosh(2 \kappa x) - 2\right)sech^4(\kappa x)\right)\]
+
+From before we had:
+\[ \frac{\partial^2 h}{\partial x^2} = - 2a_1\kappa \frac{\partial}{\partial x} \left(tanh(\kappa x)sech^2(\kappa(x )\right)\]
+
+\[ \frac{\partial^2 h}{\partial x^2} = - 2a_1\kappa \left[ \frac{\partial}{\partial x}\left(tanh(\kappa x )\right)sech^2( \kappa x)  + \frac{\partial}{\partial x}\left(sech^2(\kappa x)\right)tanh(\kappa x ) \right] \]
+
+
+\[ \frac{\partial^2 h}{\partial x^2} = - 2a_1\kappa^2 \left[ \left( 1-tanh^2(\kappa x )\right)sech^2( \kappa x)  -2 \left(sech^2(\kappa x)\right)tanh^2(\kappa x ) \right] \]
+
+\[ \frac{\partial^2 h}{\partial x^2} = - 2a_1\kappa^2 sech^2( \kappa x) \left[ ( 1-3tanh^2(\kappa x ) \right] \]
+
+
+\end{document}

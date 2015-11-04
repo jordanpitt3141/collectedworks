@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{SWW soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{SWW soliton}
+The continuity equation is:
+\begin{equation}
+\label{coneq1}
+h_t + uh_x + u_xh = 0
+\end{equation}
+
+the momentum equation is
+\[\left(uh\right)_t + \left(u^2h + g\frac{h^2}{2}\right)_x = 0\]
+expanding
+
+\[u_th + uh_t + \left(u^2h\right)_x + ghh_x = 0\]
+
+\[u_th + uh_t + 2uu_xh + u^2h_x  + ghh_x = 0\]
+
+using \eqref{coneq1}
+
+\[u_th - u^2h_x - uu_xh  + 2uu_xh + u^2h_x  + ghh_x = 0\]
+
+\[u_th + uu_xh  + ghh_x = 0\]
+when $h > 0$
+\begin{equation}
+\label{veleq1}
+u_t + uu_x  + gh_x = 0
+\end{equation}
+
+want solutions to \eqref{coneq1} and \eqref{veleq1} such that
+
+\[h(x,t) = \phi(y) ,\quad y = x -ct\]
+\[u(x,t) = \psi(y) ,\quad y = x -ct\]
+
+Substituting these into \eqref{coneq1} gives
+\[-c\phi'(y) + \psi(y)\phi'(y) + \psi'(y)\phi(y) = 0\]
+
+\[ \left[\psi(y) - c\right]\phi'(y) + \psi'(y)\phi(y) = 0\]
+\begin{equation}
+\label{eq1}
+\left[\psi(y) - c\right]\phi'(y) + \psi'(y)\phi(y) = 0
+\end{equation}
+
+Substituting these into \eqref{veleq1} gives
+\[-c\psi'(y) + \psi(y)\psi'(y)  + g\phi'(y) = 0\]
+
+\[\left[\psi(y) -c\right]\psi'(y) + g\phi'(y) = 0\]
+\begin{equation}
+\label{eq2}
+\left[\psi(y) -c\right]\psi'(y) + g\phi'(y) = 0
+\end{equation}
+
+Rearranging \eqref{eq2} we get:
+
+\[\left[\psi(y) -c\right]\psi'(y) = - g\phi'(y)\]
+\[\left[\psi(y) -c\right] = \frac{- g\phi'(y)}{\psi'(y)}\]
+
+subbing into \eqref{eq1}:
+
+\[\frac{- g\phi'(y)}{\psi'(y)}\phi'(y) + \psi'(y)\phi(y) = 0\]
+
+\[\left(\psi'(y)\right)^2\phi(y) =g \left(\phi'(y)\right)^2\]
+
+\[\psi'(y)= \sqrt{g}\frac{\phi'(y)}{\sqrt{\phi(y)} }\]
+
+In particular since $(\sqrt{f(x)})' = f(x)f^{-1/2}(x)$ we must have
+
+\[\psi(y)= \sqrt{g}\sqrt{\phi(y)}  + D\]
+
+\[u(x,t)= \sqrt{g}\sqrt{h(x,t)}  + D\]
+
+
+
+
+
+
+
+
+
+\end{document}

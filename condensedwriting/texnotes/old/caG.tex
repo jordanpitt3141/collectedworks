@@ -1,0 +1,25 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\begin{document}
+
+\title{Messing Around with G}
+\author{Jordan Pitt / u5013521}
+
+\section{Cell Averaged G}
+We have:
+\[G = uh - \frac{\partial}{\partial x} \left(\frac{h^3}{3} \frac{\partial u}{\partial x}\right)\]
+
+To take the cell average integrate over cell and divide by its measure (length). We will denote cell averages with an over bar.
+\[ \frac{1}{\Delta x} \int_{x_i}^{x_{i+1}} G dx =\frac{1}{\Delta x} \int_{x_i}^{x_{i+1}} \left[uh - \frac{\partial}{\partial x} \left(\frac{h^3}{3} \frac{\partial u}{\partial x}\right)\right]  dx \]
+
+\[ \overline{G} =\frac{1}{\Delta x} \int_{x_i}^{x_{i+1}} uh dx - \frac{1}{\Delta x} \int_{x_i}^{x_{i+1}} \frac{\partial}{\partial x} \left(\frac{h^3}{3} \frac{\partial u}{\partial x}\right)  dx \]
+
+Leibenitz rule gives (bounds of integral dont depend on x):
+
+\[ \overline{G} =\frac{1}{\Delta x} \int_{x_i}^{x_{i+1}} uh dx - \frac{1}{\Delta x} \frac{\partial}{\partial x} \int_{x_i}^{x_{i+1}} \left(\frac{h^3}{3} \frac{\partial u}{\partial x}\right)  dx \]
+
+I dont think anything nice is going to fall out from here.
+
+
+\end{document}

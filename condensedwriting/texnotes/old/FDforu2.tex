@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[pdf]{pstricks}
+\usepackage{psfrag}
+\usepackage{pifont}
+\usepackage{epstopdf}
+%\usepackage{topcapt}
+\usepackage{lscape}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{geometry}
+\usepackage{fleqn}
+\usepackage{txfonts}
+\usepackage{wasysym}
+\usepackage{lineno}
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{times}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{longtable}
+%\usepackage{citeref}
+\usepackage[skip=0pt]{caption}
+
+% TIME ON EVERY PAGE AS WELL AS THE FILE NAME
+\usepackage{fancyhdr}
+\usepackage{currfile}
+
+\begin{document}
+\begin{subequations}\label{eq:Serre_conservative_form}
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial (\bar{u}h)}{\partial x} = 0
+\label{eq:Serre_continuity}
+\end{gather}
+\begin{gather}
+\underbrace{\underbrace{\dfrac{\partial (\bar{u}h)}{\partial t} + \dfrac{\partial}{\partial x} \left ( \bar{u}^2h + \dfrac{gh^2}{2}\right )}_{\text{Shallow Water Wave Equations}} + \underbrace{\dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial \bar{u} }{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2}  - \dfrac{\partial^2 \bar{u}}{\partial x \partial t}\right ] \right )}_{\text{Dispersion Terms}} = 0.}_{\text{Serre Equations}}
+\label{eq:Serre_momentum}
+\end{gather}
+\end{subequations}
+
+
+Want FD approximation to \eqref{eq:Serre_momentum}:
+$$\dfrac{\partial (\bar{u}h)}{\partial t} + \dfrac{\partial}{\partial x} \left ( \bar{u}^2h + \dfrac{gh^2}{2}\right ) + \dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial \bar{u} }{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2}  - \dfrac{\partial^2 \bar{u}}{\partial x \partial t}\right ] \right ) = 0$$
+
+Expanding the first term
+\[\dfrac{\partial (uh)}{\partial t} = \dfrac{\partial u}{\partial t}h + u \dfrac{\partial h}{\partial t} \]
+
+Using \eqref{eq:Serre_continuity} we see that:
+\[\dfrac{\partial u}{\partial t}h + u \dfrac{\partial h}{\partial t} = \dfrac{\partial u}{\partial t}h + u \left(-\dfrac{\partial (uh)}{\partial x}\right)\]
+\[= \dfrac{\partial u}{\partial t}h - u \left(\dfrac{\partial (u)}{\partial x}h +u\dfrac{\partial (h)}{\partial x} \right)\]
+
+\[= \dfrac{\partial u}{\partial t}h - uh \dfrac{\partial u}{\partial x} -u^2\dfrac{\partial h}{\partial x}\]
+
+So returning we have that
+
+$$\dfrac{\partial u}{\partial t}h - uh \dfrac{\partial u}{\partial x} -u^2\dfrac{\partial h}{\partial x} + \dfrac{\partial}{\partial x} \left ( u^2h + \dfrac{gh^2}{2}\right) + \dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} - u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t}\right ] \right ) = 0$$
+
+Expanding the second term gives:
+
+\[\dfrac{\partial}{\partial x} \left( u^2h + \dfrac{gh^2}{2}\right) = 2uh\frac{\partial u}{\partial x} + u^2\frac{\partial h}{\partial x} + gh\frac{\partial h}{\partial x}\]
+
+Returning gives that:
+
+$$\dfrac{\partial u}{\partial t}h - uh \dfrac{\partial u}{\partial x} -u^2\dfrac{\partial h}{\partial x} + 2uh\frac{\partial u}{\partial x} + u^2\frac{\partial h}{\partial x} + gh\frac{\partial h}{\partial x} + \dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} - u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t}\right ] \right ) = 0$$
+
+$$\dfrac{\partial u}{\partial t}h + uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + \dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} - u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t}\right ] \right ) = 0$$
+
+Finally expanding the third term:
+\[\dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} - u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t}\right ] \right ) = \dfrac{\partial}{\partial x} \left(  \dfrac{h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} - u\dfrac{h^3}{3} \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{h^3}{3}\dfrac{\partial^2 u}{\partial x \partial t} \right)\]
+
+Looking at the first of these terms:
+
+\[\dfrac{\partial}{\partial x} \left(  \dfrac{h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} \right) = h^2 \frac{\partial h}{\partial x} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} + \dfrac{2h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial^2 u}{\partial x^2} \]
+
+The second:
+\[\dfrac{\partial}{\partial x} \left( - u\dfrac{h^3}{3} \dfrac{\partial^2 u}{\partial x^2} \right) = - \frac{\partial u}{\partial x}\dfrac{h^3}{3} \dfrac{\partial^2 u}{\partial x^2} - uh^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x^2} - u\dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^3}  \]
+
+The third:
+\[\dfrac{\partial}{\partial x} \left(   - \dfrac{h^3}{3}\dfrac{\partial^2 u}{\partial x \partial t} \right) = - h^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x \partial t}   - \dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^2 \partial t}  \]
+
+So we have that:
+\begin{gather*}
+\begin{split}
+\dfrac{\partial}{\partial x} \left(  \dfrac{h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} - u\dfrac{h^3}{3} \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{h^3}{3}\dfrac{\partial^2 u}{\partial x \partial t} \right) = \\ h^2 \frac{\partial h}{\partial x} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} + \dfrac{2h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial^2 u}{\partial x^2} - \frac{\partial u}{\partial x}\dfrac{h^3}{3} \dfrac{\partial^2 u}{\partial x^2} - uh^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x^2} - u\dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^3} - h^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x \partial t}   - \dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^2 \partial t} 
+\end{split}
+\end{gather*}
+\[=h^2 \frac{\partial h}{\partial x} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} + \dfrac{h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial^2 u}{\partial x^2} - uh^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x^2} - u\dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^3} - h^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x \partial t}   - \dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^2 \partial t}\]
+
+Bringing it all together
+
+\begin{gather*}
+\begin{split}
+&\dfrac{\partial u}{\partial t}h + uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + h^2 \frac{\partial h}{\partial x} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} + \dfrac{h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial^2 u}{\partial x^2} - uh^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x^2} - u\dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^3} - h^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x \partial t}   - \dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^2 \partial t} = 0
+\end{split}
+\end{gather*}
+
+Defining 
+\[D = uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + h^2 \frac{\partial h}{\partial x} \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} + \dfrac{h^3}{3} \dfrac{\partial u }{\partial x} \dfrac{\partial^2 u}{\partial x^2} - uh^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x^2} - u\dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^3}\]
+
+The equation becomes:
+
+\[\dfrac{\partial u}{\partial t}h - h^2\frac{\partial h}{\partial x}\dfrac{\partial^2 u}{\partial x \partial t}   - \dfrac{h^3}{3}\dfrac{\partial^3 u}{\partial x^2 \partial t} + D = 0\]
+
+Using a second order finite difference approximation to the time derivatives gives:
+
+\[\dfrac{u^{n+1} - u^{n-1}}{2\Delta t}h - h^2\frac{\partial h}{\partial x}\dfrac{\left(\frac{\partial u}{\partial x}\right)^{n+1} - \left(\frac{\partial u}{\partial x}\right)^{n-1}}{2\Delta t}   - \dfrac{h^3}{3}\dfrac{\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} - \left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1}}{2\Delta t} + D = 0\]
+
+\[u^{n+1}h - u^{n-1}h - h^2\frac{\partial h}{\partial x}\left(\frac{\partial u}{\partial x}\right)^{n+1} +  h^2\frac{\partial h}{\partial x}\left(\frac{\partial u}{\partial x}\right)^{n-1} - \dfrac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} +\dfrac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} + 2\Delta tD = 0\]
+
+\[u^{n+1}h - h^2\frac{\partial h}{\partial x}\left(\frac{\partial u}{\partial x}\right)^{n+1} - \dfrac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} + 2\Delta tD  - u^{n-1}h +  h^2\frac{\partial h}{\partial x}\left(\frac{\partial u}{\partial x}\right)^{n-1} +\dfrac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} = 0\]
+
+Defining 
+\[F = 2\Delta tD  - u^{n-1}h +  h^2\frac{\partial h}{\partial x}\left(\frac{\partial u}{\partial x}\right)^{n-1} +\dfrac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1}\]
+We get that
+
+\[u^{n+1}_ih - h^2\frac{\partial h}{\partial x}\frac{u^{n+1}_{i+1} - u^{n+1}_{i-1}}{2\Delta x} - \dfrac{h^3}{3}\frac{u^{n+1}_{i+1} - 2u^{n+1}_{i} + u^{n+1}_{i-1}}{\Delta x^2} = -F\]
+
+So for a tri-diagonal matrix $A$ with diagonals
+\[a_i = \frac{h^2}{2\Delta x}\frac{\partial h}{\partial x} - \frac{h^3}{3\Delta x^2} \]
+\[b_i = h + \frac{2h^3}{3 \Delta x^2} \]
+
+\[c_i = -\frac{h^2}{2\Delta x}\frac{\partial h}{\partial x} - \frac{h^3}{3\Delta x^2} \]
+
+\[\boldsymbol{A}\boldsymbol{u}^{n+1} =\boldsymbol{F}\]
+
+
+
+
+
+
+\end{document}

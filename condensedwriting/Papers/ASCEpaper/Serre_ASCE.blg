@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Serre_ASCE.aux
+The style file: ascelike.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: Serre_ASCE.bib
+You've used 42 entries,
+            2831 wiz_defined-function locations,
+            901 strings with 12550 characters,
+and the built_in function-call counts, 22303 in all, are:
+= -- 2259
+> -- 714
+< -- 111
++ -- 221
+- -- 190
+* -- 2073
+:= -- 3111
+add.period$ -- 85
+call.type$ -- 42
+change.case$ -- 305
+chr.to.int$ -- 41
+cite$ -- 42
+duplicate$ -- 964
+empty$ -- 1642
+format.name$ -- 477
+if$ -- 4529
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 40
+newline$ -- 172
+num.names$ -- 251
+pop$ -- 244
+preamble$ -- 1
+purify$ -- 555
+quote$ -- 0
+skip$ -- 855
+stack$ -- 0
+substring$ -- 1653
+swap$ -- 212
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 836
+warning$ -- 0
+while$ -- 121
+width$ -- 0
+write$ -- 552

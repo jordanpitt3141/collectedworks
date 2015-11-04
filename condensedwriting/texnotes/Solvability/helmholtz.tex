@@ -1,0 +1,84 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{SWW soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{Helmholtz Decomposition}
+We know in 2D the equation for the conserved quantity $\vec{G}$ in terms of the conserved quantity $h$ and the primitive variables $\vec{u}$ is
+
+\begin{equation}
+\label{Geq}
+\vec{G} = h\vec{u} - \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)
+\end{equation}
+
+To look at this we consider the Helmholtz decomposition of $\vec{G}$ (assuming sufficient smoothness), in principle we can calculate these two parts since we know $\vec{G}$. Thus we have
+\[\vec{G} = \nabla \phi + \nabla \times \vec{A}\] 
+
+Taking the curl of \eqref{Geq}
+
+\[\nabla \times \vec{G} = \nabla \times\left(h\vec{u} \right)-\nabla \times \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+since the curl of a grad is 0
+
+\[\nabla \times \vec{G} = \nabla \times\left(h\vec{u} \right)\]
+
+so the curl of $\vec{G}$ and $h\vec{u}$ are the same. Since the other term is a gradient, its helmholtz decomposition has no curl part and so it must be that for the helmholtz decomposition of $h\vec{u}$ (which we do not know) the curl part is the same as for $\vec{G}$ so that
+
+\[h\vec{u} = \nabla \psi + \nabla \times \vec{A}\]
+
+So we have that:
+
+\[\nabla \phi + \nabla \times \vec{A} = \nabla \psi + \nabla \times \vec{A} - \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+\[\nabla \phi = \nabla \psi - \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+Assuming we can integrate(seems reasonable) we get that (and dropping the constant)
+
+\[\phi = \psi - \left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+It would be nice to rewrite the divergence of $\vec{u}$ in terms of $\psi$ since 
+\[h\vec{u} = \nabla \psi + \nabla \times \vec{A}\]
+\[\vec{u} = \frac{\nabla \psi}{h} + \frac{\nabla \times \vec{A}}{h} \]
+
+substituting this in gives
+
+\[\phi = \psi - \left(\frac{h^3}{3} \left(\nabla \cdot \left[h^{-1} \nabla \psi + h^{-1}\nabla \times \vec{A}\right]\right)\right)\]
+
+\[\phi = \psi - \left(\frac{h^3}{3} \left(h^{-1} \left(\nabla \cdot \nabla \psi\right) + \nabla \psi \cdot \nabla h^{-1} + \left(\nabla \times A\right)\cdot\nabla h^{-1}\right)\right)\]
+
+Since 
+\[\nabla h^{-1} = -h^{-2}\nabla h\]
+
+\[\phi = \psi - \left(\frac{1}{3} \left(h^2 \nabla^2 \psi - h\nabla \psi \cdot \nabla h -h \left(\nabla \times A\right)\cdot\nabla h\right)\right)\]
+
+\[\phi = \psi - \frac{h^2}{3} \nabla^2 \psi - \frac{h}{3}\nabla \psi \cdot \nabla h - \frac{h}{3} \left(\nabla \times A\right)\cdot\nabla h\]
+
+\[\psi - \frac{h^2}{3} \nabla^2 \psi - \frac{h}{3}\nabla \psi \cdot \nabla h = \phi + \frac{h}{3} \left(\nabla \times A\right)\cdot\nabla h\]
+
+Where only the LHS has unknowns. So this is solvable (meaningful?) if we are allowed to firstly take the helmholtz decomposition of both $\vec{G}$ and $h\vec{u}$. We also integrate all the gradient terms. We must also assume that $h > 0$ to do the divisions and finally take the gradient of $h$. Remember that we have dropped a constant as well during integration.  
+
+To do such a thing we must assume that at least
+\begin{itemize}
+\item{$\Omega$ is the boundary of the problem to do a helmholtz decomposition we must have that $\Omega$ is a bounded, simply-connected, Lipschitz domain}
+\item{$\vec{G}$ and $h\vec{u}$ must be $L^2\left(\Omega\right)^3$ function to do a helmholtz decomposition. The resultant decomposition as the base divergence free part is in $H(\text{curl},\Omega)$ while the base of curl free part is in $H^1\left(\Omega\right)$.}
+\end{itemize}
+
+By these equations we start with:
+
+$G \in L^2$ and $h \in H^1$ then $\phi \in H^1$ and $\nabla \times A \in L^2$. Also $\nabla h \in L^2$, so we have that $\psi \in H^2$ thus $\vec{u} \in L^2$
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

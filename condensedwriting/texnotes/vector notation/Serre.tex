@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{G for soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations for horizontal beds}
+
+The elliptic equation:
+
+\[G_x = uh - h^2\frac{\partial h}{\partial x}\left(\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}\right) - \frac{h^3}{3} \left(\frac{\partial ^2 u}{\partial x^2} + \frac{\partial ^2 v}{\partial x \partial y} \right)\]
+
+\[G_y = vh - h^2\frac{\partial h}{\partial y}\left(\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}\right) - \frac{h^3}{3} \left(\frac{\partial ^2 u}{\partial x \partial y} + \frac{\partial ^2 v}{\partial x^2} \right)\]
+
+Then
+
+\[G_x = uh - \frac{\partial}{\partial x}\left(\frac{h^3}{3} \text{div}\left(\vec{u}\right)\right)\]
+
+\[G_y = vh - \frac{\partial}{\partial y}\left(\frac{h^3}{3} \text{div}\left(\vec{u}\right)\right)\]
+
+\[\vec{G} = \vec{u}h - \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u} \right)\right)\]
+
+The continuity equation
+
+\[\frac{\partial h}{\partial t} + \nabla\cdot(h\vec{u}) = 0\]
+
+The flux terms we want to rewrite the flux terms into vector notation: 
+
+What we have is that
+
+\[\frac{\partial \vec{U}}{\partial t} + \nabla \cdot \vec{F} = 0 \]
+
+Where 
+\[\vec{U} = \left[\begin{array}{c}
+h \\
+G_x \\
+G_y
+\end{array}\right]\]
+
+\[\vec{F} = \left[F_x , F_y\right]\]
+
+With F given by
+\[F_x = \left[\begin{array}{c}
+uh \\
+G_xu + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - \frac{vh^3}{3}\frac{\partial}{\partial y}\left(\nabla \cdot \vec{u}\right) - vh^2\frac{\partial h}{\partial y} \left(\nabla \cdot \vec{u}\right) \\
+uvh
+\end{array}\right] \]
+
+\[F_y = \left[\begin{array}{c}
+vh \\
+uvh\\
+G_yv+ \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - \frac{uh^3}{3}\frac{\partial}{\partial x}\left(\nabla \cdot \vec{u}\right) - uh^2\frac{\partial h}{\partial x} \left(\nabla \cdot \vec{u}\right)
+\end{array}\right] \]
+
+Let's just look at the G  related components:
+
+\[FG_x = \left[\begin{array}{c}
+G_xu + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - \frac{vh^3}{3}\frac{\partial}{\partial y}\left(\nabla \cdot \vec{u}\right) - vh^2\frac{\partial h}{\partial y} \left(\nabla \cdot \vec{u}\right) \\
+uvh
+\end{array}\right] \]
+
+\[FG_y = \left[\begin{array}{c}
+uvh\\
+G_yv+ \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - \frac{uh^3}{3}\frac{\partial}{\partial x}\left(\nabla \cdot \vec{u}\right) - uh^2\frac{\partial h}{\partial x} \left(\nabla \cdot \vec{u}\right)
+\end{array}\right] \]
+
+
+
+Note: We have that
+
+\[\frac{\partial}{\partial y}\left(\frac{vh^3}{3} \left(\nabla \cdot \vec{u}\right)\right) = \frac{\partial v}{\partial y}\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) + vh^2\frac{\partial h}{\partial y}\left(\nabla \cdot \vec{u}\right) + \frac{vh^3}{3} \frac{\partial }{\partial y} \left(\nabla \cdot \vec{u}\right)   \]
+
+\[\frac{\partial}{\partial y}\left(\frac{vh^3}{3} \left(\nabla \cdot \vec{u}\right)\right)  - \frac{\partial v}{\partial y}\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) = vh^2\frac{\partial h}{\partial y}\left(\nabla \cdot \vec{u}\right) + \frac{vh^3}{3} \frac{\partial }{\partial y} \left(\nabla \cdot \vec{u}\right)   \]
+
+\[ \frac{\partial v}{\partial y}\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) - \frac{\partial}{\partial y}\left(\frac{vh^3}{3} \left(\nabla \cdot \vec{u}\right)\right) = -vh^2\frac{\partial h}{\partial y}\left(\nabla \cdot \vec{u}\right) - \frac{vh^3}{3} \frac{\partial }{\partial y} \left(\nabla \cdot \vec{u}\right)   \]
+
+Similarly:
+
+\[ \frac{\partial u}{\partial x}\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) - \frac{\partial}{\partial x}\left(\frac{uh^3}{3} \left(\nabla \cdot \vec{u}\right)\right) = -uh^2\frac{\partial h}{\partial x}\left(\nabla \cdot \vec{u}\right) - \frac{uh^3}{3} \frac{\partial }{\partial x} \left(\nabla \cdot \vec{u}\right)   \]
+
+So we can rewrite it as :
+
+\[FG_x = \left[\begin{array}{c}
+G_xu + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 + \frac{\partial v}{\partial y}\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) - \frac{\partial}{\partial y}\left(\frac{vh^3}{3} \left(\nabla \cdot \vec{u}\right)\right) \\
+uvh
+\end{array}\right] \]
+
+\[FG_y = \left[\begin{array}{c}
+uvh\\
+G_yv+ \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 + \frac{\partial u}{\partial x}\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) - \frac{\partial}{\partial x}\left(\frac{uh^3}{3} \left(\nabla \cdot \vec{u}\right)\right)
+\end{array}\right] \]
+
+
+
+
+\end{document}

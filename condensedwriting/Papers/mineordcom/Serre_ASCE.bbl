@@ -1,0 +1,152 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{}{Antunes~do Carmo
+  et~al.\@}{1993}]{Antunes-do-Carmo-etal-1993-725}
+Antunes~do Carmo, A., Seabra-Santos, F.~J., and Almeida, A.~B. (1993).
+\newblock ``Numerical solution of the generalized {S}erre equations with the
+  {M}ac{C}ormack finite-difference scheme.''\ {\em International Journal for
+  Numerical Methods in Fluids}, 16(8), 725--738.
+
+\bibitem[\protect\citeauthoryear{}{Bonneton
+  et~al.\@}{2011}]{Bonneton-etal-2011-1479}
+Bonneton, P., Chazel, F., Lannes, D., Marche, F., and Tissier, M. (2011).
+\newblock ``A splitting approach for the fully nonlinear and weakly dispersive
+  {G}reen-{N}aghdi model.''\ {\em Journal of Compuational Physics}, 230(4),
+  1479--1498.
+
+\bibitem[\protect\citeauthoryear{}{Carter and
+  Cienfuegos}{2011}]{Carter-Cienfuegos-2010-259}
+Carter, J.~D. and Cienfuegos, R. (2011).
+\newblock ``Solitary and cnoidal wave solutions of the {S}erre equations and
+  their stability.''\ {\em European Journal of Mechanics B/Fluids}, 30(3),
+  259--268.
+
+\bibitem[\protect\citeauthoryear{}{Chazel
+  et~al.\@}{2011}]{Chazel-etal-2011-105}
+Chazel, F., Lannes, D., and Marche, F. (2011).
+\newblock ``Numerical simulation of strongly nonlinear and dispersive waves
+  using a {G}reen-{N}aghdi model.''\ {\em Journal of Scientific Computing},
+  48(1-3), 105--116.
+
+\bibitem[\protect\citeauthoryear{}{Cienfuegos and
+  Bonneton}{2006}]{Barthelemy-2006-51-1217}
+Cienfuegos, R.and~Barth\'{e}lemy, E. and Bonneton, P. (2006).
+\newblock ``A fourth-order compact finite volume scheme for fully nonlinear and
+  weakly dispersive {B}oussinesq-type equations. {P}art i: model development
+  and analysis.''\ {\em International Journal for Numerical Methods in Fluids},
+  51, 1217--1253.
+
+\bibitem[\protect\citeauthoryear{}{Cienfuegos and
+  Bonneton}{2007}]{Barthelemy-2007-53-1423}
+Cienfuegos, R.and~Barth\'{e}lemy, E. and Bonneton, P. (2007).
+\newblock ``A fourth-order compact finite volume scheme for fully nonlinear and
+  weakly dispersive {B}oussinesq-type equations. {P}art ii: {B}oundary
+  conditions and validation.''\ {\em International Journal for Numerical
+  Methods in Fluids}, 53, 1423--1455.
+
+\bibitem[\protect\citeauthoryear{}{Courant
+  et~al.\@}{1928}]{Courant-etal-1928-32}
+Courant, R., Friedrichs, K., and Lewy, H. (1928).
+\newblock ``{\"U}ber die partiellen {D}ifferenzengleichungen der mathematischen
+  physik.''\ {\em Mathematische Annalen}, 100(1), 32 -- 74.
+
+\bibitem[\protect\citeauthoryear{}{Dutykh et~al.\@}{2011}]{Clamond-2011-315}
+Dutykh, D., Clamond, D., Milewski, P., and Mitsotakis, D. (2011).
+\newblock ``Finite volume and pseudo-spectral schemes for the fully nonlinear
+  'irrotational' {S}erre equations.''\ {\em Arxiv}, 24(5), 0 -- 25.
+
+\bibitem[\protect\citeauthoryear{}{El et~al.\@}{2006}]{El-etal-2006}
+El, G., Grimshaw, R. H.~J., and Smyth, N.~F. (2006).
+\newblock ``Unsteady undular bores in fully nonlinear shallow-water theory.''\
+  {\em Physics of Fluids}, 18(027104).
+
+\bibitem[\protect\citeauthoryear{}{Godunov}{1959}]{Godunov-1959-271}
+Godunov, S.~K. (1959).
+\newblock ``A difference method for numerical calculation of discontinuous
+  solutions of the equations of hydrodynamics.''\ {\em Matematicheskii
+  Sbornik}, 89(3), 271--306.
+
+\bibitem[\protect\citeauthoryear{}{Gottlieb
+  et~al.\@}{2009}]{Gottlieb-etal-2009-251}
+Gottlieb, S., Ketcheson, D.~I., and Shu, C.~W. (2009).
+\newblock ``High order strong stability preserving time discretizations.''\
+  {\em Journal of Scientific Computing}, 38(3), 251--289.
+
+\bibitem[\protect\citeauthoryear{}{Green and
+  Naghdi}{1976}]{Green-Naghdi-1976-237}
+Green, A.~E. and Naghdi, P.~M. (1976).
+\newblock ``A derivation of equations for wave propagation in water of variable
+  depth.''\ {\em Journal of Fluid Mechanics}, 78(2), 237--246.
+
+\bibitem[\protect\citeauthoryear{}{Hammack and
+  Segur}{1978}]{Hammack-Segur-1978-337}
+Hammack, J.~L. and Segur, H. (1978).
+\newblock ``The {K}orteweg-de {V}ries equation and water waves. {P}art 3.
+  {O}scillatory waves.''\ {\em Journal of Fluid Mechanics}, 84(2), 337--358.
+
+\bibitem[\protect\citeauthoryear{}{Koren}{1993}]{Koren-1993}
+Koren, B. (1993).
+\newblock ``A robust upwind discretization method for advection, diffusion and
+  source terms.''\ {\em Notes on Numerical Fluid Mechanics}, Vol.~45, Centrum
+  voor Wiskunde en Informatica, Amsterdam.
+
+\bibitem[\protect\citeauthoryear{}{Kurganov
+  et~al.\@}{2002}]{Kurganov-etal-2001-707}
+Kurganov, A., Noelle, S., and Petrova, G. (2002).
+\newblock ``Semidiscrete central-upwind schemes for hyperbolic conservation
+  laws and {H}amilton-{J}acobi equations.''\ {\em Journal of Scientific
+  Computing, Society for Industrial and Applied Mathematics}, 23(3), 707--740.
+
+\bibitem[\protect\citeauthoryear{}{Lannes and
+  Bonneton}{2009}]{Bonneton-Lannes-2009-16601}
+Lannes, D. and Bonneton, P. (2009).''\ {\em Physics of Fluids}, 21(1),
+  16601--16610.
+
+\bibitem[\protect\citeauthoryear{}{Le~M\'{e}tayer
+  et~al.\@}{2010}]{Hank-etal-2010-2034}
+Le~M\'{e}tayer, O., Gavrilyuk, S., and Hank, S. (2010).
+\newblock ``A numerical scheme for the {G}reen–{N}aghdi model.''\ {\em
+  Journal of Computational Physics}, 229(6), 2034--2045.
+
+\bibitem[\protect\citeauthoryear{}{LeVeque}{2002}]{LeVeque-2002}
+LeVeque, R. (2002).
+\newblock {\em Finite {V}olume {M}ethods for {H}yperbolic {P}roblems}, Vol.~54
+  of {\em Cambridge Texts in Applied Mathematics}.
+\newblock Cambridge University Press.
+
+\bibitem[\protect\citeauthoryear{}{Li et~al.\@}{2014}]{Guyenne-etal-2014-169}
+Li, M., Guyenne, P., Li, F., and Xu, L. (2014).
+\newblock ``High order well-balanced {CDG-FE} methods for shallow water waves
+  by a {G}reen-{N}aghdi model.''\ {\em Journal of Computational Physics}, 257,
+  169--192.
+
+\bibitem[\protect\citeauthoryear{}{Mitsotakis et~al.\@}{2014}]{Dutykh-2014-315}
+Mitsotakis, D., Ilan, B., and Dutykh, D. (2014).
+\newblock ``On the {G}alerkin/{F}inite-{E}lement {M}ethod for the {S}erre
+  {E}quations.''\ {\em Journal of Scientific Computing}, 61(1), 166--195.
+
+\bibitem[\protect\citeauthoryear{}{Serre}{1953}]{Serre-F-1953-857}
+Serre, F. (1953).
+\newblock ``Contribtion \`{a} l'\'{e}tude des \'{e}coulements permanents et
+  variables dans les canaux.''\ {\em La Houille Blanche}, 6, 830--872.
+
+\bibitem[\protect\citeauthoryear{}{Su and Gardner}{1969}]{Su-Gardener-1969-536}
+Su, C.~H. and Gardner, C.~S. (1969).
+\newblock ``Korteweg-de {V}ries equation and generalisations. {III}.
+  {D}erivation of the {K}orteweg-de {V}ries equation and {B}urgers equation.''\
+  {\em Journal of Mathematical Physics}, 10(3), 536--539.
+
+\bibitem[\protect\citeauthoryear{}{Zoppou}{2014}]{Zoppou-2014}
+Zoppou, C. (2014).
+\newblock ``Numerical solution of the {O}ne-dimensional and {C}ylindrical
+  {S}erre {E}quations for {R}apidly {V}arying {F}ree {S}urface {F}lows.''\
+  Ph.D. thesis, Australian National University, Australian National University.
+
+\bibitem[\protect\citeauthoryear{}{Zoppou and
+  Roberts}{1996}]{Zoppou-Roberts-1996}
+Zoppou, C. and Roberts, S. (1996).
+\newblock ``Behaviour of finite difference schemes for advection diffusion
+  equations.''\ {\em Technical Report Mathematics Research Report No.MRR
+  062-96}.
+
+\end{thebibliography}

@@ -1,0 +1,1114 @@
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=7.0cm]{one-dimensional-axis_Serre.eps}
+\end{center}
+\caption{The notation used for one-dimensional flow governed by the Serre equation.}
+\label{fig:Notation}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[ht]
+\centering
+\begin{tabular}{ccc}
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{-500}%
+\psfrag{x02}[t][t]{0}%
+\psfrag{x03}[t][t]{500}%
+\psfrag{x04}[t][t]{1000}%
+\psfrag{x05}[t][t]{1500}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{9.8}%
+\psfrag{v02}[r][r]{10.0}%
+\psfrag{v03}[r][r]{10.2}%
+\psfrag{v04}[r][r]{10.4}%
+\psfrag{v05}[r][r]{10.6}%
+\psfrag{v06}[r][r]{10.8}%
+\psfrag{v07}[r][r]{11.0}%
+\psfrag{v08}[r][r]{11.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{boussq_rk_2_40_Soliton_h1000_LATEX.eps}}%
+\end{psfrags}%
+ & & %
+ \begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\bar{u}$(m/s)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{-500}%
+\psfrag{x02}[t][t]{0}%
+\psfrag{x03}[t][t]{500}%
+\psfrag{x04}[t][t]{1000}%
+\psfrag{x05}[t][t]{1500}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.2}%
+\psfrag{v02}[r][r]{0.0}%
+\psfrag{v03}[r][r]{0.2}%
+\psfrag{v04}[r][r]{0.4}%
+\psfrag{v05}[r][r]{0.6}%
+\psfrag{v06}[r][r]{0.8}%
+\psfrag{v07}[r][r]{1.0}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{boussq_rk_2_40_Soliton_u1000_LATEX.eps}}%
+\end{psfrags}%
+\\
+($a$) & & ($b$)
+\end{tabular}
+\caption{The progress of a initial solitary wave,  given by \eqref{eq:Carter-Cienfuegos-solitary-wave} over a horizontal bed predicted by the solution of \eqref{eq:Serre_Vector} ($\circ$) at $t = 100$s with the water depth, $h(x,t)$ shown in ($a$) and the velocity, $\bar{u}(x,t)$ in ($b$) plotted against the analytical solution (\textemdash).}
+\label{fig:Solitary_wave_simulation_second-order}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[l][l]{\setlength{\tabcolsep}{0pt}\begin{tabular}{l}$1$\end{tabular}}%
+\psfrag{s03}[l][l]{\setlength{\tabcolsep}{0pt}\begin{tabular}{l}$\Delta x^2$\end{tabular}}%
+%\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}Error norms using the second-order central scheme dambreak problem\\water depth and velocity t = 20s\end{tabular}}%
+\psfrag{s04}[r][r]{}%
+\psfrag{s05}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $Log_{10}\Delta x$}\end{tabular}}%
+\psfrag{s06}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $Log_{10}L_1$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{$10^{-2}$}%
+\psfrag{x02}[t][t]{$10^{-1}$}%
+\psfrag{x03}[t][t]{$10^{0}$}%
+\psfrag{x04}[t][t]{$10^{1}$}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{$10^{-8}$}%
+\psfrag{v02}[r][r]{$10^{-7}$}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{$10^{-6}$}%
+\psfrag{v04}[r][r]{$10^{-5}$}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{$10^{-4}$}%
+\psfrag{v06}[r][r]{$10^{-3}$}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{$10^{-2}$}%
+\psfrag{v08}[r][r]{$10^{-1}$}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{$10^{0}$}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Boussq_rk_2_40_Soliton_error_LATEX.eps}}%
+\end{psfrags}%
+\caption{The $L_1$ convergence rate for the simulated water depth ($\triangle$) and velocity ($\square$) obtained from the second-order scheme solution of \eqref{eq:Serre_Vector} to the solitary wave example,  given by \eqref{eq:Carter-Cienfuegos-solitary-wave}.}
+\label{fig:Convergence_Soliton_second-order}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{tabular}{ccc}
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_SWWE_LATEX_3.eps}}%
+\end{psfrags}%
+ & %
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_SWWE_LATEX_4.eps}}%
+\end{psfrags}%
+& %
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_SWWE_LATEX_455.eps}}%
+\end{psfrags}%
+ \\
+$(a)$ &  $(b)$ &  $(c)$ \\
+\phantom{x} & & \\
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_SWWE_LATEX_5.eps}}%
+\end{psfrags}%
+ & %
+ \begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_SWWE_LATEX_6.eps}}%
+\end{psfrags}%
+ & %
+ \begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_SWWE_LATEX_8.eps}}%
+\end{psfrags}%
+\\
+$(d)$ & $(e)$ & $(f)$ \\
+\phantom{x} & & \\
+&
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_SWWE_LATEX_108.eps}}%
+\end{psfrags}%
+& \\ \\
+&  $(g)$  & \\
+\phantom{x} &  &  \\
+\end{tabular}
+\caption{Measured (\textemdash) and simulated ($\circ$) water depth, $h(x,t)$ for the undular bore experiment in a frictionless rectangular channel using the solution of the shallow water wave equations with the simulated (\textemdash) and measured ($\circ$) results shown for ($a$) $x =3$m, ($b$) $x =4$m, ($c$) $x =4.55$m, ($d$) $x =5$m, ($e$) $x =6$m, ($f$) $x =8$m, and ($g$) $x =10.8$m.}
+ \label{fig:Undular_Bore_SWWE}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{tabular}{ccc}
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_rk_2_40_Boussq_LATEX_3.eps}}%
+\end{psfrags}%
+& %
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_rk_2_40_Boussq_LATEX_4.eps}}%
+\end{psfrags}%
+&
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_rk_2_40_Boussq_LATEX_455.eps}}%
+\end{psfrags}%
+\\
+($a$) & ($b$) & ($c$) \\
+\phantom{x} & & \\
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_rk_2_40_Boussq_LATEX_5.eps}}%
+\end{psfrags}%
+&
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_rk_2_40_Boussq_LATEX_6.eps}}%
+\end{psfrags}%
+&
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_rk_2_40_Boussq_LATEX_8.eps}}%
+\end{psfrags}%
+\\
+($d$) & ($e$)  & ($f$) \\
+\phantom{x} & & \\
+&
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t$(s)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{25}%
+\psfrag{x02}[t][t]{30}%
+\psfrag{x03}[t][t]{35}%
+\psfrag{x04}[t][t]{40}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.18}%
+\psfrag{v02}[r][r]{0.19}%
+\psfrag{v03}[r][r]{0.20}%
+\psfrag{v04}[r][r]{0.21}%
+\psfrag{v05}[r][r]{0.22}%
+\psfrag{v06}[r][r]{0.23}%
+\psfrag{v07}[r][r]{0.24}%
+%
+% Figure:
+\resizebox{4.5cm}{!}{\includegraphics{Undular_bore_rk_2_40_Boussq_LATEX_108.eps}}%
+\end{psfrags}%
+ & \\
+& ($g$)  & \\
+\phantom{x} & &  \\
+\end{tabular}
+\caption{Measured (\textemdash) and simulated ($\circ$) water depth, $h(x,t)$ for the undular bore experiment in a frictionless rectangular channel using the solution of the Serre equations with the simulated and measured results shown for ($a$) $x =3$m, ($b$) $x =4$m, ($c$) $x = 4.55$m, ($d$) $x = 5$m, ($e$) $x =6$m, ($f$) $x = 8$m, and ($g$) $x = 10.8$m.}
+ \label{fig:Undular_Bore_Boussq_2}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{tabular}{cc}
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_SWWE_x0_LATEX.eps}}%
+\end{psfrags}%
+& %
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_SWWE_x50_LATEX.eps}}%
+\end{psfrags}%
+\\
+\phantom{x} & \\
+($a$) & ($b$) \\
+\phantom{x} & \\
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_SWWE_x100_LATEX.eps}}%
+\end{psfrags}%
+&
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_SWWE_x150_LATEX.eps}}%
+\end{psfrags}%
+\\
+\phantom{x} & \\
+($c$) & ($d$) \\
+\phantom{x} & \\
+\multicolumn{2}{c}{
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_SWWE_x200_LATEX.eps}}%
+\end{psfrags}%
+}
+\\
+\phantom{x} & \\
+\multicolumn{2}{c}{$(e)$} \\
+\phantom{x} & \\
+\end{tabular}
+\caption{Measured (\textemdash) and simulated ($\circ$) water depth, $h(x,t)$ for the rectangular wave experiment in a frictionless rectangular channel,  with $h_1 = 0.1$m, $u_1 = u_0 = 0$m/s and  $h_0 = 0.07$m using the solution of the shallow water wave equations with the simulated and measured results shown for  ($a$) $x/h_1 = 0$, ($b$) $x /h_1 = 50$, ($c$) $x/h_1 = 100$, ($d$) $x/h_1 = 150$,  and ($e$) $x/h_1 = 200$.}
+ \label{fig:Segur_Figure3_SWWE}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{tabular}{cc}
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_Serre_second-order_x0_n10001_LATEX.eps}}%
+\end{psfrags}%
+& %
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_Serre_second-order_x50_n10001_LATEX.eps}}%
+\end{psfrags}%
+\\
+\phantom{x} & \\
+($a$) & ($b$) \\
+\phantom{x} & \\
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_Serre_second-order_x100_n10001_LATEX.eps}}%
+\end{psfrags}%
+&
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_Serre_second-order_x150_n10001_LATEX.eps}}%
+\end{psfrags}%
+\\
+\phantom{x} & \\
+($c$) & ($d$) \\
+\phantom{x} & \\
+\multicolumn{2}{c}{
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s02}[b][b]{\setlength{\tabcolsep}{0pt}}%
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $t\sqrt{\dfrac{g}{h_1}} - \dfrac{x}{h_1}$}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $\dfrac{h - h_1}{h_1}$}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{50}%
+\psfrag{x03}[t][t]{100}%
+\psfrag{x04}[t][t]{150}%
+\psfrag{x05}[t][t]{200}%
+\psfrag{x06}[t][t]{250}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{-0.3}%
+\psfrag{v02}[r][r]{}%
+\psfrag{v03}[r][r]{-0.2}%
+\psfrag{v04}[r][r]{}%
+\psfrag{v05}[r][r]{-0.1}%
+\psfrag{v06}[r][r]{}%
+\psfrag{v07}[r][r]{0.0}%
+\psfrag{v08}[r][r]{}%
+\psfrag{v09}[r][r]{0.1}%
+\psfrag{v10}[r][r]{}%
+\psfrag{v11}[r][r]{0.2}%
+%
+% Figure:
+\resizebox{6cm}{!}{\includegraphics{Segur_Figure3_Serre_second-order_x200_n10001_LATEX.eps}}%
+\end{psfrags}%
+}
+\\
+\phantom{x} & \\
+\multicolumn{2}{c}{$(e)$} \\
+\phantom{x} & \\
+\end{tabular}
+\caption{Measured (\textemdash) and simulated ($\circ$) water depth, $h(x,t)$ for the rectangular wave experiment in a frictionless rectangular channel, with $h_1 = 0.1$m, $u_1 = u_0 = 0$m/s and  $h_0 = 0.07$m using the solution of the Serre equations with the simulated and measured results shown for the simulated and measured results shown for  ($a$) $x/h_0 = 0$, ($b$) $x /h_0 =50$, ($c$) $x/h_0 =100$, ($d$) $x/h_0 =150$,  and ($e$) $x/h_0 =200$.}
+ \label{fig:Segur_Figure3_second}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{tabular}{ccc}
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{100}%
+\psfrag{x03}[t][t]{200}%
+\psfrag{x04}[t][t]{300}%
+\psfrag{x05}[t][t]{400}%
+\psfrag{x06}[t][t]{500}%
+\psfrag{x07}[t][t]{600}%
+\psfrag{x08}[t][t]{700}%
+\psfrag{x09}[t][t]{800}%
+\psfrag{x10}[t][t]{900}%
+\psfrag{x11}[t][t]{1000}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0}%
+\psfrag{v02}[r][r]{2}%
+\psfrag{v03}[r][r]{4}%
+\psfrag{v04}[r][r]{6}%
+\psfrag{v05}[r][r]{8}%
+\psfrag{v06}[r][r]{10}%
+\psfrag{v07}[r][r]{12}%
+%
+% Figure:
+\resizebox{5cm}{!}{\includegraphics{Dam_Break_rk_SSP_LATEX_10_1.eps}}%
+\end{psfrags}%
+& %
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{100}%
+\psfrag{x03}[t][t]{200}%
+\psfrag{x04}[t][t]{300}%
+\psfrag{x05}[t][t]{400}%
+\psfrag{x06}[t][t]{500}%
+\psfrag{x07}[t][t]{600}%
+\psfrag{x08}[t][t]{700}%
+\psfrag{x09}[t][t]{800}%
+\psfrag{x10}[t][t]{900}%
+\psfrag{x11}[t][t]{1000}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0}%
+\psfrag{v02}[r][r]{2}%
+\psfrag{v03}[r][r]{4}%
+\psfrag{v04}[r][r]{6}%
+\psfrag{v05}[r][r]{8}%
+\psfrag{v06}[r][r]{10}%
+\psfrag{v07}[r][r]{12}%
+%
+% Figure:
+\resizebox{5cm}{!}{\includegraphics{boussq_rk_2_40_Grimshaw_LATEX_10_1.eps}}%
+\end{psfrags}%
+\\
+($a$) & ($b$) & ($c$) \\
+\phantom{x} & & \\
+\end{tabular}
+\caption{Analytical (\textemdash) solution to the shallow water wave equations and simulated ($\circ$) water depth, $h(x,t)$ for the dam break problem in a frictionless rectangular channel, $1000$m in length, $u_1 = u_0 = 0$m/s, $h_1 = 10$m and $h_0 = 1$m using the ($a$) shallow water equations solver and ($b$) Serre equations solver at $t = 30$s.}
+ \label{fig:Dam_break_10_1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{tabular}{ccc}
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{100}%
+\psfrag{x03}[t][t]{200}%
+\psfrag{x04}[t][t]{300}%
+\psfrag{x05}[t][t]{400}%
+\psfrag{x06}[t][t]{500}%
+\psfrag{x07}[t][t]{600}%
+\psfrag{x08}[t][t]{700}%
+\psfrag{x09}[t][t]{800}%
+\psfrag{x10}[t][t]{900}%
+\psfrag{x11}[t][t]{1000}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0}%
+\psfrag{v02}[r][r]{2}%
+\psfrag{v03}[r][r]{4}%
+\psfrag{v04}[r][r]{6}%
+\psfrag{v05}[r][r]{8}%
+\psfrag{v06}[r][r]{10}%
+\psfrag{v07}[r][r]{12}%
+%
+% Figure:
+\resizebox{5cm}{!}{\includegraphics{Dam_Break_rk_SSP_LATEX_10_2.eps}}%
+\end{psfrags}%
+& %
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{100}%
+\psfrag{x03}[t][t]{200}%
+\psfrag{x04}[t][t]{300}%
+\psfrag{x05}[t][t]{400}%
+\psfrag{x06}[t][t]{500}%
+\psfrag{x07}[t][t]{600}%
+\psfrag{x08}[t][t]{700}%
+\psfrag{x09}[t][t]{800}%
+\psfrag{x10}[t][t]{900}%
+\psfrag{x11}[t][t]{1000}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0}%
+\psfrag{v02}[r][r]{2}%
+\psfrag{v03}[r][r]{4}%
+\psfrag{v04}[r][r]{6}%
+\psfrag{v05}[r][r]{8}%
+\psfrag{v06}[r][r]{10}%
+\psfrag{v07}[r][r]{12}%
+%
+% Figure:
+\resizebox{5cm}{!}{\includegraphics{boussq_rk_2_40_Grimshaw_LATEX_10_2.eps}}%
+\end{psfrags}%
+\\
+($a$) & ($b$) & ($c$) \\
+\phantom{x} & & \\
+\end{tabular}
+\caption{Analytical (\textemdash) solution to the shallow water wave equations and simulated ($\circ$) water depth, $h(x,t)$ for the dam-break problem in a frictionless rectangular channel, $1000$m in length, $u_1 = u_0 = 0$m/s, $h_1 = 10$m and $h_0 = 2$m using the ($a$) shallow water equations solver and ($b$) Serre equations solver  at $t = 30$s.}
+ \label{fig:Dam_break_10_2}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\begin{tabular}{ccc}
+\begin{psfrags}%
+\psfragscanon%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{100}%
+\psfrag{x03}[t][t]{200}%
+\psfrag{x04}[t][t]{300}%
+\psfrag{x05}[t][t]{400}%
+\psfrag{x06}[t][t]{500}%
+\psfrag{x07}[t][t]{600}%
+\psfrag{x08}[t][t]{700}%
+\psfrag{x09}[t][t]{800}%
+\psfrag{x10}[t][t]{900}%
+\psfrag{x11}[t][t]{1000}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.8}%
+\psfrag{v02}[r][r]{1.0}%
+\psfrag{v03}[r][r]{1.2}%
+\psfrag{v04}[r][r]{1.4}%
+\psfrag{v05}[r][r]{1.6}%
+\psfrag{v06}[r][r]{1.8}%
+\psfrag{v07}[r][r]{2.0}%
+%
+% Figure:
+\resizebox{5cm}{!}{\includegraphics{Dam_Break_rk_SSP_LATEX_1.8_1.eps}}%
+\end{psfrags}%
+&
+
+\begin{psfrags}%
+\psfragscanon%
+%
+% text strings:
+\psfrag{s03}[t][t]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $x$(m)}\end{tabular}}%
+\psfrag{s04}[b][b]{\setlength{\tabcolsep}{0pt}\begin{tabular}{c}{\Large $h$(m)}\end{tabular}}%
+%
+% xticklabels:
+\psfrag{x01}[t][t]{0}%
+\psfrag{x02}[t][t]{100}%
+\psfrag{x03}[t][t]{200}%
+\psfrag{x04}[t][t]{300}%
+\psfrag{x05}[t][t]{400}%
+\psfrag{x06}[t][t]{500}%
+\psfrag{x07}[t][t]{600}%
+\psfrag{x08}[t][t]{700}%
+\psfrag{x09}[t][t]{800}%
+\psfrag{x10}[t][t]{900}%
+\psfrag{x11}[t][t]{1000}%
+%
+% yticklabels:
+\psfrag{v01}[r][r]{0.8}%
+\psfrag{v02}[r][r]{1.0}%
+\psfrag{v03}[r][r]{1.2}%
+\psfrag{v04}[r][r]{1.4}%
+\psfrag{v05}[r][r]{1.6}%
+\psfrag{v06}[r][r]{1.8}%
+\psfrag{v07}[r][r]{2.0}%
+%
+% Figure:
+\resizebox{5cm}{!}{\includegraphics{boussq_rk_2_40_Grimshaw_LATEX_1.8_1.eps}}%
+\end{psfrags}%
+\\
+($a$) & ($b$) & ($c$) \\
+
+\phantom{x} & & \\
+\end{tabular}
+\caption{Analytical (\textemdash) solution to the shallow water wave equations and simulated ($\circ$) water depth, $h(x,t)$ for the dam-break problem in a frictionless rectangular channel, $1000$m in length, $u_1 = u_0 = 0$m/s, $h_1 = 1.8$m and $h_0 = 1$m using the ($a$) shallow water equations solver and ($b$) Serre equations solver at $t = 30$s.}
+ \label{fig:Dam_break_1.8}
+\end{figure}
+\efloatseparator
+ 

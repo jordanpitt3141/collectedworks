@@ -1,0 +1,262 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{}{A.~Harten}{1983}]{Harten-etal-1983-357}
+A.~Harten, A. (1983).
+\newblock ``High resolution schemes for hyperbolic conservation laws.''\ {\em
+  Journal of Computational Physics}, 49(3), 357--393.
+
+\bibitem[\protect\citeauthoryear{}{Antunes~do Carmo
+  et~al.\@}{1993}]{Antunes-do-Carmo-etal-1993-725}
+Antunes~do Carmo, A., Seabra-Santos, F.~J., and Almeida, A.~B. (1993).
+\newblock ``Numerical solution of the generalized serre equations with the
+  maccormack finite-difference scheme.''\ {\em International Journal for
+  Numerical Methods in Fluids}, 16(8), 725--738.
+
+\bibitem[\protect\citeauthoryear{}{Avilez-Valente and
+  Seabra-Santos}{2009}]{Avilez-Valente-Seabra-Santos-2009-969}
+Avilez-Valente, P. and Seabra-Santos, F.~J. (2009).
+\newblock ``A high-order petrov-galerkin finite element method for the
+  classical boussinesq wave model.''\ {\em Internatioanal Journal for Numerical
+  Methods in Fluids}, 59(9), 969--1010.
+
+\bibitem[\protect\citeauthoryear{}{Barth\'{e}lemy}{2004}]{Barthelemy-E-2004-315}
+Barth\'{e}lemy, E. (2004).
+\newblock ``Nonlinear shallow water theories for coastal waves.''\ {\em Surveys
+  in Geophysics}, 25(3-4), 315--337.
+
+\bibitem[\protect\citeauthoryear{}{Basco}{1987}]{Basco-D-1987}
+Basco, D.~R. (1987).
+\newblock ``Computation of rapidly varied, unsteady, free-surface flow.''\ {\em
+  Water-Resources Investigations Report 83-4284}, US Geological Survey.
+
+\bibitem[\protect\citeauthoryear{}{Beji and
+  K.~Nadaoka}{1996}]{Beji-Nadaoka-1996}
+Beji, S. and K.~Nadaoka, K. (1996).
+\newblock ``A formal derivation and numerical modelling of the improved
+  boussinesq equations for varying depth.''\ {\em Ocean Engineering}, 23(8),
+  691--704.
+
+\bibitem[\protect\citeauthoryear{}{Bonneton
+  et~al.\@}{2011a}]{Bonneton-etal-2011-589}
+Bonneton, P., Barth\'{e}lemy, E., Chazel, F., Cienfuegos, R., Lannes, D.,
+  Marche, F., and Tissier, M. (2011a).
+\newblock ``Recent advances in serre-green naghdi modelling for wave
+  transformation, breaking and runup processes.''\ {\em European Journal of
+  Mechanics B/Fluids}, 30(6), 589--597.
+
+\bibitem[\protect\citeauthoryear{}{Bonneton
+  et~al.\@}{2011b}]{Bonneton-etal-2011-1479}
+Bonneton, P., Chazel, F., Lannes, D., Marche, F., and Tissier, M. (2011b).
+\newblock ``A splitting approach for the fully nonlinear and weakly dispersive
+  green-naghdi model.''\ {\em Journal of Compuational Physics}, 230(4),
+  1479--1498.
+
+\bibitem[\protect\citeauthoryear{}{Carter and
+  Cienfuegos}{2011}]{Carter-Cienfuegos-2010-259}
+Carter, J.~D. and Cienfuegos, R. (2011).
+\newblock ``Solitary and cnoidal wave solutions of the serre equations and
+  their stability.''\ {\em European Journal of Mechanics B/Fluids}, 30(3),
+  259--268.
+
+\bibitem[\protect\citeauthoryear{}{Chanson}{2009}]{Chanson-H-2009-104}
+Chanson, H. (2009).
+\newblock ``An experimental study of tidal bore propagation: The impact of
+  bridge piers and channel constriction.''\ {\em Research Report CH74/09},
+  School of Civil Engineering, The University of Queensland.
+\newblock 104p.
+
+\bibitem[\protect\citeauthoryear{}{Chazel
+  et~al.\@}{2011}]{Chazel-etal-2011-105}
+Chazel, F., Lannes, D., and Marche, F. (2011).
+\newblock ``Numerical simulation of strongly nonlinear and dispersive waves
+  using a green-naghdi model.''\ {\em Journal of Scientific Computing},
+  48(1-3), 105--116.
+
+\bibitem[\protect\citeauthoryear{}{Dias and
+  Milewski}{2010}]{Dias-Milewski-2010}
+Dias, F. and Milewski, P. (2010).
+\newblock ``On the fully-nonlinear shallow-water generalized serre
+  equations.''\ {\em Physics Letters A}, 374(8), 1049--1053.
+
+\bibitem[\protect\citeauthoryear{}{El et~al.\@}{2006}]{El-etal-2006}
+El, G., Grimshaw, R. H.~J., and Smyth, N.~F. (2006).
+\newblock ``Unsteady undular bores in fully nonlinear shallow-water theory.''\
+  {\em Physics of Fluids}, 18(027104).
+
+\bibitem[\protect\citeauthoryear{}{El et~al.\@}{2008}]{El-etal-2008-2423}
+El, G.~A., Grimshaw, R. H.~J., and Smyth, N.~F. (2008).
+\newblock ``Asymptotic description of solitary wave trains in fully nonlinear
+  shallow-water theory.''\ {\em Physica D}, 237(19), 2423--2435.
+
+\bibitem[\protect\citeauthoryear{}{Erduran}{2007}]{Erduran-K-2007-827}
+Erduran, K.~S. (2007).
+\newblock ``Further application of hybrid solution to another form of
+  boussinesq equations and comparisons.''\ {\em International Journal for
+  Numerical Methods in Fluids}, 53(5), 827--849.
+
+\bibitem[\protect\citeauthoryear{}{Erduran
+  et~al.\@}{2005}]{Erduran-etal-2005-1213}
+Erduran, K.~S., Ilic, S., and Kutija, V. (2005).
+\newblock ``Hybrid finite-volume finite-difference scheme for the solution of
+  boussinesq equations.''\ {\em International Journal for Numerical Methods in
+  Fluids}, 49(11), 1213--1232.
+
+\bibitem[\protect\citeauthoryear{}{Eskilsson and
+  Sherwin}{2002}]{Eskilsson-Sherwin-2002-143}
+Eskilsson, C. and Sherwin, S.~J. (2002).
+\newblock ``A discontinuous spectral element model for boussinesq-type
+  equations.''\ {\em Journal of Scientific Computing}, 17(1-4), 143--152.
+
+\bibitem[\protect\citeauthoryear{}{Gottlieb
+  et~al.\@}{2009}]{Gottlieb-etal-2009-251}
+Gottlieb, S., Ketcheson, D.~I., and Shu, C.~W. (2009).
+\newblock ``High order strong stability preserving time discretizations.''\
+  {\em Journal of Scientific Computing}, 38(3), 251--289.
+
+\bibitem[\protect\citeauthoryear{}{Green and
+  Naghdi}{1976}]{Green-Naghdi-1976-237}
+Green, A.~E. and Naghdi, P.~M. (1976).
+\newblock ``A derivation of equations for wave propagation in water of variable
+  depth.''\ {\em Journal of Fluid Mechanics}, 78(2), 237--246.
+
+\bibitem[\protect\citeauthoryear{}{Hammack and
+  Segur}{1978}]{Hammack-Segur-1978-337}
+Hammack, J.~L. and Segur, H. (1978).
+\newblock ``The korteweg-de vries equation and water waves. part 3. oscillatory
+  waves.''\ {\em Journal of Fluid Mechanics}, 84(2), 337--358.
+
+\bibitem[\protect\citeauthoryear{}{Kurganov
+  et~al.\@}{2002}]{Kurganov-etal-2001-707}
+Kurganov, A., Noelle, S., and Petrova, G. (2002).
+\newblock ``Semidiscrete central-upwind schemes for hyperbolic conservation
+  laws and hamilton-jacobi equations.''\ {\em Journal of Scientific Computing,
+  Society for Industrial and Applied Mathematics}, 23(3), 707--740.
+
+\bibitem[\protect\citeauthoryear{}{Li}{2006}]{Li-Y-2006-1255}
+Li, Y.~A. (2006).
+\newblock ``A shallow-water approximation to the full water wave problem.''\
+  {\em Communications on Pure and Applied Mathematics}, 59(9), 1255--128.
+
+\bibitem[\protect\citeauthoryear{}{MacDonald
+  et~al.\@}{2008}]{MacDonald-etal-2008-89}
+MacDonald, C.~B., Gottlieb, S., and Ruuth, S.~J. (2008).
+\newblock ``A numerical study of diagonally split runga-kutta methods for pdes
+  with discontinuities.''\ {\em Journal of Scientific Computing}, 36(1),
+  89--112.
+
+\bibitem[\protect\citeauthoryear{}{Madsen
+  et~al.\@}{1991}]{Madsen-etal-1991-371}
+Madsen, P.~A., Murray, R., and S{\o}renson, O.~R. (1991).
+\newblock ``A new form of the boussinesq equations with improved linear
+  dispersion characteristics.''\ {\em Coastal Engineering}, 15(4), 371--388.
+
+\bibitem[\protect\citeauthoryear{}{Madsen and
+  S{\o}rensen}{1992}]{Madsen-Sorensen-1992-183}
+Madsen, P.~A. and S{\o}rensen, O.~R. (1992).
+\newblock ``A new form of boussinesq equations with improved linear dispersion
+  characteristics. part ii. a slowly-varying bathymetry.''\ {\em Coastal
+  Engineering}, 18(3-4), 183--204.
+
+\bibitem[\protect\citeauthoryear{}{Mei et~al.\@}{2005}]{Mei-etal-2005}
+Mei, C.~C., Stiassnie, M., and Yue, D. K.~K. (2005).
+\newblock ``Theory and applications of ocean surface waves part 2 - nonlinear
+  aspects.''\ {\em Advanced Series on Ocean Engineering}, Vol.~23, World
+  Scientific, Singapore.
+
+\bibitem[\protect\citeauthoryear{}{Mitsotakis}{2009}]{Mitsotakis-D-2009-860}
+Mitsotakis, D.~E. (2009).
+\newblock ``Boussinesq systems in two-space dimensions over a variable bottom
+  for the genetration and propagation of tsunami waves.''\ {\em Mathematics and
+  Computers in Simulation}, 80(4), 860--873.
+
+\bibitem[\protect\citeauthoryear{}{Nwogu}{1993}]{Nwogu-O-1993-618}
+Nwogu, O. (1993).
+\newblock ``Alternative form of boussinesq equations for nearshore wave
+  propagation.''\ {\em Journal of Waterway, Port, Coastal, and Ocean
+  Engineering, American Society of Civil Engineers}, 119(6), 618--638.
+
+\bibitem[\protect\citeauthoryear{}{Roeber
+  et~al.\@}{2010}]{Roeber-etal-2010-407}
+Roeber, V., Cheung, K.~F., and Kobayashi, M.~H. (2010).
+\newblock ``Shock-capturing boussinesq-type model for nearshore wave
+  processes.''\ {\em Coastal Engineering}, 57(4), 407--423.
+
+\bibitem[\protect\citeauthoryear{}{Seabra-Santos
+  et~al.\@}{1981}]{Seabra-Santos-etal-1987-117}
+Seabra-Santos, F.~J., Renouard, D.~P., and Temperville, A.~M. (1981).
+\newblock ``Numerical and experimental study of the transformation of a
+  solitary wave over a shelf or isolated obstacle.''\ {\em Journal of Fluid
+  Mechanics}, 176, 117--134.
+
+\bibitem[\protect\citeauthoryear{}{Serre}{1953}]{Serre-F-1953-857}
+Serre, F. (1953).
+\newblock ``Contribtion \`{a} l'\'{e}tude des \'{e}coulements permanents et
+  variables dans les canaux.''\ {\em La Houille Blanche}, 6, 830--872.
+
+\bibitem[\protect\citeauthoryear{}{Shi et~al.\@}{2012}]{Shi-etal-2012-36}
+Shi, F., Kirby, J.~T., Harris, J.~C., Geiman, J.~D., and Grilli, S.~T. (2012).
+\newblock ``A high-order adaptive time-stepping tvd solver for boussinesq
+  modeling of breaking waves and coastal inundation.''\ {\em Ocean Modelling},
+  43-44, 36--51.
+
+\bibitem[\protect\citeauthoryear{}{Shiach and
+  Mingham}{2009}]{Shiach-Mingham-2009-32}
+Shiach, J.~B. and Mingham, C.~G. (2009).
+\newblock ``A temporally second-order accurate godunov-type scheme for solving
+  the extended boussinesq equations.''\ {\em Coastal Engineering}, 56(1),
+  32--45.
+
+\bibitem[\protect\citeauthoryear{}{Shu and Osher}{1988}]{Shu-Osher-1988-439}
+Shu, C.~W. and Osher, S. (1988).
+\newblock ``Efficient implementation of essentially non-oscillatory
+  shock-capturing schemes.''\ {\em Journal of Computational Physics}, 77(2),
+  439--471.
+
+\bibitem[\protect\citeauthoryear{}{Soares-Fraz\~{a}o and
+  Guinot}{2008}]{Soares-Frazao-Guinot-2008-237}
+Soares-Fraz\~{a}o, S. and Guinot, V. (2008).
+\newblock ``A second-order semi-implicit hybrid scheme for one-dimensional
+  boussinesq-type waves in rectangular channels.''\ {\em International Journal
+  for Numerical Methods in Fluids}, 58(3), 237--261.
+
+\bibitem[\protect\citeauthoryear{}{Su and Gardner}{1969}]{Su-Gardener-1969-536}
+Su, C.~H. and Gardner, C.~S. (1969).
+\newblock ``Korteweg-de vries equation and generalisations. iii. derivation of
+  the korteweg-de vries equation and burgers equation.''\ {\em Journal of
+  Mathematical Physics}, 10(3), 536--539.
+
+\bibitem[\protect\citeauthoryear{}{Tonelli and
+  Petti}{2009}]{Tonelli-Petti-2009-609}
+Tonelli, M. and Petti, M. (2009).
+\newblock ``Hybrid finite volume-finite difference scheme for 2dh improved
+  boussinesq equations.''\ {\em Coastal Engineering}, 56(5-6), 609--620.
+
+\bibitem[\protect\citeauthoryear{}{Tonelli and
+  Petti}{2012}]{Tonelli-Petti-2012-8}
+Tonelli, M. and Petti, M. (2012).
+\newblock ``Shock-capturing boussinesq model for irregular wave propagation.''\
+  {\em Coastal Engineering}, 61(8-19).
+
+\bibitem[\protect\citeauthoryear{}{van Leer}{1979}]{vanLeer-B-1979-101}
+van Leer, B. (1979).
+\newblock ``Towards the ultimate conservative difference scheme, v. a
+  second-order sequel to godunov's method.''\ {\em Journal of Computational
+  Physics}, 32(1), 101--136.
+
+\bibitem[\protect\citeauthoryear{}{Witting}{1984}]{Witting-J-1984-203}
+Witting, G.~B. (1984).
+\newblock ``A unified model for the evolution of nonlinear water waves.''\ {\em
+  Journal of Computational Physics}, 56(2), 203--236.
+
+\bibitem[\protect\citeauthoryear{}{Zoppou and
+  Roberts}{2003}]{Zoppou-Roberts-2003-11}
+Zoppou, C. and Roberts, S. (2003).
+\newblock ``Explicit schemes for dam-break simulations.''\ {\em Journal of
+  Hydraulic Engineering, American Society of Civil Engineers}, 129(1), 11--34.
+
+\bibitem[\protect\citeauthoryear{}{Zou}{1999}]{Zou-Z-1999-767}
+Zou, Z.~L. (1999).
+\newblock ``Higher order boussinesq equations.''\ {\em Ocean Engineering},
+  26(8), 767--792.
+
+\end{thebibliography}

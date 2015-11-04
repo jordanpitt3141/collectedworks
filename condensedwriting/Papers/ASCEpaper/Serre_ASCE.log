@@ -1,0 +1,1896 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.24)  25 JUN 2015 13:02
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Serre_ASCE.tex
+(./Serre_ASCE.tex
+LaTeX2e <2015/01/01>
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+(./Serre_ASCE.cls
+
+
+LaTeX Warning: You have requested document class `Serre_ASCE',
+               but the document class provides `ascelike'.
+
+Document Class: ascelike 2013/2/14 Version 2.3 ASCE-like manuscripts (Am. Soc. 
+Civ. Engr.)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+
+(1) A "Journal" style manuscript will be produced
+(2) Figures and Tables will be placed together at the end of the manuscript (ch
+ange with the 'InsideFigs' option)
+(3) Text will be single spaced (change with the 'DoubleSpace' option)
+(4) Text will be 12pt (change with the '10pt', '11pt', & '12pt' options)
+(5) Line numbers will be placed alonside the text (change with the 'NoLineNumbe
+rs' option)
+
+\c@enumnoo=\count87
+\TempBoxb=\box26
+\TempBoxl=\skip43
+\Abovecaptionrule=\skip44
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 94.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 2014/10/14 v3.0j Driver-dependent file (DPC,SPQR)
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip45
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks15
+\ex@=\dimen105
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen106
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen107
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks16
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks17
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks18
+\multlinegap=\skip46
+\multlinetaggap=\skip47
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pstricks/pstricks.sty
+Package: pstricks 2013/12/12 v0.60 LaTeX wrapper for `PSTricks' (RN,HV)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+
+Package pstricks Warning: ************************************ 
+(pstricks)                Option pdf needs a "pdflatex -shell-escape <file>" 
+(pstricks)                or a "pdflatex -enable-write18 <file>" 
+(pstricks)                (if you are using MikTeX) 
+(pstricks)                ************************************.
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pstricks/pstricks.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/pst-xkey.tex
+File: pst-xkey.tex 2005/11/25 v1.6 PSTricks specialization of xkeyval (HA)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks20
+\XKV@tempa@toks=\toks21
+)
+\XKV@depth=\count100
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)))
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pstricks/pst-fp.tex
+`pst-fp' v0.05, 2010/01/17 (hv)
+\pstFP@xs=\count101
+\pstFP@xia=\count102
+\pstFP@xib=\count103
+\pstFP@xfa=\count104
+\pstFP@xfb=\count105
+\pstFP@rega=\count106
+\pstFP@regb=\count107
+\pstFP@regs=\count108
+\pstFP@times=\count109
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.te
+x
+\pgfutil@everybye=\toks22
+\pgfutil@tempdima=\dimen114
+\pgfutil@tempdimb=\dimen115
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-li
+sts.tex))
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks23
+\pgfkeys@temptoks=\toks24
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.c
+ode.tex
+\pgfkeys@tmptoks=\toks25
+))
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex
+\pgf@x=\dimen116
+\pgf@xa=\dimen117
+\pgf@xb=\dimen118
+\pgf@xc=\dimen119
+\pgf@y=\dimen120
+\pgf@ya=\dimen121
+\pgf@yb=\dimen122
+\pgf@yc=\dimen123
+\c@pgf@counta=\count110
+\c@pgf@countb=\count111
+\c@pgf@countc=\count112
+\c@pgf@countd=\count113
+\pgfutil@tempcnta=\count114
+\pgfutil@tempcntb=\count115
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen124
+\pgfmath@count=\count116
+\pgfmath@box=\box29
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.
+tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic
+.code.tex)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigo
+nometric.code.tex)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.rando
+m.code.tex)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.compa
+rison.code.tex)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.
+code.tex)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round
+.code.tex)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.
+code.tex)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integ
+erarithmetics.code.tex)))
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count117
+))
+\pgffor@iter=\dimen125
+\pgffor@skip=\dimen126
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
+)
+\psLoopIndex=\count118
+
+`PSTricks' v2.60  <2014/10/25> (tvz)
+\pst@dima=\dimen127
+\pst@dimb=\dimen128
+\pst@dimc=\dimen129
+\pst@dimd=\dimen130
+\pst@dimg=\dimen131
+\pst@dimh=\dimen132
+\pst@dimm=\dimen133
+\pst@dimn=\dimen134
+\pst@dimo=\dimen135
+\pst@dimp=\dimen136
+\pst@hbox=\box30
+\pst@ibox=\box31
+\pst@boxg=\box32
+\pst@cnta=\count119
+\pst@cntb=\count120
+\pst@cntc=\count121
+\pst@cntd=\count122
+\pst@cntg=\count123
+\pst@cnth=\count124
+\pst@cntm=\count125
+\pst@cntn=\count126
+\pst@cnto=\count127
+\pst@cntp=\count128
+\@zero=\count129
+\pst@toks=\toks31
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pstricks/pstricks.con)
+\psunit=\dimen137
+\psxunit=\dimen138
+\psyunit=\dimen139
+\pst@C@@rType=\count130
+\pslinewidth=\dimen140
+\psk@startLW=\dimen141
+\psk@endLW=\dimen142
+\pst@customdefs=\toks32
+\pslinearc=\dimen143
+\pst@symbolStep=\dimen144
+\pst@symbolWidth=\dimen145
+\pst@symbolLinewidth=\dimen146
+\everypsbox=\toks33
+\psframesep=\dimen147
+\pslabelsep=\dimen148
+\sh@wgridXunit=\dimen149
+\sh@wgridYunit=\dimen150
+\pst@shift=\dimen151
+)
+File: pstricks.tex 2014/10/25 v2.60 `PSTricks' (tvz,hv)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/pstricks/pst-fp.tex)
+File: pst-fp.tex 2014/10/25 v2.60 `PST-fp' (hv)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Package option `pdf' ignored on input line 216.
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count131
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psfrag/psfrag.sty
+Package: psfrag 1998/04/11 v3.04 PSfrag (MCG)
+\pfg@pcount=\count132
+\pfg@scount=\count133
+\pfg@temp=\write3
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/pifont.sty
+Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
+LaTeX Font Info:    Try loading font information for U+pzd on input line 63.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Try loading font information for U+psy on input line 64.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+34.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+)))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks34
+\thm@bodyfont=\toks35
+\thm@headfont=\toks36
+\thm@notefont=\toks37
+\thm@headpunct=\toks38
+\thm@preskip=\skip48
+\thm@postskip=\skip49
+\thm@headsep=\skip50
+\dth@everypar=\toks39
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count134
+\Gm@cntv=\count135
+\c@Gm@tempcnt=\count136
+\Gm@bindingoffset=\dimen152
+\Gm@wd@mp=\dimen153
+\Gm@odd@mp=\dimen154
+\Gm@even@mp=\dimen155
+\Gm@layoutwidth=\dimen156
+\Gm@layoutheight=\dimen157
+\Gm@layouthoffset=\dimen158
+\Gm@layoutvoffset=\dimen159
+\Gm@dimlist=\toks40
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/fleqn.sty
+
+LaTeX Warning: inputting `fleqn.clo' instead of obsolete `fleqn.sty'.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 2015/03/31 v1.1i Standard LaTeX option (flush left equations)
+\mathindent=\dimen160
+Applying: [2015/01/01] Make \[ robust on input line 50.
+LaTeX Info: Redefining \[ on input line 51.
+Already applied: [0000/00/00] Make \[ robust on input line 62.
+Applying: [2015/01/01] Make \] robust on input line 74.
+LaTeX Info: Redefining \] on input line 75.
+Already applied: [0000/00/00] Make \] robust on input line 83.
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/txfonts.sty
+Package: txfonts 2008/01/22 v3.2.1
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/txr/m/n on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/m/n on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/txr/m/n --> OT1/txr/bx/n on input line 22.
+\symitalic=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `italic' in version `bold'
+(Font)                  OT1/txr/m/it --> OT1/txr/bx/it on input line 26.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/bx/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/bx/n on input line 29.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/txr/m/it on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/txr/m/it on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/txr/m/it --> OT1/txr/bx/it on input line 31.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/txss/m/n on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/txss/m/n on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/txss/m/n --> OT1/txss/b/n on input line 41.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/txtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/txtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/txtt/m/n --> OT1/txtt/b/n on input line 51.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/txmi/m/it on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/txmi/m/it on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/txmi/m/it --> OML/txmi/bx/it on input line 59.
+\symlettersA=\mathgroup7
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
+(Font)                  U/txmia/m/it --> U/txmia/bx/it on input line 67.
+LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 70.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/txsy/m/n on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/txsy/m/n on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/txsy/m/n --> OMS/txsy/bx/n on input line 78.
+LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
+(Font)                  U/msa/m/n --> U/txsya/m/n on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/msa/m/n --> U/txsya/m/n on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/txsya/m/n --> U/txsya/bx/n on input line 94.
+LaTeX Font Info:    Redeclaring symbol font `AMSb' on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `normal'
+(Font)                  U/msb/m/n --> U/txsyb/m/n on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/msb/m/n --> U/txsyb/m/n on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/txsyb/m/n --> U/txsyb/bx/n on input line 103.
+\symsymbolsC=\mathgroup8
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
+(Font)                  U/txsyc/m/n --> U/txsyc/bx/n on input line 113.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/txex/m/n on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/txex/m/n on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/txex/m/n --> OMX/txex/bx/n on input line 121.
+\symlargesymbolsA=\mathgroup9
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `bold'
+(Font)                  U/txexa/m/n --> U/txexa/bx/n on input line 129.
+LaTeX Info: Redefining \not on input line 1043.
+LaTeX Info: Redefining \textsquare on input line 1063.
+LaTeX Info: Redefining \openbox on input line 1064.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/wasysym/wasysym.sty
+Package: wasysym 2003/10/30 v2.0 Wasy-2 symbol support package
+\symwasy=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
+(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 90.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count137
+\output=\toks41
+\linenoprevgraf=\count138
+\linenumbersep=\dimen161
+\linenumberwidth=\dimen162
+\c@linenumber=\count139
+\c@pagewiselinenumber=\count140
+\c@LN@truepage=\count141
+\c@internallinenumber=\count142
+\c@internallinenumbers=\count143
+\quotelinenumbersep=\dimen163
+\bframerule=\dimen164
+\bframesep=\dimen165
+\bframebox=\box33
+LaTeX Info: Redefining \\ on input line 3056.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2014/10/28 v3.00 enumerate extensions (DPC)
+\@enLab=\toks42
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip51
+\subfigcapskip=\skip52
+\subfigcaptopadj=\dimen166
+\subfigbottomskip=\skip53
+\subfigcapmargin=\dimen167
+\subfiglabelskip=\skip54
+\c@subfigure=\count144
+\c@lofdepth=\count145
+\c@subtable=\count146
+\c@lotdepth=\count147
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/local/texlive/2015/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip55
+\subfig@bottom=\skip56
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip57
+\LTright=\skip58
+\LTpre=\skip59
+\LTpost=\skip60
+\LTchunksize=\count148
+\LTcapwidth=\dimen168
+\LT@head=\box34
+\LT@firsthead=\box35
+\LT@foot=\box36
+\LT@lastfoot=\box37
+\LT@cols=\count149
+\LT@rows=\count150
+\c@LT@tables=\count151
+\c@LT@chunks=\count152
+\LT@p@ftn=\toks43
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip61
+\f@ncyO@elh=\skip62
+\f@ncyO@erh=\skip63
+\f@ncyO@olh=\skip64
+\f@ncyO@orh=\skip65
+\f@ncyO@elf=\skip66
+\f@ncyO@erf=\skip67
+\f@ncyO@olf=\skip68
+\f@ncyO@orf=\skip69
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/currfile/currfile.sty
+Package: currfile 2013/02/01 v0.7b Provides the file path elements of the curre
+nt input file
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/filehook/filehook.sty
+Package: filehook 2011/10/12 v0.5d Hooks for input files
+)
+\c@currfiledepth=\count153
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/datetime/datetime.sty
+Package: datetime 2015/03/20 v2.60 Date Time Package
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count154
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fmtcount/fmtcount.sty
+Package: fmtcount 2015/05/05 v3.01
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fmtcount/fcprefix.sty
+Package: fcprefix 2012/09/28
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fmtcount/fcnumparser.sty
+Package: fcnumparser 2012/09/28
+\fc@digit@counter=\count155
+))
+\c@padzeroesN=\count156
+\fc@tmpcatcode=\count157
+\@DT@modctr=\count158
+\@ordinalctr=\count159
+\@orgargctr=\count160
+\@strctr=\count161
+\@tmpstrctr=\count162
+\@DT@loopN=\count163
+\@DT@X=\count164
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fmtcount/fc-english.def
+File: fc-english.def 2013/08/17
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/datetime/datetime-defaults.sty
+Package: datetime-defaults 2013/09/10
+)
+\@day=\count165
+\@month=\count166
+\@year=\count167
+\c@HOUR=\count168
+\c@HOURXII=\count169
+\c@MINUTE=\count170
+\c@TOHOUR=\count171
+\c@TOMINUTE=\count172
+\c@SECOND=\count173
+\currenthour=\count174
+\currentminute=\count175
+\currentsecond=\count176
+Package datetime Info: No datetime.cfg file found, using default settings on in
+put line 308.
+\@dtctr=\count177
+\dayofyear=\count178
+\dayofweek=\count179
+LaTeX Info: Redefining \today on input line 736.
+\dt@a=\toks44
+\dt@b=\toks45
+)
+(./Serre_ASCE.aux)
+\openout1 = `Serre_ASCE.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 40.
+LaTeX Font Info:    Try loading font information for OML+txmi on input line 40.
+
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/omltxmi.fd
+File: omltxmi.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 40.
+LaTeX Font Info:    Try loading font information for OMS+txsy on input line 40.
+
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/omstxsy.fd
+File: omstxsy.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 40.
+LaTeX Font Info:    Try loading font information for OMX+txex on input line 40.
+
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/omxtxex.fd
+File: omxtxex.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 40.
+LaTeX Font Info:    Try loading font information for U+txexa on input line 40.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/utxexa.fd
+File: utxexa.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 40.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/endfloat/endfloat.sty
+Package: endfloat 2011/12/25 v2.5d LaTeX2e package puts figures and tables at e
+nd (jdm)
+\c@posttable=\count180
+\efloat@postttt=\write4
+\@ef@tttopen=\count181
+\c@postfigure=\count182
+\efloat@postfff=\write5
+\@ef@fffopen=\count183
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/auto-pst-pdf/auto-pst-pdf.sty
+Package: auto-pst-pdf 2009/04/26 v0.6 Wrapper for pst-pdf
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/catchfile.sty
+Package: catchfile 2011/03/01 v1.6 Catch the contents of a file (HO)
+)
+
+Package ifplatform Warning: 
+    shell escape is disabled, so I can only detect \ifwindows.
+
+)
+\c@app@runs=\count184
+
+
+! Package auto-pst-pdf Error: 
+    "shell escape" (or "write18") is not enabled:
+    auto-pst-pdf will not work!
+.
+
+See the auto-pst-pdf package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134         Or turn off auto-pst-pdf.}
+                                        %
+You need to run LaTeX with the equivalent of "pdflatex -shell-escape"
+    Or turn off auto-pst-pdf.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pst-pdf/pst-pdf.sty
+Package: pst-pdf 2008/10/09 v1.1v PS graphics for pdfLaTeX (RN,HjG)
+\c@pspicture=\count185
+Package pst-pdf Info: MODE: 1 (pdfTeX mode) on input line 214.
+\ppf@output=\toks46
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/preview/preview.sty
+Package: preview 2010/02/14 11.88 (AUCTeX/preview-latex)
+\pr@snippet=\count186
+\pr@box=\box38
+\pr@output=\toks47
+
+Preview: Fontsize 12pt
+Preview: PDFoutput 1
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 2014/10/14 v3.0j Driver-dependent file (DPC,SPQR)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))))
+(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count187
+\scratchdimen=\dimen169
+\scratchbox=\box39
+\nofMPsegments=\count188
+\nofMParguments=\count189
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count190
+\MPscratchDim=\dimen170
+\MPnumerator=\count191
+\makeMPintoPDFobject=\count192
+\everyMPtoPDFconversion=\toks49
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=23.12738pt
+* \headheight=0.0pt
+* \headsep=0.0pt
+* \topskip=12.0pt
+* \footskip=36.135pt
+* \marginparwidth=0.0pt
+* \marginparsep=0.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 54.
+LaTeX Font Info:    Try loading font information for OT1+txr on input line 54.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/ot1txr.fd
+File: ot1txr.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Try loading font information for U+txsya on input line 54.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/utxsya.fd
+File: utxsya.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Try loading font information for U+txsyb on input line 54.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/utxsyb.fd
+File: utxsyb.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Try loading font information for U+txmia on input line 54.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/utxmia.fd
+File: utxmia.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Try loading font information for U+txsyc on input line 54.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/utxsyc.fd
+File: utxsyc.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Try loading font information for U+wasy on input line 54.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/wasysym/uwasy.fd
+File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 56.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 56.
+
+Overfull \hbox (1.16351pt too wide) in paragraph at lines 58--59
+\OT1/ptm/m/n/12 The non-lin-ear and weakly dis-per-sive Serre equa-tions con-ta
+in higher-order dis-per-sive terms.
+ []
+
+[1
+
+
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/upd
+map/pdftex.map}]
+Overfull \hbox (17.47992pt too wide) in paragraph at lines 74--75
+[]\OT1/ptm/m/n/12 Systems of equa-tions that con-tain non-lin-ear and dis-per-s
+ive terms are known as Boussinesq-
+ []
+
+[2] [3]
+\openout5 = `Serre_ASCE.fff'.
+
+ (Serre_ASCE.fff)
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 128.
+
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 128.
+ [4] [5]
+[6] [7] [8] [9]
+\openout4 = `Serre_ASCE.ttt'.
+
+ (Serre_ASCE.ttt) [10] [11] [12]
+Overfull \hbox (5.83014pt too wide) in paragraph at lines 586--587
+\OT1/ptm/m/n/12 Strong Sta-bil-ity Pre-serv-ing (\OT1/ptm/m/it/12 SSP\OT1/ptm/m
+/n/12 ) Runge-Kutta scheme. Strong sta-bil-ity pre-serv-ing schemes
+ []
+
+[13] [14] [15] [16] [17] [18] [19] [20] (./Serre_ASCE.bbl [21
+
+] [22] [23])
+Overfull \hbox (9.45103pt too wide) in alignment at lines 1940--1961
+ [] [] 
+ []
+
+
+Overfull \hbox (9.45103pt too wide) in alignment at lines 1961--1981
+ [] [] 
+ []
+
+[24]
+Overfull \hbox (9.45103pt too wide) in alignment at lines 1981--1999
+ [] [] 
+ []
+
+[25] AED endfloat: Processing end Figures and Tables [26] (./Serre_ASCE.lot)
+\tf@lot=\write6
+\openout6 = `Serre_ASCE.lot'.
+
+
+[27
+
+
+] (./Serre_ASCE.ttt
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
+
+Overfull \hbox (73.57317pt too wide) in paragraph at lines 6--31
+ [][] 
+ []
+
+[28]) (./Serre_ASCE.lof [29
+
+
+
+])
+\tf@lof=\write7
+\openout7 = `Serre_ASCE.lof'.
+
+ [30] (./Serre_ASCE.fff
+
+LaTeX Warning: File `one-dimensional-axis_Serre.eps' not found on input line 3.
+
+
+
+LaTeX Warning: File `one-dimensional-axis_Serre.eps' not found on input line 3.
+
+
+Package epstopdf Info: Source file: <one-dimensional-axis_Serre.eps>
+(epstopdf)             Output file: <one-dimensional-axis_Serre-eps-converted-t
+o.pdf>
+(epstopdf)             Command: <repstopdf --outfile=one-dimensional-axis_Serre
+-eps-converted-to.pdf one-dimensional-axis_Serre.eps>
+(epstopdf)             \includegraphics on input line 3.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `one-dimensional-axis_Serre-eps-converted-to.p
+df' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 ...idth=7.0cm]{one-dimensional-axis_Serre.eps}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 3.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [31
+
+]
+Package epstopdf Info: Source file: <boussq_rk_2_40_Soliton_h1000_LATEX.eps>
+(epstopdf)                    date: 2015-05-28 02:50:16
+(epstopdf)                    size: 42275 bytes
+(epstopdf)             Output file: <boussq_rk_2_40_Soliton_h1000_LATEX-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:09:19
+(epstopdf)                    size: 44337 bytes
+(epstopdf)             Command: <repstopdf --outfile=boussq_rk_2_40_Soliton_h10
+00_LATEX-eps-converted-to.pdf boussq_rk_2_40_Soliton_h1000_LATEX.eps>
+(epstopdf)             \includegraphics on input line 38.
+Package epstopdf Info: Output file is already uptodate.
+
+<boussq_rk_2_40_Soliton_h1000_LATEX-eps-converted-to.pdf, id=119, 380.42125pt x
+ 299.1175pt>
+File: boussq_rk_2_40_Soliton_h1000_LATEX-eps-converted-to.pdf Graphic file (typ
+e pdf)
+ <use boussq_rk_2_40_Soliton_h1000_LATEX-eps-converted-to.pdf>
+Package pdftex.def Info: boussq_rk_2_40_Soliton_h1000_LATEX-eps-converted-to.pd
+f used on input line 38.
+(pdftex.def)             Requested size: 380.4203pt x 299.11676pt.
+Package epstopdf Info: Source file: <boussq_rk_2_40_Soliton_u1000_LATEX.eps>
+(epstopdf)                    date: 2015-05-28 02:50:16
+(epstopdf)                    size: 42209 bytes
+(epstopdf)             Output file: <boussq_rk_2_40_Soliton_u1000_LATEX-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:09:19
+(epstopdf)                    size: 44578 bytes
+(epstopdf)             Command: <repstopdf --outfile=boussq_rk_2_40_Soliton_u10
+00_LATEX-eps-converted-to.pdf boussq_rk_2_40_Soliton_u1000_LATEX.eps>
+(epstopdf)             \includegraphics on input line 65.
+Package epstopdf Info: Output file is already uptodate.
+
+<boussq_rk_2_40_Soliton_u1000_LATEX-eps-converted-to.pdf, id=120, 380.42125pt x
+ 299.1175pt>
+File: boussq_rk_2_40_Soliton_u1000_LATEX-eps-converted-to.pdf Graphic file (typ
+e pdf)
+ <use boussq_rk_2_40_Soliton_u1000_LATEX-eps-converted-to.pdf>
+Package pdftex.def Info: boussq_rk_2_40_Soliton_u1000_LATEX-eps-converted-to.pd
+f used on input line 65.
+(pdftex.def)             Requested size: 380.4203pt x 299.11676pt.
+
+[32
+
+ <./boussq_rk_2_40_Soliton_h1000_LATEX-eps-converted-to.pdf> <./boussq_rk_2_40_
+Soliton_u1000_LATEX-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Boussq_rk_2_40_Soliton_error_LATEX.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 15358 bytes
+(epstopdf)             Output file: <Boussq_rk_2_40_Soliton_error_LATEX-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:26
+(epstopdf)                    size: 7061 bytes
+(epstopdf)             Command: <repstopdf --outfile=Boussq_rk_2_40_Soliton_err
+or_LATEX-eps-converted-to.pdf Boussq_rk_2_40_Soliton_error_LATEX.eps>
+(epstopdf)             \includegraphics on input line 110.
+Package epstopdf Info: Output file is already uptodate.
+
+<Boussq_rk_2_40_Soliton_error_LATEX-eps-converted-to.pdf, id=134, 380.42125pt x
+ 313.17pt>
+File: Boussq_rk_2_40_Soliton_error_LATEX-eps-converted-to.pdf Graphic file (typ
+e pdf)
+ <use Boussq_rk_2_40_Soliton_error_LATEX-eps-converted-to.pdf>
+Package pdftex.def Info: Boussq_rk_2_40_Soliton_error_LATEX-eps-converted-to.pd
+f used on input line 110.
+(pdftex.def)             Requested size: 380.4203pt x 313.16922pt.
+
+[33
+
+ <./Boussq_rk_2_40_Soliton_error_LATEX-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Undular_bore_SWWE_LATEX_3.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 88309 bytes
+(epstopdf)             Output file: <Undular_bore_SWWE_LATEX_3-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:26
+(epstopdf)                    size: 117057 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_SWWE_LATEX_3-
+eps-converted-to.pdf Undular_bore_SWWE_LATEX_3.eps>
+(epstopdf)             \includegraphics on input line 143.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_SWWE_LATEX_3-eps-converted-to.pdf, id=143, 310.15875pt x 299.1175
+pt>
+File: Undular_bore_SWWE_LATEX_3-eps-converted-to.pdf Graphic file (type pdf)
+ <use Undular_bore_SWWE_LATEX_3-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_SWWE_LATEX_3-eps-converted-to.pdf used on
+ input line 143.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_SWWE_LATEX_4.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 88378 bytes
+(epstopdf)             Output file: <Undular_bore_SWWE_LATEX_4-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:26
+(epstopdf)                    size: 117161 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_SWWE_LATEX_4-
+eps-converted-to.pdf Undular_bore_SWWE_LATEX_4.eps>
+(epstopdf)             \includegraphics on input line 169.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_SWWE_LATEX_4-eps-converted-to.pdf, id=144, 310.15875pt x 299.1175
+pt>
+File: Undular_bore_SWWE_LATEX_4-eps-converted-to.pdf Graphic file (type pdf)
+ <use Undular_bore_SWWE_LATEX_4-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_SWWE_LATEX_4-eps-converted-to.pdf used on
+ input line 169.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+
+
+LaTeX Warning: File `Undular_bore_SWWE_LATEX_455.eps' not found on input line 1
+95.
+
+
+LaTeX Warning: File `Undular_bore_SWWE_LATEX_455.eps' not found on input line 1
+95.
+
+Package epstopdf Info: Source file: <Undular_bore_SWWE_LATEX_455.eps>
+(epstopdf)             Output file: <Undular_bore_SWWE_LATEX_455-eps-converted-
+to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_SWWE_LATEX_45
+5-eps-converted-to.pdf Undular_bore_SWWE_LATEX_455.eps>
+(epstopdf)             \includegraphics on input line 195.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Undular_bore_SWWE_LATEX_455-eps-converted-to.
+pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.195 ...raphics{Undular_bore_SWWE_LATEX_455.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Package epstopdf Info: Source file: <Undular_bore_SWWE_LATEX_5.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 88526 bytes
+(epstopdf)             Output file: <Undular_bore_SWWE_LATEX_5-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:27
+(epstopdf)                    size: 117402 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_SWWE_LATEX_5-
+eps-converted-to.pdf Undular_bore_SWWE_LATEX_5.eps>
+(epstopdf)             \includegraphics on input line 223.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_SWWE_LATEX_5-eps-converted-to.pdf, id=145, 310.15875pt x 299.1175
+pt>
+File: Undular_bore_SWWE_LATEX_5-eps-converted-to.pdf Graphic file (type pdf)
+ <use Undular_bore_SWWE_LATEX_5-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_SWWE_LATEX_5-eps-converted-to.pdf used on
+ input line 223.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_SWWE_LATEX_6.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 88383 bytes
+(epstopdf)             Output file: <Undular_bore_SWWE_LATEX_6-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:27
+(epstopdf)                    size: 116840 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_SWWE_LATEX_6-
+eps-converted-to.pdf Undular_bore_SWWE_LATEX_6.eps>
+(epstopdf)             \includegraphics on input line 249.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_SWWE_LATEX_6-eps-converted-to.pdf, id=146, 310.15875pt x 299.1175
+pt>
+File: Undular_bore_SWWE_LATEX_6-eps-converted-to.pdf Graphic file (type pdf)
+ <use Undular_bore_SWWE_LATEX_6-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_SWWE_LATEX_6-eps-converted-to.pdf used on
+ input line 249.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_SWWE_LATEX_8.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 88305 bytes
+(epstopdf)             Output file: <Undular_bore_SWWE_LATEX_8-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:28
+(epstopdf)                    size: 116551 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_SWWE_LATEX_8-
+eps-converted-to.pdf Undular_bore_SWWE_LATEX_8.eps>
+(epstopdf)             \includegraphics on input line 275.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_SWWE_LATEX_8-eps-converted-to.pdf, id=147, 310.15875pt x 299.1175
+pt>
+File: Undular_bore_SWWE_LATEX_8-eps-converted-to.pdf Graphic file (type pdf)
+ <use Undular_bore_SWWE_LATEX_8-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_SWWE_LATEX_8-eps-converted-to.pdf used on
+ input line 275.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_SWWE_LATEX_108.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 88013 bytes
+(epstopdf)             Output file: <Undular_bore_SWWE_LATEX_108-eps-converted-
+to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:28
+(epstopdf)                    size: 115343 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_SWWE_LATEX_10
+8-eps-converted-to.pdf Undular_bore_SWWE_LATEX_108.eps>
+(epstopdf)             \includegraphics on input line 304.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_SWWE_LATEX_108-eps-converted-to.pdf, id=148, 310.15875pt x 299.11
+75pt>
+File: Undular_bore_SWWE_LATEX_108-eps-converted-to.pdf Graphic file (type pdf)
+ <use Undular_bore_SWWE_LATEX_108-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_SWWE_LATEX_108-eps-converted-to.pdf used 
+on input line 304.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+
+
+LaTeX Warning: Float too large for page by 65.44632pt on input line 312.
+
+[34 <./Undular_bore_SWWE_LATEX_3-eps-converted-to.pdf> <./Undular_bore_SWWE_LAT
+EX_4-eps-converted-to.pdf> <./Undular_bore_SWWE_LATEX_5-eps-converted-to.pdf> <
+./Undular_bore_SWWE_LATEX_6-eps-converted-to.pdf> <./Undular_bore_SWWE_LATEX_8-
+eps-converted-to.pdf> <./Undular_bore_SWWE_LATEX_108-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Undular_bore_rk_2_40_Boussq_LATEX_3.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 106294 bytes
+(epstopdf)             Output file: <Undular_bore_rk_2_40_Boussq_LATEX_3-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:29
+(epstopdf)                    size: 163181 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_rk_2_40_Bouss
+q_LATEX_3-eps-converted-to.pdf Undular_bore_rk_2_40_Boussq_LATEX_3.eps>
+(epstopdf)             \includegraphics on input line 341.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_rk_2_40_Boussq_LATEX_3-eps-converted-to.pdf, id=183, 310.15875pt 
+x 299.1175pt>
+File: Undular_bore_rk_2_40_Boussq_LATEX_3-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use Undular_bore_rk_2_40_Boussq_LATEX_3-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_rk_2_40_Boussq_LATEX_3-eps-converted-to.p
+df used on input line 341.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_rk_2_40_Boussq_LATEX_4.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 112387 bytes
+(epstopdf)             Output file: <Undular_bore_rk_2_40_Boussq_LATEX_4-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:29
+(epstopdf)                    size: 175234 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_rk_2_40_Bouss
+q_LATEX_4-eps-converted-to.pdf Undular_bore_rk_2_40_Boussq_LATEX_4.eps>
+(epstopdf)             \includegraphics on input line 367.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_rk_2_40_Boussq_LATEX_4-eps-converted-to.pdf, id=184, 310.15875pt 
+x 299.1175pt>
+File: Undular_bore_rk_2_40_Boussq_LATEX_4-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use Undular_bore_rk_2_40_Boussq_LATEX_4-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_rk_2_40_Boussq_LATEX_4-eps-converted-to.p
+df used on input line 367.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_rk_2_40_Boussq_LATEX_455.eps>
+
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 115710 bytes
+(epstopdf)             Output file: <Undular_bore_rk_2_40_Boussq_LATEX_455-eps-
+converted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:30
+(epstopdf)                    size: 182774 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_rk_2_40_Bouss
+q_LATEX_455-eps-converted-to.pdf Undular_bore_rk_2_40_Boussq_LATEX_455.eps>
+(epstopdf)             \includegraphics on input line 393.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_rk_2_40_Boussq_LATEX_455-eps-converted-to.pdf, id=185, 310.15875p
+t x 299.1175pt>
+File: Undular_bore_rk_2_40_Boussq_LATEX_455-eps-converted-to.pdf Graphic file (
+type pdf)
+
+<use Undular_bore_rk_2_40_Boussq_LATEX_455-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_rk_2_40_Boussq_LATEX_455-eps-converted-to
+.pdf used on input line 393.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_rk_2_40_Boussq_LATEX_5.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 118367 bytes
+(epstopdf)             Output file: <Undular_bore_rk_2_40_Boussq_LATEX_5-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:30
+(epstopdf)                    size: 188402 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_rk_2_40_Bouss
+q_LATEX_5-eps-converted-to.pdf Undular_bore_rk_2_40_Boussq_LATEX_5.eps>
+(epstopdf)             \includegraphics on input line 421.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_rk_2_40_Boussq_LATEX_5-eps-converted-to.pdf, id=186, 310.15875pt 
+x 299.1175pt>
+File: Undular_bore_rk_2_40_Boussq_LATEX_5-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use Undular_bore_rk_2_40_Boussq_LATEX_5-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_rk_2_40_Boussq_LATEX_5-eps-converted-to.p
+df used on input line 421.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_rk_2_40_Boussq_LATEX_6.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 124464 bytes
+(epstopdf)             Output file: <Undular_bore_rk_2_40_Boussq_LATEX_6-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:31
+(epstopdf)                    size: 200808 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_rk_2_40_Bouss
+q_LATEX_6-eps-converted-to.pdf Undular_bore_rk_2_40_Boussq_LATEX_6.eps>
+(epstopdf)             \includegraphics on input line 447.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_rk_2_40_Boussq_LATEX_6-eps-converted-to.pdf, id=187, 310.15875pt 
+x 299.1175pt>
+File: Undular_bore_rk_2_40_Boussq_LATEX_6-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use Undular_bore_rk_2_40_Boussq_LATEX_6-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_rk_2_40_Boussq_LATEX_6-eps-converted-to.p
+df used on input line 447.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_rk_2_40_Boussq_LATEX_8.eps>
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 133818 bytes
+(epstopdf)             Output file: <Undular_bore_rk_2_40_Boussq_LATEX_8-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:31
+(epstopdf)                    size: 219780 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_rk_2_40_Bouss
+q_LATEX_8-eps-converted-to.pdf Undular_bore_rk_2_40_Boussq_LATEX_8.eps>
+(epstopdf)             \includegraphics on input line 473.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_rk_2_40_Boussq_LATEX_8-eps-converted-to.pdf, id=188, 310.15875pt 
+x 299.1175pt>
+File: Undular_bore_rk_2_40_Boussq_LATEX_8-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use Undular_bore_rk_2_40_Boussq_LATEX_8-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_rk_2_40_Boussq_LATEX_8-eps-converted-to.p
+df used on input line 473.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+Package epstopdf Info: Source file: <Undular_bore_rk_2_40_Boussq_LATEX_108.eps>
+
+(epstopdf)                    date: 2015-05-28 02:48:54
+(epstopdf)                    size: 102326 bytes
+(epstopdf)             Output file: <Undular_bore_rk_2_40_Boussq_LATEX_108-eps-
+converted-to.pdf>
+(epstopdf)                    date: 2015-05-28 13:13:32
+(epstopdf)                    size: 159778 bytes
+(epstopdf)             Command: <repstopdf --outfile=Undular_bore_rk_2_40_Bouss
+q_LATEX_108-eps-converted-to.pdf Undular_bore_rk_2_40_Boussq_LATEX_108.eps>
+(epstopdf)             \includegraphics on input line 502.
+Package epstopdf Info: Output file is already uptodate.
+
+<Undular_bore_rk_2_40_Boussq_LATEX_108-eps-converted-to.pdf, id=189, 310.15875p
+t x 299.1175pt>
+File: Undular_bore_rk_2_40_Boussq_LATEX_108-eps-converted-to.pdf Graphic file (
+type pdf)
+
+<use Undular_bore_rk_2_40_Boussq_LATEX_108-eps-converted-to.pdf>
+Package pdftex.def Info: Undular_bore_rk_2_40_Boussq_LATEX_108-eps-converted-to
+.pdf used on input line 502.
+(pdftex.def)             Requested size: 310.15799pt x 299.11676pt.
+
+
+LaTeX Warning: Float too large for page by 44.01619pt on input line 510.
+
+[35 <./Undular_bore_rk_2_40_Boussq_LATEX_3-eps-converted-to.pdf> <./Undular_bor
+e_rk_2_40_Boussq_LATEX_4-eps-converted-to.pdf> <./Undular_bore_rk_2_40_Boussq_L
+ATEX_455-eps-converted-to.pdf> <./Undular_bore_rk_2_40_Boussq_LATEX_5-eps-conve
+rted-to.pdf> <./Undular_bore_rk_2_40_Boussq_LATEX_6-eps-converted-to.pdf> <./Un
+dular_bore_rk_2_40_Boussq_LATEX_8-eps-converted-to.pdf> <./Undular_bore_rk_2_40
+_Boussq_LATEX_108-eps-converted-to.pdf>]
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x0_LATEX.eps' not found on input line 5
+46.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x0_LATEX.eps' not found on input line 5
+46.
+
+Package epstopdf Info: Source file: <Segur_Figure3_SWWE_x0_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_SWWE_x0_LATEX-eps-converted-
+to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_SWWE_x0_LATE
+X-eps-converted-to.pdf Segur_Figure3_SWWE_x0_LATEX.eps>
+(epstopdf)             \includegraphics on input line 546.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_SWWE_x0_LATEX-eps-converted-to.
+pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.546 ...raphics{Segur_Figure3_SWWE_x0_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x50_LATEX.eps' not found on input line 
+579.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x50_LATEX.eps' not found on input line 
+579.
+
+Package epstopdf Info: Source file: <Segur_Figure3_SWWE_x50_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_SWWE_x50_LATEX-eps-converted
+-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_SWWE_x50_LAT
+EX-eps-converted-to.pdf Segur_Figure3_SWWE_x50_LATEX.eps>
+(epstopdf)             \includegraphics on input line 579.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_SWWE_x50_LATEX-eps-converted-to
+.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.579 ...aphics{Segur_Figure3_SWWE_x50_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x100_LATEX.eps' not found on input line
+ 615.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x100_LATEX.eps' not found on input line
+ 615.
+
+Package epstopdf Info: Source file: <Segur_Figure3_SWWE_x100_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_SWWE_x100_LATEX-eps-converte
+d-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_SWWE_x100_LA
+TEX-eps-converted-to.pdf Segur_Figure3_SWWE_x100_LATEX.eps>
+(epstopdf)             \includegraphics on input line 615.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_SWWE_x100_LATEX-eps-converted-t
+o.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.615 ...phics{Segur_Figure3_SWWE_x100_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x150_LATEX.eps' not found on input line
+ 648.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x150_LATEX.eps' not found on input line
+ 648.
+
+Package epstopdf Info: Source file: <Segur_Figure3_SWWE_x150_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_SWWE_x150_LATEX-eps-converte
+d-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_SWWE_x150_LA
+TEX-eps-converted-to.pdf Segur_Figure3_SWWE_x150_LATEX.eps>
+(epstopdf)             \includegraphics on input line 648.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_SWWE_x150_LATEX-eps-converted-t
+o.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.648 ...phics{Segur_Figure3_SWWE_x150_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x200_LATEX.eps' not found on input line
+ 687.
+
+
+LaTeX Warning: File `Segur_Figure3_SWWE_x200_LATEX.eps' not found on input line
+ 687.
+
+Package epstopdf Info: Source file: <Segur_Figure3_SWWE_x200_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_SWWE_x200_LATEX-eps-converte
+d-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_SWWE_x200_LA
+TEX-eps-converted-to.pdf Segur_Figure3_SWWE_x200_LATEX.eps>
+(epstopdf)             \includegraphics on input line 687.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_SWWE_x200_LATEX-eps-converted-t
+o.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.687 }
+       
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Float too large for page by 231.62158pt on input line 695.
+
+[36]
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x0_n10001_LATEX.eps' not 
+found on input line 731.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x0_n10001_LATEX.eps' not 
+found on input line 731.
+
+Package epstopdf Info: Source file: <Segur_Figure3_Serre_second-order_x0_n10001
+_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_Serre_second-order_x0_n10001
+_LATEX-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_Serre_second
+-order_x0_n10001_LATEX-eps-converted-to.pdf Segur_Figure3_Serre_second-order_x0
+_n10001_LATEX.eps>
+(epstopdf)             \includegraphics on input line 731.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_Serre_second-order_x0_n10001_LA
+TEX-eps-converted-to.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.731 ..._Serre_second-order_x0_n10001_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x50_n10001_LATEX.eps' not
+ found on input line 764.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x50_n10001_LATEX.eps' not
+ found on input line 764.
+
+Package epstopdf Info: Source file: <Segur_Figure3_Serre_second-order_x50_n1000
+1_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_Serre_second-order_x50_n1000
+1_LATEX-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_Serre_second
+-order_x50_n10001_LATEX-eps-converted-to.pdf Segur_Figure3_Serre_second-order_x
+50_n10001_LATEX.eps>
+(epstopdf)             \includegraphics on input line 764.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_Serre_second-order_x50_n10001_L
+ATEX-eps-converted-to.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.764 ...Serre_second-order_x50_n10001_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x100_n10001_LATEX.eps' no
+t found on input line 800.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x100_n10001_LATEX.eps' no
+t found on input line 800.
+
+Package epstopdf Info: Source file: <Segur_Figure3_Serre_second-order_x100_n100
+01_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_Serre_second-order_x100_n100
+01_LATEX-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_Serre_second
+-order_x100_n10001_LATEX-eps-converted-to.pdf Segur_Figure3_Serre_second-order_
+x100_n10001_LATEX.eps>
+(epstopdf)             \includegraphics on input line 800.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_Serre_second-order_x100_n10001_
+LATEX-eps-converted-to.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.800 ...erre_second-order_x100_n10001_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x150_n10001_LATEX.eps' no
+t found on input line 833.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x150_n10001_LATEX.eps' no
+t found on input line 833.
+
+Package epstopdf Info: Source file: <Segur_Figure3_Serre_second-order_x150_n100
+01_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_Serre_second-order_x150_n100
+01_LATEX-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_Serre_second
+-order_x150_n10001_LATEX-eps-converted-to.pdf Segur_Figure3_Serre_second-order_
+x150_n10001_LATEX.eps>
+(epstopdf)             \includegraphics on input line 833.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_Serre_second-order_x150_n10001_
+LATEX-eps-converted-to.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.833 ...erre_second-order_x150_n10001_LATEX.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x200_n10001_LATEX.eps' no
+t found on input line 872.
+
+
+LaTeX Warning: File `Segur_Figure3_Serre_second-order_x200_n10001_LATEX.eps' no
+t found on input line 872.
+
+Package epstopdf Info: Source file: <Segur_Figure3_Serre_second-order_x200_n100
+01_LATEX.eps>
+(epstopdf)             Output file: <Segur_Figure3_Serre_second-order_x200_n100
+01_LATEX-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Segur_Figure3_Serre_second
+-order_x200_n10001_LATEX-eps-converted-to.pdf Segur_Figure3_Serre_second-order_
+x200_n10001_LATEX.eps>
+(epstopdf)             \includegraphics on input line 872.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Segur_Figure3_Serre_second-order_x200_n10001_
+LATEX-eps-converted-to.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.872 }
+       
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Float too large for page by 246.12158pt on input line 880.
+
+[37]
+
+LaTeX Warning: File `Dam_Break_rk_SSP_LATEX_10_1.eps' not found on input line 9
+16.
+
+
+LaTeX Warning: File `Dam_Break_rk_SSP_LATEX_10_1.eps' not found on input line 9
+16.
+
+Package epstopdf Info: Source file: <Dam_Break_rk_SSP_LATEX_10_1.eps>
+(epstopdf)             Output file: <Dam_Break_rk_SSP_LATEX_10_1-eps-converted-
+to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Dam_Break_rk_SSP_LATEX_10_
+1-eps-converted-to.pdf Dam_Break_rk_SSP_LATEX_10_1.eps>
+(epstopdf)             \includegraphics on input line 916.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Dam_Break_rk_SSP_LATEX_10_1-eps-converted-to.
+pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.916 ...raphics{Dam_Break_rk_SSP_LATEX_10_1.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `boussq_rk_2_40_Grimshaw_LATEX_10_1.eps' not found on input
+ line 949.
+
+
+LaTeX Warning: File `boussq_rk_2_40_Grimshaw_LATEX_10_1.eps' not found on input
+ line 949.
+
+Package epstopdf Info: Source file: <boussq_rk_2_40_Grimshaw_LATEX_10_1.eps>
+(epstopdf)             Output file: <boussq_rk_2_40_Grimshaw_LATEX_10_1-eps-con
+verted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=boussq_rk_2_40_Grimshaw_LA
+TEX_10_1-eps-converted-to.pdf boussq_rk_2_40_Grimshaw_LATEX_10_1.eps>
+(epstopdf)             \includegraphics on input line 949.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `boussq_rk_2_40_Grimshaw_LATEX_10_1-eps-conver
+ted-to.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.949 ...{boussq_rk_2_40_Grimshaw_LATEX_10_1.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[38
+
+
+
+
+
+]
+
+LaTeX Warning: File `Dam_Break_rk_SSP_LATEX_10_2.eps' not found on input line 9
+93.
+
+
+LaTeX Warning: File `Dam_Break_rk_SSP_LATEX_10_2.eps' not found on input line 9
+93.
+
+Package epstopdf Info: Source file: <Dam_Break_rk_SSP_LATEX_10_2.eps>
+(epstopdf)             Output file: <Dam_Break_rk_SSP_LATEX_10_2-eps-converted-
+to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=Dam_Break_rk_SSP_LATEX_10_
+2-eps-converted-to.pdf Dam_Break_rk_SSP_LATEX_10_2.eps>
+(epstopdf)             \includegraphics on input line 993.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `Dam_Break_rk_SSP_LATEX_10_2-eps-converted-to.
+pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.993 ...raphics{Dam_Break_rk_SSP_LATEX_10_2.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `boussq_rk_2_40_Grimshaw_LATEX_10_2.eps' not found on input
+ line 1026.
+
+
+LaTeX Warning: File `boussq_rk_2_40_Grimshaw_LATEX_10_2.eps' not found on input
+ line 1026.
+
+Package epstopdf Info: Source file: <boussq_rk_2_40_Grimshaw_LATEX_10_2.eps>
+(epstopdf)             Output file: <boussq_rk_2_40_Grimshaw_LATEX_10_2-eps-con
+verted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=boussq_rk_2_40_Grimshaw_LA
+TEX_10_2-eps-converted-to.pdf boussq_rk_2_40_Grimshaw_LATEX_10_2.eps>
+(epstopdf)             \includegraphics on input line 1026.
+Package epstopdf Info: Output file is already uptodate.
+
+! Package pdftex.def Error: File `boussq_rk_2_40_Grimshaw_LATEX_10_2-eps-conver
+ted-to.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1026 ...boussq_rk_2_40_Grimshaw_LATEX_10_2.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[39
+
+]
+
+LaTeX Warning: File `Dam_Break_rk_SSP_LATEX_1.8_1.eps' not found on input line 
+1069.
+
+
+LaTeX Warning: File `Serre_ASCE-pics.pdf' not found on input line 1069.
+
+
+! Package pdftex.def Error: File `Serre_ASCE-pics.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1069 ...phics{Dam_Break_rk_SSP_LATEX_1.8_1.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `boussq_rk_2_40_Grimshaw_LATEX_1.8_1.eps' not found on inpu
+t line 1103.
+
+
+LaTeX Warning: File `Serre_ASCE-pics.pdf' not found on input line 1103.
+
+
+! Package pdftex.def Error: File `Serre_ASCE-pics.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1103 ...oussq_rk_2_40_Grimshaw_LATEX_1.8_1.eps}}
+                                                  %
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[40
+
+])
+
+Package pst-pdf Warning: File `Serre_ASCE-pics.pdf' not found.
+(pst-pdf)                Use the following commands to create it:
+(pst-pdf)                ---------------------------------------------------- 
+(pst-pdf)                latex Serre_ASCE.tex
+(pst-pdf)                dvips -o Serre_ASCE-pics.ps Serre_ASCE.dvi
+(pst-pdf)                ps2pdf Serre_ASCE-pics.ps
+(pst-pdf)                ---------------------------------------------------- .
+
+
+(./Serre_ASCE.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 13642 strings out of 493089
+ 225798 string characters out of 6134848
+ 306212 words of memory out of 5000000
+ 16727 multiletter control sequences out of 15000+600000
+ 66138 words of font info for 143 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 45i,27n,43p,1382b,526s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/local/texlive/2015/te
+xmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/local/texlive/2015/texmf-dis
+t/fonts/type1/public/txfonts/txexa.pfb></usr/local/texlive/2015/texmf-dist/font
+s/type1/public/txfonts/txsy.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
+/public/txfonts/txsya.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publi
+c/txfonts/txsyc.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier
+/ucrr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvb8a
+.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on Serre_ASCE.pdf (40 pages, 2248916 bytes).
+PDF statistics:
+ 299 PDF objects out of 1000 (max. 8388607)
+ 207 compressed objects within 3 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+

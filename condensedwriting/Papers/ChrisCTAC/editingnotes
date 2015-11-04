@@ -1,0 +1,36 @@
+I've gone through the paper, and through the reviews and checked the papers against each other. These are the things I found that have been stated as being addressed, but are in fact still in the paper you gave me. I'm listing them backwards in the paper, since that will make it easier to find things as you make changes going through. 
+
+
+Line 183 : Still mentioning the finite difference scheme, even though you said you removed references to it.
+
+Line 170 : still using 'approximately' instead of \simeq here (I think thats the symbol name in LaTeX not sure)
+
+Line 137 : The CFL condition, does 'theoretically satisifed' mean 'it is expected to be stable'? I think this is what reviewer is meaning by his comment on it, that although it is a necessary condition, it is not always a sufficient condition? I'm not sure, thought I should make some comment about it just to make sure its all correct.
+
+Line 134 : Change sentence begining 'With this approach' to "This approach's use of the finite volume method and the approximate Riemann solvers allows discontinous h and G to be handled efficiently"
+
+Line 117 : the process outline, should read "Averaging" not "Averageing"
+
+Line 113 : Down past the phase velocity equation the line starting 'differes' ; 'properties' should be 'property of'
+
+Line 110 : What's with that weird space after [14,9]?
+
+Line 97 : 'If we' doesn't sound right, maybe 'We' or just 'Making the following observation'
+
+Line 85 : should be 'steep' not 'step'
+
+Line 37 : Still mentions the FD scheme
+
+Line 23 : 'steep' not 'sheep'
+
+Line 16 : 'remain' rather than 'remains'
+
+
+That covers the short referee report. For the long one there are somethings I was not clear on. Firstly, I don't know the correct usage of ',' after variables, equations. So I didn't really review that.
+
+Also I wonder if "conservative form" can be used instead of "Conservation law form"?
+
+
+But that's all from me. I'm also not very good with sentence length / structure. 
+
+

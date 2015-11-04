@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{SWW soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{Helmholtz Decomposition}
+We know in 2D the equation for the conserved quantity $\vec{G}$ in terms of the conserved quantity $h$ and the primitive variables $\vec{u}$ is
+
+\begin{equation}
+\label{Geq}
+\vec{G} = h\vec{u} - \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)
+\end{equation}
+
+To look at this we consider the Helmholtz decomposition of $\vec{G}$ (assuming sufficient smoothness), in principle we can calculate these two parts since we know $\vec{G}$. Thus we have
+\[\vec{G} = \nabla \phi + \nabla \times \vec{A}\] 
+
+Taking the curl of \eqref{Geq}
+
+\[\nabla \times \vec{G} = \nabla \times\left(h\vec{u} \right)-\nabla \times \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+since the curl of a grad is 0
+
+\[\nabla \times \vec{G} = \nabla \times\left(h\vec{u} \right)\]
+
+so the curl of $\vec{G}$ and $h\vec{u}$ are the same. Since the other term is a gradient, its helmholtz decomposition has no curl part and so it must be that for the helmholtz decomposition of $h\vec{u}$ (which we do not know) the curl part is the same as for $\vec{G}$ so that
+
+\[h\vec{u} = \nabla \psi + \nabla \times \vec{A}\]
+
+So we have that:
+
+\[\nabla \phi + \nabla \times \vec{A} = \nabla \psi + \nabla \times \vec{A} - \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+\[\nabla \phi = \nabla \psi - \nabla\left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+Assuming we can just integrate without a problem (probably need to impose some boundary conditions here)
+
+\[ \phi = \psi - \left(\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\]
+
+From above by diving the Helmholtz decomposition of $\vec{u}$ by h we get (asssume $h > 0$ )
+
+\[\vec{u} = \frac{\nabla \psi }{h} + \frac{\nabla \times \vec{A} }{h}\]
+
+Subbing this in gives
+
+\[ \phi = \psi - \left(\frac{h^3}{3} \left(\nabla \cdot \left(\frac{\nabla \psi }{h} + \frac{\nabla \times \vec{A} }{h}\right)\right)\right)\]
+
+Getting ready for a integration by parts we divide out the $h^3/3$ factor to give
+
+\[ \frac{3}{h^3}\phi = \frac{3}{h^3}\psi - \nabla \cdot \left(\frac{\nabla \psi }{h} + \frac{\nabla \times \vec{A} }{h}\right)\]
+
+So integrating over the domain and multiplying by a test function $v \in C^{\infty}_0 (\Omega)$
+
+\[ \int_{\Omega} \frac{3}{h^3}\phi v \; dx = \int_{\Omega} \frac{3}{h^3}\psi v \; dx - \int_{\Omega}\nabla \cdot \left(\frac{\nabla \psi }{h} + \frac{\nabla \times \vec{A} }{h}\right) v \; dx\]
+
+By integrating by parts and remembering that v has is supported inside $\Omega$ we have
+
+\[ \int_{\Omega} \frac{3}{h^3}\phi v \; dx = \int_{\Omega} \frac{3}{h^3}\psi v \; dx - \int_{\Omega}\left(\frac{\nabla \psi }{h} + \frac{\nabla \times \vec{A} }{h}\right) \nabla \cdot v \; dx\]
+
+\[ \int_{\Omega} \frac{3}{h^3}\phi v \; dx = \int_{\Omega} \frac{3}{h^3}\psi v \; dx - \int_{\Omega} \frac{\nabla \psi }{h}\left(\nabla \cdot v\right) + \frac{\nabla \times \vec{A} }{h}\left(\nabla \cdot v\right) \; dx\]
+
+\[ \int_{\Omega} \frac{3}{h^3}\phi v - \frac{\nabla \times \vec{A} }{h}\left(\nabla \cdot v\right)  \; dx = \int_{\Omega} \frac{3}{h^3}\psi v \; dx - \int_{\Omega} \frac{\nabla \psi }{h}\left(\nabla \cdot v\right)  \; dx\] \\ \\ \\
+
+
+
+
+
+
+In principle we can calculate the LHS for any $v$ in the following way. 
+
+We know $\vec{G}$ and $h$, by definition $\phi$ and $\vec{A}$ are given by
+
+\[\vec{G} = \nabla \phi + \nabla \times \vec{A}\] 
+
+Note that we need $\phi$ and only $\nabla \times \vec{A}$, since
+
+\[\nabla \cdot \vec{G} =  \nabla \cdot (\nabla \phi) +  \nabla \cdot(\nabla \times \vec{A})\] 
+
+\[\nabla \cdot \vec{G} =  \nabla \cdot (\nabla \phi)\] 
+
+multiplying by $v \in C^\infty_0(\Omega)$ and integrating over $\Omega$
+
+\[\int_{\Omega}\nabla \cdot \vec{G} v \; dx =  \int_{\Omega}\nabla \cdot (\nabla \phi) v \; dx\] 
+
+Integrating by parts gives:
+
+\[\int_{\Omega}\vec{G}  (\nabla \cdot v) \; dx =  \int_{\Omega}(\nabla \phi)  (\nabla \cdot v) \; dx\]
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,293 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{G for soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{Cell Averaged G}
+Fit a parabola so that the averages over the neighbouring cells is correct. First the parabola is centred at the midpoint so that:
+\[P_i(x) = a(x-x_i)^2 + b(x-x_i) +c \]
+
+We have a list of cell averages $\bar{u}$ and we want this parabola to match the cell averages over the cell it is centred on and the two neighbouring cells. This gives 3 equations we can solve for for a,b and c. So we want:
+\[\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}} P_i(x) \, dx = \frac{1}{\Delta x}\bar{u}_i \]
+\[\int_{x_{i-\frac{3}{2}}}^{x_{i-\frac{1}{2}}} P_i(x) \, dx = \frac{1}{\Delta x} \bar{u}_{i-1} \]
+\[\int_{x_{i+\frac{1}{2}}}^{x_{i+\frac{3}{2}}} P_i(x) \, dx = \frac{1}{\Delta x} \bar{u}_{i+1} \]
+
+We know that:
+\[\int_d^e a(x-x_i)^2 + b(x-x_i) +c \, dx = \left[\frac{1}{3}a(x-x_i)^3 + \frac{1}{2}b(x-x_i)^2 +c(x - x_i)\right]_d^e  \]
+
+So we get that 
+\[\left[\frac{1}{3}a(x-x_i)^3 + \frac{1}{2}b(x-x_i)^2 +c(x - x_i)\right]_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}} = \frac{1}{\Delta x}\bar{u}_i \]
+
+\[\left[\frac{1}{3}a(x-x_i)^3 + \frac{1}{2}b(x-x_i)^2 +c(x - x_i)\right]_{x_{i-\frac{3}{2}}}^{x_{i-\frac{1}{2}}} = \frac{1}{\Delta x} \bar{u}_{i-1} \]
+
+\[\left[\frac{1}{3}a(x-x_i)^3 + \frac{1}{2}b(x-x_i)^2 +c(x - x_i)\right]_{x_{i+\frac{1}{2}}}^{x_{i+\frac{3}{2}}} = \frac{1}{\Delta x} \bar{u}_{i+1} \]
+
+So:
+\begin{dmath*}
+\left[\frac{1}{3}a(x_{i+\frac{1}{2}}-x_i)^3 + \frac{1}{2}b(x_{i+\frac{1}{2}}-x_i)^2 +c(x_{i+\frac{1}{2}} - x_i)\right] - \left[\frac{1}{3}a(x_{i-\frac{1}{2}}-x_i)^3 + \frac{1}{2}b(x_{i-\frac{1}{2}}-x_i)^2 +c(x_{i-\frac{1}{2}} - x_i)\right]  = \frac{1}{\Delta x}\bar{u}_i 
+\end{dmath*}
+
+\begin{dmath*}
+\left[\frac{1}{3}a(\frac{1}{2}\Delta x)^3 + \frac{1}{2}b(\frac{1}{2}\Delta x)^2 +c(\frac{1}{2}\Delta x)\right] - \left[\frac{1}{3}a(-\frac{1}{2}\Delta x)^3 + \frac{1}{2}b(-\frac{1}{2}\Delta x)^2 +c(-\frac{1}{2}\Delta x)\right]  = \frac{1}{\Delta x}\bar{u}_i 
+\end{dmath*}
+
+\begin{dmath*}
+\frac{2}{3}a(\frac{1}{2}\Delta x)^3 + 2c(\frac{1}{2}\Delta x)  = \frac{1}{\Delta x}\bar{u}_i 
+\end{dmath*}
+
+\begin{dmath}
+\label{ciint}
+\frac{2}{24}a(\Delta x)^2 + c =\bar{u}_i 
+\end{dmath}
+
+\begin{dmath*}
+\left[\frac{1}{3}a(-\frac{1}{2}\Delta x)^3 + \frac{1}{2}b(-\frac{1}{2}\Delta x)^2 +c(-\frac{1}{2}\Delta x)\right] - \left[\frac{1}{3}a(-\frac{3}{2}\Delta x)^3 + \frac{1}{2}b(-\frac{3}{2}\Delta x)^2 +c(-\frac{3}{2}\Delta x)\right]  = \frac{1}{\Delta x} \bar{u}_{i-1} 
+\end{dmath*}
+
+\begin{dmath*}
+\frac{1}{3}a \left(-\frac{1}{8}\Delta x^3 + \frac{27}{8 } \Delta x^3\right) + \frac{1}{2}b \left(\frac{1}{4}\Delta x^2 - \frac{9}{4}\Delta x ^2\right) + c \left(-\frac{1}{2}\Delta x + \frac{3}{2}\Delta x\right) = \frac{1}{\Delta x} \bar{u}_{i-1} 
+\end{dmath*}
+
+\begin{dmath*}
+\frac{1}{3}a\frac{26}{8}\Delta x^2 + \frac{1}{2}b \left(- \frac{8}{4}\Delta x\right) + c = \bar{u}_{i-1} 
+\end{dmath*}
+
+\begin{dmath}
+\label{ci-1int}
+\frac{26}{24}a\Delta x^2 - b\Delta x + c = \bar{u}_{i-1} 
+\end{dmath}
+
+\begin{dmath*}
+\left[\frac{1}{3}a(\frac{3}{2}\Delta x)^3 + \frac{1}{2}b(\frac{3}{2}\Delta x)^2 +c(\frac{3}{2}\Delta x)\right] - \left[\frac{1}{3}a(\frac{1}{2}\Delta x)^3 + \frac{1}{2}b(\frac{1}{2}\Delta x)^2 +c(\frac{1}{2}\Delta x)\right]  = \frac{1}{\Delta x}\bar{u}_{i+1} 
+\end{dmath*}
+
+\begin{dmath*}
+\frac{1}{3} a \left(\frac{27}{8} \Delta x^3 - \frac{1}{8}\Delta x^3\right) + \frac{1}{2}b\left(\frac{9}{4}\Delta x^2 - \frac{1}{4}\Delta x^2\right) + c \left(\frac{3}{2}\Delta x - \frac{1}{2}\Delta x\right) = \frac{1}{\Delta x}\bar{u}_{i+1}
+\end{dmath*}
+
+\begin{dmath*}
+\frac{1}{3} a \frac{26}{8} \Delta x^2 + \frac{1}{2}b\frac{8}{4}\Delta x + c = \bar{u}_{i+1}
+\end{dmath*}
+
+\begin{dmath}
+\label{ci+1int}
+\frac{26}{24} a \Delta x^2 + b\Delta x + c = \bar{u}_{i+1}
+\end{dmath}
+
+Adding \eqref{ci-1int} and \eqref{ci+1int} gives:
+\[\frac{52}{24} a \Delta x^2 + 2c = \bar{u}_{i+1} + \bar{u}_{i-1} \]
+
+Taking twice \eqref{ciint} from this gives:
+
+\[\frac{48}{24} a \Delta x^2 = \bar{u}_{i+1} + \bar{u}_{i-1} - 2\bar{u}_{i} \]
+
+\begin{dmath}
+\label{aint1}
+a = \frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2}
+\end{dmath}\
+
+Subbin in \eqref{aint1} into \eqref{ciint} gives:
+
+\begin{dmath*}
+\frac{2}{24} \left(\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2}\right)(\Delta x)^2 + c =\bar{u}_i 
+\end{dmath*}
+
+\begin{dmath*}
+\left(\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{24}\right)+ c =\bar{u}_i 
+\end{dmath*}
+
+\begin{dmath}
+\label{cint1}
+ c = \bar{u}_i - \left(\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{24}\right) 
+\end{dmath}
+
+Subbin in  \eqref{aint1} and \eqref{cint1} into \ref{ci+1int} gives:
+
+\begin{dmath*}
+\frac{26}{24} \left(\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2}\right)  \Delta x^2 + b\Delta x + \bar{u}_i - \left(\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{24}\right) = \bar{u}_{i+1}
+\end{dmath*}
+
+\begin{dmath*}
+\frac{26\bar{u}_{i+1} - 52\bar{u}_{i} + 26\bar{u}_{i-1} }{48}  + b\Delta x - \left(\frac{\bar{u}_{i+1} - 26\bar{u}_{i} + \bar{u}_{i-1} }{24}\right) = \bar{u}_{i+1}
+\end{dmath*}
+
+\begin{dmath*}
+ b\Delta x = \frac{\bar{u}_{i+1} - 26\bar{u}_{i} + \bar{u}_{i-1} }{24} + \bar{u}_{i+1} -  \frac{26\bar{u}_{i+1} - 52\bar{u}_{i} + 26\bar{u}_{i-1} }{48}
+\end{dmath*}
+
+\begin{dmath*}
+ b\Delta x = \frac{25\bar{u}_{i+1} - 26\bar{u}_{i} + \bar{u}_{i-1} }{24} -  \frac{26\bar{u}_{i+1} - 52\bar{u}_{i} + 26\bar{u}_{i-1} }{48}
+\end{dmath*}
+
+\begin{dmath*}
+ b\Delta x = \frac{50\bar{u}_{i+1} - 52\bar{u}_{i} + 2\bar{u}_{i-1} - 26\bar{u}_{i+1} + 52\bar{u}_{i} - 26\bar{u}_{i-1} }{48}
+\end{dmath*}
+
+\begin{dmath*}
+ b\Delta x = \frac{24\bar{u}_{i+1} - 24\bar{u}_{i-1}}{48}
+\end{dmath*}
+
+\begin{dmath}
+\label{bint1}
+ b = \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{2 \Delta x}
+\end{dmath}
+
+So we have $P_i(x)$ by these equations \eqref{aint1},\eqref{bint1}, \eqref{cint1} Which are:
+
+\[a = \frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2}\]
+\[ b = \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{2 \Delta x}\]
+\[ c = \bar{u}_i - \left(\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{24}\right)\]
+
+So we have :
+\[P_i(x) = \frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2} \left(x - x_i\right)^2 + \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{2 \Delta x} \left(x - x_i\right) +   \bar{u}_i - \left(\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{24}\right)\]
+
+This can be rewritten with another variable $-1  \le \kappa \le 1 $ so that:
+
+\[P_i(x) = \bar{u}_i + \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{2 \Delta x} \left(x - x_i\right) +  3 \kappa \left[(x - x_i)^2 - \frac{\Delta x^2}{12}\right]\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2} \]
+
+Which is a second order reconstruction when $-1  \le \kappa \le 1 $ and only third when $\kappa = \frac{1}{3}$ [?,proof]
+
+Looking at the reconstruction at $\bar{u}^+_{i - \frac{1}{2}}$ which is the reconstruction based at $i$ of its left boundary we get:
+
+\[\bar{u}^+_{i - \frac{1}{2}} = P_i(x_{i-\frac{1}{2}}) = \bar{u}_i + \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{2 \Delta x} \left(x_{i-\frac{1}{2}} - x_i\right) +  3 \kappa \left[(x_{i-\frac{1}{2}} - x_i)^2 - \frac{\Delta x^2}{12}\right]\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2} \]
+\[= \bar{u}_i + \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{2 \Delta x} \left(-\frac{1}{2}\Delta x\right) +  3 \kappa \left[\left(-\frac{1}{2}\Delta x\right)^2 - \frac{\Delta x^2}{12}\right]\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2}\]
+
+\[= \bar{u}_i - \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{4} +  3 \kappa \left[\frac{\Delta x^2}{4} - \frac{\Delta x^2}{12}\right]\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2}\]
+
+\[= \bar{u}_i - \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{4} +  3 \kappa \left[\frac{3\Delta x^2}{12} - \frac{\Delta x^2}{12}\right]\frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{2 \Delta x^2}\]
+
+\[= \bar{u}_i - \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{4} +  3 \kappa \frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{12}\]
+
+\[= \bar{u}_i - \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{4} +  \kappa \frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{4}\]
+
+\[= \bar{u}_i +\frac{1}{4}\left[-\bar{u}_{i+1} + \bar{u}_{i-1} +  \kappa \bar{u}_{i+1} - 2\kappa \bar{u}_{i} + \kappa \bar{u}_{i-1} \right]\]
+
+\[= \bar{u}_i +\frac{1}{4}\left[ \left(\kappa -1\right)\bar{u}_{i+1} - 2\kappa \bar{u}_{i} + \left(\kappa + 1\right) \bar{u}_{i-1} \right]\]
+
+Since $2\kappa = (\kappa + 1) + (\kappa -1)$ we have:
+
+\[= \bar{u}_i +\frac{1}{4}\left[ \left(\kappa -1\right)\bar{u}_{i+1} - \left((\kappa + 1) + (\kappa -1)\right) \bar{u}_{i} + \left(\kappa + 1\right) \bar{u}_{i-1} \right]\]
+
+\[= \bar{u}_i +\frac{1}{4}\left[ \left(\kappa -1\right)\left(\bar{u}_{i+1} - \bar{u}_{i}\right) - \left(\kappa + 1\right)\left(\bar{u}_{i} -\bar{u}_{i-1} \right) \right]\]
+
+\[= \bar{u}_i +\frac{1}{4}\left(\kappa -1\right)\left(\bar{u}_{i+1} - \bar{u}_{i}\right) - \frac{1}{4} \left(\kappa + 1\right) \left(\bar{u}_{i} -\bar{u}_{i-1} \right)\]
+
+\[= \bar{u}_i  - \frac{1}{4}\left(1 - \kappa\right)\left(\bar{u}_{i+1} - \bar{u}_{i}\right) - \frac{1}{4} \left(1 + \kappa\right) \left(\bar{u}_{i} -\bar{u}_{i-1} \right)\]
+
+For the right side of cell $i$ the sign is different on the first term only so we get
+
+\[\bar{u}^-_{i + \frac{1}{2}} = P_i(x_{i-\frac{1}{2}}) = \bar{u}_i + \frac{\bar{u}_{i+1} - \bar{u}_{i-1}}{4} +  3 \kappa \frac{\bar{u}_{i+1} - 2\bar{u}_{i} + \bar{u}_{i-1} }{12}\]
+
+\[= \bar{u}_i +\frac{1}{4}\left[\bar{u}_{i+1} - \bar{u}_{i-1} +  \kappa \bar{u}_{i+1} - 2\kappa \bar{u}_{i} + \kappa \bar{u}_{i-1} \right]\]
+
+\[= \bar{u}_i +\frac{1}{4}\left[\left(\kappa + 1 \right)\bar{u}_{i+1} - 2\kappa \bar{u}_{i} + \left(\kappa -1 \right) \bar{u}_{i-1} \right]\]
+
+Using same trick as above we get:
+
+\[= \bar{u}_i +\frac{1}{4}\left[\left(\kappa + 1 \right)\bar{u}_{i+1} - \left((\kappa +1) + (\kappa - 1)\right) \bar{u}_{i} + \left(\kappa -1 \right) \bar{u}_{i-1} \right]\]
+
+\[= \bar{u}_i +\frac{1}{4}\left[\left(\kappa + 1 \right)\left(\bar{u}_{i+1} - \bar{u}_{i}\right) - \left(\kappa -1 \right)\left(\bar{u}_{i} - \bar{u}_{i-1}\right) \right]\]
+
+\[= \bar{u}_i +\frac{1}{4}\left(\kappa + 1 \right)\left(\bar{u}_{i+1} - \bar{u}_{i}\right) - \frac{1}{4}\left(\kappa -1 \right)\left(\bar{u}_{i} - \bar{u}_{i-1}\right) \]
+
+\[= \bar{u}_i +\frac{1}{4}\left( 1 + \kappa\right)\left(\bar{u}_{i+1} - \bar{u}_{i}\right) + \frac{1}{4}\left( 1- \kappa \right)\left(\bar{u}_{i} - \bar{u}_{i-1}\right) \]
+
+[matches Chris]
+
+Now lets focus on this last one for the moment doing some rearranging we get that:
+\[\bar{u}^-_{i + \frac{1}{2}} = \bar{u}_i + \frac{1}{2} \left[\left( \frac{1}{2} +\frac{\kappa}{2}\right)\left(\bar{u}_{i+1} - \bar{u}_{i}\right) + \left(\frac{1}{2} - \frac{\kappa}{2} \right)\left(\bar{u}_{i} - \bar{u}_{i-1}\right)\right] \]
+
+Then:
+\[\bar{u}^-_{i + \frac{1}{2}} = \bar{u}_i + \frac{1}{2} \left[\left( \frac{1}{2} +\frac{\kappa}{2}\right)\frac{\bar{u}_{i+1} - \bar{u}_{i}}{\bar{u}_{i} - \bar{u}_{i-1}} + \left(\frac{1}{2} - \frac{\kappa}{2} \right) \right] \left(\bar{u}_{i} - \bar{u}_{i-1}\right) \]
+
+Define $r_i = \frac{\bar{u}_{i+1} - \bar{u}_{i}}{\bar{u}_{i} - \bar{u}_{i-1}} $ so:
+\[\bar{u}^-_{i + \frac{1}{2}} = \bar{u}_i + \frac{1}{2} \left[\left( \frac{1}{2} +\frac{\kappa}{2}\right)r_i + \left(\frac{1}{2} - \frac{\kappa}{2} \right) \right] \left(\bar{u}_{i} - \bar{u}_{i-1}\right) \]
+
+When $\kappa = \frac{1}{3}$ we get third order reconstruction and:
+
+\[\bar{u}^-_{i + \frac{1}{2}} = \bar{u}_i + \frac{1}{2} \left[\left( \frac{1}{2} +\frac{1}{6}\right)r_i + \left(\frac{1}{2} - \frac{1}{6} \right) \right] \left(\bar{u}_{i} - \bar{u}_{i-1}\right) \]
+
+\[\bar{u}^-_{i + \frac{1}{2}} = \bar{u}_i + \frac{1}{2} \left[\left(\frac{4}{6}\right)r_i + \left(\frac{2}{6} \right) \right] \left(\bar{u}_{i} - \bar{u}_{i-1}\right) \]
+
+\[\bar{u}^-_{i + \frac{1}{2}} = \bar{u}_i + \frac{1}{2} \left[\left(\frac{2}{3}\right)r_i + \left(\frac{1}{3} \right) \right] \left(\bar{u}_{i} - \bar{u}_{i-1}\right) \]
+
+So we want some nonlinear limiter $\phi^-(r_i)$ to reconstruct forwards such that in smooth situations:
+
+\[\phi^-(r_i) = \frac{2}{3}r_i + \frac{1}{3} \]
+
+
+\section{quadratic fitting these points}
+Lets say we have a quadratic fitting the cell average ($C_i$) and the two edge values of a cell, and we want to calculate it.
+\[P_i(x) = a(x-x_i)^2 + b(x-x_i) +c \]
+
+We know from The cell average part that:
+
+\begin{dmath}
+\label{ciintn}
+\frac{2}{24}a(\Delta x)^2 + c =\bar{u}_i 
+\end{dmath}
+
+To fit the edge values we simply require that (poor notation above):
+\begin{dmath}
+\label{cil}
+u_{i - \frac{1}{2}} =P_i(x_{i - \frac{1}{2}}) = a(-\frac{1}{2}\Delta x)^2 + b(-\frac{1}{2}\Delta x) +c = \frac{a}{4}(\Delta x)^2 -\frac{b}{2}(\Delta x) +c
+\end{dmath}
+
+\begin{dmath}
+\label{cir}
+u_{i + \frac{1}{2}} =P_i(x_{i + \frac{1}{2}}) = a(\frac{1}{2}\Delta x)^2 + b(\frac{1}{2}\Delta x) +c = \frac{a}{4}(\Delta x)^2 +\frac{b}{2}(\Delta x) +c
+\end{dmath}
+
+Adding \eqref{cil} and \eqref{cir} eliminates $b$
+
+\[u_{i - \frac{1}{2}} +u_{i + \frac{1}{2}} =  \frac{a}{4}(\Delta x)^2 -\frac{b}{2}(\Delta x) +c + \frac{a}{4}(\Delta x)^2 +\frac{b}{2}(\Delta x) +c  \]
+\[ =\frac{a}{2}(\Delta x)^2 + 2c \]
+
+taking $2 \times$\eqref{ciintn}
+\[\frac{a}{2}(\Delta x)^2 + 2c - \frac{1}{6}a(\Delta x)^2 - 2c = u_{i - \frac{1}{2}} +u_{i + \frac{1}{2}} -2*\bar{u}_i \]
+
+\[\frac{a}{3}(\Delta x)^2 = u_{i - \frac{1}{2}} +u_{i + \frac{1}{2}} -2\bar{u}_i \]
+
+\[a = \frac{3u_{i - \frac{1}{2}} +3u_{i + \frac{1}{2}} -6\bar{u}_i}{(\Delta x)^2} \]
+
+So that now \eqref{ciintn} says:
+\[\frac{1}{12}\frac{3u_{i - \frac{1}{2}} +3u_{i + \frac{1}{2}} -6\bar{u}_i}{(\Delta x)^2}(\Delta x)^2 + c =\bar{u}_i \]
+\[\frac{1}{4}\left(u_{i - \frac{1}{2}} +u_{i + \frac{1}{2}} -2\bar{u}_i\right) + c =\bar{u}_i \]
+\[c =\bar{u}_i - \frac{1}{4}\left(u_{i - \frac{1}{2}} +u_{i + \frac{1}{2}} -2\bar{u}_i\right)  \]
+
+\[c = \frac{6\bar{u}_i-u_{i - \frac{1}{2}} -u_{i + \frac{1}{2}}}{4}  \]
+
+Now \ref{cir} reads:
+\[u_{i + \frac{1}{2}} = \frac{3u_{i - \frac{1}{2}} +3u_{i + \frac{1}{2}} -6\bar{u}_i}{4(\Delta x)^2}(\Delta x)^2 +\frac{b}{2}(\Delta x) + \frac{6\bar{u}_i-u_{i - \frac{1}{2}} -u_{i + \frac{1}{2}}}{4}   \]
+
+\[u_{i + \frac{1}{2}} = \frac{3u_{i - \frac{1}{2}} +3u_{i + \frac{1}{2}} -6\bar{u}_i}{4} + \frac{6\bar{u}_i-u_{i - \frac{1}{2}} -u_{i + \frac{1}{2}}}{4} +\frac{b}{2}(\Delta x)   \]
+
+\[u_{i + \frac{1}{2}} = \frac{3u_{i - \frac{1}{2}} +3u_{i + \frac{1}{2}} -6\bar{u}_i + 6\bar{u}_i-u_{i - \frac{1}{2}} -u_{i + \frac{1}{2}}}{4} +\frac{b}{2}(\Delta x)   \]
+
+\[u_{i + \frac{1}{2}} = \frac{2u_{i - \frac{1}{2}} +2u_{i + \frac{1}{2}} }{4} +\frac{b}{2}(\Delta x)   \]
+
+\[u_{i + \frac{1}{2}} = \frac{u_{i - \frac{1}{2}} +u_{i + \frac{1}{2}} }{2} +\frac{b}{2}(\Delta x)   \]
+
+\[2u_{i + \frac{1}{2}} - u_{i - \frac{1}{2}} - u_{i + \frac{1}{2}} = b(\Delta x)   \]
+
+\[\frac{u_{i + \frac{1}{2}} - u_{i - \frac{1}{2}} }{\Delta x} = b   \]
+
+So we end up with the following equations:
+
+\[a = \frac{3u_{i - \frac{1}{2}} +3u_{i + \frac{1}{2}} -6\bar{u}_i}{(\Delta x)^2} \]
+
+\[b = \frac{u_{i + \frac{1}{2}} - u_{i - \frac{1}{2}} }{\Delta x}  \]
+
+\[c = \frac{6\bar{u}_i-u_{i - \frac{1}{2}} -u_{i + \frac{1}{2}}}{4}  \]
+
+
+
+
+
+
+
+\end{document}

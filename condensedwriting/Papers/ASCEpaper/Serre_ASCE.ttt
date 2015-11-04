@@ -1,0 +1,33 @@
+\begin{table}[t]
+\caption{The major differences between the Serre and shallow water wave equations describing one-dimensional unsteady flow over a frictionless horizontal bed.}
+\label{The major differences in the derivation of the Serre and Shallow water wave equations}
+\centering
+{\footnotesize
+\begin{tabular}{lcc}
+\phantom{p} & \\
+\hline
+\phantom{p} & \\
+& \textbf{Serre Equations} & \textbf{Shallow Water Wave Equations} \\
+\phantom{p} & \\
+\hline
+\phantom{p} & \\
+Longitudinal velocity & $\bar{u}(x,t) = u(x,t)$ & $\bar{u}(x,t) = \dfrac{1}{h} \displaystyle\int_0^h u(x,z,t) \, dz$ \\
+\phantom{p} & \\
+Vertical particle velocity & $w|_z = -(z - z_b) \dfrac{\partial \bar{u}}{\partial x}$ & $w|_z = 0$ \\
+\phantom{p} & \\
+Pressure  & $p|_{\xi} = p_a + \rho g \xi + \dfrac{\rho}{2} \xi ( 2h - \xi ) \left ( \dfrac{\partial \bar{u}}{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2} -  \dfrac{\partial^2 \bar{u}}{\partial x \partial t} \right )  $ & $p|_{\xi} = p_a + \rho g\xi$ \\
+\phantom{p} & \\
+Continuity equation & $\dfrac{\partial h}{\partial t} + \dfrac{\partial (\bar{u}h)}{\partial x} = 0$ & $\dfrac{\partial h}{\partial t} + \dfrac{\partial (\bar{u}h)}{\partial x} = 0$ \\
+\phantom{p} & \\
+Momentum equation & $\dfrac{\partial (\bar{u}h)}{\partial t} + \dfrac{\partial}{\partial x} \left [  \bar{u}^2h + \dfrac{gh^2}{2} + \dfrac{h^3}{3} \left ( \dfrac{\partial \bar{u}}{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2} - \dfrac{\partial^2 \bar{u}}{\partial x \partial t} \right ) \right ] = 0$ & $\dfrac{\partial (\bar{u}h)}{\partial t} + \dfrac{\partial}{\partial x} \left ( \bar{u}^2h + \dfrac{gh^2}{2}\right ) = 0$ \\
+\phantom{p} & \\
+Phase velocity & $v_p = \bar{u} \pm \sqrt{gh} \sqrt{\dfrac{3}{\mu^2 + 3}}$ & $v_p = \bar{u} \pm \sqrt{gh}$ \\
+\phantom{p} & \\
+Group velocity & $v_g = \bar{u} \pm \sqrt{gh} \left ( \sqrt{\dfrac{3}{\mu^2 + 3}} \mp \mu^2 \sqrt{\dfrac{3}{(\mu^2 + 3)^3}} \right ) $ & $v_g = \bar{u} \pm \sqrt{gh}$ \\
+\phantom{p} & \\
+\hline
+\end{tabular}
+}
+\end{table}
+\efloatseparator
+ 

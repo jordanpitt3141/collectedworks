@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Serre_ASCE.aux
+The style file: ascelike.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: Serre_ASCE.bib
+Warning--string name "pa" is undefined
+--line 735 of file Serre_ASCE.bib
+Warning--empty title in Bonneton-Lannes-2009-16601
+`address' is a missing field, not a string, for entry Zoppou-2014
+while executing---line 3269 of file ascelike.bst
+You've used 24 entries,
+            2831 wiz_defined-function locations,
+            771 strings with 9311 characters,
+and the built_in function-call counts, 12804 in all, are:
+= -- 1289
+> -- 429
+< -- 54
++ -- 132
+- -- 116
+* -- 1192
+:= -- 1799
+add.period$ -- 48
+call.type$ -- 24
+change.case$ -- 176
+chr.to.int$ -- 24
+cite$ -- 25
+duplicate$ -- 552
+empty$ -- 935
+format.name$ -- 276
+if$ -- 2577
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 24
+newline$ -- 99
+num.names$ -- 144
+pop$ -- 164
+preamble$ -- 1
+purify$ -- 322
+quote$ -- 0
+skip$ -- 481
+stack$ -- 0
+substring$ -- 940
+swap$ -- 122
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 470
+warning$ -- 1
+while$ -- 70
+width$ -- 0
+write$ -- 315
+(There was 1 error message)

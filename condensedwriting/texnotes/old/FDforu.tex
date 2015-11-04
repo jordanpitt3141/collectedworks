@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[pdf]{pstricks}
+\usepackage{psfrag}
+\usepackage{pifont}
+\usepackage{epstopdf}
+%\usepackage{topcapt}
+\usepackage{lscape}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{geometry}
+\usepackage{fleqn}
+\usepackage{txfonts}
+\usepackage{wasysym}
+\usepackage{lineno}
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{times}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{longtable}
+%\usepackage{citeref}
+\usepackage[skip=0pt]{caption}
+
+% TIME ON EVERY PAGE AS WELL AS THE FILE NAME
+\usepackage{fancyhdr}
+\usepackage{currfile}
+
+\begin{document}
+\begin{subequations}\label{eq:Serre_conservative_form}
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial (\bar{u}h)}{\partial x} = 0
+\label{eq:Serre_continuity}
+\end{gather}
+\begin{gather}
+\underbrace{\underbrace{\dfrac{\partial (\bar{u}h)}{\partial t} + \dfrac{\partial}{\partial x} \left ( \bar{u}^2h + \dfrac{gh^2}{2}\right )}_{\text{Shallow Water Wave Equations}} + \underbrace{\dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial \bar{u} }{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2}  - \dfrac{\partial^2 \bar{u}}{\partial x \partial t}\right ] \right )}_{\text{Dispersion Terms}} = 0.}_{\text{Serre Equations}}
+\label{eq:Serre_momentum}
+\end{gather}
+\end{subequations}
+
+
+Want FD approximation to \eqref{eq:Serre_momentum}:
+$$\dfrac{\partial (\bar{u}h)}{\partial t} + \dfrac{\partial}{\partial x} \left ( \bar{u}^2h + \dfrac{gh^2}{2}\right ) + \dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial \bar{u} }{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2}  - \dfrac{\partial^2 \bar{u}}{\partial x \partial t}\right ] \right ) = 0$$
+
+Expanding gives:
+
+$$\dfrac{\partial (uh)}{\partial t} + 2uh\frac{\partial u}{\partial x} + u^2\frac{\partial h}{\partial x} + gh\frac{\partial h}{\partial x} + \frac{\partial}{\partial x}\left[\frac{ h^3}{3}\dfrac{\partial \bar{u} }{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \frac{ h^3}{3}\bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2}  - \frac{ h^3}{3}\dfrac{\partial^2 \bar{u}}{\partial x \partial t}\right]   $$
+
+Let 
+\[D = 2uh\frac{\partial u}{\partial x} + u^2\frac{\partial h}{\partial x} + gh\frac{\partial h}{\partial x} \]
+
+$$\dfrac{\partial (uh)}{\partial t} + D + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + 2\frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2} - \frac{h ^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2}- \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3} - h^2\frac{\partial^2 u}{\partial x \partial t} - \frac{h^3}{3}\frac{\partial^3 u}{\partial x^2 \partial t}  =0        $$
+
+Let 
+\[F = D + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + 2\frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2} - \frac{h ^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2}- \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3} \]
+
+$$\dfrac{\partial (uh)}{\partial t} + F - h^2\frac{\partial^2 u}{\partial x \partial t} - \frac{h^3}{3}\frac{\partial^3 u}{\partial x^2 \partial t}  =0        $$
+
+$$\dfrac{\partial (uh)}{\partial t}  - h^2\frac{\partial^2 u}{\partial x \partial t} - \frac{h^3}{3}\frac{\partial^3 u}{\partial x^2 \partial t} + F  =0        $$
+
+$$\dfrac{u^{n+1}h^{n+1} - u^{n-1}h^{n-1}}{2\Delta t}  - h^2\dfrac{\left(\frac{\partial u}{\partial x}\right)^{n+1} - \left(\frac{\partial u}{\partial x}\right)^{n-1}}{2\Delta t} - \frac{h^3}{3}\dfrac{\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} - \left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1}}{2\Delta t} + F^n  =0        $$
+
+$$u^{n+1}h^{n+1} - u^{n-1}h^{n-1} - h^2\left[\left(\frac{\partial u}{\partial x}\right)^{n+1} - \left(\frac{\partial u}{\partial x}\right)^{n-1}\right] - \frac{h^3}{3}\left[\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} - \left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1}\right] + 2\Delta t F^n  =0        $$
+
+$$u^{n+1}h^{n+1} - h^2\left(\frac{\partial u}{\partial x}\right)^{n+1} - \frac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} + 2\Delta t F^n   - u^{n-1}h^{n-1} + h^2 \left(\frac{\partial u}{\partial x}\right)^{n-1} + \frac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} =0        $$
+
+$$u^{n+1}h^{n+1} - h^2\left(\frac{u^{n+1}_{i+1} - u^{n+1}_{i-1}}{2 \Delta x}\right) - \frac{h^3}{3}\left(\frac{u^{n+1}_{i+1} - 2u^{n+1}_{i} + u^{n+1}_{i-1}}{\Delta x^2}\right) + 2\Delta t F^n   - u^{n-1}h^{n-1} + h^2 \left(\frac{\partial u}{\partial x}\right)^{n-1} + \frac{h^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} =0        $$
+
+So for a tri-diagonal matrix
+\[a_i = \frac{h^2}{2\Delta x} - \frac{h^3}{3\Delta x^2} \]
+\[b_i = h^{n+1} + \frac{2h^3}{3 \Delta x^2} \]
+
+\[c_i = -\frac{h^2}{2\Delta x} - \frac{h^3}{3\Delta x^2} \]
+
+\[F = 2uh\frac{\partial u}{\partial x} + u^2\frac{\partial h}{\partial x} + gh\frac{\partial h}{\partial x} + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + 2\frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2} - \frac{h ^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2}- \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3} \]
+
+\[F = 2uh\frac{\partial u}{\partial x} + u^2\frac{\partial h}{\partial x} + gh\frac{\partial h}{\partial x} + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + \frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2} - \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3} \]
+
+
+
+
+\end{document}

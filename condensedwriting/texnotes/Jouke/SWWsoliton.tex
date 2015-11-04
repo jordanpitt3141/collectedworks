@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{SWW soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{SWW soliton}
+The continuity equation is:
+\begin{equation}
+\label{coneq1}
+h_t + uh_x + u_xh = 0
+\end{equation}
+
+the momentum equation is
+\[\left(uh\right)_t + \left(u^2h + g\frac{h^2}{2}\right)_x = 0\]
+expanding
+
+\[u_th + uh_t + \left(u^2h\right)_x + ghh_x = 0\]
+
+\[u_th + uh_t + 2uu_xh + u^2h_x  + ghh_x = 0\]
+
+using \eqref{coneq1}
+
+\[u_th - u^2h_x - uu_xh  + 2uu_xh + u^2h_x  + ghh_x = 0\]
+
+\[u_th + uu_xh  + ghh_x = 0\]
+when $h > 0$
+\begin{equation}
+\label{veleq1}
+u_t + uu_x  + gh_x = 0
+\end{equation}
+
+want solutions to \eqref{coneq1} and \eqref{veleq1} such that
+
+\[h(x,t) = \phi(x - ct)\]
+\[u(x,t) = \psi(x - ct)\]
+
+Substituting these into \eqref{coneq1} gives
+
+\[-c\phi'(x - ct) + \psi(x - ct)\phi'(x - ct) + \psi'(x - ct)\phi(x - ct) = 0\]
+
+\[\left(\psi(x - ct) -c\right)\phi'(x - ct) + \psi'(x - ct)\phi(x - ct) = 0\]
+
+\begin{equation}
+\label{expconeq}
+\left(\psi(x - ct) -c\right)\phi'(x - ct) + \psi'(x - ct)\phi(x - ct) = 0
+\end{equation}
+
+Substituting these into \eqref{veleq1} gives
+\[-c\psi'(x - ct) + \psi(x - ct)\psi'(x - ct)  + g\phi'(x-ct) = 0\]
+\[\left(\psi(x - ct) -c\right)\psi'(x - ct) + g\phi'(x-ct) = 0\]
+
+\begin{equation}
+\label{expveleq}
+\left(\psi(x - ct) -c\right)\psi'(x - ct) + g\phi'(x-ct) = 0
+\end{equation}
+
+So we find that by \eqref{expveleq}
+\[\left(\psi(x - ct) -c\right) = \frac{-g\phi'(x-ct)}{\psi'(x - ct)} \]
+
+subbing this into \eqref{expconeq}
+\[\frac{-g\phi'(x-ct)}{\psi'(x - ct)}\phi'(x - ct) + \psi'(x - ct)\phi(x - ct) = 0\]
+
+\[g \left(\phi'(x - ct)\right)^2 = \left(\psi'(x - ct)\right)^2\phi(x - ct)\]
+\[g \frac{\left(\phi'(x - ct)\right)^2}{\phi(x - ct)} = \left(\psi'(x - ct)\right)^2\]
+
+\[\sqrt{g} \frac{\phi'(x - ct)}{\sqrt{\phi(x - ct)}} = \psi'(x - ct)\]
+
+After we differentiated with respect to x and t it will be easier to see what we have with a change of variables so $y = x - ct$:
+
+\[\sqrt{g} \frac{\phi'(y)}{\sqrt{\phi(y)}} = \psi'(y)\]
+
+and 
+
+\begin{equation}
+\label{expconeqy}
+\left(\psi(y) -c\right)\phi'(y) + \psi'(y)\phi(y) = 0
+\end{equation}
+\begin{equation}
+\label{expveleqy}
+\left(\psi(y) -c\right)\psi'(y) + g\phi'(y) = 0
+\end{equation}
+
+We know by the fundamental theorem of calculus that
+\[\psi(y) = \int_0^y \psi'(s) ds - \psi(0)\]
+
+\[\psi(y) = \sqrt{g} \int_0^y \frac{\phi'(s)}{\sqrt{\phi(s)}} ds + \psi(0)\]
+
+It is quite easy to see that the antiderivative of $\frac{\phi'(s)}{\sqrt{\phi(s)}}$  is $2\sqrt{\phi(s)}$
+
+\[\psi(y) = 2\sqrt{g} \left[\sqrt{\phi(y)} - \sqrt{\phi(0)}\right] + \psi(0)\]
+
+\[\psi(y) = 2\sqrt{g}\sqrt{\phi(y)} - 2\sqrt{g}\sqrt{\phi(0)} + \psi(0)\]
+
+defining $d =- 2\sqrt{g}\sqrt{\phi(0)} + \psi(0)$ which is a constant
+
+\[\psi(y) = 2\sqrt{g}\sqrt{\phi(y)} + d\]
+
+So we have that (assume $c \neq 0$)
+\begin{equation}
+\label{relation}
+u(x,t) = 2\sqrt{g}\sqrt{h(x,t)} + d  
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+\end{document}
