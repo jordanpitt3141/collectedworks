@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.24)  4 NOV 2015 16:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.24)  5 NOV 2015 12:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -951,190 +951,199 @@ ine 427.
 -figure0.pdf> <./results/soliton/ex/newo2-figure0.pdf> <./results/soliton/ex/ne
 wo2u-figure0.pdf> <./results/soliton/ex/newo3-figure0.pdf> <./results/soliton/e
 x/newo3u-figure0.pdf>] [12 <./results/soliton/con/sto1-figure0.pdf> <./results/
-soliton/con/sto2-figure0.pdf> <./results/soliton/con/sto3-figure0.pdf>] [13]
-<./results/segurdata/o1/plotp0-figure0.pdf, id=235, 249.88457pt x 202.07596pt>
+soliton/con/sto2-figure0.pdf> <./results/soliton/con/sto3-figure0.pdf>]
+<./results/soliton/con/o31dt-figure0.pdf, id=231, 247.0289pt x 198.53773pt>
+File: ./results/soliton/con/o31dt-figure0.pdf Graphic file (type pdf)
+
+<use ./results/soliton/con/o31dt-figure0.pdf>
+Package pdftex.def Info: ./results/soliton/con/o31dt-figure0.pdf used on input 
+line 449.
+(pdftex.def)             Requested size: 227.62204pt x 182.94775pt.
+ [13]
+<./results/segurdata/o1/plotp0-figure0.pdf, id=236, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o1/plotp0-figure0.pdf Graphic file (type pdf)
 
 <use ./results/segurdata/o1/plotp0-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o1/plotp0-figure0.pdf used on inpu
-t line 469.
+t line 476.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o1/plotp5-figure0.pdf, id=236, 249.88457pt x 202.07596pt>
+<./results/segurdata/o1/plotp5-figure0.pdf, id=237, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o1/plotp5-figure0.pdf Graphic file (type pdf)
 
 <use ./results/segurdata/o1/plotp5-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o1/plotp5-figure0.pdf used on inpu
-t line 470.
+t line 477.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o1/plotp10-figure0.pdf, id=237, 249.88457pt x 202.07596pt>
+<./results/segurdata/o1/plotp10-figure0.pdf, id=238, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o1/plotp10-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o1/plotp10-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o1/plotp10-figure0.pdf used on inp
-ut line 471.
+ut line 478.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o1/plotp15-figure0.pdf, id=238, 249.88457pt x 202.07596pt>
+<./results/segurdata/o1/plotp15-figure0.pdf, id=239, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o1/plotp15-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o1/plotp15-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o1/plotp15-figure0.pdf used on inp
-ut line 472.
+ut line 479.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o1/plotp20-figure0.pdf, id=239, 249.88457pt x 202.07596pt>
+<./results/segurdata/o1/plotp20-figure0.pdf, id=240, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o1/plotp20-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o1/plotp20-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o1/plotp20-figure0.pdf used on inp
-ut line 473.
+ut line 480.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
 
-LaTeX Warning: Float too large for page by 29.305pt on input line 476.
+LaTeX Warning: Float too large for page by 29.305pt on input line 483.
 
 
-<./results/segurdata/o2/plotp0-figure0.pdf, id=240, 249.88457pt x 202.07596pt>
+<./results/segurdata/o2/plotp0-figure0.pdf, id=241, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o2/plotp0-figure0.pdf Graphic file (type pdf)
 
 <use ./results/segurdata/o2/plotp0-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o2/plotp0-figure0.pdf used on inpu
-t line 480.
+t line 487.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o2/plotp5-figure0.pdf, id=241, 249.88457pt x 202.07596pt>
+<./results/segurdata/o2/plotp5-figure0.pdf, id=242, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o2/plotp5-figure0.pdf Graphic file (type pdf)
 
 <use ./results/segurdata/o2/plotp5-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o2/plotp5-figure0.pdf used on inpu
-t line 481.
+t line 488.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o2/plotp10-figure0.pdf, id=242, 249.88457pt x 202.07596pt>
+<./results/segurdata/o2/plotp10-figure0.pdf, id=243, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o2/plotp10-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o2/plotp10-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o2/plotp10-figure0.pdf used on inp
-ut line 482.
+ut line 489.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o2/plotp15-figure0.pdf, id=243, 249.88457pt x 202.07596pt>
+<./results/segurdata/o2/plotp15-figure0.pdf, id=244, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o2/plotp15-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o2/plotp15-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o2/plotp15-figure0.pdf used on inp
-ut line 483.
+ut line 490.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o2/plotp20-figure0.pdf, id=244, 249.88457pt x 202.07596pt>
+<./results/segurdata/o2/plotp20-figure0.pdf, id=245, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o2/plotp20-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o2/plotp20-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o2/plotp20-figure0.pdf used on inp
-ut line 484.
+ut line 491.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
 
-LaTeX Warning: Float too large for page by 29.305pt on input line 487.
+LaTeX Warning: Float too large for page by 29.305pt on input line 494.
 
 
-<./results/segurdata/o3/plotp0-figure0.pdf, id=245, 249.88457pt x 202.07596pt>
+<./results/segurdata/o3/plotp0-figure0.pdf, id=246, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o3/plotp0-figure0.pdf Graphic file (type pdf)
 
 <use ./results/segurdata/o3/plotp0-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o3/plotp0-figure0.pdf used on inpu
-t line 491.
+t line 498.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o3/plotp5-figure0.pdf, id=246, 249.88457pt x 202.07596pt>
+<./results/segurdata/o3/plotp5-figure0.pdf, id=247, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o3/plotp5-figure0.pdf Graphic file (type pdf)
 
 <use ./results/segurdata/o3/plotp5-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o3/plotp5-figure0.pdf used on inpu
-t line 492.
+t line 499.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o3/plotp10-figure0.pdf, id=247, 249.88457pt x 202.07596pt>
+<./results/segurdata/o3/plotp10-figure0.pdf, id=248, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o3/plotp10-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o3/plotp10-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o3/plotp10-figure0.pdf used on inp
-ut line 493.
+ut line 500.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o3/plotp15-figure0.pdf, id=248, 249.88457pt x 202.07596pt>
+<./results/segurdata/o3/plotp15-figure0.pdf, id=249, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o3/plotp15-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o3/plotp15-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o3/plotp15-figure0.pdf used on inp
-ut line 494.
+ut line 501.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
-<./results/segurdata/o3/plotp20-figure0.pdf, id=249, 249.88457pt x 202.07596pt>
+<./results/segurdata/o3/plotp20-figure0.pdf, id=250, 249.88457pt x 202.07596pt>
 File: ./results/segurdata/o3/plotp20-figure0.pdf Graphic file (type pdf)
 <use ./results/segurdata/o3/plotp20-figure0.pdf>
 Package pdftex.def Info: ./results/segurdata/o3/plotp20-figure0.pdf used on inp
-ut line 495.
+ut line 502.
 (pdftex.def)             Requested size: 199.16928pt x 161.06895pt.
 
 
-LaTeX Warning: Float too large for page by 29.305pt on input line 498.
+LaTeX Warning: Float too large for page by 29.305pt on input line 505.
 
-[14] [15 <./results/segurdata/o1/plotp0-figure0.pdf> <./results/segurdata/o1/pl
-otp5-figure0.pdf> <./results/segurdata/o1/plotp10-figure0.pdf> <./results/segur
-data/o1/plotp15-figure0.pdf> <./results/segurdata/o1/plotp20-figure0.pdf>]
-[16 <./results/segurdata/o2/plotp0-figure0.pdf> <./results/segurdata/o2/plotp5-
-figure0.pdf> <./results/segurdata/o2/plotp10-figure0.pdf> <./results/segurdata/
-o2/plotp15-figure0.pdf> <./results/segurdata/o2/plotp20-figure0.pdf>] [17 <./re
-sults/segurdata/o3/plotp0-figure0.pdf> <./results/segurdata/o3/plotp5-figure0.p
-df> <./results/segurdata/o3/plotp10-figure0.pdf> <./results/segurdata/o3/plotp1
-5-figure0.pdf> <./results/segurdata/o3/plotp20-figure0.pdf>]
-<./results/dambreak/L1con/both-figure0.pdf, id=600, 239.97354pt x 196.37666pt>
+[14 <./results/soliton/con/o31dt-figure0.pdf>] [15 <./results/segurdata/o1/plot
+p0-figure0.pdf> <./results/segurdata/o1/plotp5-figure0.pdf> <./results/segurdat
+a/o1/plotp10-figure0.pdf> <./results/segurdata/o1/plotp15-figure0.pdf> <./resul
+ts/segurdata/o1/plotp20-figure0.pdf>] [16 <./results/segurdata/o2/plotp0-figure
+0.pdf> <./results/segurdata/o2/plotp5-figure0.pdf> <./results/segurdata/o2/plot
+p10-figure0.pdf> <./results/segurdata/o2/plotp15-figure0.pdf> <./results/segurd
+ata/o2/plotp20-figure0.pdf>] [17 <./results/segurdata/o3/plotp0-figure0.pdf> <.
+/results/segurdata/o3/plotp5-figure0.pdf> <./results/segurdata/o3/plotp10-figur
+e0.pdf> <./results/segurdata/o3/plotp15-figure0.pdf> <./results/segurdata/o3/pl
+otp20-figure0.pdf>] [18]
+<./results/dambreak/L1con/both-figure0.pdf, id=620, 239.97354pt x 196.37666pt>
 File: ./results/dambreak/L1con/both-figure0.pdf Graphic file (type pdf)
 
 <use ./results/dambreak/L1con/both-figure0.pdf>
 Package pdftex.def Info: ./results/dambreak/L1con/both-figure0.pdf used on inpu
-t line 528.
+t line 535.
 (pdftex.def)             Requested size: 227.62204pt x 186.2721pt.
 
-<./results/dambreak/ex/o1-figure0.pdf, id=601, 246.23093pt x 200.67473pt>
+<./results/dambreak/ex/o1-figure0.pdf, id=621, 246.23093pt x 200.67473pt>
 File: ./results/dambreak/ex/o1-figure0.pdf Graphic file (type pdf)
 
 <use ./results/dambreak/ex/o1-figure0.pdf>
 Package pdftex.def Info: ./results/dambreak/ex/o1-figure0.pdf used on input lin
-e 535.
+e 542.
 (pdftex.def)             Requested size: 199.16928pt x 162.32516pt.
 
-<./results/dambreak/ex/o2-figure0.pdf, id=602, 246.23093pt x 200.67473pt>
+<./results/dambreak/ex/o2-figure0.pdf, id=622, 246.23093pt x 200.67473pt>
 File: ./results/dambreak/ex/o2-figure0.pdf Graphic file (type pdf)
 
 <use ./results/dambreak/ex/o2-figure0.pdf>
 Package pdftex.def Info: ./results/dambreak/ex/o2-figure0.pdf used on input lin
-e 536.
+e 543.
 (pdftex.def)             Requested size: 199.16928pt x 162.32516pt.
 
-<./results/dambreak/ex/o3-figure0.pdf, id=603, 246.23093pt x 200.67473pt>
+<./results/dambreak/ex/o3-figure0.pdf, id=623, 246.23093pt x 200.67473pt>
 File: ./results/dambreak/ex/o3-figure0.pdf Graphic file (type pdf)
 
 <use ./results/dambreak/ex/o3-figure0.pdf>
 Package pdftex.def Info: ./results/dambreak/ex/o3-figure0.pdf used on input lin
-e 537.
+e 544.
 (pdftex.def)             Requested size: 199.16928pt x 162.32516pt.
 
-<./results/dambreak/ex/o1-figure1.pdf, id=604, 246.23093pt x 200.67473pt>
+<./results/dambreak/ex/o1-figure1.pdf, id=624, 246.23093pt x 200.67473pt>
 File: ./results/dambreak/ex/o1-figure1.pdf Graphic file (type pdf)
 
 <use ./results/dambreak/ex/o1-figure1.pdf>
 Package pdftex.def Info: ./results/dambreak/ex/o1-figure1.pdf used on input lin
-e 538.
+e 545.
 (pdftex.def)             Requested size: 199.16928pt x 162.32516pt.
- [18] [19 <./results/dambreak/L1con/both-figure0.pdf>] [20 <./results/dambreak/
-ex/o1-figure0.pdf> <./results/dambreak/ex/o2-figure0.pdf> <./results/dambreak/e
-x/o3-figure0.pdf> <./results/dambreak/ex/o1-figure1.pdf>] (./Serre_ASCE.bbl [21
+ [19 <./results/dambreak/L1con/both-figure0.pdf>] [20 <./results/dambreak/ex/o1
+-figure0.pdf> <./results/dambreak/ex/o2-figure0.pdf> <./results/dambreak/ex/o3-
+figure0.pdf> <./results/dambreak/ex/o1-figure1.pdf>] [21] (./Serre_ASCE.bbl [22
 ]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
-) [22] (./Serre_ASCE.aux) ) 
+) [23] (./Serre_ASCE.aux) ) 
 Here is how much of TeX's memory you used:
- 13231 strings out of 493089
- 223875 string characters out of 6134848
- 285952 words of memory out of 5000000
- 16370 multiletter control sequences out of 15000+600000
+ 13237 strings out of 493089
+ 224087 string characters out of 6134848
+ 284961 words of memory out of 5000000
+ 16375 multiletter control sequences out of 15000+600000
  67315 words of font info for 157 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  53i,27n,92p,1436b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1159,10 +1168,10 @@ pe1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw
 utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmbi8a.pf
 b></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/lo
 cal/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Serre_ASCE.pdf (22 pages, 7849734 bytes).
+Output written on Serre_ASCE.pdf (23 pages, 7858006 bytes).
 PDF statistics:
- 720 PDF objects out of 1000 (max. 8388607)
- 636 compressed objects within 7 object streams
+ 740 PDF objects out of 1000 (max. 8388607)
+ 654 compressed objects within 7 object streams
  0 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
 
