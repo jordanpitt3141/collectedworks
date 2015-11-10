@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{SWW soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{Equations}
+
+\subsection{26}
+Yep, that is correct.
+
+\subsection{28}
+Correct as well.
+
+\subsection{34}
+While I don't mind having $\bar{u}$ to denote that $u$ is depth averaged, I'm more used to dropping it and then using the bar to always mean that the value is a cell averaged so that's how I will explain it. As a compromise between the two I will use $\nu$ to refer to the velocity $u$ averaged over depth and bar to represent cell average values.
+
+Ok here's the equation that makes me want to write something up to hopefully explain it a little better. While I think the operator notation is very nice in some instances, I think since it corresponds better to how a FEM is constructed we should actually look at it from the point of view of individual elements and then have some assemble operator  that combines all the elements, which you do but just not for this equations as well. This will also correspond better to how I think about it as well.
+
+Ok so for the FEM we want to take in the cell averages of all cells $\bar{\boldsymbol{h}}$ and $\bar{\boldsymbol{G}}$ and solve the elliptic equation for $\nu$. In particular the FEM gives us $\nu$ as nodal values at the cell centres and the cell edges. Then since out FVM needs only the $\nu$ at the cell edges and an approximation to the derivative we have enough information. 
+
+The derivative is calculated using the quadratic that fits the two edges and the centre of a cell. So we are really using the quadratic given to us by the FEM.
+
+In particular we have $\nu_{j \pm 1/2}$ directly from the FEM, and using basic interpolation we also have
+
+\[\left(\frac{\partial \nu}{\partial x}\right)^-_{j + 1/2} = a_j \Delta x + b_j\]
+
+\[\left(\frac{\partial \nu}{\partial x}\right)^+_{j + 1/2} = -a_{j+1} \Delta x + b_{j+ 1}\]
+
+Where the $a_j$'s and $b_j$'s are coefficients of the quadratic the fits through the points given at the cell centre and the two edges, denoted by $Q$ so that.
+
+\[Q_j(x) = a_j \left(x - x_j\right)^2 + b_j \left(x - x_j\right) + c_j \]
+
+and by the definition of what data points this quadratic fits we have
+
+\[Q_j(x_j) = \nu_j \]
+\[Q_j(x_{j - 1/2}) = \nu_{j - 1/2} \]
+\[Q_j(x_{j + 1/2}) = \nu_{j + 1/2} \]
+
+It can be found by using these definitions of $Q$ to solve for the coefficients that
+
+\[a_j = \frac{2\nu_{j+ 1/2} - 4\nu_j + 2\nu_{j+ 1/2}}{\Delta x ^2}\]
+
+\[b_j = \frac{\nu_{j+ 1/2} - \nu_{j+ 1/2}}{\Delta x}\]
+
+\[c_j = \nu_j\]
+
+So that is how the FVM handles the output of the FEM for $\nu$, for $h$ and $G$ it is the same, of course this just affects the flux terms.
+
+Now to the how the FEM handles the cell averages. Since it is easiest to think by elements that is what we will do, focussing in on the element with $x_j$ as its centre.
+
+For each element we must calculate $h$ and $G$ as nodal values at the cell centre $x_j$ and the cell edges $x_{j - 1/2}$ and $x_{j + 1/2}$ using the cell averages. 
+
+So as in equation 26 you have
+\[q_j = \frac{- \bar{q}_{j+1} + 26\bar{q}_{j} - \bar{q}_{j-1}}{24}.\]
+
+Thus we have 
+
+\[h_j = \frac{- \bar{h}_{j+1} + 26\bar{h}_{j} - \bar{h}_{j-1}}{24}\]
+
+and 
+
+\[G_j = \frac{- \bar{G}_{j+1} + 26\bar{G}_{j} - \bar{G}_{j-1}}{24}.\]
+
+Thus we have the cell centres nodal values. To calculate the edge values we consider what we have already done for the FVM, during the reconstruction phase we calculate the cell edge values based on the cell averages which is exactly what we need to do here. In particular for the third order scheme we use a quadratic and use the Koren limiter to stop extrema being introduced numerically. Thus we do the same thing here, in particular as in your notes we have 
+
+\[
+q^-_{j + \frac{1}{2}} = \bar{q}_j + \frac{1}{2}\phi^-\left(r_j\right)\left(\bar{q}_j -\bar{q}_{j-1} \right)
+\]
+and
+\[
+q^+_{j + \frac{1}{2}} = \bar{q}_{j+1} - \frac{1}{2}\phi^+\left(r_{j+1}\right)\left(\bar{q}_{j+1} -\bar{q}_{j} \right)
+\]
+where
+\[
+\phi^-\left(r_j\right) = \max\left[0, \min\left[2 r_j, \frac{1 + 2r_j}{3},2\right]\right],
+\]
+\[\phi^+\left(r_i\right) = \max\left[0, \min\left[2 r_j, \frac{2 + r_j}{3},2\right]\right]
+\]
+and
+\[
+r_j = \frac{\bar{q}_{j+1} - \bar{q}_{j} }{\bar{q}_{j} - \bar{q}_{j-1}}.
+\]
+
+So we have
+
+\[
+h^-_{j + \frac{1}{2}} = \bar{h}_j + \frac{1}{2}\phi^-\left(r_j\right)\left(\bar{h}_j -\bar{h}_{j-1} \right)
+\]
+
+\[
+h^+_{j - \frac{1}{2}} = \bar{h}_{j} - \frac{1}{2}\phi^+\left(r_{j}\right)\left(\bar{h}_{j} -\bar{h}_{j-1} \right)
+\]
+and
+
+\[
+G^-_{j + \frac{1}{2}} = \bar{G}_j + \frac{1}{2}\phi^-\left(r_j\right)\left(\bar{G}_j -\bar{G}_{j-1} \right)
+\]
+
+\[
+G^+_{j - \frac{1}{2}} = \bar{G}_{j} - \frac{1}{2}\phi^+\left(r_{j}\right)\left(\bar{G}_{j} -\bar{G}_{j-1} \right)
+\]
+
+I suppose in the paper you should only need to describe the reconstruction process once then refer to it. So now we have for each element $h$ and $G$ at the cell centre and at the edges based on the quadratic fitted to the cell averages by the Koren limiter. As I've said above my explanation strategy would be to follow how you explain FEM and to show how to calculate the values you need on each element then have some assemble operator that puts it in one big matrix. 
+
+
+
+
+
+\end{document}
