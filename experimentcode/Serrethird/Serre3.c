@@ -400,6 +400,7 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
         Gir = G[i] + 0.5*phikm(Gri)*(G[i] - G[i-1]);
         hir = h[i] + 0.5*phikm(hri)*(h[i] - h[i-1]);
         uir = u[i] + 0.5*phikm(uri)*(u[i] - u[i-1]);
+        //printf("Gir: %f | Gi : %f | hir : %f | hi : %f| x : %f\n", Gir, G[i], hir, h[i], 490 + dx*i);
         //printf("C , Gir : %f, hir : %f , uir : %f",Gir, hir,uir);
 
         // i+1 left
@@ -410,6 +411,9 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
         Gip1l = G[i+1] - 0.5*phikp(Grip1)*(G[i+1] - G[i]);
         hip1l = h[i+1] - 0.5*phikp(hrip1)*(h[i+1] - h[i]);
         uip1l = u[i+1] - 0.5*phikp(urip1)*(u[i+1] - u[i]); 
+
+        //printf("Gip1l: %f | Gip1 : %f | hip1l : %f | hip1 : %f| uip1l : %f | uip1 : %f | x : %f\n", Gip1l, G[i+1], hip1l, h[i+1], uip1l, u[i+1], 490 + dx*(i+1));
+        //printf("uip1l : %e | uip1 : %e | x : %f\n", uip1l, u[i+1], 490 + dx*(i+1));
 
         //for derivatives
         urip2 = (u[i+3] - u[i+2]) / (u[i+2] - u[i+1]);
@@ -422,7 +426,7 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
         duer = 0.5*idx*(-uip3l + 4*uip2l - 3*uip1l);
         duel = 0.5*idx*(3*uir - 4*uim1r + uim2r);
 
-        //printf("duer : %.8f, duel : %.8f\n",duer,duel);
+        //printf("duer : %e | duel : %e | ui : %e | uip1 : %e | x : %f \n",duer,duel,u[i], u[i+1],490 + dx*(i+1));
         //printf("C : %f %f %f \n",uir,uim1r,uim2r);
 
         sqrtghel = sqrt(g* hir);
@@ -439,12 +443,14 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
         isrmsl = 0.0;
 
         if(sr != sl) isrmsl = 1.0 / (sr - sl);
+        //printf("sr : %f | sl : %f | isrmsl : %f | x: %f \n ",sr,sl,isrmsl,490 + dx*(i+0.5));
        
         foh = isrmsl*(sr*felh - sl*ferh + sl*sr*(hip1l - hir));
         foG = isrmsl*(sr*felG - sl*ferG + sl*sr*(Gip1l - Gir));
 
         nh[i -nBC] = h[i] -dt*idx*(foh - fih);
         nG[i -nBC] = G[i] -dt*idx*(foG -fiG);
+        //printf("hi : %f | nhi : %f | Gi : %f | nGi : %f | x: %f \n ",h[i],nh[i -nBC],G[i],nG[i -nBC],490 + dx*(i));
 
         fih = foh;
         fiG = foG;
@@ -558,6 +564,7 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
     free(nhapp);
     free(nGappp);
     free(nhappp);
+
 }
 
 double *mallocPy(int n)

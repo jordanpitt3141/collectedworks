@@ -1,0 +1,32 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{}{Carter and
+  Cienfuegos}{2011}]{Carter-Cienfuegos-2010-259}
+Carter, J.~D. and Cienfuegos, R. (2011).
+\newblock ``Solitary and cnoidal wave solutions of the {S}erre equations and
+  their stability.''\ {\em European Journal of Mechanics B/Fluids}, 30(3),
+  259--268.
+
+\bibitem[\protect\citeauthoryear{}{El et~al.\@}{2006}]{El-etal-2006}
+El, G., Grimshaw, R. H.~J., and Smyth, N.~F. (2006).
+\newblock ``Unsteady undular bores in fully nonlinear shallow-water theory.''\
+  {\em Physics of Fluids}, 18(027104).
+
+\bibitem[\protect\citeauthoryear{}{Lannes and
+  Bonneton}{2009}]{Bonneton-Lannes-2009-16601}
+Lannes, D. and Bonneton, P. (2009).''\ {\em Physics of Fluids}, 21(1),
+  16601--16610.
+
+\bibitem[\protect\citeauthoryear{}{Li et~al.\@}{2014}]{Guyenne-etal-2014-169}
+Li, M., Guyenne, P., Li, F., and Xu, L. (2014).
+\newblock ``High order well-balanced {CDG-FE} methods for shallow water waves
+  by a {G}reen-{N}aghdi model.''\ {\em Journal of Computational Physics}, 257,
+  169--192.
+
+\bibitem[\protect\citeauthoryear{}{Su and Gardner}{1969}]{Su-Gardener-1969-536}
+Su, C.~H. and Gardner, C.~S. (1969).
+\newblock ``Korteweg-de {V}ries equation and generalisations. {III}.
+  {D}erivation of the {K}orteweg-de {V}ries equation and {B}urgers equation.''\
+  {\em Journal of Mathematical Physics}, 10(3), 536--539.
+
+\end{thebibliography}

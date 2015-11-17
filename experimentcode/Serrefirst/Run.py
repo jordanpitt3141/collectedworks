@@ -376,6 +376,7 @@ for k in range(16,20):
     deallocPy(u0_c)
     deallocPy(u1_c)
 """
+#big smooth
 """
 wdirb = "../../data/bigsmooth/o1/"
 import os
@@ -451,10 +452,93 @@ for ll in range(3,16):
         deallocPy(u1_c)
 
 """
+
+#big smooth targetted
+
+difflist = [1]
+
+deltaxa = [5,6,7,9,10,11,12,13,14,15]
+dxlist = [deltaxa]
+
+import os
+diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
+wdirb = "../../data/bigsmoothtargetted/o1/"
+for lk in range(len(difflist)):
+    for ll in dxlist[lk]:
+        wdir = wdirb + str(ll) + "/" + str(difflist[lk]) + "/"
+        dx = ll*(10.0 / (2**12))
+        l = 0.01
+        dt = l*dx
+        startx = 0.0
+        endx = 1000.0 + dx
+        startt = 0.0
+        endt = 30.0+(dt*0.9)   
+        g = 9.81
+        
+        gap = max(1,int(0.02/dt))
+                    
+        x,t = makevar(startx,endx,dx,startt,endt,dt)
+        n = len(x)
+            
+        bot = 0.0
+        hf = 1.8
+        hl = 1.0
+        base = hl
+        eta0 = hf - hl
+        x0 = 500
+        diffuse = diffuses[difflist[lk]]
+        
+        if not os.path.exists(wdir):
+            os.makedirs(wdir) 
+            
+        h,G= dambreaksmooth(x,x0,base,eta0,diffuse,dx)
+           
+        nBC = 3
+        nBCs = 4
+        u0 = zeros(nBCs)
+        u1 = zeros(nBCs)    
+        h0 = hf*ones(nBCs)
+        h1 = hl*ones(nBCs)
+                    
+        h_c = copyarraytoC(h)
+        G_c = copyarraytoC(G)
+        h0_c  = copyarraytoC(h0)
+        h1_c  = copyarraytoC(h1)
+        u0_c  = copyarraytoC(u0)
+        u1_c  = copyarraytoC(u1)
+        u_c = mallocPy(n)
+        
+        for i in range(1,len(t)):
+            evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs)
+            print t[i]
+                
+        getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+        u = copyarrayfromC(u_c,n)
+        G = copyarrayfromC(G_c,n)
+        h = copyarrayfromC(h_c,n)
+        s = wdir + "outlast.txt"
+        with open(s,'a') as file2:
+             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            
+             writefile2.writerow(['dx' ,'dt','time' ,"cell midpoint", 'height(m)', 'G' , 'u(m/s)', 'diffuse'])        
+                           
+             for j in range(n):
+                 writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]) ,str(h[j]) , str(G[j]) , str(u[j]), str(diffuse)])   
+                 
+        deallocPy(u_c)   
+        deallocPy(h_c)
+        deallocPy(G_c)
+        deallocPy(h0_c)
+        deallocPy(h1_c)
+        deallocPy(u0_c)
+        deallocPy(u1_c)
+
+
+"""
 ################################# SOLITON Accuracy ####################3
 #dxs = [100.0,90.0,80.0,70.0,60.0,50.0,40.0,30.0,20.0,10.0,9.0,8.0,7.0,6.0,5.0,4.0,3.0,2.0,1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0.09,0.08,0.07 \
 #,0.06,0.05,0.04,0.03,0.02,0.01]
-wdir = "../../data/solconbreak/o1/"
+wdir = "../../../data/solcononesec/o1/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -472,7 +556,7 @@ for k in range(25):
     startx = -500.0
     endx = 1500.0 + dx
     startt = 0
-    endt = 2*dt
+    endt = 1 + dt
     
     wdatadir = wdir+ str(k) + "/"
     if not os.path.exists(wdatadir):
@@ -577,7 +661,7 @@ for k in range(25):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
+"""
 
 """    
 ##### SOLITON

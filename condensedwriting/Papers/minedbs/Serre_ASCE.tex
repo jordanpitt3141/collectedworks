@@ -79,7 +79,7 @@ The Serre equations can derived as an approximation to the full Euler equations 
 \end{figure}
 The set up of the scenario under which the Serre approximation is made consists of a two dimensional $\textbf{x} = (x,z)$ fluid over a bottom topography as in Figure \ref{fig:Notation} acting under gravity. Consider a fluid particle at depth  $\xi(\textbf{x},t) = z - h(x,t) - z_b(x)$ below the water surface, see Figure \ref{fig:Notation}. Where the water depth is $h(x,t)$ and $z_b(x)$ is the bed elevation. The fluid particle is subject to the pressure, $p(\textbf{x},t)$ and  gravitational acceleration, $\textbf{g} = (0,g)^T$ and has a velocity $\textbf{u} = (u(\textbf{x},t),w(\textbf{x},t))$,  where $u(\textbf{x},t)$ is the velocity in the $x$-coordinate and $w(\textbf{x},t)$ is the velocity in the $z$-coordinate and $t$ is time. Assuming that $z_b(x)$ is constant the Serre equations read \cite{Guyenne-etal-2014-169}
 \begin{linenomath*}
-\begin{subequations}\label{eq:Serre_conservative_form}
+\begin{subequations}\label{eq:Serre_nonconservative_form}
 \begin{gather}
 \dfrac{\partial h}{\partial t} + \dfrac{\partial (\bar{u}h)}{\partial x} = 0
 \label{eq:Serre_continuity}
@@ -92,22 +92,11 @@ The set up of the scenario under which the Serre approximation is made consists 
 \end{linenomath*}
 Where $\bar{u}$ means the average of $u$ over the depth of water.
 %--------------------------------------------------------------------------------
+\section{Direct Numerical Methods}
 %--------------------------------------------------------------------------------
-\section{Finite Difference and Lax Wendroff}
-\label{section:}
-This method was used in \citeN{El-etal-2006} for the Serre equations. It consists of a lax-wendroff update for $h$ and a spatio-temporal second order approximation to [] which results in a fully second-order method. To make this method precise it will be presented here in sufficient replicable detail.
-
-Note that [] is in conservative law form for $h$ where the Jacobian is $u$, where the bar has been dropped to simplify the notation. Thus assuming a fixed resolution discretisation for space and time which will be represented as follows $q^n_i = q(x_i,t^n)$ for some quantity $q$ the lax-wendroff update for $h$ obtained is
-\begin{linenomath*}
-\begin{gather}
-\begin{split}
-h^{n+1}_i &= h^{n}_i - \frac{\Delta t}{2\Delta x} \left(\left(uh\right)^n_{i+1} - \left(uh\right)^n_{i-1}\right) \\ &+ \frac{\Delta t^2}{2\Delta x^2}\left(\frac{u^n_{i+1} - u^n_{i} }{2}\left(\left(uh\right)^n_{i+1} - \left(uh\right)^n_{i}\right) - \frac{u^n_{i} - u^n_{i-1} }{2}\left(\left(uh\right)^n_{i} - \left(uh\right)^n_{i-1}\right) \right)
-\end{split}
-\label{eq:LW4h}
-\end{gather}
-\end{linenomath*}
-
-To get a second-order approximation to [] is built by first expanding all the derivatives out and making use of the continuity equation [], this results in:
+Due to the presence of the mixed spatial and temporal derivatives in the conservation of momentum equation \eqref{eq:Serre_momentum} the choices of methods for these particular equations are limited. Thus the two direct numerical methods presented in this paper will begin by approximating \eqref{eq:Serre_momentum} by finite differences. To facilitate this a uniform grid in space will be used with $\Delta x  = x_{i+1} - x_i$ for all $i$ and quantities evaluated at these grid points will be denoted by subscripts for example $h_i = h(x_i)$. The grid in time will be denoted by superscripts for example $h^n = h(t^n)$, noting that $h^n$ is a function in space. 
+\subsection{Finite Difference Appximation to Conservation of Momentum Equation} 
+In [][Zoppou thesis/my work] it was demonstrated that an efficient numerical scheme for the Serre equations must be at least second-order accurate thus the derivatives in \eqref{eq:Serre_momentum} will be approximated by second-order finite differences. Firstly \eqref{eq:Serre_momentum} must be expanded, making use of \eqref{eq:Serre_continuity} one obtains
 \begin{linenomath*}
 \begin{subequations}
 \begin{gather}
@@ -116,39 +105,46 @@ h\dfrac{\partial u}{\partial t} + X - h^2\frac{\partial^2 u}{\partial x \partial
 \end{gather}
 where $X$ contains only spatial derivatives and is
 \begin{gather}
-X = uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + \frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2}- \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3} .
+X = uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + \frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2}- \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3}
 \end{gather}
 \end{subequations}
 \end{linenomath*}
-Then taking second-order approximations to the time derivatives for [] gives
+where the bar over $u$ has been dropped to simplify notation. Then taking second-order centred finite difference approximation to the time derivatives for \eqref{eq:expandedu} gives
 \begin{linenomath*}
-\begin{gather}
-h^{n}\dfrac{u^{n+1} - u^{n-1}}{2 \Delta t} + X^{n} - \left(h^{n}\right)^2\frac{ \left(\frac{\partial u}{\partial x}\right)^{n+1} - \left(\frac{\partial u}{\partial x}\right)^{n-1} }{2 \Delta t} - \frac{\left(h^{n}\right)^3}{3}\frac{ \left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} - \left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} }{2 \Delta t}  =0 
+\begin{gather*}
+h^{n}\dfrac{u^{n+1} - u^{n-1}}{2 \Delta t} + X^{n} - \left(h^{n}\right)^2\frac{ \left(\frac{\partial u}{\partial x}\right)^{n+1} - \left(\frac{\partial u}{\partial x}\right)^{n-1} }{2 \Delta t} - \frac{\left(h^{n}\right)^3}{3}\frac{ \left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} - \left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} }{2 \Delta t}  =0, 
 \label{eq:expandedutdisc}
-\end{gather}
+\end{gather*}
 \end{linenomath*}
 \begin{linenomath*}
-\begin{gather}
-h^{n} \left(u^{n+1} - u^{n-1}\right) + 2\Delta tX^{n} - \left(h^{n}\right)^2 \left(\left(\frac{\partial u}{\partial x}\right)^{n+1} - \left(\frac{\partial u}{\partial x}\right)^{n-1}\right) - \frac{\left(h^{n}\right)^3}{3}\left(\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} - \left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} \right)  =0 
+\begin{gather*}
+h^{n} \left(u^{n+1} - u^{n-1}\right) + 2\Delta tX^{n} - \left(h^{n}\right)^2 \left(\left(\frac{\partial u}{\partial x}\right)^{n+1} - \left(\frac{\partial u}{\partial x}\right)^{n-1}\right) - \frac{\left(h^{n}\right)^3}{3}\left(\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1} - \left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1} \right)  =0. 
 \label{eq:expandedutdisc1}
-\end{gather}
+\end{gather*}
 \end{linenomath*}
 
+%\begin{linenomath*}
+%\begin{gather*}
+%h^{n}u^{n+1} - \left(h^{n}\right)^2 \left(\frac{\partial u}{\partial x}\right)^{n+1} - \frac{\left(h^{n}\right)^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1}  + 2\Delta tX^{n} - h^{n}u^{n-1} + \left(h^{n}\right)^2\left(\frac{\partial u}{\partial x}\right)^{n-1} + \frac{\left(h^{n}\right)^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1}   =0 
+%\label{eq:expandedutdisc2}
+%\end{gather*}
+%\end{linenomath*}
+Introducing
 \begin{linenomath*}
-\begin{gather}
-h^{n}u^{n+1} - \left(h^{n}\right)^2 \left(\frac{\partial u}{\partial x}\right)^{n+1} - \frac{\left(h^{n}\right)^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1}  + 2\Delta tX^{n} - h^{n}u^{n-1} + \left(h^{n}\right)^2\left(\frac{\partial u}{\partial x}\right)^{n-1} + \frac{\left(h^{n}\right)^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1}   =0 
-\label{eq:expandedutdisc2}
-\end{gather}
-\end{linenomath*}
-Let
-\begin{linenomath*}
-\begin{gather}
+\begin{gather*}
 Y^n = 2\Delta tX^{n} - h^{n}u^{n-1} + \left(h^{n}\right)^2\left(\frac{\partial u}{\partial x}\right)^{n-1} + \frac{\left(h^{n}\right)^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n-1}
 \label{eq:expandfactor Xp}
-\end{gather}
+\end{gather*}
+\end{linenomath*}
+and rearranging results in
+\begin{linenomath*}
+\begin{gather*}
+h^{n}u^{n+1} - \left(h^{n}\right)^2 \left(\frac{\partial u}{\partial x}\right)^{n+1} - \frac{\left(h^{n}\right)^3}{3}\left(\frac{\partial^2 u}{\partial x^2}\right)^{n+1}  + Y^n   =0 . 
+\label{eq:expandedutdisc2}
+\end{gather*}
 \end{linenomath*}
 
-Taking second-order approximations to the spatial derivatives gives
+Taking second-order approximations to the spatial derivatives and evaluating the quantities at the correct locations gives
 \begin{linenomath*}
 \begin{gather}
 h^{n}_iu^{n+1}_i - \left(h^{n}_i\right)^2 \left(\frac{u^{n+1}_{i+1} -u^{n+1}_{i-1} }{2 \Delta x}\right) - \frac{\left(h^{n}_i\right)^3}{3}\left(\frac{u^{n+1}_{i+1} - 2u^{n+1}_{i} + u^{n+1}_{i-1} }{\Delta x^2}\right) = - Y^n_i 
@@ -157,7 +153,7 @@ h^{n}_iu^{n+1}_i - \left(h^{n}_i\right)^2 \left(\frac{u^{n+1}_{i+1} -u^{n+1}_{i-
 \end{linenomath*}
 This can be rearranged into a tri-diagonal matrix that updates $u$ given its current and previous values. So that
 \begin{linenomath*}
-\begin{gather*}
+\begin{gather}
 \left[\begin{array}{c}
  u^{n+1}_0 \\
  \vdots \\
@@ -165,8 +161,9 @@ This can be rearranged into a tri-diagonal matrix that updates $u$ given its cur
  = A^{-1} \left[\begin{array}{c}
   -Y^n_0 \\
   \vdots \\
-  -Y^n_m \end{array}\right] =: \mathcal{G}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1}, \Delta t \right).
-\end{gather*}
+  -Y^n_m \end{array}\right] =: \mathcal{G}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right).
+\label{eq:FDcentforu}
+\end{gather}
 \end{linenomath*}
 Where
 \begin{linenomath*}
@@ -199,53 +196,100 @@ c_i = -\frac{\left(h^n_i\right)^2}{2\Delta x}\frac{h^n_{i+1} - h^n_{i-1}}{2\Delt
 \label{eq:utriAc}
 \end{gather}
 \end{subequations}
-Lastly the final expression for $Y^n_i$ is given by:
-
+Lastly for completeness the final expression for $Y^n_i$ is given by
 \begin{linenomath*}
 \begin{gather}
 \begin{split}
-Y^n_i = 2\Delta tX_i^{n} - h_i^{n}u_i^{n-1} + \left(h_i^{n}\right)^2\frac{u^{n-1}_{i+1} - u^{n-1}_{i-1}}{2\Delta x} + \frac{\left(h_i^{n}\right)^3}{3}\frac{u^{n-1}_{i+1} -2 u^{n-1}_{i} + u^{n-1}_{i-1}}{\Delta x^2}
+Y^n_i &= 2\Delta t \Bigg[u^n_ih^n_i \frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x} + gh^n_i\frac{h^{n-1}_{i+1} - h^{n-1}_{i-1}}{2\Delta x} + \left(h^n_i\right)^2 \left(\frac{u^{n-1}_{i+1} - u^{n-1}_{i-1}}{2\Delta x} \right)^2 \\ &+ \frac{\left(h^n_i\right)^3}{3}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x}\frac{u^{n}_{i+1} -2u^{n}_{i}   + u^{n}_{i-1}}{\Delta x^2} - \left(h^n_i\right)^2u^n_i\frac{u^{n}_{i+1} -2u^{n}_{i} + u^{n}_{i-1}}{\Delta x^2}  \\  &- \frac{\left(h^n_i\right)^3}{3}u^n_i\frac{ u^n_{j+2} - 2u^n_{j+1} + 2 u^n_{j-1} - u^n_{j-2}}{2 \Delta x^3} \Bigg] \\ &- h_i^{n}u_i^{n-1} + \left(h_i^{n}\right)^2\frac{u^{n-1}_{i+1} - u^{n-1}_{i-1}}{2\Delta x} + \frac{\left(h_i^{n}\right)^3}{3}\frac{u^{n-1}_{i+1} -2 u^{n-1}_{i} + u^{n-1}_{i-1}}{\Delta x^2}.
 \end{split}
 \end{gather}
 \end{linenomath*}
+In particular this is an explicit numerical method for \eqref{eq:Serre_momentum}, that requires the current and previous values of $h$ and $u$.
 
+
+\subsection{The Lax Wendroff Method for Conservation of Mass Equation}
+\label{section:}
+Because the conservation of mass equation \eqref{eq:Serre_continuity} has no mixed derivative term a wider range of numerical methods can be used. This paper will use two, one using the Lax Wendroff method as was done by \citeN{El-etal-2006} and the other will use the same process as []. Both of these are theoretically second-order accurate. To make these methods precise they will be presented here in sufficient replicable detail.
+
+Note that \eqref{eq:Serre_continuity} is in conservative law form for $h$ where the Jacobian is $u$. Thus using the previously defined spatio-temporal discretisation the lax-wendroff update for $h$ is
 \begin{linenomath*}
 \begin{gather}
 \begin{split}
-Y^n_i &= 2\Delta t \Bigg[u^n_ih^n_i \frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x} + gh^n_i\frac{h^{n-1}_{i+1} - h^{n-1}_{i-1}}{2\Delta x} + \left(h^n_i\right)^2 \left(\frac{u^{n-1}_{i+1} - u^{n-1}_{i-1}}{2\Delta x} \right)^2 \\ &+ \frac{\left(h^n_i\right)^3}{3}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x}\frac{u^{n}_{i+1} -2u^{n}_{i}   + u^{n}_{i-1}}{\Delta x^2} - \left(h^n_i\right)^2u^n_i\frac{u^{n}_{i+1} -2u^{n}_{i} + u^{n}_{i-1}}{\Delta x^2}  \\  &- \frac{\left(h^n_i\right)^3}{3}u^n_i\frac{ u^n_{j+2} - 2u^n_{j+1} + 2 u^n_{j-1} - u^n_{j-2}}{2 \Delta x^3} \Bigg] \\ &- h_i^{n}u_i^{n-1} + \left(h_i^{n}\right)^2\frac{u^{n-1}_{i+1} - u^{n-1}_{i-1}}{2\Delta x} + \frac{\left(h_i^{n}\right)^3}{3}\frac{u^{n-1}_{i+1} -2 u^{n-1}_{i} + u^{n-1}_{i-1}}{\Delta x^2}
+h^{n+1}_i &= h^{n}_i - \frac{\Delta t}{2\Delta x} \left(\left(uh\right)^n_{i+1} - \left(uh\right)^n_{i-1}\right) \\ &+ \frac{\Delta t^2}{2\Delta x^2}\left(\frac{u^n_{i+1} - u^n_{i} }{2}\left(\left(uh\right)^n_{i+1} - \left(uh\right)^n_{i}\right) - \frac{u^n_{i} - u^n_{i-1} }{2}\left(\left(uh\right)^n_{i} - \left(uh\right)^n_{i-1}\right) \right). \\
 \end{split}
+\label{eq:LW4h}
 \end{gather}
 \end{linenomath*}
+Preforming this update for all $i$ will be denoted by $\mathcal{E}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n ,\Delta x, \Delta t \right)$.
 
 %--------------------------------------------------------------------------------
+\subsection{Second Order Finite Difference Method}
 %--------------------------------------------------------------------------------
-\section{Second Order Finite Difference Method}
-%--------------------------------------------------------------------------------
-Above a second order finite difference method for updating $u$ was given, thus replacing the numerical method for $h$ by replacing derivatives with second order finite differences will give another full finite difference method. From \eqref{eq:Serre_continuity} we expand derivatives and then approximate them by second order finite differences to give
-
+To follow the process above [] to obtain a second-order finite difference approximation to \eqref{eq:Serre_continuity} the derivatives are first expanded then approximated by second order centered finite differences to give
 \begin{linenomath*}
 \begin{gather}
-\frac{h^{n+1}_i - h^{n-1}_i}{2\Delta t} + u^{n}_{i}\frac{h^{n}_{i+1} - h^{n}_{i-1}}{2\Delta x} + h^{n}_{i}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x} = 0
+\frac{h^{n+1}_i - h^{n-1}_i}{2\Delta t} + u^{n}_{i}\frac{h^{n}_{i+1} - h^{n}_{i-1}}{2\Delta x} + h^{n}_{i}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x} = 0.
 \end{gather}
 \end{linenomath*}
-
-
 After rearranging this to give an update formula one obtains
-
 \begin{linenomath*}
 \begin{gather}
-h^{n+1}_i = h^{n-1}_i - \Delta t \left(u^{n}_{i}\frac{h^{n}_{i+1} - h^{n}_{i-1}}{\Delta x} + h^{n}_{i}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta x}\right) 
+h^{n+1}_i = h^{n-1}_i - \Delta t \left(u^{n}_{i}\frac{h^{n}_{i+1} - h^{n}_{i-1}}{\Delta x} + h^{n}_{i}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta x}\right).
 \end{gather}
 \end{linenomath*}
+Preforming this update for all $i$ will be denoted by $\mathcal{G}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{h}^{n-1} ,\Delta x, \Delta t \right)$.
 
-Combining this with the update formula for $u$ [] gives a full finite difference method for the Serre equations. 
+\subsection{The Finite Difference Methods}
+To summarise the first numerical method which naively approximates all derivatives by finite differences has the following update algorithm
+\begin{linenomath*}
+\begin{gather}
+\left.
+\begin{array}{l l}
+\boldsymbol{h}^{n+1}&=\mathcal{G}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \Delta x, \Delta t \right) \\
+\boldsymbol{u}^{n+1}&=\mathcal{G}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right)
+\end{array} \right\rbrace \mathcal{G}\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right).
+\end{gather}
+\end{linenomath*}
+While the second method which follows from a naive interpretation of the numerical method described by \citeN{El-etal-2006} is
+\begin{linenomath*}
+\begin{gather}
+\left.
+\begin{array}{l l}
+\boldsymbol{h}^{n+1}&=\mathcal{E}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \Delta x, \Delta t \right) \\
+\boldsymbol{u}^{n+1}&=\mathcal{G}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right)
+\end{array} \right\rbrace \mathcal{E}\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right).
+\end{gather}
+\end{linenomath*}
+%-------------------------------------------------------------------------------- 
+\section{Conservative Form of The Serre Equations}
+To overcome the aforementioned difficulty of mixed derivatives the Serre equations \eqref{eq:Serre_nonconservative_form} can be reformulated into conservative form which has no mixed spatio-temportal derivatives. This is accomplished by the introduction of a new quantity \cite{Hank-etal-2010-2034,Zoppou-2014}
+\begin{linenomath*}
+\begin{gather}
+\label{eq:Gdefinition}
+G = uh - h^2 \dfrac{\partial h}{\partial x} \dfrac{\partial u}{\partial x} - \frac{h^3}{3} \dfrac{\partial^2 u}{\partial x^2}.
+\end{gather}
+\end{linenomath*}
+Consequently, \eqref{eq:Serre_nonconservative_form} can be rewritten as
+\begin{linenomath*}
+\begin{subequations}
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+\label{eq:Serrecon_continuity}
+\end{gather}
+and
+\begin{gather}
+\dfrac{\partial G}{\partial t} + \dfrac{\partial}{\partial x}\left(Gu + \dfrac{gh^2}{2} - \dfrac{2h^3}{3}\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}\right) = 0.
+\label{eq:Serrecon_momentum}
+\end{gather}
+\label{eq:Serrecon}
+\end{subequations}
+\end{linenomath*}
 
-%--------------------------------------------------------------------------------
-%--------------------------------------------------------------------------------
-\section{A Hybrid Finite Difference-Volume Method for Serre Equations in Conservative Form}
+\subsection{A Hybrid Finite Difference-Volume Method for Serre Equations in Conservative Form}
 \label{section:hybridmethod}
 %--------------------------------------------------------------------------------
-%Borrow from the other paper, reference it?
+The conservative form \eqref{eq:Serrecon} allows.
+
 [] also offer another family of numerical methods which can be constructed by first rearranging the equations into conservative form and then using both a finite difference and a finite volume method to solve these equations. This paper will make use of the first-, second- and third-order versions of this method as set out in []. These have been validated for both smooth and discontinuous problems and their orders of accuracy have been verified for smooth solutions so they are of particular interest for the comparisons that will be investigated in this paper. 
 
 
@@ -324,7 +368,7 @@ where $a_0$ and $a_1$ are input parameters that determine the depth of the quies
 \section{Smoothed Dam-Break}
 \label{section:smootheddambreak}
 %--------------------------------------------------------------------------------
-The discontinuous dam-break problem can be approximated by a smooth function using the hyperbolic tan function []. Such an approximation will be called a smoothed dam-break problem and will be defined as such
+The discontinuous dam-break problem can be approximated by a smooth function using the hyperbolic tangent function. Such an approximation will be called a smoothed dam-break problem and will be defined as such
 \begin{linenomath*}
 \begin{subequations}
 \begin{gather}
@@ -336,59 +380,68 @@ u(x,0) = 0.0m/s.
 \end{subequations}
 \label{eq:sdbi}
 \end{linenomath*}
-Where $a$ is given and controls the width of the transition between the two dam-break heights of $h_0$ and $h_1$. For large $\alpha$ the width is small and vice versa. For a fixed $\Delta x$ there are large enough $\alpha$ values such that the transition width is zero. This experiment was run for both of the methods described in this paper and the 3 different order finite difference-volume methods described in []. In this particular simulation $h_0 = 1.0m$, $h_1 = 1.8m$ on $x \in [0m,1000m]$ for $t \in [0s,30s]$ with $x_0 = 500m$. The simulations were run changing both $\Delta x$ and $\alpha$ and for stability $\Delta t = 0.01 \Delta x$ while for the second order finite volume method $\theta = 1.2$. Since this experiment involves a very large amount of data the analysis will be broken up into three sections: decreasing $\Delta x$, increasing $\alpha$ and finally differences between the methods. 
+Where $a$ is given and controls the width of the transition between the two dam-break heights of $h_0$ and $h_1$. For large $\alpha$ the width is small and vice versa. For a fixed $\Delta x$ there are large enough $\alpha$ values such that the transition width is zero. This experiment was run for both of the methods described in this paper and the 3 different order finite difference-volume methods described in []. In this particular simulation $h_0 = 1.0m$, $h_1 = 1.8m$ on $x \in [0m,1000m]$ for $t \in [0s,30s]$ with $x_0 = 500m$. The simulations were run changing both $\Delta x$ and $\alpha$ and for stability $\Delta t = 0.01 \Delta x$ while for the second-order finite volume method $\theta = 1.2$. Since this experiment involves a very large amount of data the analysis will be broken up into three sections: decreasing $\Delta x$, increasing $\alpha$ and finally differences between the methods. 
 
 %--------------------------------------------------------------------------------
 \subsection{Changing $\Delta x$}
 %--------------------------------------------------------------------------------
 Decreasing $\Delta x$ allows the numerical method to better approximate the analytic solution to the equations. So for our valid [] numerical methods it would be expected that smaller $\Delta x$'s provide a closer approximation to the analytic solution This was demonstrated for smooth problems [] above.
 
-In this comparison we pick an $\alpha$ and a method and investigate the result of decreasing $\Delta x$. Because the smoothness of the initial conditions depends on both $\Delta x$ and $\alpha$ one must be careful that the initial conditions do not change from discontinuous to smooth as $\Delta x$ is altered as then we are no longer comparing smooth problems. [] 
+In this comparison we pick an $\alpha$ and a method and investigate the result of decreasing $\Delta x$. Because the smoothness of the initial conditions depends on both $\Delta x$ and $\alpha$ one must be careful that the initial conditions do not change from discontinuous to smooth as $\Delta x$ is altered as then we are no longer comparing smooth problems. This is of particular importance for the two finite difference methods as they do not correctly handle discontinuos initial conditions. [] 
 
-The first and most important observation is that there are four types of behaviour of the problem depending on the $\alpha$ and the corresponding $\alpha$ values at which they occur depend on the numerical methods. It was found that the second- and third-order methods had similar $\alpha$ ranges determining the trending behaviour while the first-order had very different ranges, because of this large difference the term higher-order will be used to refer to all second- and third- order methods. Also for the purposes of simplicity these scenario's will be demonstrated by solutions of the FDVM as they are better for illustrative purpose. The four scenarios are identified by the behaviour of the solutions when $\Delta x$ is small and they correspond to different results in the literature. The first which will be referred to as the non-oscillatory scenario has such smooth initial conditions that the oscillations around the shock and rarefaction fan [][0] {dont know enough about this}. 
+The first and most important observation is that there are four types of behaviour as $\Delta x \rightarrow 0$ of the problem depending on the $\alpha$ and the numerical method. It was found that the second- and third-order methods had similar $\alpha$ ranges determining the trending behaviour while the first-order had very different ranges, because of this large difference the term higher-order will be used to refer to all second- and third- order methods. Also for the purposes of simplicity these scenario's will be demonstrated by solutions of the FDVM as they are better for illustrative purposes. The four scenarios are identified by the behaviour of the solutions when $\Delta x$ is small and they correspond to different results in the literature. 
 
-The second will be referred to as the flat scenario due to the presence of a constant height state between the oscillations at the shock and rarefaction fan. This scenario emerges at $\alpha(2)$ and continues to $\alpha(8)$ for the higher-order methods and can be seen for all the investigated numerical methods. It corresponds to the results presented by \citeN{Hank-etal-2010-2034} and []. An example plot of demonstrating this for the [][method] and $\alpha = 0.5$ can be seen in Figure []. As $\Delta x$ decreases the solutions converge which is sensible since for the $\Delta x$ in Figure [] the initial conditions are smooth as can be seen in Figure [] and these methods have been verified for smooth problems. So that by $\Delta x = 10 / 2^8$ the solutions for higher $\Delta x$ are graphically identical. 
+The first behaviour which will be referred to as the non-oscillatory scenario has such smooth initial conditions that there are no introduced oscillations. This scenario ends at $\alpha = 0.025$ and should in theory extend down to the trivial $\alpha = 0$, in these ranges the smoothed dam-break problem is a very poor approximation to the dam-break problem. This behaviour was observed for all methods when $\alpha = 0.025$ and an example case for the third-order method is plotted in Figure \ref{fig:o3a1dxlimflatexp}. This example demonstrates rapid convergence with all the solutions being graphically identical. This scenario resembles the solution of the shallow water wave equations in that it contains only a rarefaction and a shock with no dispersion. 
 
 \begin{figure}
 \centering
-\subfigure[][]{\label{fig:o3a6dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb4ne11/0-figure0.pdf}}
-\subfigure[][]{\label{fig:o3a6dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb4ne11/1-figure0.pdf}}
-\subfigure[][]{\label{fig:o3a6dxlimz2}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb4ne11/2-figure0.pdf}}
-\caption{Smooth dam break problem for o3 [] with $\alpha = 0.5$ for $\Delta x = 10/2^4$ (blue), $\Delta x = 10/2^5$ (green), $\Delta x = 10/2^6$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^8$ (magenta), $\Delta x = 10/2^9$ (yellow), $\Delta x = 10/2^{10}$ (black)}
+\subfigure[][]{\label{fig:o3a1dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf}}
+%\subfigure[][]{\label{fig:o3a1dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/1/nb3ne10/1-figure0.pdf}}
+\caption{Smooth dam break problem for o3 [] with $\alpha = 0.025$ for $\Delta x = 10/2^{10}$ (blue), $\Delta x = 10/2^9$ (green), $\Delta x = 10/2^8$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^6$ (magenta), $\Delta x = 10/2^5$ (yellow), $\Delta x = 10/2^4$ (black)}
+\label{fig:o3a1dxlimflatexp}
+\end{figure}
+
+The second will be referred to as the flat scenario due to the presence of a constant height state between the oscillations at the shock and rarefaction fan. This scenario emerges at $\alpha = 0.05 $ and continues to $\alpha = 1$ for the higher-order methods and occurs from $\alpha = 0.05 $ to $\alpha = 1000 $ for the first-order method (so far). This scenario corresponds to the results presented by \citeN{Hank-etal-2010-2034} and \citeN{Mitsotakis-etal-2014}. 
+
+An example plot demonstrating this scenario for the third-order method with $\alpha = 0.5$ can be seen in Figure \ref{fig:o3a6dxlimflatexp}. As $\Delta x$ decreases the solutions converge which is sensible since for the $\Delta x$ in Figure [] the initial conditions are smooth as can be seen in Figure [] and these methods have been verified for smooth problems. So that by $\Delta x = 10 / 2^8$ the solutions for higher $\Delta x$ are graphically identical. 
+
+\begin{figure}
+\centering
+%\subfigure[][]{\label{fig:o3a6dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb4ne11/0-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a6dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a6dxlimz2}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb3ne10/1-figure0.pdf}}
+\caption{Smooth dam break problem for o3 [] with $\alpha = 0.5$ for $\Delta x = 10/2^{10}$ (blue), $\Delta x = 10/2^9$ (green), $\Delta x = 10/2^8$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^6$ (magenta), $\Delta x = 10/2^7$ (yellow), $\Delta x = 10/2^{8}$ (black)}
 \label{fig:o3a6dxlimflatexp}
 \end{figure}
 
-The third scenario will be referred to as the contact discontinuity scenario due to the use of that term to describe by \citeN{El-etal-2006}. For the higher-order methods it occurs at $\alpha = 2.5$ and so far has not occurred for the first order method[]. The contact discontinuity scenarios main feature is that the oscillations from the rarefaction fan and the shock decay and appear to meet at a point as can be seen in Figure []. For the experiments performed this doesn't appear to be an actual centre point but rather that the oscillations decay so quickly around the `contact discontinuity' that it appears to be the case. All the higher order methods so far have not shown a converged solution as $\Delta x$ decreases with $\Delta x = 10 / 2^9$ and $\Delta x = 10 / 2^10$ in Figure [] being very close although it does appear to demonstrate convergence and that it is close to being a converged solution. 
+The third scenario will be referred to as the contact discontinuity scenario due to the use of that term to describe it by \citeN{El-etal-2006}. For the higher-order methods it occurs at $\alpha = 2.5$ and so far has not occurred for the first order method[]. The contact discontinuity scenarios main feature is that the oscillations from the rarefaction fan and the shock decay and appear to meet at a point as can be seen in Figure \ref{fig:o3a9dxlimcdexp}. For the experiments performed this doesn't appear to be an actual centre point but rather that the oscillations decay so quickly around the `contact discontinuity' that it appears to be the case. All the higher order methods so far have not shown a converged solution as $\Delta x$ decreases. However it does appear that convergence is likely with the solutions getting closer together. 
 
 \begin{figure}
 \centering
-\subfigure[][]{\label{fig:o3a9dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/9/nb4ne11/0-figure0.pdf}}
-\subfigure[][]{\label{fig:o3a9dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/9/nb4ne11/1-figure0.pdf}}
-\subfigure[][]{\label{fig:o3a9dxlimz2}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/9/nb4ne11/2-figure0.pdf}}
-\caption{Smooth dam break problem for o3 [] with $\alpha = 2.5$ for $\Delta x = 10/2^4$ (blue), $\Delta x = 10/2^5$ (green), $\Delta x = 10/2^6$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^8$ (magenta), $\Delta x = 10/2^9$ (yellow), $\Delta x = 10/2^{10}$ (black)}
+\subfigure[][]{\label{fig:o3a9dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a9dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/9/nb3ne10/1-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a9dxlimz2}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/9/nb3ne10/2-figure0.pdf}}
+\caption{Smooth dam break problem for o3 [] with $\alpha = 2.5$ for $\Delta x = 10/2^{10}$ (blue), $\Delta x = 10/2^9$ (green), $\Delta x = 10/2^8$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^6$ (magenta), $\Delta x = 10/2^5$ (yellow), $\Delta x = 10/2^{4}$ (black)}
 \label{fig:o3a9dxlimcdexp}
 \end{figure}
 
-The fourth scenario will be referred to as the bump scenario due to the oscillations no longer meeting down towards a point but rather blow up around where the contact discontinuity was in the previous scenario as can be seen in Figure []. This behaviour has hitherto not been presented and is certainly not an expected result. There are some important observations, changing $\alpha$ does increase the height of the bump for the lowest resolution methods although after [] increasing $\alpha$ has no effect. The behaviour of these solutions in Figure [] do not clearly show convergence, although it doesn't appear that there is a rapid divergence which suggests that it probably doesn't have an unbounded height. Also the lack of convergence is only around the contact discontinuity with other parts of the solution showing convergence. 
+The fourth scenario will be referred to as the bump scenario due to the oscillations no longer decaying down towards a point but rather growing around where the contact discontinuity was in the previous scenario as can be seen in Figure \ref{fig:o3a20dxlimcdexp}. This behaviour has hitherto not been presented and is certainly not an expected result. There are some important observations, changing $\alpha$ does increase the height of the bump for the lowest resolution methods although after [] increasing $\alpha$ has no effect[huh?]. The behaviour of these solutions in Figure \ref{fig:o3a20dxlimcdexp} do not clearly show convergence, although it doesn't appear that there is a rapid divergence which suggests that this behaviour is not unstable. Also the lack of convergence is only around the contact discontinuity with other parts of the solution showing convergence. 
 
 \begin{figure}
 \centering
-\subfigure[][]{\label{fig:o3a20dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb4ne11/0-figure0.pdf}}
-\subfigure[][]{\label{fig:o3a20dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb4ne11/1-figure0.pdf}}
-\subfigure[][]{\label{fig:o3a20dxlimz2}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb4ne11/2-figure0.pdf}}
-\subfigure[][]{\label{fig:o3a20dxlimz3}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb4ne11/4-figure0.pdf}}
-\caption{Smooth dam break problem for o3 [] with $\alpha = 1000.0$ for $\Delta x = 10/2^4$ (blue), $\Delta x = 10/2^5$ (green), $\Delta x = 10/2^6$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^8$ (magenta), $\Delta x = 10/2^9$ (yellow), $\Delta x = 10/2^{10}$ (black)}
+\subfigure[][]{\label{fig:o3a20dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a20dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb3ne10/1-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a20dxlimz2}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb3ne10/2-figure0.pdf}}
+%\subfigure[][]{\label{fig:o3a20dxlimz3}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/20/nb3ne10/4-figure0.pdf}}
+\caption{Smooth dam break problem for o3 [] with $\alpha = 1000.0$ for $\Delta x = 10/2^{10}$ (blue), $\Delta x = 10/2^9$ (green), $\Delta x = 10/2^8$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^6$ (magenta), $\Delta x = 10/2^7$ (yellow), $\Delta x = 10/2^{8}$ (black)}
 \label{fig:o3a20dxlimcdexp}
 \end{figure}
 
-All of the scenarios described above and displayed using the higher-order FDVM also occur for the FDM, however because finite differences cannot properly handle discontinuities this is a little more subtle. Firstly, since for each $\alpha$ there is a $\Delta x$ such that for larger $\Delta x$ the smooth dam break problem is no longer smooth enough for a finite difference approximation to be appropriate. This becomes a problem for the contact discontinuity and bump scenarios since they require higher $\alpha$ and are thus more discontinuous to begin with. The result of this are non-physcial looking oscillations for large $\Delta x$ values that were not replicated by the FDVM and thus can be attribute to this flaw of FDM as in Figure []. 
+All of the scenarios described above and displayed using the higher-order FDVM also occur for the FDM, however because finite differences cannot properly handle discontinuities this is a little more subtle. Firstly, since for each $\alpha$ there is a $\Delta x$ such that for larger $\Delta x$ the smooth dam break problem is no longer smooth enough for a finite difference approximation to be appropriate. This becomes a problem for the contact discontinuity and bump scenarios since they require higher $\alpha$ and are thus more discontinuous to begin with. The result of this are non-physcial looking oscillations for large $\Delta x$ values that were not replicated by the FDVM and thus can be attributed to this flaw of FDM as in Figure []. 
 
 Overall there where two types of trending behaviours as $\Delta x$ was decreased one for the FDM and another for the FDVM. FDM decreased the number of oscillations in the solution as in Figure [], while FDVM increased the number of oscillations in the solution as can be seen in Figure []. This is explained by \citeN{Zoppou-Roberts-1996} as the FDM are second order finite difference approximations their errors are dissipative thus introducing oscillatory errors which are most prominent when $\Delta x$ and therefore the errors are large. While the behaviour of the FDVM is explained by a series of effects [] [TVD, treating things as cell averages, thus flattening things in cells,]. 
 
-
-
-
-It was also observed that the FDM and the FDVM both had different convergence trends as $\Delta x \rightarrow 0$. For the FDM as $\Delta x$ was decreased the number oscillations decreased while for the FDVM a decrease in $\Delta x$ resolved more oscillations. 
+ 
 
 [](verify convergence rates near discontinuities?) 
 

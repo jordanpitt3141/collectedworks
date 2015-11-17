@@ -4,10 +4,10 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 
 order = "3"
-wdir = "../../results/soliton/o"+order+"/"
-sdir = "../../../../written/exportpic/soliton/solc/o"+order+"/"
+wdir = "../../../../data/raw/onesec/o"+order+"/"
+sdir = "../../../../data/postprocessing/onesec/o"+order+"/"
 
-gap = 2
+gap = 1
 
 h0 = 0.1
 g = 9.81

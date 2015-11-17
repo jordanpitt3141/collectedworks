@@ -83,9 +83,9 @@ def experiment1(x,h0,h1,dx):
             h[i] = h0
 
     return h,u
-
+"""
 #solitonaccuracy
-wdir = "../../data/solconbreak/FDcent/"
+wdir = "../../../data/solcononesec/FDcent/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
@@ -103,7 +103,7 @@ for k in range(20):
     startx = -500.0
     endx = 1500.0 + dx
     startt = 0.0
-    endt = 2*dt  
+    endt = 1 + dt  
         
     g = 9.81
         
@@ -172,7 +172,7 @@ for k in range(20):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
+"""
 
 """
 ##Soliton
@@ -403,3 +403,80 @@ for ll in range(3,16):
         deallocPy(u0_c)
         deallocPy(u1_c)
 """
+
+#big smooth targeted
+
+difflist = [1,6,8,9,12]
+
+deltaxa = [5,6,7,9,10,11,12,13,14,15]
+dxlist = [deltaxa,deltaxa,deltaxa,deltaxa,deltaxa]
+
+diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
+wdirb = "../../data/bigsmoothtargetted/FDcent/"
+for lk in range(len(difflist)):
+    for ll in dxlist[lk]:
+        wdir = wdirb + str(ll) + "/" + str(difflist[lk]) + "/"
+        if not os.path.exists(wdir):
+            os.makedirs(wdir) 
+        dx = ll*(10.0 / (2**12))
+        l = 0.01
+        dt = l*dx
+        startx = 0.0
+        endx = 1000.0 + dx
+        startt = 0.0
+        endt = 30.0+(dt*0.9) 
+        
+        g = 9.81
+        
+        x,t = makevar(startx,endx,dx,startt,endt,dt)
+        n = len(x)
+            
+        bot = 0.0
+        hf = 1.8
+        hl = 1.0
+        gap = max(1,int(0.02/dt))
+        
+        diffuse = diffuses[difflist[lk]]
+        base = hl
+        eta0 = hf - hl
+        x0 = 500
+        h,u = dambreaksmooth(x,x0,base,eta0,diffuse,dx)   
+            
+        nBC = 3
+        nBCs = 4
+        u0 = zeros(nBCs)
+        u1 = zeros(nBCs)    
+        h0 = hf*ones(nBCs)
+        h1 = hl*ones(nBCs)
+            
+        h_c = copyarraytoC(h)
+        u_c = copyarraytoC(u)
+        pubc_c = copyarraytoC(concatenate([u0[-nBC:],u,u1[:nBC]]))
+        phbc_c = copyarraytoC(concatenate([h0[-nBC:],h,h1[:nBC]]))
+        h0_c  = copyarraytoC(h0)
+        h1_c  = copyarraytoC(h1)
+        u0_c  = copyarraytoC(u0)
+        u1_c  = copyarraytoC(u1)
+            
+              
+        for i in range(1,len(t)):
+            evolvewrap(u_c, h_c, pubc_c,phbc_c, h0_c, h1_c,u0_c, u1_c,g,dx,dt,nBC, n,nBCs)    
+            print (t[i])
+        
+        u = copyarrayfromC(u_c,n)
+        h = copyarrayfromC(h_c,n)
+        s = wdir + "outlast.txt"
+        with open(s,'a') as file2:
+             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                
+             writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'u(m/s)', 'diffuse'])        
+                               
+             for j in range(n):
+                 writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j]), str(diffuse)])     
+        
+        deallocPy(u_c)   
+        deallocPy(h_c)
+        deallocPy(h0_c)
+        deallocPy(h1_c)
+        deallocPy(u0_c)
+        deallocPy(u1_c)

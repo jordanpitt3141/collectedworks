@@ -108,12 +108,6 @@ Le~M\'{e}tayer, O., Gavrilyuk, S., and Hank, S. (2010).
 \newblock ``A numerical scheme for the {G}reen–{N}aghdi model.''\ {\em
   Journal of Computational Physics}, 229(6), 2034--2045.
 
-\bibitem[\protect\citeauthoryear{}{LeVeque}{2002}]{LeVeque-2002}
-LeVeque, R. (2002).
-\newblock {\em Finite {V}olume {M}ethods for {H}yperbolic {P}roblems}, Vol.~54
-  of {\em Cambridge Texts in Applied Mathematics}.
-\newblock Cambridge University Press.
-
 \bibitem[\protect\citeauthoryear{}{Li et~al.\@}{2014}]{Guyenne-etal-2014-169}
 Li, M., Guyenne, P., Li, F., and Xu, L. (2014).
 \newblock ``High order well-balanced {CDG-FE} methods for shallow water waves

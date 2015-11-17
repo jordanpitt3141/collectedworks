@@ -5,7 +5,9 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 
 
 #wdir = "../../../../data/raw/Joebigsmooth/o1/13/11/"
-wdir = "../../../../../../PhDold/project/code/data/Joe/alldb/o3/"
+#wdir = "../../../../../../PhDold/project/code/data/Joe/alldb/o3/"
+
+wdir = "../../../../data/dbchris/o3femh110h01testsmallt/"
 
 
 gap = 1
@@ -14,7 +16,7 @@ h0 = 0.1
 g = 9.81
 
          
-s = wdir + "11.txt"
+s = wdir + "out450.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
