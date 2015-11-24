@@ -21,17 +21,41 @@ wdirord = "o1"
 #numss = [[1,6,8,9,12],[1,6,8,9,12],[1,6,8,9,12],[1,6,8,9,12],[1]]
 #dxwss = [range(9,34),range(9,37),range(9,37),range(9,34),range(9,37)] 
 
-wdirords = ["o1"]
-ordsubtup = [[6,7]]
-removeint = [[515,545]]
+#wdirords = ["o1"]
+#ordsubtup = [[6,7]]
+#removeint = [[515,545]]
 
-nums = [1]
+#nums = [1]
+#dxws = range(1,513)
+
+#wdirords = ["o3","FDcent","grim","o2"]
+#ordsubtup = [[6,7],[5,6],[5,6], [6,8]]
+#removeint = [[515,545],[515,545],[515,545],[515,545]]
+
+#nums = [1]
+#dxws = range(1,513)
+
+#wdirords = ["o3"]
+#ordsubtup = [[6,7],[5,6],[5,6], [6,8]]
+#removeint = [[515,545],[515,545],[515,545],[515,545]]
+"""
+wdirords = ["FDcent","grim"]
+ordsubtup = [[5,6],[5,6]]
+removeint = [[515,545],[515,545]]
+nums = [1,6,8,9,12]
 dxws = range(1,513)
+"""
+
+wdirords = ["o3","o2"]
+ordsubtup = [[6,7], [6,8]]
+removeint = [[515,545],[515,545]]
+
+nums = [1,6,8,9,12]
+dxws = range(2,513)
 
 for ip in range(len(wdirords)):
-    hdx = dxws[0] * (10.0/(2**12))
     for jp in nums:
-        
+        hdx = dxws[0] * (10.0/(2**12))
         hs = []
         us = []
         xs = []

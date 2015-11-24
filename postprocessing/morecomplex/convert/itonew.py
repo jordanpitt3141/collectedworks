@@ -13,9 +13,9 @@ from matplotlib2tikz import save as tikz_save
 import os
 from subprocess import call
 
-#wdirords = ["o3","FDcent","grim","o2","o1"]
+wdirords = ["o3","FDcent","grim","o2","o1"]
 
-wdirords = ["o1"]
+#wdirords = ["o1"]
 
 wdirbase = "../../../../data/raw/Joebigsmooth/"
 
