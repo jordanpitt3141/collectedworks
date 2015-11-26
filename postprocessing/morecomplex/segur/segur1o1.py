@@ -18,8 +18,8 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from os import listdir
 
-wdir = "../../../../data/segur2/o1/"
-sdir = "../../../results/segurf/o1/"
+wdir = "../../../../data/raw/segur/o1/"
+sdir = "../../../../data/postprocessing/segur/o1/"
 
 
 g = 9.81
@@ -27,8 +27,10 @@ dx = 0.1
 h1 = 0.1
 h0 = 0.09
 
-xs = [0.0+dx]
-for pos in xs:
+#xs = [0.0+dx]
+poss = [0,5.0,10.0,15.0,20.0]
+for pos in poss:
+    pos = pos + 0.61
     time = []
     height = []
     
