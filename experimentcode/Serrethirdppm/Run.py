@@ -1,6 +1,7 @@
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 import csv
+import os
 from Serre3ppm import *
 from numpy.linalg import norm
 
@@ -386,15 +387,25 @@ def experiment1(x,b,h0,h1,dx):
     return h,u 
 
 #Dam Break 
-"""
-wdir = "../../data/Cserre/dambreak/high/o3p/"
-dx = 0.001
-l = 0.01
+
+wdir = "../../../data/raw/Cserre/dambreak/o3p/"
+dx = 0.1
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir) 
+
+xc = 500
+hf = 10.0
+hl = 1.0 
+
+g = 9.81
+
+l = 0.2 / sqrt(g*hf)
 dt = l*dx
 startx = 0.0
 endx = 1000.0 + dx
 startt = 0.0
-endt = 30 + dt
+endt = 20.0 + dt
         
 szoomx = startx
 ezoomx = endx
@@ -404,16 +415,12 @@ nfcBC = 4 #for flux calculation
 nGsBC = 2 #for solving G from u,h
 niBC = nGsBC + nfcBC #total
         
-g = 9.81
     
-gap = int(0.5/dt)
+gap = int(10.0/dt)
         
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
-    
-xc = 500
-hf = 1.8
-hl = 1.0    
+      
 um,hm = dambreak(x,xc,hf,hl)
                 
 umbegi = zeros(niBC)
@@ -525,7 +532,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-"""
+
 
 """
 ####### DAMBREAK ACCURACY #######
@@ -810,7 +817,7 @@ with open(s,'a') as file2:
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])]) 
 """
 
-
+"""
 ### Soliton Accuracy ################
 wdir = "../../data/test3rd/o3p/"
 
@@ -974,7 +981,7 @@ for k in range(20):
         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
         writefile.writerow([str(dx),str(normhdiffi), str(normudiffi)])  
-
+"""
 """  
 ##### SEGUR AND HAMMACK EXPERIMENT 1
 tl = 60.0

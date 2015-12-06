@@ -8,12 +8,14 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 def TV(a):
     return sum(abs(a[1:] - a[:-1]))
 
-nf = 17    
-orders = ["1","2","3"]     
+nf = 18    
+orders = ["1af","2af","3"]     
 #orders = ["1"]     
 for order in orders:
-    wdir = "../../../data/Joe/alldb/o"+order+"/"
-    sdir = "../../../../written/exportpic/dambreak/dbtexn/o"+order+"/"
+    wdir = "../../../../data/raw/ndbh/o"+order+"/"
+    sdir = "../../../../data/postprocessing/ndbh/o"+order+"/"
+    if not os.path.exists(sdir):
+        os.makedirs(sdir)
     L1h = []
     L1u = []
     dxs = []
@@ -32,7 +34,7 @@ for order in orders:
                     time = float(row[2])
                     xm.append(float(row[3]))
                     hm.append(float(row[4]))
-                    um.append(float(row[5]))
+                    um.append(float(row[6]))
                         
                 j = j + 1
             um = array(um)

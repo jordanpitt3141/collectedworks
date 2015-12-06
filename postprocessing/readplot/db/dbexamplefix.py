@@ -4,15 +4,19 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from matplotlib2tikz import save as tikz_save
 
-order = "1"
-num = "10"
-wdir = "../../../data/Joe/alldb/o"+order+"/"
+order = "1af"
+num = "17"
+wdir = "../../../../data/raw/ndbh/o"+order+"/"
+sdir = "../../../../data/postprocessing/ndbhex/o"+order+"/"+num+"/"
+
+if not os.path.exists(sdir):
+    os.makedirs(sdir)
+
 #wdir = "../../../data/Joe/dbh/o"+order+"/"
-sdir = "../../../../written/test/"
 #sdir = "../../../../written/exportpic/dambreak/ex/"
 
 #gap = 50
-gap = 1
+gap = 30
 
 h0 = 0.1
 g = 9.81
@@ -40,15 +44,26 @@ with open(s,'r') as file1:
     u = array(u)
     h = array(h)
 
-xt =x[::gap]
-ht =h[::gap]
+xbeg = int((350)/dx)
+xend = int((650)/dx)
+xt =x[xbeg:xend:gap]
+ht =h[xbeg:xend:gap]
 
+"""
 plot(xt,ht ,'-b')
-xlim([0,1000])
-ylim([0.8,2.0])
-xlabel("x(m)")
-ylabel("h(m)")
-#s = sdir + "o" + order +".tikz" 
+xlim([350,650])
+ylim([1.0,1.8])
+xlabel("$x$ ($m$)")
+ylabel("$h$ ($m$)")
+"""
+#s = sdir + "o" + order +"n" + num +".tikz" 
 #tikz_save(s);      
 #clf();
-    
+
+n = len(xt)
+s = sdir + "h.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.15f\n" %(xt[i]," ",ht[i])
+        file1.write(s)
+   

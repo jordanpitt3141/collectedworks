@@ -25,10 +25,13 @@ from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from os import listdir
+import os
 
-wdir = "../../../../data/raw/segur/o2/"
-sdir = "../../../../data/postprocessing/segur/o2/"
+wdir = "../../../../data/raw/segur/o2af/"
+sdir = "../../../../data/postprocessing/segur/o2af0f/"
 
+if not os.path.exists(sdir):
+    os.makedirs(sdir)
 
 g = 9.81
 h1 = 0.1
@@ -36,9 +39,9 @@ h0 = 0.09
 theta = 1.0
 
 #xs = [0,5.0,10.0,15.0,20.0]
-poss = [0,5.0,10.0,15.0,20.0]
+#poss = [0,5.0,10.0,15.0,20.0]
+poss = [0]
 for pos in poss:
-    pos = pos + 0.61
 
     time = []
     height = []    
@@ -55,6 +58,7 @@ for pos in poss:
              for row in readfile:       
                  if (j >= 0):
                     dx = float(row[0])
+                    pos = dx
                     dt = float(row[1])
                     hs.append(float(row[4]))
                     if(pos >= float(row[3]) - 0.5*dx and pos <= float(row[3]) + 0.5*dx):

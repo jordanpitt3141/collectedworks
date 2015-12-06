@@ -390,7 +390,7 @@ def experiment1(x,b,h0,h1,dx):
 
     return h,u
  
-"""   
+""" 
 #Dam Break 
 import os
 
@@ -556,6 +556,8 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
+"""
+
 """
 #Dam Break Chris Smooth
 import os
@@ -733,7 +735,7 @@ deallocPy(hmend_c)
 #Dam Break Chris
 import os
 
-wdir = "../../../data/dbchris/o3femh110h01testsmalltsmalldt/"
+wdir = "../../../data/raw/Cserre/db/o3femhf10hl0p9/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -744,12 +746,12 @@ hl = 1.0
     
 dx = 0.1
 Cr = 0.2
-l = 0.001#Cr / sqrt(g*hf)
+l = Cr / sqrt(g*hf)
 dt = l*dx
 startx = 0.0
 endx = 1000.0 + dx
 startt = 0.0
-endt = 1.0 + dt
+endt = 30.0 + dt
         
 szoomx = startx
 ezoomx = endx
@@ -761,7 +763,7 @@ niBC = nGsBC + nfcBC #total
         
 g = 9.81
     
-gap = int(0.01/dt)
+gap = int(10.0/dt)
         
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
@@ -901,7 +903,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-"""
+
 
 """
 ### DAMBREAK ACCURACY

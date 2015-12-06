@@ -368,7 +368,25 @@ def solitoninit(n,a0,a1,g,x,t0,dx):
         h[i] = soliton(x[i],t0,g,a0,a1)
         u[i] =  c* ((h[i] - a0) / h[i])
     
-    return h,u       
+    return h,u
+
+def soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx):
+    h = zeros(n)
+    u = zeros(n)
+    c1 = sqrt(g*(a0 + a11))
+    c2 = sqrt(g*(a0 + a12))
+    for i in range(n):
+        if (x[i] > solbeg1 and x[i] < solend1):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg1 + solend1)),t0,g,a0,a11)
+            u[i] = direction1*c1*( (h[i] - a0) / h[i] )
+        elif (x[i] > solbeg2 and x[i] < solend2):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg2 + solend2)),t0,g,a0,a12)
+            u[i] =  direction2*c2* ((h[i] - a0) / h[i])
+        else:
+            h[i] = a0
+            u[i] = 0.0
+    
+    return h,u          
 
 def experiment1(x,b,h0,h1,dx):
     n = len(x)
@@ -791,12 +809,12 @@ deallocPy(hmend_c)
 """
 #Dam Break 
 from time import time
-wdir = "../../../data/raw/db/o3/"
-Cr = 0.5
-hf = 1.8
-hl = 1.0
+wdir = "../../../data/raw/Cserre/db/o3hf10hl0p9/"
+Cr = 0.2
+hf = 10.0
+hl = 0.9
 g = 9.81
-dx = 100.0 / (2**10)
+dx = 0.1
 l = Cr / sqrt(g*hf) 
 dt = l*dx
 startx = 0.0
@@ -942,8 +960,9 @@ deallocPy(hmend_c)
 """
 
 
-################# DAM BREAK Accuracy
 
+################# DAM BREAK Accuracy
+"""
 wdir = "../../../data/raw/dbh/o3/"
 for k in range(20):
     g = 9.81
@@ -1097,17 +1116,21 @@ for k in range(20):
     deallocPy(umend_c)
     deallocPy(hmbeg_c)
     deallocPy(hmend_c)
-
-
 """
-#Soliton
-dx = 0.1
-l = 0.01
+
+######### Solitary Soliton
+"""
+dx = 0.05
+a0 = 1.0
+a1 = 1.0
+Cr = 0.5
+g = 9.81
+l = Cr / (sqrt(g*(a0 + a1)))
 dt = l*dx
-startx = -500.0
-endx = 1500.0
+startx = -100.0
+endx = 500.0
 startt = 0.0
-endt = 100.0 + dt
+endt = 100 + dt
     
 szoomx = startx
 ezoomx = endx
@@ -1118,17 +1141,16 @@ nGsBC = 2 #for solving G from u,h
 niBC = nGsBC + nfcBC #total
     
     
-wdir = "../../data/Cserre/soliton/order3/t/"
-    
-g = 9.81
+wdir = "../../../data/raw/Cserre/solitonothers/highnonlinear/order3/dx0p05"
 
-gap = int(0.5/dt)
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+gap = int(10.0/dt)
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
 
-a0 = 10.0
-a1 = 1.0
 t0 = 0   
 hm,um = solitoninit(n,a0,a1,g,x,t0,dx)
             
@@ -1242,18 +1264,160 @@ with open(s,'a') as file2:
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])  
 """
+
+######### Colliding Soliton Experiments
+
+dx = 0.05
+
+a0 = 1.0
+a11 = 1.6
+solbeg1 = 75.0
+solend1 = 125.0
+direction1 = 1.0
+a12 = 0.6
+solbeg2 = 150.0
+solend2 = 200.0
+direction2 = -1.0
+
+Cr = 0.5
+g = 9.81
+l = Cr / (sqrt(g*(a0 + a11 + a12)))
+dt = l*dx
+startx = -100.0
+endx = 600.0
+startt = 0.0
+endt = 30 + dt
+
+    
+#number of boundary conditions (one side)
+nfcBC = 4 #for flux calculation
+nGsBC = 2 #for solving G from u,h
+niBC = nGsBC + nfcBC #total
+    
+    
+wdir = "../../../data/raw/Cserre/solitonothers/coll/o3/dx0p05"
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+gap = int(10.0/dt)
+    
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+
+t0 = 0   
+hm,um = soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx)
+          
+umbeg = um[0]*ones(niBC)
+umend = um[-1]*ones(niBC)
+hmbeg = hm[0]*ones(niBC)
+hmend = hm[-1]*ones(niBC)    
+            
+#calculate G midpoint
+cnBC = niBC - nGsBC
+    
+umbc = concatenate([umbeg[-cnBC:],um,umend[0:cnBC]]) 
+hmbc = concatenate([hmbeg[-cnBC:],hm,hmend[0:cnBC]])       
+Gmbc = solveGfromuh(umbc,hmbc,hmbeg[0:-cnBC],hmend[-cnBC:],umbeg[0:-cnBC],umend[-cnBC:],dx)  
+    
+#calculate averages
+Gabc = midpointtocellaverages(Gmbc,dx)
+habc = midpointtocellaverages(hmbc,dx)
+uabc = midpointtocellaverages(umbc,dx)
+    
+#so we can just go from here with Ga ang ha?
+Gabeg = Gabc[0:cnBC]
+Ga = Gabc[cnBC:-cnBC]
+Gaend = Gabc[-cnBC:]
+habeg = habc[0:cnBC]
+ha = habc[cnBC:-cnBC]
+haend = habc[-cnBC:]
+uabeg = uabc[0:cnBC]
+ua = uabc[cnBC:-cnBC]
+uaend = uabc[-cnBC:]
+
+Ga_c = copyarraytoC(Ga)
+Gabeg_c = copyarraytoC(Gabeg)
+Gaend_c = copyarraytoC(Gaend)
+ha_c = copyarraytoC(ha)
+
+habeg_c = copyarraytoC(habeg)
+haend_c = copyarraytoC(haend)
+
+uabeg_c = copyarraytoC(uabeg)
+uaend_c = copyarraytoC(uaend)
+
+hmbeg_c = copyarraytoC(hmbeg)
+hmend_c = copyarraytoC(hmend)
+
+umbeg_c = copyarraytoC(umbeg)
+umend_c = copyarraytoC(umend)
+
+u_c = mallocPy(n)
+G_c = mallocPy(n)
+h_c = mallocPy(n)
+
+for i in range(1,len(t)):
+    
+    if(i % gap == 0 or i ==1):
+        
+        ca2midpt(ha_c,dx,n,h_c)
+        ca2midpt(Ga_c,dx,n,G_c)
+        ufromGh(G_c,h_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,niBC, u_c)
+        u = copyarrayfromC(u_c,n)
+        G = copyarrayfromC(G_c,n)
+        h = copyarrayfromC(h_c,n)
+            
+        s = wdir + "saveoutputts" + str(i) + ".txt"
+        print t[i]
+        print(h[30],G[30]) 
+        with open(s,'a') as file2:
+            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+            writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)'])        
+               
+            for j in range(n):
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j])])  
+             
+        
+    evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC)
+    print t[i]
+    print(h[30],G[30]) 
+
+    
+ca2midpt(ha_c,dx,n,h_c)
+ca2midpt(Ga_c,dx,n,G_c)
+ufromGh(G_c,h_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,niBC, u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+    
+s = wdir + "saveoutputtslast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+     writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)'])        
+               
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j])])  
+
+
 """
 #Soliton Time
 from time import time
 import os
 from scipy.linalg import norm
+a0 = 1.0
+a1 = 1.0
 dx = 100.0 / (2.0**5)
-l = 0.01
-dt = l*dx
+Cr = 0.5
+g = 9.81
+l = 1 / (sqrt(g*(a0 + a1)))
+dt = Cr*l*dx
 startx = -500.0
-endx = 1500.0
+endx = 1000.0
 startt = 0.0
-endt = 100.0 + dt
+endt = 50.0 + dt
     
 szoomx = startx
 ezoomx = endx
@@ -1264,20 +1428,16 @@ nGsBC = 2 #for solving G from u,h
 niBC = nGsBC + nfcBC #total
     
     
-wdir = "../../data/timecomp2/o3/"
+wdir = "../../../data/raw/timecomplong/o3/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
-    
-g = 9.81
 
 gap = int(0.5/dt)
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
 
-a0 = 10.0
-a1 = 1.0
 t0 = 0   
 hm,um = solitoninit(n,a0,a1,g,x,t0,dx)
             
@@ -1361,12 +1521,12 @@ with open(s,'a') as file2:
                
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j]),str(normh),str(normu), str(timeelapse),str(len(t) - 1) , str((1.0*timeelapse)/ (len(t) - 1) )])
-
 """
+
 """
 ##Accuracy Test
 ### Soliton Accuracy ################
-wdir = "../../../data/solcon/o3a/"
+wdir = "../../../data/solcon/o3/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -1377,13 +1537,13 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
     
-for k in range(16):
+for k in range(18):
     dx = 100.0 / (2**k)
     a0 = 10.0
     a1 = 1.0
     g = 9.81
     Cr = 0.5
-    l = 1 / (sqrt(g*a0 + a1))
+    l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
     startx = -500
     endx = 1000.0 + dx

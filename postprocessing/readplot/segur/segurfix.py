@@ -3,14 +3,17 @@ from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 
-order = "3p"
-wdir = "../../results/segurf/o"+order+"/"
-expdir = "../../results/segurexp/"
-sdir = "../../../../written/test/o"+order+"/"
+order = "1af0f"
+wdir = "../../../../data/postprocessing/segur/o"+order+"/"
+expdir = "../../../../data/postprocessing/segurexp/"
+sdir = "../../../../data/postprocessing/segurfull/o"+order+"/"
 
-gap = 2
-#poss = [0,5]
-poss = [0,5,10,15,20]
+if not os.path.exists(sdir):
+    os.makedirs(sdir) 
+
+gap = 1
+poss = [0]
+#poss = [0,5,10,15,20]
 #poss = [5,10,15,20]
 for pos in poss:
     h0 = 0.1

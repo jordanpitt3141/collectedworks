@@ -555,11 +555,11 @@ for lk in range(len(difflist)):
         deallocPy(u1_c)
 """
 
-
+"""
 ################################# SOLITON Accuracy ####################3
 #dxs = [100.0,90.0,80.0,70.0,60.0,50.0,40.0,30.0,20.0,10.0,9.0,8.0,7.0,6.0,5.0,4.0,3.0,2.0,1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0.09,0.08,0.07 \
 #,0.06,0.05,0.04,0.03,0.02,0.01]
-wdir = "../../../data/solcon/o1af/"
+wdir = "../../../data/solcon/o1/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -570,13 +570,13 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
     
-for k in range(20):
+for k in range(18):
     dx = 100.0 / (2**k)
     a0 = 10.0
     a1 = 1.0
     g = 9.81
     Cr = 0.5
-    l = 1 / (sqrt(g*a0 + a1))
+    l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
     startx = -500.0
     endx = 1000.0 + dx
@@ -683,31 +683,32 @@ for k in range(20):
     deallocPy(u0_c)
     deallocPy(u1_c)
 
-
-"""    
+"""
+ 
 ##### SOLITON
-dx = 0.1
-l = 0.01
-dt = l*dx
-startx = -500.0
-endx = 1500.0 + dx
-startt = 0
-endt = 100.0 + dt
-
-theta = 1.2
-    
-wdir = "../../data/Cserre/soliton/order1/t/"
-    
+dx = 0.05
+a0 = 1.0
+a1 = 1.0
 g = 9.81
+Cr = 0.5
+l = Cr / (sqrt(g*(a0 + a1)))
+dt = l*dx
+startx = -100.0
+endx = 500.0
+startt = 0.0
+endt = 100 + dt
+
+    
+wdir = "../../../data/raw/Cserre/solitonothers/highnonlinear/order1/dx0p05"
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
     
-a0 = 10.0
-a1 = 1.0
 t0 = 0
-bot = 0
-gap = max(1,int(0.5/dt))
+gap = int(10.0/dt)
     
 h,G= solitoninit(n,a0,a1,g,x,t0,dx)
     
@@ -788,23 +789,27 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)  
-"""
+
 """
 ##### SOLITON time
 from time import time
 import os
 from scipy.linalg import norm
-dx = 100.0 / (2.0**11)
-l = 0.01
-dt = l*dx
+dx = 100.0 / (2.0**10)
+a0 = 10.0
+a1 = 1.0
+g = 9.81
+Cr = 0.5
+l = 1 / (sqrt(g*(a0 + a1)))
+dt = Cr*l*dx
 startx = -500.0
-endx = 1500.0 + dx
+endx = 1000.0 + dx
 startt = 0
-endt = 100.0 + dt
+endt = 50.0 + dt
 
 theta = 1.2
     
-wdir = "../../data/timecomp2/o1/"
+wdir = "../../../data/raw/timecomplong/o1/"
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
     
@@ -812,9 +817,6 @@ g = 9.81
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
-    
-a0 = 10.0
-a1 = 1.0
 t0 = 0
 bot = 0
 gap = max(1,int(0.5/dt))
@@ -877,6 +879,8 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)  
 """
+
+
 """
 ################ SEGUR AND HAMMACK RECTANGULAR WAVE ###################################
 tl = 60.0
@@ -895,7 +899,7 @@ endx = tl + dx
 startt = 0
 endt = 50.0 + dt
     
-wdir = "../../../data/raw/segur/o1/"
+wdir = "../../../data/raw/segur/o1af/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)

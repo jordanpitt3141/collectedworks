@@ -9,15 +9,16 @@
 \citation{Hank-etal-2010-2034,Guyenne-etal-2014-169,Zoppou-2014}
 \citation{Hank-etal-2010-2034}
 \citation{Zoppou-2014}
-\citation{Zoppou-Roberts-1996}
-\citation{El-etal-2006}
 \citation{Hank-etal-2010-2034}
 \citation{El-etal-2006}
 \citation{Hank-etal-2010-2034}
+\citation{El-etal-2006}
 \citation{Su-Gardener-1969-536}
 \citation{Bonneton-Lannes-2009-16601}
-\newlabel{section:Serre Equations}{{2}{2}}
 \citation{Guyenne-etal-2014-169,Zoppou-2014}
+\newlabel{section:Serre Equations}{{2}{2}}
+\citation{Hank-etal-2010-2034}
+\citation{Zoppou-2014}
 \citation{Hank-etal-2010-2034}
 \citation{Zoppou-2014}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The notation used for one-dimensional flow governed by the Serre equation.\relax }}{3}}
@@ -29,18 +30,16 @@
 \@writefile{toc}{\contentsline {subsection}{Alternative Conservation Law Form of the Serre Equations}{3}}
 \newlabel{section:Alternative Conservation Law Form of the Serre Equations}{{2}{3}}
 \newlabel{eq:Gdefinition}{{2}{3}}
-\citation{Hank-etal-2010-2034}
-\citation{Zoppou-2014}
+\newlabel{eq:Serrecon_continuity}{{3a}{3}}
+\newlabel{eq:Serrecon_momentum}{{3b}{3}}
 \citation{Hank-etal-2010-2034,Zoppou-2014}
-\newlabel{eq:Serrecon_continuity}{{3a}{4}}
-\newlabel{eq:Serrecon_momentum}{{3b}{4}}
 \newlabel{eq:Serrecon}{{3}{4}}
 \newlabel{section:Solving the Serre Equations Written in Conservation Law Form}{{3}{4}}
 \newlabel{eq:L}{{4}{4}}
 \newlabel{eq:A}{{5}{4}}
 \newlabel{eq:Gsecondord}{{{5a}}{4}}
+\newlabel{eq:Gfourthord}{{{5b}}{4}}
 \citation{Kurganov-etal-2001-707}
-\newlabel{eq:Gfourthord}{{{5b}}{5}}
 \newlabel{eq:FVMupdate}{{6}{5}}
 \@writefile{toc}{\contentsline {subsection}{Local Riemann Problem}{5}}
 \newlabel{eq:HLL_flux}{{7}{5}}
@@ -49,113 +48,113 @@
 \citation{Kurganov-etal-2001-707}
 \citation{Koren-1993}
 \@writefile{toc}{\contentsline {subsection}{Propagation Speeds of a Local Shock}{6}}
-\@writefile{toc}{\contentsline {subsection}{Reconstruction}{6}}
-\@writefile{toc}{\contentsline {subsection}{Fully discrete approximations to the instantaneous flux $f(q^{\pm }_{i + \frac  {1}{2}})$}{7}}
-\newlabel{eq:derivdisco1m}{{5}{8}}
+\@writefile{toc}{\contentsline {subsection}{Reconstruction of Conserved Quantities}{6}}
+\@writefile{toc}{\contentsline {subsection}{Reconstruction of $u$}{7}}
+\@writefile{toc}{\contentsline {subsection}{Fully discrete approximations to the instantaneous flux $f(q^{\pm }_{i + \frac  {1}{2}})$}{8}}
 \@writefile{toc}{\contentsline {subsection}{Transforming between nodal values and cell averages}{8}}
 \citation{Gottlieb-etal-2009-251}
 \citation{Courant-etal-1928-32}
 \@writefile{toc}{\contentsline {subsection}{Strong-Stability-Preserving Runge-Kutta Scheme}{9}}
+\@writefile{toc}{\contentsline {subsection}{Stability Constraint}{9}}
+\newlabel{eq:CFLcond}{{8}{9}}
 \citation{Hammack-Segur-1978-337}
 \citation{El-etal-2006}
 \citation{Hank-etal-2010-2034}
 \citation{El-etal-2006}
 \citation{Hank-etal-2010-2034}
 \citation{Carter-Cienfuegos-2010-259}
-\@writefile{toc}{\contentsline {subsection}{Stability Constraint}{10}}
-\newlabel{eq:CFLcond}{{8}{10}}
 \newlabel{section:Numerical Simulations}{{6}{10}}
 \@writefile{toc}{\contentsline {subsection}{Soliton}{10}}
 \newlabel{section:Convergence Rate}{{6}{10}}
-\newlabel{eq:sol}{{9}{11}}
-\newlabel{fig:solitoneo1h}{{2(a)}{12}}
-\newlabel{sub@fig:solitoneo1h}{{(a)}{12}}
-\newlabel{fig:solitoneo1u}{{2(b)}{12}}
-\newlabel{sub@fig:solitoneo1u}{{(b)}{12}}
-\newlabel{fig:solitoneo2h}{{2(c)}{12}}
-\newlabel{sub@fig:solitoneo2h}{{(c)}{12}}
-\newlabel{fig:solitoneo2u}{{2(d)}{12}}
-\newlabel{sub@fig:solitoneo2u}{{(d)}{12}}
-\newlabel{fig:solitoneo3h}{{2(e)}{12}}
-\newlabel{sub@fig:solitoneo3h}{{(e)}{12}}
-\newlabel{fig:solitoneo3u}{{2(f)}{12}}
-\newlabel{sub@fig:solitoneo3u}{{(f)}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The first-, second- and third-order simulation of a soliton with $\Delta x = 100 /2^{6}\text  {m}$ ($\bullet $) plotted against the analytic solution of \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 9\hbox {}\unskip \@@italiccorr )}} (\discretionary {-}{}{}--) with black for $t =0\text  {s}$ and blue for $t=100\text  {s}$.\relax }}{12}}
-\newlabel{fig:solitone}{{2}{12}}
-\newlabel{fig:solitoncono1}{{3(a)}{13}}
-\newlabel{sub@fig:solitoncono1}{{(a)}{13}}
-\newlabel{fig:solitoncono2}{{3(b)}{13}}
-\newlabel{sub@fig:solitoncono2}{{(b)}{13}}
-\newlabel{fig:solitoncono3}{{3(c)}{13}}
-\newlabel{sub@fig:solitoncono3}{{(c)}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Convergence of relative error using $L_1$ norm for analytic soliton solution for both $h$ ($\circ $) and $u$ ($\diamond $) for the; (a) first-, (b) second- and (c) third-order methods.\relax }}{13}}
-\newlabel{fig:solitoncon}{{3}{13}}
+\newlabel{eq:sol}{{9}{10}}
+\newlabel{fig:solitoneo1h}{{2(a)}{11}}
+\newlabel{sub@fig:solitoneo1h}{{(a)}{11}}
+\newlabel{fig:solitoneo1u}{{2(b)}{11}}
+\newlabel{sub@fig:solitoneo1u}{{(b)}{11}}
+\newlabel{fig:solitoneo2h}{{2(c)}{11}}
+\newlabel{sub@fig:solitoneo2h}{{(c)}{11}}
+\newlabel{fig:solitoneo2u}{{2(d)}{11}}
+\newlabel{sub@fig:solitoneo2u}{{(d)}{11}}
+\newlabel{fig:solitoneo3h}{{2(e)}{11}}
+\newlabel{sub@fig:solitoneo3h}{{(e)}{11}}
+\newlabel{fig:solitoneo3u}{{2(f)}{11}}
+\newlabel{sub@fig:solitoneo3u}{{(f)}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The first-, second- and third-order simulation of a soliton with $\Delta x = 100 /2^{6}\text  {m}$ ($\bullet $) plotted against the analytic solution of \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 9\hbox {}\unskip \@@italiccorr )}} (\discretionary {-}{}{}--) with black for $t =0\text  {s}$ and blue for $t=30\text  {s}$.\relax }}{11}}
+\newlabel{fig:solitone}{{2}{11}}
+\newlabel{fig:solitoncono1}{{3(a)}{12}}
+\newlabel{sub@fig:solitoncono1}{{(a)}{12}}
+\newlabel{fig:solitoncono2}{{3(b)}{12}}
+\newlabel{sub@fig:solitoncono2}{{(b)}{12}}
+\newlabel{fig:solitoncono3}{{3(c)}{12}}
+\newlabel{sub@fig:solitoncono3}{{(c)}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Convergence of relative error using $L_1$ norm for analytic soliton solution for both $h$ ($\circ $) and $u$ ($\diamond $) for the; (a) first-, (b) second- and (c) third-order methods.\relax }}{12}}
+\newlabel{fig:solitoncon}{{3}{12}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparison of run times for different order methods to get similar relative error as measured by the $L_1$ norm for $h$\relax }}{13}}
+\newlabel{table:runtime}{{1}{13}}
 \citation{Hammack-Segur-1978-337}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Convergence of relative error using $L_1$ norm for analytic soliton solution for both $h$ ($\circ $) and $u$ ($\diamond $) over only a single time step\relax }}{14}}
-\newlabel{fig:solitoncono3dt}{{4}{14}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparison of run times for different order methods to get similar relative error as measured by the $L_1$ norm for $h$\relax }}{14}}
-\newlabel{table:runtime}{{1}{14}}
+\citation{Zoppou-Roberts-1996}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Comparison of run times for different order methods to get similar relative error as measured by the $L_1$ norm for $h$\relax }}{14}}
+\newlabel{table:runtime1}{{2}{14}}
 \@writefile{toc}{\contentsline {subsection}{Segur Labratory Experiment}{14}}
 \newlabel{Laboratory_Experiments}{{6}{14}}
-\citation{Zoppou-Roberts-1996}
-\citation{El-etal-2006}
-\citation{El-etal-2006}
-\citation{Hank-etal-2010-2034}
-\@writefile{toc}{\contentsline {subsection}{Dam-Break}{15}}
-\newlabel{fig:Seguro1p0}{{5(a)}{16}}
-\newlabel{sub@fig:Seguro1p0}{{(a)}{16}}
-\newlabel{fig:Seguro1p5}{{5(b)}{16}}
-\newlabel{sub@fig:Seguro1p5}{{(b)}{16}}
-\newlabel{fig:Seguro1p10}{{5(c)}{16}}
-\newlabel{sub@fig:Seguro1p10}{{(c)}{16}}
-\newlabel{fig:Seguro1p15}{{5(d)}{16}}
-\newlabel{sub@fig:Seguro1p15}{{(d)}{16}}
-\newlabel{fig:Seguro1p20}{{5(e)}{16}}
-\newlabel{sub@fig:Seguro1p20}{{(e)}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Comparison of the experimental results ($-$) against the first-order methods solution ($\bullet $) at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$.\relax }}{16}}
-\newlabel{fig:Seguro1}{{5}{16}}
-\newlabel{fig:Seguro2p0}{{6(a)}{17}}
-\newlabel{sub@fig:Seguro2p0}{{(a)}{17}}
-\newlabel{fig:Seguro2p5}{{6(b)}{17}}
-\newlabel{sub@fig:Seguro2p5}{{(b)}{17}}
-\newlabel{fig:Seguro2p10}{{6(c)}{17}}
-\newlabel{sub@fig:Seguro2p10}{{(c)}{17}}
-\newlabel{fig:Seguro2p15}{{6(d)}{17}}
-\newlabel{sub@fig:Seguro2p15}{{(d)}{17}}
-\newlabel{fig:Seguro2p20}{{6(e)}{17}}
-\newlabel{sub@fig:Seguro2p20}{{(e)}{17}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of the experimental results ($-$) against the second-order methods solution ($\bullet $) at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$.\relax }}{17}}
-\newlabel{fig:Seguro2}{{6}{17}}
-\newlabel{fig:Seguro3p0}{{7(a)}{18}}
-\newlabel{sub@fig:Seguro3p0}{{(a)}{18}}
-\newlabel{fig:Seguro3p5}{{7(b)}{18}}
-\newlabel{sub@fig:Seguro3p5}{{(b)}{18}}
-\newlabel{fig:Seguro3p10}{{7(c)}{18}}
-\newlabel{sub@fig:Seguro3p10}{{(c)}{18}}
-\newlabel{fig:Seguro3p15}{{7(d)}{18}}
-\newlabel{sub@fig:Seguro3p15}{{(d)}{18}}
-\newlabel{fig:Seguro3p20}{{7(e)}{18}}
-\newlabel{sub@fig:Seguro3p20}{{(e)}{18}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Comparison of the experimental results ($-$) against the third-order methods solution ($\bullet $) at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$.\relax }}{18}}
-\newlabel{fig:Seguro3}{{7}{18}}
+\newlabel{fig:Seguro1p0}{{4(a)}{15}}
+\newlabel{sub@fig:Seguro1p0}{{(a)}{15}}
+\newlabel{fig:Seguro1p5}{{4(b)}{15}}
+\newlabel{sub@fig:Seguro1p5}{{(b)}{15}}
+\newlabel{fig:Seguro1p10}{{4(c)}{15}}
+\newlabel{sub@fig:Seguro1p10}{{(c)}{15}}
+\newlabel{fig:Seguro1p15}{{4(d)}{15}}
+\newlabel{sub@fig:Seguro1p15}{{(d)}{15}}
+\newlabel{fig:Seguro1p20}{{4(e)}{15}}
+\newlabel{sub@fig:Seguro1p20}{{(e)}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Comparison of the experimental results ($-$) against the first-order methods solution ($\bullet $) at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$.\relax }}{15}}
+\newlabel{fig:Seguro1}{{4}{15}}
+\newlabel{fig:Seguro2p0}{{5(a)}{16}}
+\newlabel{sub@fig:Seguro2p0}{{(a)}{16}}
+\newlabel{fig:Seguro2p5}{{5(b)}{16}}
+\newlabel{sub@fig:Seguro2p5}{{(b)}{16}}
+\newlabel{fig:Seguro2p10}{{5(c)}{16}}
+\newlabel{sub@fig:Seguro2p10}{{(c)}{16}}
+\newlabel{fig:Seguro2p15}{{5(d)}{16}}
+\newlabel{sub@fig:Seguro2p15}{{(d)}{16}}
+\newlabel{fig:Seguro2p20}{{5(e)}{16}}
+\newlabel{sub@fig:Seguro2p20}{{(e)}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Comparison of the experimental results ($-$) against the second-order methods solution ($\bullet $) at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$.\relax }}{16}}
+\newlabel{fig:Seguro2}{{5}{16}}
+\newlabel{fig:Seguro3p0}{{6(a)}{17}}
+\newlabel{sub@fig:Seguro3p0}{{(a)}{17}}
+\newlabel{fig:Seguro3p5}{{6(b)}{17}}
+\newlabel{sub@fig:Seguro3p5}{{(b)}{17}}
+\newlabel{fig:Seguro3p10}{{6(c)}{17}}
+\newlabel{sub@fig:Seguro3p10}{{(c)}{17}}
+\newlabel{fig:Seguro3p15}{{6(d)}{17}}
+\newlabel{sub@fig:Seguro3p15}{{(d)}{17}}
+\newlabel{fig:Seguro3p20}{{6(e)}{17}}
+\newlabel{sub@fig:Seguro3p20}{{(e)}{17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of the experimental results ($-$) against the third-order methods solution ($\bullet $) at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$.\relax }}{17}}
+\newlabel{fig:Seguro3}{{6}{17}}
 \citation{El-etal-2006}
 \citation{El-etal-2006}
 \citation{Hank-etal-2010-2034}
 \citation{El-etal-2006}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The change in total variation (TV) over $\Delta x$ for; ($\circ $) first- , ($\square $) second-, and ($*$) third-order methods.\relax }}{19}}
-\newlabel{fig:DBL1}{{8}{19}}
-\newlabel{fig:DBo1}{{9(a)}{20}}
+\citation{El-etal-2006}
+\citation{Hank-etal-2010-2034}
+\citation{El-etal-2006}
+\@writefile{toc}{\contentsline {subsection}{Dam-Break}{18}}
+\citation{El-etal-2006}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The change in total variation (TV) of $h$ over $\Delta x$ for: ($\circ $) first- , ($\square $) second-, and ($*$) third-order methods.\relax }}{19}}
+\newlabel{fig:DBL1}{{7}{19}}
+\newlabel{section:Conclusions}{{7}{19}}
+\newlabel{fig:DBo1}{{8(a)}{20}}
 \newlabel{sub@fig:DBo1}{{(a)}{20}}
-\newlabel{fig:DBo2}{{9(b)}{20}}
+\newlabel{fig:DBo2}{{8(b)}{20}}
 \newlabel{sub@fig:DBo2}{{(b)}{20}}
-\newlabel{fig:DBo3}{{9(c)}{20}}
+\newlabel{fig:DBo3}{{8(c)}{20}}
 \newlabel{sub@fig:DBo3}{{(c)}{20}}
-\newlabel{fig:DB1o1}{{9(d)}{20}}
+\newlabel{fig:DB1o1}{{8(d)}{20}}
 \newlabel{sub@fig:DB1o1}{{(d)}{20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Solution of the dam-break problem using the (a) first-, (b) second- and (c) third-order method with $\Delta x = 100 /2^{10} \text  {m}$. As well as a (d) first-order method with $\Delta x = 100 /2^{15} \text  {m}$. \relax }}{20}}
-\newlabel{fig:DB}{{9}{20}}
-\citation{El-etal-2006}
-\newlabel{section:Conclusions}{{7}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Solution of the dam-break problem using the (a) first-, (b) second- and (c) third-order method with $\Delta x = 100 /2^{11} \text  {m}$. As well as a (d) first-order method with $\Delta x = 100 /2^{17} \text  {m}$. \relax }}{20}}
+\newlabel{fig:DB}{{8}{20}}
 \bibdata{Serre_ASCE}
 \bibcite{Antunes-do-Carmo-etal-1993-725}{\citeauthoryear {}{Antunes\nobreakspace  {}do Carmo et\nobreakspace  {}al.\spacefactor \@m {}}{1993}}
 \bibcite{Bonneton-etal-2011-1479}{\citeauthoryear {}{Bonneton et\nobreakspace  {}al.\spacefactor \@m {}}{2011}}

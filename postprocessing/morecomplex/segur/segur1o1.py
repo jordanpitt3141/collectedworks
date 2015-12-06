@@ -17,20 +17,23 @@ from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from os import listdir
+import os
 
-wdir = "../../../../data/raw/segur/o1/"
-sdir = "../../../../data/postprocessing/segur/o1/"
+wdir = "../../../../data/raw/segur/o1af/"
+sdir = "../../../../data/postprocessing/segur/o1af0f/"
 
 
 g = 9.81
-dx = 0.1
 h1 = 0.1
 h0 = 0.09
 
+if not os.path.exists(sdir):
+    os.makedirs(sdir)
+
 #xs = [0.0+dx]
-poss = [0,5.0,10.0,15.0,20.0]
+#poss = [0,5.0,10.0,15.0,20.0]
+poss = [0]
 for pos in poss:
-    pos = pos + 0.61
     time = []
     height = []
     
@@ -45,6 +48,7 @@ for pos in poss:
                  if (j >= 0):
                     dx = float(row[0])
                     dt = float(row[1])
+                    pos = dx
                      
                     if(pos >= float(row[3]) - 0.5*dx and pos <= float(row[3]) + 0.5*dx):
                         #print(pos,float(row[3]),float(row[3]) - 0.5*dx,float(row[3]) + 0.5*dx)

@@ -118,6 +118,24 @@ def solitoninit(n,a0,a1,g,x,t0,dx):
     G = getGfromupy(h,u,0.0,0.0,a0,a0,dx)
     
     return h,G 
+
+def soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx):
+    h = zeros(n)
+    u = zeros(n)
+    c1 = sqrt(g*(a0 + a11))
+    c2 = sqrt(g*(a0 + a11))
+    for i in range(n):
+        if (x[i] > solbeg1 and x[i] < solend1):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg1 + solend1)),t0,g,a0,a11)
+            u[i] = direction1*c1*( (h[i] - a0) / h[i] )
+        elif (x[i] > solbeg2 and x[i] < solend2):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg2 + solend2)),t0,g,a0,a12)
+            u[i] =  direction2*c2* ((h[i] - a0) / h[i])
+        else:
+            h[i] = a0
+            u[i] = 0.0
+    G = getGfromupy(h,u,0.0,0.0,a0,a0,dx)
+    return h,G  
     
 def experiment1(x,b,h0,h1,dx):
     n = len(x)
@@ -384,9 +402,9 @@ for k in range(20):
 """
 
 
-
+"""
 ################################# SOLITON Accuracy ####################3
-wdir = "../../../data/solcon/o2afa/"
+wdir = "../../../data/solcon/o2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -397,13 +415,13 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
     
-for k in range(11,12):
+for k in range(18):
     dx = 100.0 / (2**k)
     a0 = 10.0
     a1 = 1.0
     g = 9.81
     Cr = 0.5
-    l = 1 / (sqrt(g*a0 + a1))
+    l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
     startx = -500.0
     endx = 1000.0 + dx
@@ -511,11 +529,310 @@ for k in range(11,12):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
+"""
+
+"""
+################################# SOLITON  ####################3
+wdir = "../../../data/raw/Cserre/solitonothers/highnonlinear/order2/dx0p05"
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+
+dx = 0.05
+a0 = 1.0
+a1 = 1.0
+g = 9.81
+Cr = 0.5
+l = Cr / (sqrt(g*(a0 + a1)))
+dt = l*dx
+startx = -100.0
+endx = 500.0
+startt = 0.0
+endt = 100 + dt
+
+theta = 1.2
+
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+
+t0 = 0
+bot = 0
+gap = int(10.0/dt)
+
+h,G = solitoninit(n,a0,a1,g,x,t0,dx)
+
+nBC = 3
+nBCs = 4
+u0 = zeros(nBCs)
+u1 = zeros(nBCs)    
+h0 = h[0]*ones(nBCs)
+h1 = h[-1]*ones(nBCs)
+
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+u_c = mallocPy(n)
+
+
+
+for i in range(1,len(t)):
+    
+    if(i % gap == 0 or i ==1):
+        getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+        u = copyarrayfromC(u_c,n)
+        G = copyarrayfromC(G_c,n)
+        h = copyarrayfromC(h_c,n)
+        
+        c = sqrt(g*(a0 + a1))
+        htrue = zeros(n)
+        utrue = zeros(n)
+        for j in range(n):             
+            he = soliton(x[j],t[i],g,a0,a1)
+            htrue[j] = he
+            utrue[j] = c* ((he - a0) / he) 
+            
+        s = wdir + "saveoutputts" + str(i) + ".txt"
+
+        with open(s,'a') as file2:
+            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+            writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+               
+            for j in range(n):
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]) , str(htrue[j]), str(utrue[j])])  
+             
+    print t[i]
+    print(h[1],G[1])     
+    evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs,theta)
+    
+getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+
+
+c = sqrt(g*(a0 + a1))
+htrue = zeros(n)
+utrue = zeros(n)
+for j in range(n):             
+    he = soliton(x[j],t[-1],g,a0,a1)
+    htrue[j] = he
+    utrue[j] = c* ((he - a0) / he) 
+
+s = wdir + "saveoutputtslast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+     writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity'  ])        
+               
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[-1]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])
+    
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c)
+"""
+################################# SOLITON Collision  ####################3
+wdir = "../../../data/raw/Cserre/solitonothers/collision/o2/dx0p05"
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+dx = 0.05
+
+a0 = 1.0
+a11 = 1.0
+solbeg1 = 75.0
+solend1 = 125.0
+direction1 = 1.0
+a12 = 1.6
+solbeg2 = 150.0
+solend2 = 200.0
+direction2 = -1.0
+
+Cr = 0.5
+g = 9.81
+l = Cr / (sqrt(g*(a0 + a11 + a12)))
+dt = l*dx
+startx = -100.0
+endx = 400.0
+startt = 0.0
+endt = 100 + dt
+
+theta = 1.2
+
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+
+t0 = 0
+bot = 0
+gap = int(10.0/dt)
+
+h,G = soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx)
+
+nBC = 3
+nBCs = 4
+u0 = zeros(nBCs)
+u1 = zeros(nBCs)    
+h0 = h[0]*ones(nBCs)
+h1 = h[-1]*ones(nBCs)
+
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+u_c = mallocPy(n)
+
+
+
+for i in range(1,len(t)):
+    
+    if(i % gap == 0 or i ==1):
+        getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+        u = copyarrayfromC(u_c,n)
+        G = copyarrayfromC(G_c,n)
+        h = copyarrayfromC(h_c,n)
+
+        s = wdir + "saveoutputts" + str(i) + ".txt"
+
+        with open(s,'a') as file2:
+            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+            writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)' ])        
+               
+            for j in range(n):
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j])])  
+             
+    print t[i]
+    print(h[1],G[1])     
+    evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs,theta)
+    
+getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+
+s = wdir + "saveoutputtslast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+     writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)' ])        
+               
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[-1]), str(h[j]) , str(G[j]) , str(u[j])])
+    
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c)
+
+"""
+################################# SOLITON example time ####################3
+wdir = "../../../data/raw/timecomplong/o2/"
+
+from time import time
+import os
+from scipy.linalg import norm
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+dx = 100.0 / (2**6)
+a0 = 10.0
+a1 = 1.0
+g = 9.81
+Cr = 0.5
+l = 1 / (sqrt(g*(a0 + a1)))
+dt = Cr*l*dx
+startx = -500.0
+endx = 1000.0 + dx
+startt = 0
+endt = 50 + dt
+
+theta = 1.2
+
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+
+t0 = 0
+bot = 0
+gap = max(1,int(10.0/dt))
+
+h,G = solitoninit(n,a0,a1,g,x,t0,dx)
+
+nBC = 3
+nBCs = 4
+u0 = zeros(nBCs)
+u1 = zeros(nBCs)    
+h0 = h[0]*ones(nBCs)
+h1 = h[-1]*ones(nBCs)
+
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+u_c = mallocPy(n)
+
+
+t0 = time() 
+for i in range(1,len(t)):
+    print t[i]  
+    evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs,theta)
+t1 = time()
+timeelapse = t1 - t0
+    
+getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+
+
+c = sqrt(g*(a0 + a1))
+htrue = zeros(n)
+utrue = zeros(n)
+for j in range(n):             
+    he = soliton(x[j],t[-1],g,a0,a1)
+    htrue[j] = he
+    utrue[j] = c* ((he - a0) / he) 
+
+normh = norm(h - htrue,ord=1) / norm(htrue,ord=1)
+normu = norm(u -utrue,ord=1) / norm(utrue,ord=1)  
+
+s = wdir + "saveoutputtslast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+     writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity',"hnorm","unorm", "time taken", "number of steps", "average time per step" ])        
+               
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j]),str(normh),str(normu), str(timeelapse),str(len(t) - 1) , str((1.0*timeelapse)/ (len(t) - 1) )]) 
+    
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c)
+"""
 
 
 """
 ## Segur time##########################
-wdir = "../../../data/raw/segur/o2/"
+wdir = "../../../data/raw/segur/o2af/"
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 tl = 60.0

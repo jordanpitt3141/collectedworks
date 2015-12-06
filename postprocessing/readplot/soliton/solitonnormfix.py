@@ -4,8 +4,11 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 
 order = "3"
-wdir = "../../../../data/raw/onesec/o"+order+"/"
-sdir = "../../../../data/postprocessing/onesec/o"+order+"/"
+wdir = "../../../../data/raw/solconlong/o"+order+"/"
+sdir = "../../../../data/postprocessing/solconlong/o"+order+"/"
+
+if not os.path.exists(sdir):
+    os.makedirs(sdir) 
 
 gap = 1
 
@@ -49,4 +52,15 @@ s = sdir + "u.dat"
 with open(s,'a') as file2:
     for i in range(n):
         s ="%3.8f%5s%1.15f\n" %(ldx[i]," ",lu[i])
+        file2.write(s)
+        
+s = sdir + "ch.dat"
+with open(s,'a') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.15f\n" %(ldx[i]," ",lh[i]/(ldx[i]**int(order)))
+        file1.write(s)
+s = sdir + "cu.dat"
+with open(s,'a') as file2:
+    for i in range(n):
+        s ="%3.8f%5s%1.15f\n" %(ldx[i]," ",lu[i]/(ldx[i]**int(order)))
         file2.write(s)

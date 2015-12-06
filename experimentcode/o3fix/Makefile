@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I/usr/include/python2.7 -Wall -fPIC -O3 -lm
+CFLAGS = -I/usr/include/python2.7 -Wall -fPIC -O0
 
 
 Serre3_wrap.c:

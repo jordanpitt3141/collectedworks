@@ -577,15 +577,17 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
     //printf("C , uip3l : %f, uip2l : %f",uip3l, uip2l); 
 
 
-    double pja = idx*(2*u[k+1] - 4*u[k] + 2*u[k-1]);
+    double pja = 2*idx*(u[k+1] - 2*u[k] + u[k-1]);
     double pjb = idx*(u[k+1] - u[k-1]);
 
-    double pjp1a = idx*(2*u[k+3] - 4*u[k+2] + 2*u[k+1]);
+    double pjp1a = 2*idx*(u[k+3] - 2*u[k+2] + u[k+1]);
     double pjp1b = idx*(u[k+3] - u[k+1]);
 
-    double duel = pja + pjb;
+    double due = idx*i24*(-u[k+4] + 27*u[k+2] - 27*u[k] + u[k-2]);
 
-    double duer = -pjp1a + pjp1b;
+    double duel = due;
+
+    double duer = due;
 
     //printf("duer : %.8f, duel : %.8f\n",duer,duel);
     //printf("C : %f %f %f \n",uir,uim1r,uim2r);
@@ -634,16 +636,17 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
         hip1l = h[i+1] - 0.5*phikp(hrip1)*(h[i+1] - h[i]);
         uip1l = u[k+1]; 
 
+        due = idx*i24*(-u[k+4] + 27*u[k+2] - 27*u[k] + u[k-2]);
 
-        pja = idx*(2*u[k+1] - 4*u[k] + 2*u[k-1]);
+        pja = 2*idx*(u[k+1] - 2*u[k] + u[k-1]);
         pjb = idx*(u[k+1] - u[k-1]);
 
-        pjp1a = idx*(2*u[k+3] - 4*u[k+2] + 2*u[k+1]);
+        pjp1a = 2*idx*(u[k+3] - 2*u[k+2] + u[k+1]);
         pjp1b = idx*(u[k+3] - u[k+1]);
 
-        duel = pja + pjb;
+        duel = due;
 
-        duer = -pjp1a + pjp1b;
+        duer = due;
 
         //printf("duer : %.8f, duel : %.8f\n",duer,duel);
         //printf("C : %f %f %f \n",uir,uim1r,uim2r);

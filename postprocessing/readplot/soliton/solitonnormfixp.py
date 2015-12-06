@@ -6,8 +6,8 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 #wdir = "../../../../data/JoeFDaccfin/FDacc/"
 #sdir = "../../../results/FDsolacc/FD/"
 
-wdir = "../../../../data/femelemdusolcon/"
-sdir = "../../../results/Chrisfem1/solcon/"
+wdir = "../../../../data/raw/nsolcon/o2af/"
+sdir = "../../../../data/postprocessing/nsolcon30/o2af/"
 
 if not os.path.exists(sdir):
     os.makedirs(sdir)
