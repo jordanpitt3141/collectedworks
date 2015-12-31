@@ -732,11 +732,11 @@ deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
 """
-"""
+
 #Dam Break Chris
 import os
 
-wdir = "../../../data/raw/Cserre/db/o3femnewstill1r10/"
+wdir = "../../../data/raw/Cserre/db/o3femhnewdoned/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -744,9 +744,6 @@ if not os.path.exists(wdir):
 g = 9.81
 hf = 10.0
 hl = 1.0
-
-r = 10
-epsilon = 2.0**(-53)
     
 dx = 0.05
 Cr = 0.2
@@ -755,7 +752,7 @@ dt = l*dx
 startx = 0.0
 endx = 1000.0 + dx
 startt = 0.0
-endt = 30.0 + dt
+endt = 30 + dt
         
 szoomx = startx
 ezoomx = endx
@@ -766,6 +763,8 @@ nGsBC = 2 #for solving G from u,h
 niBC = nGsBC + nfcBC #total
         
 g = 9.81
+r=  10
+epsilon = 10.0**-32
     
 gap = int(10.0/dt)
         
@@ -773,7 +772,9 @@ x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
     
 xc = 500   
-um,hm = dambreak(x,xc,hf,hl)
+#um,hm = dambreak(x,xc,hf,hl)
+um,hm = dambreaksmooth(x,xc,hl,hf-hl,10,dx)
+
                 
 umbegi = zeros(niBC)
 umendi = zeros(niBC)
@@ -836,6 +837,8 @@ G_c = mallocPy(n)
 h_c = mallocPy(n)
     
 for i in range(1,len(t)):
+    if(i > 500):
+        r = 0.0001
     if(i ==1 or i %gap == 0):
         ca2midpt(ha_c,dx,n,h_c)
         ca2midpt(Ga_c,dx,n,G_c)
@@ -907,7 +910,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-"""
+
 
 """
 ### DAMBREAK ACCURACY
@@ -1052,8 +1055,9 @@ for k in range(16):
 """    
 
 
+"""
 #soliton 
-wdir = "../../../data/test/o3fem/soltest/"
+wdir = "../../data/test11/o3fem/sol/"
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 dx = 0.5
@@ -1062,22 +1066,23 @@ a1 = 1.0
 g = 9.81
 l = 0.5/sqrt(g*(a0 + a1))
 dt = l*dx
-startx = -200.0
-endx = 200.0 + dx
-startt = 0.0
-endt = 20 + dt
-
-r = 0.1
-epsilon = 2.0**(-53)
+startx = -500.0
+endx = 1500.0 + dx
+startt = 0.0#19.8065574333 - dt
+endt = 100 #822*dt
         
 szoomx = startx
 ezoomx = endx
-
         
 #number of boundary conditions (one side)
 nfcBC = 4 #for flux calculation
 nGsBC = 2 #for solving G from u,h
 niBC = nGsBC + nfcBC #total
+        
+g = 9.81
+
+rnew = 0.1
+epsilonnew = 10.0**(-15)
     
 gap = int(10.0/dt)
         
@@ -1113,7 +1118,6 @@ Gmbc = solveGfromuh(umbc,hmbc,hmbeg[0:-cnBC],hmend[-cnBC:],umbeg[0:-cnBC],umend[
 Gabc = midpointtocellaverages(Gmbc,dx)
 habc = midpointtocellaverages(hmbc,dx)
 uabc = midpointtocellaverages(umbc,dx)
-
         
 #so we can just go from here with Ga ang ha?
 Gabeg = Gabc[0:cnBC]
@@ -1142,14 +1146,10 @@ hmend_c = copyarraytoC(hmend)
     
 umbeg_c = copyarraytoC(umbeg)
 umend_c = copyarraytoC(umend)
-
-
     
-u_c= mallocPy(2*n+1)
+u_c= mallocPy(2*n + 1)
 G_c = mallocPy(n)
 h_c = mallocPy(n)
-
-   
     
 for i in range(1,len(t)):
     if(i ==1 or i %gap == 0):
@@ -1167,9 +1167,10 @@ for i in range(1,len(t)):
         habc = concatenate([habeg[-cnBC:],ha,haend[0:cnBC]]) 
         Gabc_c = copyarraytoC(Gabc)
         habc_c = copyarraytoC(habc)
-        ufromGh(Gabc_c,habc_c,hmbeg_c,hmend_c,umbeg_c,umend_c,r,epsilon,dx,n,cnBC, u_c)
-        u = copyarrayfromC(u_c,2*n+1)
+        ufromGh(Gabc_c,habc_c,hmbeg_c,hmend_c,umbeg_c,umend_c, rnew,epsilonnew,dx,n,cnBC, u_c)
+        u = copyarrayfromC(u_c,2*n + 1)
         u = u[1::2]
+        
         c = sqrt(g*(a0 + a1))
         htrue = zeros(n)
         utrue = zeros(n)
@@ -1184,9 +1185,8 @@ for i in range(1,len(t)):
              writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'G' , 'u(m/s)','h(m) exact', 'u exact'])        
                            
              for j in range(n):
-                 writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])]) 
-                 
-    evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,r,epsilon,dx,dt,n,cnBC,niBC)
+                 writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])    
+    evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,rnew,epsilonnew,dx,dt,n,cnBC,niBC)
     print (t[i])
     
         
@@ -1204,8 +1204,8 @@ Gabc = concatenate([Gabeg[-cnBC:],Ga,Gaend[0:cnBC]])
 habc = concatenate([habeg[-cnBC:],ha,haend[0:cnBC]]) 
 Gabc_c = copyarraytoC(Gabc)
 habc_c = copyarraytoC(habc)
-ufromGh(Gabc_c,habc_c,hmbeg_c,hmend_c,umbeg_c,umend_c,r,epsilon,dx,n,cnBC, u_c)
-u = copyarrayfromC(u_c,2*n+1)
+ufromGh(Gabc_c,habc_c,hmbeg_c,hmend_c,umbeg_c,umend_c,rnew,epsilonnew,dx,n,cnBC, u_c)
+u = copyarrayfromC(u_c,2*n + 1)
 u = u[1::2]
 
 c = sqrt(g*(a0 + a1))
@@ -1223,7 +1223,6 @@ with open(s,'a') as file2:
                            
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])   
-
 deallocPy(u_c)   
 deallocPy(h_c)
 deallocPy(G_c)
@@ -1239,7 +1238,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-
+"""
 
 """
 ### Soliton accuracy

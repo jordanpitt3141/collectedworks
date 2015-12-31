@@ -6,7 +6,8 @@ Created on Wed Apr 22 10:09:21 2015
 """
 from Serre1 import *
 from scipy import *
-import csv 
+import csv
+import os 
 from numpy.linalg import norm 
 
 def copyarraytoC(a):
@@ -117,6 +118,24 @@ def solitoninit(n,a0,a1,g,x,t0,dx):
     G = getGfromupy(h,u,0.0,0.0,a0,a0,dx)
     
     return h,G
+
+def soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx):
+    h = zeros(n)
+    u = zeros(n)
+    c1 = sqrt(g*(a0 + a11))
+    c2 = sqrt(g*(a0 + a11))
+    for i in range(n):
+        if (x[i] > solbeg1 and x[i] < solend1):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg1 + solend1)),t0,g,a0,a11)
+            u[i] = direction1*c1*( (h[i] - a0) / h[i] )
+        elif (x[i] > solbeg2 and x[i] < solend2):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg2 + solend2)),t0,g,a0,a12)
+            u[i] =  direction2*c2* ((h[i] - a0) / h[i])
+        else:
+            h[i] = a0
+            u[i] = 0.0
+    G = getGfromupy(h,u,0.0,0.0,a0,a0,dx)
+    return h,G  
 
 def experiment1(x,b,h0,h1,dx):
     n = len(x)
@@ -397,12 +416,18 @@ for k in range(20):
     deallocPy(u0_c)
     deallocPy(u1_c)
 """
+
 #big smooth
 """
 wdirb = "../../data/bigsmooth/o1/"
 import os
-diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-for ll in range(3,16):
+#diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
+
+diffuses = [2.5,10.0,1000.0]
+#diffuses = [10.0,1000.0]
+
+#for ll in range(3,16):
+for ll in range(14,15):
     for k in range(len(diffuses)):
         wdir = wdirb + str(ll) + "/" + str(k) + "/"
         dx = 10.0 / (2**ll)
@@ -471,8 +496,8 @@ for ll in range(3,16):
         deallocPy(h1_c)
         deallocPy(u0_c)
         deallocPy(u1_c)
-
 """
+
 
 #big smooth targetted
 """
@@ -559,7 +584,7 @@ for lk in range(len(difflist)):
 ################################# SOLITON Accuracy ####################3
 #dxs = [100.0,90.0,80.0,70.0,60.0,50.0,40.0,30.0,20.0,10.0,9.0,8.0,7.0,6.0,5.0,4.0,3.0,2.0,1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0.09,0.08,0.07 \
 #,0.06,0.05,0.04,0.03,0.02,0.01]
-wdir = "../../../data/solcon/o1/"
+wdir = "../../../data/raw/solconnonsmallg1/o1/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -570,18 +595,19 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
     
-for k in range(18):
+for k in range(6,21):
     dx = 100.0 / (2**k)
-    a0 = 10.0
+    a0 = 1.0
     a1 = 1.0
-    g = 9.81
+    #g = 9.81
+    g = 1
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -500.0
-    endx = 1000.0 + dx
+    startx = -100.0
+    endx = 100.0 + dx
     startt = 0
-    endt = 30 + dt
+    endt = 50 + dt
     
     wdatadir = wdir+ str(k) + "/"
     if not os.path.exists(wdatadir):
@@ -682,9 +708,9 @@ for k in range(18):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
 """
- 
+
+""" 
 ##### SOLITON
 dx = 0.05
 a0 = 1.0
@@ -789,6 +815,106 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)  
+"""
+
+
+##### SOLITON INTERACTION
+wdir = "../../../data/raw/Cserre/solitonothers/collDMcopyhh/o1/"
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+dx = 0.01
+
+a0 = 1.0
+a11 = 0.96
+solbeg1 = 100.0
+solend1 = 200.0
+direction1 = 1.0
+a12 = 0.96
+solbeg2 = 200.0
+solend2 = 300.0
+direction2 = -1.0
+
+Cr = 0.5
+#g = 9.81
+g = 1.0
+#l = Cr / (sqrt(g*1.5*(a0 + a11 + a12)))
+dt = 0.1*dx
+startx = 0.0
+endx = 400.0
+startt = 0.0
+endt = 150 + dt
+
+    
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+    
+t0 = 0
+gap = int(0.5/dt)
+    
+h,G = soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx)
+    
+nBC = 3
+nBCs = 4
+u0 = zeros(nBCs)
+u1 = zeros(nBCs)    
+h0 = h[0]*ones(nBCs)
+h1 = h[-1]*ones(nBCs)
+    
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+u_c = mallocPy(n)
+    
+    
+    
+for i in range(1,len(t)):
+       
+    if(i % gap == 0 or i ==1):
+       getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0],dx,n,u_c)
+       u = copyarrayfromC(u_c,n)
+       G = copyarrayfromC(G_c,n)
+       h = copyarrayfromC(h_c,n)
+                 
+       s = wdir + "saveoutputts" + str(i) + ".txt"
+       print t[i]
+       print(h[1],G[1]) 
+       with open(s,'a') as file2:
+            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            
+            writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+                   
+            for j in range(n):
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
+                 
+            
+    evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs)
+        
+getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+    
+s = wdir + "saveoutputtslast.txt"
+with open(s,'a') as file2:
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+       
+    for j in range(n):
+        writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
+    
+
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c)  
+
 
 """
 ##### SOLITON time

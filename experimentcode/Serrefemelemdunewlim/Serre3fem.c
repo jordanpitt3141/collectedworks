@@ -9,6 +9,7 @@ const double i30 = 1.0/30.0;
 const double i24 = 1.0/24.0;
 const double i12 = 1.0/12.0;
 const double i3 = 1.0/3.0;
+//const double zerolim = pow(10.0,-200);
 
 void conc(double *a , double *b, double *c,int n,int m ,int k, double *d)
 {
@@ -18,13 +19,22 @@ void conc(double *a , double *b, double *c,int n,int m ,int k, double *d)
     memcpy(d+n+m,c,k*sizeof(double));
 }
 
+double phikm(double r)
+{
+    return fmax(0.,fmin(fmin(2.*r,i3*(1.+2.*r)),2.0));
+}
+double phikp(double r)
+{
+    return fmax(0.,fmin(fmin(2.*r,i3*(2.+r)),2.));
+}
+
 double Cadalim(double delimh, double deliph ,double r, double epsilon1, double dx)
 {
     double eta = (deliph*deliph + delimh*delimh)/ (r*r*dx*dx);
-    double theta1;
-    if (deliph == 0)
+    double theta1 = 0.0;
+    if (deliph > -epsilon1 && deliph < epsilon1)
     {
-        theta1 = (delimh == 0);
+        theta1 = (deliph > -epsilon1 && deliph < epsilon1);
     }
     else
     {
@@ -32,25 +42,25 @@ double Cadalim(double delimh, double deliph ,double r, double epsilon1, double d
     }   
     double iepsilon = 1.0 / epsilon1;
     double res1 = i3*(2.0 + theta1);
-    double res2 = fmax(0.0,fmin(res1,fmax(-0.5*theta1,fmin(2*theta1, fmin(res1, 1.6))))) ;//fmax(0.0,fmin(res1,fmax(-0.5*theta1,fmin(2*theta1,fmin(res1,1.6)))));
+    double res2 = fmax(0.0,fmin(res1,fmax(-0.5*theta1,fmin(2*theta1, fmin(res1, 1.6))))) ;
     double res3 = 0.5*((1 - iepsilon*(eta-1) )*res1+  (1 + iepsilon*(eta-1) )*res2);
+    double resfin = 0.0;
 
     if (eta <= 1 - epsilon1)
     {
-        return res1;
+        resfin=res1;
 
     }
     else if(eta >= 1 + epsilon1)
     {
-        return res2;
+        resfin=res2;
     }
     else
     {
-        return res3;
+        resfin=res3;
     }
 
-
-    //return (eta <= 1 - epsilon1)*res1 + (eta >= 1 + epsilon1)*res2 + (eta > 1 - epsilon1)*(eta < 1 + epsilon1)*res3;
+    return resfin;
 }
 
 void TDMA(double *a, double *b, double *c, double *d, int n, double *x)
@@ -170,7 +180,7 @@ void ca2midpt(double *qa, double dx, int n,double *qm)
 }
 
 void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double *uend, double r, double epsilon, double dx , int n, int nBC, double *ue)
-{
+{  
     int m = 2*n + 1;
     double idx = 1.0 / dx;
 
@@ -205,26 +215,26 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
     f[m-1] = 0.0;
 
     j = 3;
-    double Gci,hci,Gir,hir,Gil,hil,Gim,him,p11,p12,p13,p21,p22,p23,p31,p32,p33; 
-    double Gdelimh,Gdeliph,hdelimh,hdeliph;
+    double Gci,hci,Gir,hir,Gil,hil,Gim,him,p11,p12,p13,p21,p22,p23,p31,p32,p33;
     double q11,q12,q13,q21,q22,q23,q31,q32,q33,r1,r2,r3;
+    double Gdelimh,Gdeliph,hdelimh,hdeliph;
     for(i = nBC + 1; i < n + nBC - 1 ; i++)
     {
+
+        Gdelimh = G[i] - G[i-1]; 
+        Gdeliph = G[i+1] - G[i];
+        hdelimh = h[i] - h[i-1]; 
+        hdeliph = h[i+1] - h[i];
         // Get h and G over an element
         //increment
         
         //value that fits over cell and its neighbours
         Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
         hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
-
-        Gdelimh = G[i] - G[i-1]; 
-        Gdeliph = G[i+1] - G[i];
-        hdelimh = h[i] - h[i-1]; 
-        hdeliph = h[i+1] - h[i];
-
+        
         Gir = G[i] + 0.5*Cadalim(Gdelimh, Gdeliph , r, epsilon, dx)*Gdeliph;
         hir = h[i] + 0.5*Cadalim(hdelimh, hdeliph , r, epsilon, dx)*hdeliph;
-        
+
         Gil = G[i] - 0.5*Cadalim(Gdeliph, Gdelimh , r, epsilon, dx)*Gdelimh;
         hil = h[i] - 0.5*Cadalim(hdeliph, hdelimh , r, epsilon, dx)*hdelimh;
         
@@ -305,20 +315,42 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
     // Get h and G over an element
     //increment
         
-    //value that fits over cell and its neighbours
-    Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
-    hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
-        
+
     Gdelimh = G[i] - G[i-1]; 
     Gdeliph = G[i+1] - G[i];
     hdelimh = h[i] - h[i-1]; 
     hdeliph = h[i+1] - h[i];
-
+    //value that fits over cell and its neighbours
+    Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
+    hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
+    
     Gir = G[i] + 0.5*Cadalim(Gdelimh, Gdeliph , r, epsilon, dx)*Gdeliph;
     hir = h[i] + 0.5*Cadalim(hdelimh, hdeliph , r, epsilon, dx)*hdeliph;
-    
+
     Gil = G[i] - 0.5*Cadalim(Gdeliph, Gdelimh , r, epsilon, dx)*Gdelimh;
     hil = h[i] - 0.5*Cadalim(hdeliph, hdelimh , r, epsilon, dx)*hdelimh;
+
+    if (Gir != Gir)
+    {
+        printf("Gir | i:%d | Gir %f | Gai %f | Gdeliph : %f | Slope : %f   \n",i,Gir,G[i],Gdeliph,Cadalim(Gdelimh, Gdeliph , r, epsilon, dx) );
+        exit(0);
+    }
+    if (Gil != Gil)
+    {
+        printf("Gil \n");
+        exit(0);
+    }
+
+    if (hir != hir)
+    {
+        printf("hir \n");
+        exit(0);
+    }
+    if (hil != hil)
+    {
+        printf("hil\n");
+        exit(0);
+    }
         
     //i
     Gim = Gci;
@@ -393,19 +425,19 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
 
     // Get h and G over an element
     //increment
-        
-    //value that fits over cell and its neighbours
-    Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
-    hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
-        
+
     Gdelimh = G[i] - G[i-1]; 
     Gdeliph = G[i+1] - G[i];
     hdelimh = h[i] - h[i-1]; 
     hdeliph = h[i+1] - h[i];
-
+        
+    //value that fits over cell and its neighbours
+    Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
+    hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
+    
     Gir = G[i] + 0.5*Cadalim(Gdelimh, Gdeliph , r, epsilon, dx)*Gdeliph;
     hir = h[i] + 0.5*Cadalim(hdelimh, hdeliph , r, epsilon, dx)*hdeliph;
-    
+
     Gil = G[i] - 0.5*Cadalim(Gdeliph, Gdelimh , r, epsilon, dx)*Gdelimh;
     hil = h[i] - 0.5*Cadalim(hdeliph, hdelimh , r, epsilon, dx)*hdelimh;
         
@@ -469,22 +501,11 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
     d[j-1] = p12 + q12;
         
     //need to push back a and b because they are 'behind' by the counting system
-    e[j-1] = p13 + q13;    
-    
+    e[j-1] = p13 + q13;  
+
 
     PENT(a,b,c,d,e,f,m,ue); 
 
-    /*
-    j  = 0;
-    for(i=1 ; i < m ; i=i+2)
-    {
-        u[j] = ue[i];
-        
-        j++;
-        //printf("nums = i : %d | n : %d | j : %d | m : %d \n",i,n,j,m);
-        //printf("us = u[%d] : %e | ue[%d] : %e \n",j,u[j],i,ue[i]);
-
-    }*/    
 
     free(a);
     free(b);
@@ -585,13 +606,13 @@ void evolve(double *G, double *h, double *u, double g, double r, double epsilon,
 
     //off bu 10**-15
 
-    //printf("C , ui2mr : %f, ui1mr : %f",uim2r, uim1r);
 
     //i right
     double Gdelimh = G[i] - G[i-1]; 
     double Gdeliph = G[i+1] - G[i];
     double hdelimh = h[i] - h[i-1]; 
     double hdeliph = h[i+1] - h[i];
+
 
     double Gir = G[i] + 0.5*Cadalim(Gdelimh, Gdeliph , r, epsilon, dx)*Gdeliph;
     double hir = h[i] + 0.5*Cadalim(hdelimh, hdeliph , r, epsilon, dx)*hdeliph;
@@ -606,9 +627,6 @@ void evolve(double *G, double *h, double *u, double g, double r, double epsilon,
 
     double uip1l = u[k+1]; 
 
-    //printf("C , uip3l : %f, uip2l : %f",uip3l, uip2l); 
-   //printf("C , Gir : %f | Gia : %f | Gip1l %f \n",Gir, G[i],Gip1l);
-
 
     double pja = 2*idx*(u[k+1] - 2*u[k] + u[k-1]);
     double pjb = idx*(u[k+1] - u[k-1]);
@@ -616,14 +634,9 @@ void evolve(double *G, double *h, double *u, double g, double r, double epsilon,
     double pjp1a = 2*idx*(u[k+3] - 2*u[k+2] + u[k+1]);
     double pjp1b = idx*(u[k+3] - u[k+1]);
 
-    //double due = idx*i24*(-u[k+4] + 27*u[k+2] - 27*u[k] + u[k-2]);
-
     double duel = pja + pjb;
 
     double duer = -pjp1a + pjp1b;
-
-    //printf("duer : %.8f, duel : %.8f\n",duer,duel);
-    //printf("C : %f %f %f \n",uir,uim1r,uim2r);
 
     double sqrtghel = sqrt(g* hir);
     double sqrtgher = sqrt(g* hip1l);
@@ -668,6 +681,39 @@ void evolve(double *G, double *h, double *u, double g, double r, double epsilon,
         hip1l = h[i+1] - 0.5*Cadalim(hdelip3h, hdeliph , r, epsilon, dx)*hdeliph;
         uip1l = u[k+1]; 
 
+
+        if (Gir != Gir)
+        {
+            printf("E Gir | i:%d | Gir %f | Gai %f | Gdeliph : %f | Slope : %f   \n",i,Gir,G[i],Gdeliph,Cadalim(Gdelimh, Gdeliph , r, epsilon, dx) );
+            exit(0);
+        }
+        if (Gip1l != Gip1l)
+        {
+            printf("E Gil \n");
+            exit(0);
+        }
+
+        if (hir != hir)
+        {
+            printf("E hir \n");
+            exit(0);
+        }
+        if (hip1l != hip1l)
+        {
+            printf("E hil\n");
+            exit(0);
+        }
+        if (uir != uir)
+        {
+            printf("E uir \n");
+            printf("E uir | i:%d | uir %f | ui %f \n",i,uir,u[k]);
+            exit(0);
+        }
+        if (uip1l != uip1l)
+        {
+            printf("E uil\n");
+            exit(0);
+        }
         pja = 2*idx*(u[k+1] - 2*u[k] + u[k-1]);
         pjb = idx*(u[k+1] - u[k-1]);
 
@@ -678,11 +724,6 @@ void evolve(double *G, double *h, double *u, double g, double r, double epsilon,
 
         duer = -pjp1a + pjp1b;
         
-        //printf("hia  : %.8f  ,hir : %.8f, hip1l : %.8f, hip1a : %.8f \n",h[i],hir,hip1l,h[i+1]);
-
-        //printf("duer : %.8f, duel : %.8f\n",duer,duel);
-        //printf("C : %f %f %f \n",uir,uim1r,uim2r);
-        //printf("C , Gir : %f | Gia : %f | Gip1l %f \n",Gir, G[i],Gip1l);
 
         sqrtghel = sqrt(g* hir);
         sqrtgher = sqrt(g* hip1l);
@@ -698,7 +739,7 @@ void evolve(double *G, double *h, double *u, double g, double r, double epsilon,
         isrmsl = 0.0;
 
         if(sr != sl) isrmsl = 1.0 / (sr - sl);
-       
+
         foh = isrmsl*(sr*felh - sl*ferh + sl*sr*(hip1l - hir));
         foG = isrmsl*(sr*felG - sl*ferG + sl*sr*(Gip1l - Gir));
 
@@ -716,31 +757,46 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
 //again errors at machine precision, result of the division handling?
 //############################### FIRST ITERATION #######################################
     //size of list with edge values
+
     int m = 2*n + 1;
     double *ue = malloc((m)*sizeof(double));
-    int cnBC;
+    int cnBC,i;
 
     cnBC = nfcBC;
+
+    
 
     double *Gabc = malloc((n + 2*cnBC)*sizeof(double));
     double *habc = malloc((n + 2*cnBC)*sizeof(double));
     double *uebc = malloc((m + 4*cnBC)*sizeof(double));
 
+
+
     conc(Gabeg+(nBCa - cnBC), Ga, Gaend,cnBC,n,cnBC,Gabc);
     conc(habeg+(nBCa - cnBC), ha, haend,cnBC,n,cnBC,habc);
 
 
+
     ufromGh(Gabc,habc,hmbeg+(nBCm -cnBC),hmend,umbeg+(nBCm -cnBC),umend,r,epsilon,dx,n,cnBC,ue);
 
+    if(ue[0] != ue[0])
+    {
+        for(i = 500; i < n - 500 ; i++)
+        {
+            printf("e1 i : %d | hai : %e | Gai : %e \n",i,ha[i],Ga[i]);
+        }
+        exit(0);
+
+    }
+
     //midpt2ca(um ,dx ,n,ua); 
-
     conc(uebeg+(2*nBCa - 2*cnBC), ue, ueend,2*cnBC,m,2*cnBC,uebc);
-
 
     double *nGa = malloc(n*sizeof(double));
     double *nha = malloc(n*sizeof(double));
 
     evolve(Gabc,habc,uebc,g,r,epsilon,dx,dt,n,cnBC,nha,nGa);
+
 
 //######################################### SECOND ITERATION #############################
 
@@ -750,6 +806,16 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
     conc(habeg+(nBCa - cnBC), nha, haend,cnBC,n,cnBC,habc);
 
     ufromGh(Gabc,habc,hmbeg+(nBCm -cnBC),hmend,umbeg+(nBCm -cnBC),umend,r,epsilon,dx,n,cnBC,ue);
+
+    if(ue[0] != ue[0])
+    {
+        for(i = 500; i < n - 500 ; i++)
+        {
+            printf("e2 i : %d | hai : %e | Gai : %e \n",i,nha[i],nGa[i]);
+        }
+        exit(0);
+
+    }
 
     //midpt2ca(um ,dx ,n,ua); 
     conc(uebeg+(2*nBCa - 2*cnBC), ue, ueend,2*cnBC,m,2*cnBC,uebc);
@@ -776,6 +842,16 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
 
     ufromGh(Gabc,habc,hmbeg+(nBCm -cnBC),hmend,umbeg+(nBCm -cnBC),umend,r,epsilon,dx,n,cnBC,ue);
 
+    if(ue[0] != ue[0])
+    {
+        for(i = 0; i < n ; i++)
+        {
+            printf("e3 i : %d | hai : %e | Gai : %e \n",i,nhapp[i],nGapp[i]);
+        }
+        exit(0);
+
+    }
+
     //midpt2ca(um ,dx ,n,ua); 
 
     conc(uebeg+(2*nBCa - 2*cnBC), ue, ueend,2*cnBC,m,2*cnBC,uebc);
@@ -789,12 +865,15 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
     weightsum(i3,ha,2*i3,nhappp,n,ha);
     weightsum(i3,Ga,2*i3,nGappp,n,Ga);
 
+
     free(ue);
     free(Gabc);
     free(habc);
     free(uebc);
+
     free(nGa);
     free(nha);
+
     free(nGap);
     free(nhap);
     free(nGapp);

@@ -214,37 +214,31 @@ deallocPy(u1_c)
 
 """
 ## Dam break##########################
-wdir = "../../../data/raw/dbh/o2/"
+wdir = "../../../data/raw/Chrisdb/o2/"
 if not os.path.exists(wdir):
     os.makedirs(wdir)
     
-hf = 1.8
+hf = 10.0
 hl = 1.0
 g = 9.81
 
-dx = 100.0 / (2**10)
-Cr = 0.5
+dx = 0.1#100.0 / (2**10)
+Cr = 0.2
 l = Cr / sqrt(g*hf)
 dt = l*dx
 
-theta = 1.2
+theta = 2.0
 startx = 0.0
 endx = 1000.0 + dx
 startt = 0.0
 endt = 30.0 + dt 
-
-dt = l*dx
-startx = -tl
-endx = tl + dx
-startt = 0
-endt = 50.0 + dt
     
 g = 9.81
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
     
-gap = 1
+gap = 10.0/dt
     
 h,G = dambreak(x,hf,500,hl,dx)
     
@@ -252,8 +246,8 @@ nBC = 3
 nBCs = 4
 u0 = zeros(nBCs)
 u1 = zeros(nBCs)    
-h0 = h1*ones(nBCs)
-h1 = h1*ones(nBCs)
+h0 = hf*ones(nBCs)
+h1 = hl*ones(nBCs)
     
 h_c = copyarraytoC(h)
 G_c = copyarraytoC(G)
@@ -404,7 +398,7 @@ for k in range(20):
 
 """
 ################################# SOLITON Accuracy ####################3
-wdir = "../../../data/solcon/o2/"
+wdir = "../../../data/raw/solconnonsmallg1/o2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -415,18 +409,19 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
     
-for k in range(18):
+for k in range(6,21):
     dx = 100.0 / (2**k)
-    a0 = 10.0
+    a0 = 1.0
     a1 = 1.0
-    g = 9.81
+    #g = 9.81
+    g = 1.0
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -500.0
-    endx = 1000.0 + dx
+    startx = -100.0
+    endx = 100.0 + dx
     startt = 0
-    endt = 30 + dt
+    endt = 50 + dt
     
     wdatadir = wdir+ str(k) + "/"
     if not os.path.exists(wdatadir):
@@ -639,31 +634,34 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
 """
+
+
 ################################# SOLITON Collision  ####################3
-wdir = "../../../data/raw/Cserre/solitonothers/collision/o2/dx0p05"
+wdir = "../../../data/raw/Cserre/solitonothers/collDMcopyhh/o2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
-dx = 0.05
+dx = 0.01
 
 a0 = 1.0
-a11 = 1.0
-solbeg1 = 75.0
-solend1 = 125.0
+a11 = 0.96
+solbeg1 = 100.0
+solend1 = 200.0
 direction1 = 1.0
-a12 = 1.6
-solbeg2 = 150.0
-solend2 = 200.0
+a12 = 0.96
+solbeg2 = 200.0
+solend2 = 300.0
 direction2 = -1.0
 
-Cr = 0.5
-g = 9.81
-l = Cr / (sqrt(g*(a0 + a11 + a12)))
-dt = l*dx
-startx = -100.0
+#Cr = 0.5
+#g = 9.81
+g = 1.0
+#l = Cr / (sqrt(g*1.5*(a0 + a11 + a12)))
+dt = 0.1*dx
+startx = 0.0
 endx = 400.0
 startt = 0.0
-endt = 100 + dt
+endt = 150 + dt
 
 theta = 1.2
 
@@ -672,7 +670,7 @@ n = len(x)
 
 t0 = 0
 bot = 0
-gap = int(10.0/dt)
+gap = int(0.5/dt)
 
 h,G = soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx)
 
@@ -705,11 +703,11 @@ for i in range(1,len(t)):
 
         with open(s,'a') as file2:
             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-
-            writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)' ])        
-               
+            
+            writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+                   
             for j in range(n):
-                writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j])])  
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
              
     print t[i]
     print(h[1],G[1])     
@@ -722,12 +720,12 @@ h = copyarrayfromC(h_c,n)
 
 s = wdir + "saveoutputtslast.txt"
 with open(s,'a') as file2:
-     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-
-     writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)' ])        
-               
-     for j in range(n):
-         writefile2.writerow([str(dx),str(dt),str(t[-1]), str(h[j]) , str(G[j]) , str(u[j])])
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+    writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+           
+    for j in range(n):
+        writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
     
 deallocPy(u_c)   
 deallocPy(h_c)
@@ -736,6 +734,7 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
+
 
 """
 ################################# SOLITON example time ####################3

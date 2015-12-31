@@ -46,16 +46,26 @@ nums = [1,6,8,9,12]
 dxws = range(1,513)
 """
 
+
+
 wdirords = ["o3","o2"]
 ordsubtup = [[6,7], [6,8]]
 removeint = [[515,545],[515,545]]
-
 nums = [1,6,8,9,12]
-dxws = range(2,513)
+dxws =  range(2,6) + range(6,14)[::2] +   range(16,513)
+
+"""
+
+wdirords = ["FDcent","grim"]
+ordsubtup = [[5,6],[5,6]]
+removeint = [[515,545],[515,545]]
+nums = [1,6,8,9,12]
+dxws =  range(1,6) + range(6,14)[::2] +   range(16,513)
+"""
 
 for ip in range(len(wdirords)):
     for jp in nums:
-        hdx = dxws[0] * (10.0/(2**12))
+        hdx = dxws[0]*(10.0/(2**12))
         hs = []
         us = []
         xs = []
@@ -71,7 +81,7 @@ for ip in range(len(wdirords)):
                     
         for k in dxws:
             wdir = "../../../../../data/raw/bigsmoothtargetted/"  +wdirord +"/" + str(k)+ "/" + diff + "/"
-            sdir = "../../../../../data/postprocessing/smoothdb/2/1diffmdxcomreal/" + wdirord + "/" +diff+ "/"
+            sdir = "../../../../../data/postprocessing/smoothdbtarget/1/1diffmdxcomreal/" + wdirord + "/" +diff+ "/"
             if not os.path.exists(sdir):
                    os.makedirs(sdir)
             
@@ -138,7 +148,7 @@ for ip in range(len(wdirords)):
             u1 = u1[0:zbeg] + zeros(zend-zbeg).tolist()  + u1[zend:]
             h2 = h2[0:zbeg] + zeros(zend-zbeg).tolist()  + h2[zend:]
             u2 = u2[0:zbeg] + zeros(zend-zbeg).tolist()  + u2[zend:]
-            print(len(h1),len(h2))
+            print(wdirord,len(h1),len(h2))
             h1 = array(h1)
             u1 = array(u1)
             h2 = array(h2)
@@ -155,6 +165,16 @@ for ip in range(len(wdirords)):
                 writefile1 = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     
                 writefile1.writerow([str(dxs[i]),str(ts[i]),str(diffs[i]) ,str(normh),str(normu)]) 
+                
+            s = sdir + "h.dat"
+            with open(s,'a') as file1:
+                 s ="%3.8f%5s%1.15f\n" %(dxs[i]," ",normh)
+                 file1.write(s)
+                
+            s = sdir + "u.dat"
+            with open(s,'a') as file1:
+                s ="%3.8f%5s%1.15f\n" %(dxs[i]," ",normu)
+                file1.write(s) 
             
             normus.append(normu)
             normhs.append(normh)

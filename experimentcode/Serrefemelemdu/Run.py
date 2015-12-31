@@ -732,6 +732,7 @@ deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
 """
+"""
 #Dam Break Chris
 import os
 
@@ -903,7 +904,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-
+"""
 
 """
 ### DAMBREAK ACCURACY
@@ -1047,18 +1048,21 @@ for k in range(16):
     deallocPy(hmend_c)
 """    
 
-"""
+
 #soliton 
-wdir = "../../data/test/o3fem/sol/"
-dx = 1.0
-l = 0.01
+wdir = "../../data/test11/o3fem/sol/"
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+dx = 0.5
+a0 = 10.0
+a1 = 1.0
+g = 9.81
+l = 0.5/sqrt(g*(a0 + a1))
 dt = l*dx
 startx = -500.0
 endx = 1500.0 + dx
-startt = 0.0
-endt = 2*dt
-a0 = 10.0
-a1 = 1.0
+startt = 0.0#19.8065574333 - dt
+endt = 20 #822*dt
         
 szoomx = startx
 ezoomx = endx
@@ -1133,7 +1137,7 @@ hmend_c = copyarraytoC(hmend)
 umbeg_c = copyarraytoC(umbeg)
 umend_c = copyarraytoC(umend)
     
-u_c= mallocPy(n)
+u_c= mallocPy(2*n + 1)
 G_c = mallocPy(n)
 h_c = mallocPy(n)
     
@@ -1154,7 +1158,8 @@ for i in range(1,len(t)):
         Gabc_c = copyarraytoC(Gabc)
         habc_c = copyarraytoC(habc)
         ufromGh(Gabc_c,habc_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,cnBC, u_c)
-        u = copyarrayfromC(u_c,n)
+        u = copyarrayfromC(u_c,2*n + 1)
+        u = u[1::2]
         
         c = sqrt(g*(a0 + a1))
         htrue = zeros(n)
@@ -1190,7 +1195,8 @@ habc = concatenate([habeg[-cnBC:],ha,haend[0:cnBC]])
 Gabc_c = copyarraytoC(Gabc)
 habc_c = copyarraytoC(habc)
 ufromGh(Gabc_c,habc_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,cnBC, u_c)
-u = copyarrayfromC(u_c,n)
+u = copyarrayfromC(u_c,2*n + 1)
+u = u[1::2]
 
 c = sqrt(g*(a0 + a1))
 htrue = zeros(n)
@@ -1222,7 +1228,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-"""
+
 
 """
 ### Soliton accuracy

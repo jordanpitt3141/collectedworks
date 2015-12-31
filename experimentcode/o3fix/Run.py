@@ -1,6 +1,7 @@
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 import csv
+import os
 from Serre3 import *
 from numpy.linalg import norm
 from time import time
@@ -386,7 +387,7 @@ def soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2
             h[i] = a0
             u[i] = 0.0
     
-    return h,u          
+    return h,u        
 
 def experiment1(x,b,h0,h1,dx):
     n = len(x)
@@ -1267,26 +1268,32 @@ with open(s,'a') as file2:
 
 ######### Colliding Soliton Experiments
 
-dx = 0.05
+wdir = "../../../data/raw/Cserre/solitonothers/collDMcopyhh/o3/"
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+
+dx = 0.01
 
 a0 = 1.0
-a11 = 1.6
-solbeg1 = 75.0
-solend1 = 125.0
+a11 = 0.96
+solbeg1 = 100.0
+solend1 = 200.0
 direction1 = 1.0
-a12 = 0.6
-solbeg2 = 150.0
-solend2 = 200.0
+a12 = 0.96
+solbeg2 = 200.0
+solend2 = 300.0
 direction2 = -1.0
 
-Cr = 0.5
-g = 9.81
-l = Cr / (sqrt(g*(a0 + a11 + a12)))
-dt = l*dx
-startx = -100.0
-endx = 600.0
+#Cr = 0.5
+#g = 9.81
+g = 1.0
+#l = Cr / (sqrt(g*1.5*(a0 + a11 + a12)))
+dt = 0.1*dx
+startx = 0.0
+endx = 400.0
 startt = 0.0
-endt = 30 + dt
+endt = 150 + dt
 
     
 #number of boundary conditions (one side)
@@ -1294,13 +1301,7 @@ nfcBC = 4 #for flux calculation
 nGsBC = 2 #for solving G from u,h
 niBC = nGsBC + nfcBC #total
     
-    
-wdir = "../../../data/raw/Cserre/solitonothers/coll/o3/dx0p05"
-
-if not os.path.exists(wdir):
-    os.makedirs(wdir)
-    
-gap = int(10.0/dt)
+gap = int(1.0/dt)
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
@@ -1374,10 +1375,10 @@ for i in range(1,len(t)):
         with open(s,'a') as file2:
             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-            writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)'])        
-               
+            writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+                   
             for j in range(n):
-                writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j])])  
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])]) 
              
         
     evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC)
@@ -1394,12 +1395,12 @@ h = copyarrayfromC(h_c,n)
     
 s = wdir + "saveoutputtslast.txt"
 with open(s,'a') as file2:
-     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-     writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)'])        
-               
-     for j in range(n):
-         writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j])])  
+    writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+           
+    for j in range(n):
+        writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])]) 
 
 
 """
@@ -1408,14 +1409,14 @@ from time import time
 import os
 from scipy.linalg import norm
 a0 = 1.0
-a1 = 1.0
-dx = 100.0 / (2.0**5)
-Cr = 0.5
+a1 = 10.0
+dx = 0.1#100.0 / (2.0**5)
+Cr = 0.2
 g = 9.81
 l = 1 / (sqrt(g*(a0 + a1)))
 dt = Cr*l*dx
-startx = -500.0
-endx = 1000.0
+startx = -200.0
+endx = 800.0
 startt = 0.0
 endt = 50.0 + dt
     
@@ -1526,7 +1527,7 @@ with open(s,'a') as file2:
 """
 ##Accuracy Test
 ### Soliton Accuracy ################
-wdir = "../../../data/solcon/o3/"
+wdir = "../../../data/raw/solconnonsmallg1/o3/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -1537,18 +1538,19 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
     
-for k in range(18):
+for k in range(6,21):
     dx = 100.0 / (2**k)
-    a0 = 10.0
+    a0 = 1.0
     a1 = 1.0
-    g = 9.81
+    #g = 9.81
+    g = 1.0
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -500
-    endx = 1000.0 + dx
+    startx = -100.0
+    endx = 100.0 + dx
     startt = 0.0
-    endt = 30.0 + dt
+    endt = 50.0 + dt
         
     szoomx = startx
     ezoomx = endx
@@ -1563,7 +1565,7 @@ for k in range(18):
     if not os.path.exists(wdatadir):
         os.makedirs(wdatadir)
     
-    gap = max(20,int(0.5/dt))
+    gap = max(20,int(10.0/dt))
         
     x,t = makevar(startx,endx,dx,startt,endt,dt)
     n = len(x)
@@ -1689,6 +1691,7 @@ for k in range(18):
 
         writefile.writerow([str(dx),str(normhdiffi), str(normudiffi)])
 """
+
 """
 ##### SEGUR AND HAMMACK EXPERIMENT 1
 tl = 60.0

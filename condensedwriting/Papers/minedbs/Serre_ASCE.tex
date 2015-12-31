@@ -288,10 +288,61 @@ and
 \subsection{A Hybrid Finite Difference-Volume Method for Serre Equations in Conservative Form}
 \label{section:hybridmethod}
 %--------------------------------------------------------------------------------
-The conservative form \eqref{eq:Serrecon} allows.
+The conservative form \eqref{eq:Serrecon} allows for a wider range of numerical techniques such as finite element methods \cite{Guyenne-etal-2014-169} and finite volume methods \cite{Hank-etal-2010-2034,Zoppou-2014}. In this paper the finite volume methods will be used and so our full solution scheme $\mathcal{H}$ will be composed of a scheme $\mathcal{A}$ that given $h$ and $G$ solves \eqref{eq:Gdefinition} for $u$ and a scheme $\mathcal{L}$ that given all three quantities solves \eqref{eq:Serrecon} giving $h$ and $G$ at some later time. 
 
-[] also offer another family of numerical methods which can be constructed by first rearranging the equations into conservative form and then using both a finite difference and a finite volume method to solve these equations. This paper will make use of the first-, second- and third-order versions of this method as set out in []. These have been validated for both smooth and discontinuous problems and their orders of accuracy have been verified for smooth solutions so they are of particular interest for the comparisons that will be investigated in this paper. 
+\subsection{Finite Difference Approximation for $\mathcal{A}$}
+\label{section:ellipticA}
+In this paper the scheme $\mathcal{A}$ will be given by approximating all the derivatives in \eqref{eq:Gdefinition} by finite differences [this was done above for second order] in particular second- and fourth-order centred finite differences and then rearranging into a matrix equation of the form
+\begin{linenomath*}
+\begin{gather*}
+\left[\begin{array}{c}
+  u_0 \\
+  \vdots \\
+  u_m \end{array}\right] = A^{-1}\left(h\right)
+\left[\begin{array}{c}
+ G_0 \\
+ \vdots \\
+ G_m \end{array}\right] =: \mathcal{A}(\boldsymbol{h},\boldsymbol{G}). 
+\end{gather*}
+\end{linenomath*}
+For a second-order approximation $A\left(h\right)$ is tri-diagonal while for a fourth-order approximation $A\left(h\right)$ is penta-diagonal.
+%use A for two different matrices, change that
 
+\subsection{Finite Volume Method for $\mathcal{L}$}
+\label{section:conservativeL}
+Finite volume methods work with cell averages which are the value of a quantity averaged over a cell and is denoted by a bar and a spatial subscript corresponding to the centre of the cell. For example
+\begin{linenomath*}
+\begin{gather*}
+\bar{h}_i = \dfrac{1}{\Delta x} \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}} h(x,t) \, dx 
+\end{gather*}
+\end{linenomath*}
+is the averaged water depth in the cell with centre $x_i$ spanning $\left[x_{i - 1/2} , x_{i + 1/2}\right]$ where $x_{i \pm 1/2} = x_i \pm \Delta x/2$. Finite volume methods update these cell averages in time using the formula
+\begin{linenomath*}
+\begin{gather}\label{eq:FVMupdate}
+\bar{U}^{n+1}_i = \bar{U}^{n}_i - \dfrac{\Delta t}{\Delta x} \left(F^n_{i+ \frac{1}{2}} - F^n_{i - \frac{1}{2}} \right)
+\end{gather}
+\end{linenomath*}
+where for \eqref{eq:Serrecon} $\bar{U}^{n}_i = \left[ \bar{h}^{n}_i \; \bar{G}^{n}_i \right] ^T$ is an approximation of the vector of the conserved quantities averaged over the cell at time $t^n$. While $F^n_{i\pm 1/2}$ is an approximation of the average flux over the time interval $[t^n, t^{n+1}]$ at the respective cell boundary $x_{i \pm 1/2 }$, which is obtained by solving a local Riemann problem at the cell boundaries.  In \citeN{Kurganov-etal-2001-707} $F^n_{i\pm 1/2}$ is given by
+\begin{linenomath*}
+\begin{gather}\label{eq:HLL_flux}
+F_{i+\frac{1}{2}} = \dfrac{a^+_{i+\frac{1}{2}} f\left(q^-_{i+\frac{1}{2}}\right) - a^-_{i+\frac{1}{2}} f\left(q^+_{i+\frac{1}{2}}\right)}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}}  + \dfrac{a^+_{i+\frac{1}{2}} \, a^-_{i+\frac{1}{2}}}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{gather}
+\end{linenomath*}
+where $f$ is the instantaneous flux of the conserved quantity $q$ evaluated using the reconstructed values from the cells adjacent to the cell interface $x_{i + 1/2}$. While $a^-_{i+1/2}$ and $a^+_{i+1/2}$ are given by
+\begin{linenomath*}
+\begin{gather*}
+a^-_{i+\frac{1}{2}} = \min \left[\lambda_1\left(q^-_{i + \frac{1}{2}}\right), \lambda_1\left(q^+_{i + \frac{1}{2}}\right), 0 \right]
+%\label{eq:aatcelledgep}
+\end{gather*}
+\end{linenomath*}
+and
+\begin{linenomath*}
+\begin{gather*}
+a^+_{i+\frac{1}{2}} = \max \left[\lambda_2\left(q^-_{i + \frac{1}{2}}\right), \lambda_2\left(q^+_{i + \frac{1}{2}}\right), 0 \right].
+%\label{eq:aatcelledgem}
+\end{gather*}
+\end{linenomath*}
+where $\lambda_1 = u - \sqrt{gh}$ and $\lambda_2 = u + \sqrt{gh}$ since it was demonstrated in \citeN{Zoppou-2014} that these are bounds on the phase speed of the Serre equations.
 
 \section{Numerical Simulations}
 \label{section:Numerical Simulations}

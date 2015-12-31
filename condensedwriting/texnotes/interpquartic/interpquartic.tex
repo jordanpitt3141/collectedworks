@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{G for soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{Cell Averaged G}
+We have a quartic:
+
+\[Q_j(x) = a_j(x - x_j)^4 + b_j(x - x_j)^3 + c_j(x - x_j)^2 + d_j(x - x_j) + e_j\]
+
+Satisfying the equations
+\[Q_j(x_j) = q_j\]
+\[Q_j(x_{j+1}) = q_{j+1}\]
+\[Q_j(x_{j+2}) = q_{j+2}\]
+\[Q_j(x_{j-1}) = q_{j-1}\]
+\[Q_j(x_{j-2}) = q_{j-2}\]
+
+In particular we have that
+
+\begin{equation}
+\label{e}
+q_j = e_j
+\end{equation}
+
+\begin{equation}
+\label{1}
+q_{j+1} = a_j(\Delta x)^4 + b_j(\Delta x)^3 + c_j(\Delta x)^2 + d_j(\Delta x) + e_j
+\end{equation}
+
+\begin{equation}
+\label{2}
+q_{j+2} = 16a_j(\Delta x)^4 + 8b_j(\Delta x)^3 + 4c_j(\Delta x)^2 + 2d_j(\Delta x) + e_j
+\end{equation}
+
+\begin{equation}
+\label{3}
+q_{j-1} = a_j(\Delta x)^4 - b_j(\Delta x)^3 + c_j(\Delta x)^2 - d_j(\Delta x) + e_j
+\end{equation}
+
+\begin{equation}
+\label{4}
+q_{j-2} = 16a_j(\Delta x)^4 - 8b_j(\Delta x)^3 + 4c_j(\Delta x)^2 - 2d_j(\Delta x) + e_j
+\end{equation}
+
+Adding \eqref{1} and \eqref{3} gives
+\begin{equation}
+\label{5}
+q_{j+1} + q_{j-1} = 2a_j(\Delta x)^4 + 2c_j(\Delta x)^2 + 2q_j
+\end{equation}
+Adding \eqref{2} and \eqref{4} gives
+\begin{equation}
+\label{6}
+q_{j+2} + q_{j-2} = 32a_j(\Delta x)^4 + 8c_j(\Delta x)^2 + 2q_j
+\end{equation}
+
+\eqref{6} - 4 $\times$ \eqref{5}:
+\[q_{j+2} + q_{j-2} -4q_{j+1} -4q_{j-1} = 24a_j(\Delta x)^4 - 6q_j\]
+\[q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2} = 24a_j(\Delta x)^4 \]
+
+\begin{equation}
+\label{a}
+a_j = \frac{q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2}}{24 \Delta x^4 }
+\end{equation}
+
+Subbing the known values into \eqref{5} gives
+\[q_{j+1} + q_{j-1} = 2\frac{q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2}}{24 \Delta x^4 }(\Delta x)^4 + 2c_j(\Delta x)^2 + 2q_j\]
+
+\[q_{j+1} + q_{j-1} = \frac{q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2}}{12 } + 2c_j(\Delta x)^2 + 2q_j\]
+
+\[q_{j+1} + q_{j-1} - 2q_j +  \frac{-q_{j+2} +4q_{j+1} - 6q_j +4q_{j-1}  - q_{j-2}}{12 } = 2c_j(\Delta x)^2\]
+
+\[\frac{12q_{j+1} + 12q_{j-1} - 24q_j -q_{j+2} +4q_{j+1} - 6q_j +4q_{j-1}  - q_{j-2}}{12 } = 2c_j(\Delta x)^2\]
+
+\[\frac{-q_{j+2} +16q_{j+1} - 30q_j + 16q_{j-1}  - q_{j-2}}{12 } = 2c_j(\Delta x)^2\]
+
+\begin{equation}
+\label{c}
+c_j = \frac{-q_{j+2} +16q_{j+1} - 30q_j + 16q_{j-1}  - q_{j-2}}{24 \Delta x^2 }
+\end{equation}
+
+Subtracting \eqref{3} from \eqref{1} gives
+\begin{equation}
+\label{7}
+q_{j+1} - q_{j-1} = 2b_j(\Delta x)^3 + 2d_j(\Delta x)
+\end{equation}
+
+Subtracting \eqref{4} from \eqref{2} gives
+\begin{equation}
+\label{8}
+q_{j+2} - q_{j-2}  = 16b_j(\Delta x)^3 + 4d_j(\Delta x)
+\end{equation}
+
+\eqref{8} - 2 $\times$ \eqref{7}:
+\[q_{j+2} - q_{j-2} - 2q_{j+1} + 2q_{j-1} = 12b_j(\Delta x)^3\]
+
+\begin{equation}
+\label{b}
+b_j = \frac{q_{j+2} - 2q_{j+1} + 2q_{j-1} - q_{j-2}}{12 \Delta x^3 }
+\end{equation}
+
+Subbing the known values in to  \eqref{7} gives
+
+\[q_{j+1} - q_{j-1} = \frac{q_{j+2} - 2q_{j+1} - q_{j-2} + 2q_{j-1}}{6} + 2d_j(\Delta x) \]
+
+\[q_{j+1} - q_{j-1} + \frac{-q_{j+2} + 2q_{j+1} + q_{j-2} - 2q_{j-1}}{6} = + 2d_j(\Delta x) \]
+
+\[\frac{6q_{j+1} - 6q_{j-1}  -q_{j+2} + 2q_{j+1} + q_{j-2} - 2q_{j-1}}{6} = 2d_j(\Delta x) \]
+
+\[\frac{-q_{j+2} + 8q_{j+1} - 8q_{j-1} + q_{j-2}}{6} = 2d_j(\Delta x) \]
+
+\begin{equation}
+\label{d}
+d_j = \frac{-q_{j+2} + 8q_{j+1} - 8q_{j-1} + q_{j-2}}{12\Delta x}
+\end{equation}
+
+So to recall we have 
+\[a_j = \frac{q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2}}{24 \Delta x^4 }\]
+\[b_j = \frac{q_{j+2} - 2q_{j+1} + 2q_{j-1} - q_{j-2}}{12 \Delta x^3 }\]
+\[c_j = \frac{-q_{j+2} +16q_{j+1} - 30q_j + 16q_{j-1}  - q_{j-2}}{24 \Delta x^2 }\]
+\[d_j = \frac{-q_{j+2} + 8q_{j+1} - 8q_{j-1} + q_{j-2}}{12\Delta x}\]
+\[e_j = q_j\]
+
+test this for  $Q_j(x_{j+1}) = q_{j+1}$
+
+\begin{equation*}
+\begin{split}
+\frac{q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2}}{24 \Delta x^4 }(\Delta x)^4 + \frac{q_{j+2} - 2q_{j+1} + 2q_{j-1} - q_{j-2}}{12 \Delta x^3 }(\Delta x)^3  \\ + \frac{-q_{j+2} +16q_{j+1} - 30q_j + 16q_{j-1}  - q_{j-2}}{24 \Delta x^2 }(\Delta x)^2 + \frac{-q_{j+2} + 8q_{j+1} - 8q_{j-1} + q_{j-2}}{12\Delta x}(\Delta x) + q_j
+\end{split}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+=\frac{q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2}}{24} + \frac{q_{j+2} - 2q_{j+1} + 2q_{j-1} - q_{j-2}}{12} \\ + \frac{-q_{j+2} +16q_{j+1} - 30q_j + 16q_{j-1}  - q_{j-2}}{24} + \frac{-q_{j+2} + 8q_{j+1} - 8q_{j-1} + q_{j-2}}{12} + q_j
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+=\frac{q_{j+2} -4q_{j+1} + 6q_j -4q_{j-1}  + q_{j-2}}{24} + \frac{2q_{j+2} - 4q_{j+1} + 4q_{j-1} - 2q_{j-2}}{24} \\ + \frac{-q_{j+2} +16q_{j+1} - 30q_j + 16q_{j-1}  - q_{j-2}}{24} + \frac{-2q_{j+2} + 16q_{j+1} - 16q_{j-1} + 2q_{j-2}}{24} + q_j
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+=\frac{24q_{j+1}}{24} = q_{j+1} \square
+\end{equation*}
+
+
+
+\end{document}
+
+

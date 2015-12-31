@@ -61,6 +61,48 @@ void TDMA(double *a, double *b, double *c, double *d, int n, double *x)
     free(beta);
 }
 
+void reconstructppm(double *u, int i, double dx, double* uilr, double* uirr)
+{
+//it works yay!
+    double uil, uir;
+    double daip1 = 0.5*(u[i+2] - u[i]);
+    double dip1 = ((u[i+2] - u[i+1])*(u[i+1] - u[i]) >0);
+    dip1 = dip1*copysign(fmin(fabs(daip1),fmin(2*fabs(u[i+2] - u[i+1]), 2*fabs(u[i+1] - u[i]))) , daip1);
+
+    double dai = 0.5*(u[i+1] - u[i-1]);
+    double di = ((u[i+1] - u[i])*(u[i] - u[i-1]) >0);
+    di = di*copysign(fmin(fabs(dai),fmin(2*fabs(u[i+1] - u[i]), 2*fabs(u[i] - u[i-1]))) , dai);
+
+    uir = u[i] + 0.5*(u[i+1] - u[i]) + (0.5*i3)*(di - dip1);
+
+    double daim1 = 0.5*(u[i] - u[i-2]);
+    double dim1 = ((u[i] - u[i-1])*(u[i-1] - u[i-2]) >0);
+    dim1 = dim1*copysign(fmin(fabs(daim1),fmin(2*fabs(u[i] - u[i-1]), 2*fabs(u[i-1] - u[i-2]))) , daim1);
+
+    uil = u[i-1] + 0.5*(u[i] - u[i-1]) + (0.5*i3)*(dim1 - di);
+
+
+    //local extrema
+    double lce = (uir - u[i])*(u[i] - uil);
+
+    uir = u[i]*(lce <= 0) + uir*(lce > 0);
+    uil = u[i]*(lce <= 0) + uil*(lce > 0);
+
+    //monotonicity
+    double toclosellhs = (uir - uil)*(u[i] - 0.5*(uil + uir));
+    double tocloselrhs = (uir - uil)*(uir -uil)*0.5*i3; 
+
+    double tocloserlhs = (uir - uil)*(u[i] - 0.5*(uil + uir));
+    double tocloserrhs = -(uir - uil)*(uir -uil)*0.5*i3;
+
+    uil = (3*u[i] - 2*uir)*(toclosellhs > tocloselrhs) + uil*(toclosellhs <= tocloselrhs);
+    uir = (3*u[i] - 2*uir)*(tocloserlhs < tocloserrhs) + uir*(tocloserlhs >= tocloserrhs);
+
+    *uilr = uil;
+    *uirr = uir;
+
+}
+
 void PENT(double *e, double *a, double *d, double *c,double *f, double *B, int n, double *x)
 {
     //works but is destructive on inputs
@@ -189,17 +231,10 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
         //value that fits over cell and its neighbours
         Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
         hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
-        
-        Gri = (G[i+1] - G[i]) / (G[i] - G[i-1]); 
-        hri = (h[i+1] - h[i]) / (h[i] - h[i-1]); 
 
-        Gir = G[i] + 0.5*phikm(Gri)*(G[i] - G[i-1]);
-        hir = h[i] + 0.5*phikm(hri)*(h[i] - h[i-1]);
-                
-        //i - 1/2 +
-        Gil = G[i] - 0.5*phikp(Gri)*(G[i] - G[i-1]);
-        hil = h[i] - 0.5*phikp(hri)*(h[i] - h[i-1]);
-        
+        reconstructppm(h,i,dx,&hil,&hir);
+        reconstructppm(G,i,dx,&Gil,&Gir);
+            
         //i
         Gim = Gci;
         him = hci;
@@ -281,15 +316,8 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
     Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
     hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
         
-    Gri = (G[i+1] - G[i]) / (G[i] - G[i-1]); 
-    hri = (h[i+1] - h[i]) / (h[i] - h[i-1]); 
-
-    Gir = G[i] + 0.5*phikm(Gri)*(G[i] - G[i-1]);
-    hir = h[i] + 0.5*phikm(hri)*(h[i] - h[i-1]);
-                
-    //i - 1/2 +
-    Gil = G[i] - 0.5*phikp(Gri)*(G[i] - G[i-1]);
-    hil = h[i] - 0.5*phikp(hri)*(h[i] - h[i-1]);
+    reconstructppm(h,i,dx,&hil,&hir);
+    reconstructppm(G,i,dx,&Gil,&Gir);
         
     //i
     Gim = Gci;
@@ -369,15 +397,8 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
     Gci = G[i] - i24*(G[i+1] - 2*G[i] + G[i-1]);
     hci = h[i] - i24*(h[i+1] - 2*h[i] + h[i-1]);
         
-    Gri = (G[i+1] - G[i]) / (G[i] - G[i-1]); 
-    hri = (h[i+1] - h[i]) / (h[i] - h[i-1]); 
-
-    Gir = G[i] + 0.5*phikm(Gri)*(G[i] - G[i-1]);
-    hir = h[i] + 0.5*phikm(hri)*(h[i] - h[i-1]);
-                
-    //i - 1/2 +
-    Gil = G[i] - 0.5*phikp(Gri)*(G[i] - G[i-1]);
-    hil = h[i] - 0.5*phikp(hri)*(h[i] - h[i-1]);
+    reconstructppm(h,i,dx,&hil,&hir);
+    reconstructppm(G,i,dx,&Gil,&Gir);
         
     //i
     Gim = Gci;
@@ -528,48 +549,6 @@ void Gfromuh(double *u, double *h,double *hbeg,double *hend,double *ubeg,double 
     ei = (i12*idx)*(h[i]*h[i]*thx) + (i12*idx*idx)*(i3*h[i]*h[i]*h[i]);
 
     G[i] = ai*u[i-2] + bi*u[i-1] + ci*u[i] + di*uend[j+1] + ei*uend[j+2];
-
-}
-
-void reconstructppm(double *u, int i, double dx, double* uilr, double* uirr)
-{
-//it works yay!
-    double uil, uir;
-    double daip1 = 0.5*(u[i+2] - u[i]);
-    double dip1 = ((u[i+2] - u[i+1])*(u[i+1] - u[i]) >0);
-    dip1 = dip1*copysign(fmin(fabs(daip1),fmin(2*fabs(u[i+2] - u[i+1]), 2*fabs(u[i+1] - u[i]))) , daip1);
-
-    double dai = 0.5*(u[i+1] - u[i-1]);
-    double di = ((u[i+1] - u[i])*(u[i] - u[i-1]) >0);
-    di = di*copysign(fmin(fabs(dai),fmin(2*fabs(u[i+1] - u[i]), 2*fabs(u[i] - u[i-1]))) , dai);
-
-    uir = u[i] + 0.5*(u[i+1] - u[i]) + (0.5*i3)*(di - dip1);
-
-    double daim1 = 0.5*(u[i] - u[i-2]);
-    double dim1 = ((u[i] - u[i-1])*(u[i-1] - u[i-2]) >0);
-    dim1 = dim1*copysign(fmin(fabs(daim1),fmin(2*fabs(u[i] - u[i-1]), 2*fabs(u[i-1] - u[i-2]))) , daim1);
-
-    uil = u[i-1] + 0.5*(u[i] - u[i-1]) + (0.5*i3)*(dim1 - di);
-
-
-    //local extrema
-    double lce = (uir - u[i])*(u[i] - uil);
-
-    uir = u[i]*(lce <= 0) + uir*(lce > 0);
-    uil = u[i]*(lce <= 0) + uil*(lce > 0);
-
-    //monotonicity
-    double toclosellhs = (uir - uil)*(u[i] - 0.5*(uil + uir));
-    double tocloselrhs = (uir - uil)*(uir -uil)*0.5*i3; 
-
-    double tocloserlhs = (uir - uil)*(u[i] - 0.5*(uil + uir));
-    double tocloserrhs = -(uir - uil)*(uir -uil)*0.5*i3;
-
-    uil = (3*u[i] - 2*uir)*(toclosellhs > tocloselrhs) + uil*(toclosellhs <= tocloselrhs);
-    uir = (3*u[i] - 2*uir)*(tocloserlhs < tocloserrhs) + uir*(tocloserlhs >= tocloserrhs);
-
-    *uilr = uil;
-    *uirr = uir;
 
 }
 

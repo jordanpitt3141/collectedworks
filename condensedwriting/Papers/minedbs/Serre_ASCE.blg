@@ -9,45 +9,45 @@ Warning--string name "pa" is undefined
 Warning--empty title in Bonneton-Lannes-2009-16601
 `address' is a missing field, not a string, for entry Zoppou-2014
 while executing---line 3269 of file ascelike.bst
-You've used 9 entries,
+You've used 10 entries,
             2831 wiz_defined-function locations,
-            661 strings with 6252 characters,
-and the built_in function-call counts, 4658 in all, are:
-= -- 474
-> -- 163
+            669 strings with 6533 characters,
+and the built_in function-call counts, 5210 in all, are:
+= -- 529
+> -- 184
 < -- 20
-+ -- 46
-- -- 44
-* -- 431
-:= -- 666
-add.period$ -- 17
-call.type$ -- 9
-change.case$ -- 66
-chr.to.int$ -- 9
-cite$ -- 10
-duplicate$ -- 200
-empty$ -- 324
-format.name$ -- 112
-if$ -- 929
++ -- 52
+- -- 50
+* -- 485
+:= -- 745
+add.period$ -- 19
+call.type$ -- 10
+change.case$ -- 74
+chr.to.int$ -- 10
+cite$ -- 11
+duplicate$ -- 223
+empty$ -- 364
+format.name$ -- 122
+if$ -- 1039
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 8
-newline$ -- 38
-num.names$ -- 54
-pop$ -- 63
+missing$ -- 9
+newline$ -- 42
+num.names$ -- 60
+pop$ -- 72
 preamble$ -- 1
-purify$ -- 121
+purify$ -- 135
 quote$ -- 0
-skip$ -- 178
+skip$ -- 197
 stack$ -- 0
-substring$ -- 309
-swap$ -- 44
+substring$ -- 350
+swap$ -- 49
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 180
+type$ -- 200
 warning$ -- 1
-while$ -- 24
+while$ -- 27
 width$ -- 0
-write$ -- 116
+write$ -- 129
 (There was 1 error message)

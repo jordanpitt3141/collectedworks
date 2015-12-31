@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{G for soliton}
+\author{Jordan Pitt / u5013521}
+
+\section{3rd order edges}
+
+\[C_j (x) = a_j (x - x_j)^3 + b_j(x - x_j)^2 + c_j (x - x_j) + d_j \]
+
+From the values at the 4 cells around the edge we have
+
+\[C_j (x_j) = u_j =  d_j \]
+\[C_j (x_{j+1}) = u_{j+1} =  a_j (\Delta x)^3 + b_j(\Delta x)^2 + c_j (\Delta x) + d_j \]
+\[C_j (x_{j+2}) = u_{j+2} =  a_j (2\Delta x)^3 + b_j(2\Delta x)^2 + c_j (2\Delta x) + d_j \]
+\[C_j (x_{j-1}) = u_{j-1} =  a_j (-\Delta x)^3 + b_j(-\Delta x)^2 + c_j (-\Delta x) + d_j \]
+
+\[u_{j-1} = - a_j (\Delta x)^3 + b_j(\Delta x)^2 - c_j (\Delta x) + d_j \]
+
+\[u_{j+2} =  8a_j \Delta x^3 + 4b_j\Delta x^2 + 2c_j\Delta x + d_j \]
+
+Add the $u_{j-1}$ and $u_{j+1}$ equations
+
+\[u_{j+1} + u_{j-1}  =  2b_j(\Delta x)^2  + 2u_j\]
+
+\[u_{j+1} - 2u_j + u_{j-1}  =  2b_j(\Delta x)^2 \]
+
+\[ \frac{u_{j+1} - 2u_j + u_{j-1}}{2 \Delta x^2 }  =  b_j \]
+
+Add the $u_{j+2}$ and 2 times the $u_{j-1}$ equations
+
+\[u_{j+2} + 2u_{j-1} =  6a_j \Delta x^3 + 6b_j\Delta x^2  + 3d_j \]
+
+\[u_{j+2} + 2u_{j-1}  =  6a_j \Delta x^3 + 6\frac{u_{j+1} - 2u_j + u_{j-1}}{2 \Delta x^2 }\Delta x^2  + 3u_j \]
+
+\[u_{j+2} + 2u_{j-1} =  6a_j \Delta x^3 + 3\left(u_{j+1} - 2u_j + u_{j-1}\right) + 3u_j \]
+\[u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}  =  6a_j \Delta x^3  \]
+
+\[\frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{6 \Delta x^3} = a_j\]
+
+Subbing it in
+
+\[u_{j+1} =  \left(\frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{6 \Delta x^3}\right) (\Delta x)^3 + \left(\frac{u_{j+1} - 2u_j + u_{j-1}}{2 \Delta x^2 }\right)(\Delta x)^2 + c_j (\Delta x) + d_j \]
+
+\[u_{j+1} =  \left(\frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{6}\right) + \left(\frac{u_{j+1} - 2u_j + u_{j-1}}{2 }\right) + c_j (\Delta x) + u_j \]
+
+\[u_{j+1} -\left(\frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{6}\right) -\left(\frac{u_{j+1} - 2u_j + u_{j-1}}{2 }\right) - u_j   =  + c_j (\Delta x) \]
+
+\[u_{j+1} + \left(\frac{-u_{j+2} + 3u_{j+1} - 3u_j + u_{j-1}}{6}\right) + \left(\frac{-u_{j+1} + 2u_j - u_{j-1}}{2 }\right) - u_j   =  + c_j (\Delta x) \]
+
+\[\frac{6u_{j+1} -u_{j+2} + 3u_{j+1} - 3u_j + u_{j-1} -3u_{j+1} + 6u_j - 3u_{j-1} - 6u_j}{6}   =  c_j (\Delta x) \]
+
+\[\frac{ -u_{j+2} + 6u_{j+1} - 3u_j - 2u_{j-1}}{6 \Delta x}   =  c_j \]
+
+So to be clear
+\[a_j = \frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{6 \Delta x^3} \]
+\[ b_j = \frac{u_{j+1} - 2u_j + u_{j-1}}{2 \Delta x^2 } \]
+\[ c_j = \frac{ -u_{j+2} + 6u_{j+1} - 3u_j - 2u_{j-1}}{6 \Delta x}  \]
+\[ d_j = u_j\]
+
+Thus
+\[C_j (x_{j + 1/2}) = a_j (\frac{\Delta x}{2})^3 + b_j(\frac{\Delta x}{2})^2 + c_j (\frac{\Delta x}{2}) + d_j\]
+
+\[u_{j + 1/2} = \frac{1}{8}a_j\Delta x^3 + \frac{1}{4}b_j\Delta x^2 + \frac{1}{2}c_j\Delta x + d_j\]
+
+\begin{equation}
+\begin{split}
+u_{j + 1/2} = \frac{1}{8}\left(\frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{6 \Delta x^3}\right)\Delta x^3 + \frac{1}{4}\left( \frac{u_{j+1} - 2u_j + u_{j-1}}{2 \Delta x^2 }\right)\Delta x^2 \\  + \frac{1}{2}\left(\frac{ -u_{j+2} + 6u_{j+1} - 3u_j - 2u_{j-1}}{6 \Delta x}  \right)\Delta x + u_j
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+u_{j + 1/2} = \left(\frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{48}\right) + \left( \frac{u_{j+1} - 2u_j + u_{j-1}}{8 }\right) \\  +\left(\frac{ -u_{j+2} + 6u_{j+1} - 3u_j - 2u_{j-1}}{12} \right)+ u_j
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+u_{j + 1/2} = \left(\frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{48}\right) + \left( \frac{6u_{j+1} - 12u_j + 6u_{j-1}}{48 }\right) \\  +\left(\frac{ -4u_{j+2} + 24u_{j+1} - 12u_j - 8u_{j-1} }{48} \right)+ u_j
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+u_{j + 1/2} = \left(\frac{-3u_{j+2} + 27u_{j+1} - 21u_j - 3u_{j-1}}{48}\right) + u_j
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+u_{j + 1/2} = \left(\frac{-3u_{j+2} + 27u_{j+1} + 27u_j - 3u_{j-1}}{48}\right)
+\end{split}
+\end{equation}
+
+Now for the derivative at this point,
+
+\[\frac{\partial }{\partial x}C_j (x_{j + 1/2}) = 3a_j (\frac{\Delta x}{2})^2 + 2b_j(\frac{\Delta x}{2}) + c_j \]
+
+\[\frac{\partial }{\partial x}C_j (x_{j + 1/2}) = a_j\frac{3\Delta x^2}{4} + b_j\Delta x + c_j \]
+
+\begin{equation}
+\begin{split}
+\frac{\partial u}{\partial x}_{j + 1/2} = \frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{6 \Delta x^3}\frac{3\Delta x^2}{4}  \\+ \frac{u_{j+1} - 2u_j + u_{j-1}}{2 \Delta x^2 }\Delta x + \frac{ -u_{j+2} + 6u_{j+1} - 3u_j - 2u_{j-1}}{6 \Delta x} 
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\frac{\partial u}{\partial x}_{j + 1/2} = \frac{u_{j+2} - 3u_{j+1} + 3u_j - u_{j-1}}{8 \Delta x} \\+ \frac{u_{j+1} - 2u_j + u_{j-1}}{2 \Delta x } + \frac{ -u_{j+2} + 6u_{j+1} - 3u_j - 2u_{j-1}}{6 \Delta x} 
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\frac{\partial u}{\partial x}_{j + 1/2} = \frac{3u_{j+2} - 9u_{j+1} + 9u_j - 3u_{j-1}}{24 \Delta x} \\+ \frac{12u_{j+1} - 24u_j + 12u_{j-1}}{24 \Delta x } + \frac{ -4u_{j+2} + 24u_{j+1} - 12u_j - 8u_{j-1}}{24 \Delta x} 
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\frac{\partial u}{\partial x}_{j + 1/2} = \frac{-u_{j+2} + 27u_{j+1} - 27u_j + u_{j-1}}{24 \Delta x}
+\end{split}
+\end{equation}
+
+
+
+\end{document}

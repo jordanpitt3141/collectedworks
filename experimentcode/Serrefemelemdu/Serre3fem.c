@@ -439,8 +439,8 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
     d[j-1] = p12 + q12;
         
     //need to push back a and b because they are 'behind' by the counting system
-    e[j-1] = p13 + q13;    
-    
+    e[j-1] = p13 + q13;  
+
 
     PENT(a,b,c,d,e,f,m,ue); 
 
@@ -454,7 +454,8 @@ void ufromGh(double *G, double *h,double *hbeg,double *hend,double *ubeg,double 
         //printf("nums = i : %d | n : %d | j : %d | m : %d \n",i,n,j,m);
         //printf("us = u[%d] : %e | ue[%d] : %e \n",j,u[j],i,ue[i]);
 
-    }*/    
+    }*/
+    
 
     free(a);
     free(b);
@@ -583,11 +584,9 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
     double pjp1a = 2*idx*(u[k+3] - 2*u[k+2] + u[k+1]);
     double pjp1b = idx*(u[k+3] - u[k+1]);
 
-    double due = idx*i24*(-u[k+4] + 27*u[k+2] - 27*u[k] + u[k-2]);
+    double duel = pja + pjb;
 
-    double duel = due;
-
-    double duer = due;
+    double duer = -pjp1a + pjp1b;
 
     //printf("duer : %.8f, duel : %.8f\n",duer,duel);
     //printf("C : %f %f %f \n",uir,uim1r,uim2r);
@@ -636,17 +635,15 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
         hip1l = h[i+1] - 0.5*phikp(hrip1)*(h[i+1] - h[i]);
         uip1l = u[k+1]; 
 
-        due = idx*i24*(-u[k+4] + 27*u[k+2] - 27*u[k] + u[k-2]);
-
         pja = 2*idx*(u[k+1] - 2*u[k] + u[k-1]);
         pjb = idx*(u[k+1] - u[k-1]);
 
         pjp1a = 2*idx*(u[k+3] - 2*u[k+2] + u[k+1]);
         pjp1b = idx*(u[k+3] - u[k+1]);
 
-        duel = due;
+        duel = pja + pjb;
 
-        duer = due;
+        duer = -pjp1a + pjp1b;
 
         //printf("duer : %.8f, duel : %.8f\n",duer,duel);
         //printf("C : %f %f %f \n",uir,uim1r,uim2r);
@@ -768,6 +765,7 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
     free(nhapp);
     free(nGappp);
     free(nhappp);
+
 
 }
 

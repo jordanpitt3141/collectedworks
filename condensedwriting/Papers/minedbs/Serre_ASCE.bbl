@@ -12,6 +12,13 @@ El, G., Grimshaw, R. H.~J., and Smyth, N.~F. (2006).
 \newblock ``Unsteady undular bores in fully nonlinear shallow-water theory.''\
   {\em Physics of Fluids}, 18(027104).
 
+\bibitem[\protect\citeauthoryear{}{Kurganov
+  et~al.\@}{2002}]{Kurganov-etal-2001-707}
+Kurganov, A., Noelle, S., and Petrova, G. (2002).
+\newblock ``Semidiscrete central-upwind schemes for hyperbolic conservation
+  laws and {H}amilton-{J}acobi equations.''\ {\em Journal of Scientific
+  Computing, Society for Industrial and Applied Mathematics}, 23(3), 707--740.
+
 \bibitem[\protect\citeauthoryear{}{Lannes and
   Bonneton}{2009}]{Bonneton-Lannes-2009-16601}
 Lannes, D. and Bonneton, P. (2009).''\ {\em Physics of Fluids}, 21(1),

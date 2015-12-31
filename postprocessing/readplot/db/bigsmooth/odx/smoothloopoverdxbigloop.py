@@ -19,14 +19,18 @@ wdirord = "o3"
 #wdirords = ["o3","FDcent","grim","o2","o1"]
 #ordsubtup = [[6,7],[5,6],[5,6], [6,8], [6,7]]
 
-wdirords = ["o3","o2","o1"]
-ordsubtup = [[6,7],[6,8], [6,7]]
+#wdirords = ["o3","o2","o1"]
+#ordsubtup = [[6,7],[6,8], [6,7]]
 
-#wdirords = ["FDcent","grim"]
-#ordsubtup = [[5,6],[5,6]]
+wdirords = ["FDcent","grim"]
+ordsubtup = [[5,6],[5,6]]
+
+#wdirords = ["o1"]
+#ordsubtup = [[6,7]]
 
 
-diffws = [6,9,10,20]
+#diffws = [6,9,10,12]
+diffws = [9,10]
 
 for ip in range(len(wdirords)):
     for jp in diffws:
@@ -34,22 +38,44 @@ for ip in range(len(wdirords)):
         diffw = str(jp)
         wdirord = wdirords[ip]
 
-        #nums = [0,3,6,9,12]
-        #nums = [2,5,8,11,14]
-        #nums = [1,4,7,10,13]
+        #reverse
         numbeg = 4
         numend = 11
-        nums = range(numbeg,numend)
-        
+        incr = 1
+        nums = range(numbeg,numend,incr)
+
         ylims = [[0.0,2],[1.0,1.8],[1.3,1.45],[1.3,1.45],[1.3,1.45]]
         xlims = [[0,1000],[300,700],[500,560],[520,540],[528,536]]
-        gaps = [[2,4,6,8,10,12,14],[1,1,2,6,10,14,14],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]
-        zoom = [True,True,False,False,False]
-        zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
-        zoomgap = [2,1,1,1,1]
+        #gaps = [[2,4,6,8,10,12,14],[1,1,2,6,10,14,14],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]
+        #zoom = [True,True,False,False,False]
+        #zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
+        #zoomgap = [2,1,1,1,1] 
+        
+        #gaps = [[100,100*2,100*2**2,100*2**3,100*2**4,100*2**5,100*2**5], \
+        #        [50,100,100*2,100*2**2,100*2**3,100*2**4,100*2**5], \
+        #        [25,50,100,100*2,100*2**2,100*2**3,100*2**4], \
+        #        [1,1,2,2,4,4,8], \
+        #        [1,1,1,1,1,1,1]]
+        #zoom = [True,True,True,False,False]
+        #zoomints = [[350,650],[350,650],[350,650],[350,650],[350,650]]
+        #zoomgap = [[2,2**2,2**3,2**4,2**5,2**6,2**7], \
+        #            [2,2**2,2**3,2**4,2**5,2**6,2**7], \
+        #            [2,2**2,2**3,2**4,2**5,2**6,2**7],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]  
+        
+        gaps = [[100*2**(-2),100*2**(-1),100,100*2**1,100*2**2,100*2**3,100*2**4], \
+                [100*2**(-2),100*2**(-1),100,100*2**1,100*2**2,100*2**3,100*2**4], \
+                [100*2**(-2),100*2**(-1),100,100*2**1,100*2**2,100*2**3,100*2**4], \
+                [1,1,1,2,2,4,4], \
+                [1,1,1,1,1,1,1]]
+        zoom = [True,True,True,False,False]
+        zoomints = [[350,650],[350,650],[350,650],[350,650],[350,650]]
+        zoomgap = [[1,2,4,6,8,10,12], \
+                    [1,2,4,6,8,10,12], \
+                    [1,2,4,6,8,10,12],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]  
         
         
         for l in range(len(ylims)):
+        #for l in range(1):
             
             cylim = ylims[l]
             cxlim = xlims[l]
@@ -57,10 +83,11 @@ for ip in range(len(wdirords)):
             
             for k in nums:
                 gap = gaps[l][k-numbeg]
+                #gap = gaps[l][numbeg - k]
                 
-                wdir = "../../../../../../data/Joesmooth/bigsmooth/"  +wdirord +"/" + str(k) + "/" + diffw + "/"
+                wdir = "../../../../../../data/raw/Joebigsmooth/"  +wdirord +"/" + str(k) + "/" + diffw + "/"
                 sdirend = "nb" + str(numbeg) + "ne" + str(numend) + "/"
-                sdir = "../../../../../results/smoothdb/FVMpics/1diffmdx/" + wdirord + "/" +str(diffw)+ "/" + sdirend
+                sdir = "../../../../../../data/postprocessing/smoothdball/4t/Joebigsmooth/" + wdirord + "/" +str(diffw)+ "/" + sdirend
                 if not os.path.exists(sdir):
                         os.makedirs(sdir)
                      
@@ -88,8 +115,11 @@ for ip in range(len(wdirords)):
                          xend = int(cxlim[1]/dx)
                          zbeg = int(zoomints[l][0]/dx)
                          zend = int(zoomints[l][1]/dx)
-                         xt = x[xbeg:zbeg:igap] + x[zbeg:zend:zoomgap[l]] + x[zend:xend:igap]
-                         ht = h[xbeg:zbeg:igap] + h[zbeg:zend:zoomgap[l]] + h[zend:xend:igap]
+                         print(l,k,zend,xend,igap)
+                         zoomgapi = int(zoomgap[l][k-numbeg])
+                         #zoomgapi = int(zoomgap[l][numbeg - k])
+                         xt = x[xbeg:zbeg:igap] + x[zbeg:zend:zoomgapi] + x[zend:xend:igap]
+                         ht = h[xbeg:zbeg:igap] + h[zbeg:zend:zoomgapi] + h[zend:xend:igap]
                      else:
                          xbeg = int(cxlim[0]/dx)
                          xend = int(cxlim[1]/dx)

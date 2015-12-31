@@ -7,16 +7,19 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 #wdir = "../../../../data/raw/Joebigsmooth/o1/13/11/"
 #wdir = "../../../../../../PhDold/project/code/data/Joe/alldb/o3/"
 
-wdir = "../../../../data/dbchris/o3femh110h01testsmallt/"
+#wdir = "../../../../data/dbchris/o3femh110h01testsmallt/"
 
+
+#wdir = "../../../../data/raw/Joebigsmooth/o1/13/9/"
+
+wdir = "../../../../data/raw/Cserre/solitonothers/collDMcopy/o3/"
 
 gap = 1
-
-h0 = 0.1
 g = 9.81
-
          
-s = wdir + "out450.txt"
+#s = wdir + "outlast.txt"
+ 
+s = wdir + "saveoutputtslast.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         

@@ -19,12 +19,12 @@ wdirord = "o1"
 #wdirords = ["o3","FDcent","grim","o2","o1"]
 #ordsubtup = [[6,7],[5,6],[5,6], [6,8], [6,7]]
 
-wdirords = ["FDcent","grim"]
-ordsubtup = [[5,6],[5,6]]
+#wdirords = ["FDcent","grim"]
+#ordsubtup = [[5,6],[5,6]]
 
 #dxws = range(3,11)
 
-dxws = [10]
+dxws = [8]
 
 #nums = [0,3,6,9,12]
 #nums = [2,5,8,11,14]
@@ -33,9 +33,30 @@ dxws = [10]
 #numbegs= [8,3,3,6,6]
 #numends = [15,10,10,13,13]
 
-numbegs= [6,7]
-numends = [13,14]
+#numbegs= [6,7]
+#numends = [13,14]
+
+#numbegs= [13,13,14,13,15]
+#numends = [6,6,7,6,8]
+
+#numincs = [-1,-1,-1,-1,-1]
 #nums = [10]
+
+
+wdirords = ["o3","FDcent","grim","o2","o1"]
+ordsubtup = [[6,7],[5,6],[5,6], [6,8], [6,7]]
+numbegs= [14,11,11,14,12]
+numends = [7,4,4,7,5]
+numincs = [-1,-1,-1,-1,-1]
+
+
+"""
+wdirords = ["o3"]
+ordsubtup = [[6,7]]
+numbegs= [13]
+numends = [6]
+numincs = [-1]
+"""
 
 for ip in range(len(wdirords)):
     for jp in dxws:
@@ -45,29 +66,35 @@ for ip in range(len(wdirords)):
         
         numbeg = numbegs[ip]
         numend = numends[ip]
-        nums = range(numbeg,numend)
+        numinc = numincs[ip]
+        nums = range(numbeg,numend,numinc)
         
         ylims = [[0.0,2],[1.0,1.8],[1.3,1.45],[1.3,1.45],[1.3,1.45]]
         xlims = [[0,1000],[300,700],[500,560],[520,540],[528,536]]
         mn = len(nums)
         
         ## for dx 10
-        gaps = [50*ones(mn),30*ones(mn),20*ones(mn),ones(mn),ones(mn)]
+        """
+        gaps = [30*ones(mn),15*ones(mn),5*ones(mn),2*ones(mn),ones(mn)]
         zoom = [True,True,False,False,False]
         zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
         zoomgap = [25,15,10,1,1]
+        """
         
         ## for dx 6
-        #gaps = [2*ones(mn),2*ones(mn),ones(mn),ones(mn),ones(mn)]
-        #zoom = [True,True,False,False,False]
-        #zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
-        #zoomgap = [1,1,1,1,1]
+        """
+        gaps = [2*ones(mn),2*ones(mn),ones(mn),ones(mn),ones(mn)]
+        zoom = [True,True,False,False,False]
+        zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
+        zoomgap = [1,1,1,1,1]
+        """
+        
         
         ## for dx 8
-        #gaps = [8*ones(mn),8*ones(mn),2*ones(mn),ones(mn),ones(mn)]
-        #zoom = [True,True,False,False,False]
-        #zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
-        #zoomgap = [2,2,1,1,1]
+        gaps = [8*ones(mn),8*ones(mn),2*ones(mn),ones(mn),ones(mn)]
+        zoom = [True,True,False,False,False]
+        zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
+        zoomgap = [2,2,1,1,1]
         
         
         
@@ -78,10 +105,10 @@ for ip in range(len(wdirords)):
             cxlim = xlims[l]
             
             for k in nums:
-                gap = gaps[l][k-numbeg]
-                wdir = "../../../../../../data/Joesmooth/bigsmooth/"  +wdirord +"/" + dxw + "/" + str(k) + "/"
+                gap = gaps[l][nums.index(k)]
+                wdir = "../../../../../../data/raw/Joebigsmooth/"  +wdirord +"/" + dxw + "/" + str(k) + "/"
                 sdirend = "nb" + str(numbeg) + "ne" + str(numend) + "/"
-                sdir = "../../../../../results/smoothdb/transn2wdiff/1dxmdiff/" + wdirord + "/" +dxw+ "/" + sdirend
+                sdir = "../../../../../../data/postprocessing/Joebigsmoothdbalpha2/" + wdirord + "/" +dxw+ "/" + sdirend
                 if not os.path.exists(sdir):
                         os.makedirs(sdir)
                      

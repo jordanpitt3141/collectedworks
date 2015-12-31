@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.24)  17 NOV 2015 16:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.24)  13 DEC 2015 12:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -945,104 +945,104 @@ LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
 (Font)              Font shape `U/wasy/m/n' tried instead on input line 166.
 
-[3] [4] [5] [6] [7]
-<./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf, id=47, 238.38661pt x 19
+[3] [4] [5] [6] [7] [8]
+<./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf, id=50, 238.38661pt x 19
 5.83063pt>
 File: ./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf Graphic file (type 
 pdf)
  <use ./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf 
-used on input line 398.
+used on input line 449.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
- [8 <./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf>]
-<./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf, id=72, 238.38661pt x 19
+ [9 <./results/FVMpics/1diffmdx/o3/1/nb3ne10/0-figure0.pdf>]
+<./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf, id=75, 238.38661pt x 19
 5.83063pt>
 File: ./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf Graphic file (type 
 pdf)
  <use ./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf 
-used on input line 411.
+used on input line 462.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
-<./results/FVMpics/1diffmdx/o3/6/nb3ne10/1-figure0.pdf, id=73, 242.37552pt x 19
+<./results/FVMpics/1diffmdx/o3/6/nb3ne10/1-figure0.pdf, id=76, 242.37552pt x 19
 5.82962pt>
 File: ./results/FVMpics/1diffmdx/o3/6/nb3ne10/1-figure0.pdf Graphic file (type 
 pdf)
  <use ./results/FVMpics/1diffmdx/o3/6/nb3ne10/1-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/6/nb3ne10/1-figure0.pdf 
-used on input line 412.
+used on input line 463.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
-<./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf, id=74, 238.38661pt x 19
+<./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf, id=77, 238.38661pt x 19
 5.83063pt>
 File: ./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf Graphic file (type 
 pdf)
  <use ./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf 
-used on input line 421.
+used on input line 472.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
-<./results/FVMpics/1diffmdx/o3/9/nb3ne10/1-figure0.pdf, id=75, 242.37552pt x 19
+<./results/FVMpics/1diffmdx/o3/9/nb3ne10/1-figure0.pdf, id=78, 242.37552pt x 19
 5.82962pt>
 File: ./results/FVMpics/1diffmdx/o3/9/nb3ne10/1-figure0.pdf Graphic file (type 
 pdf)
  <use ./results/FVMpics/1diffmdx/o3/9/nb3ne10/1-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/9/nb3ne10/1-figure0.pdf 
-used on input line 422.
+used on input line 473.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
-<./results/FVMpics/1diffmdx/o3/9/nb3ne10/2-figure0.pdf, id=76, 242.3725pt x 195
+<./results/FVMpics/1diffmdx/o3/9/nb3ne10/2-figure0.pdf, id=79, 242.3725pt x 195
 .82962pt>
 File: ./results/FVMpics/1diffmdx/o3/9/nb3ne10/2-figure0.pdf Graphic file (type 
 pdf)
  <use ./results/FVMpics/1diffmdx/o3/9/nb3ne10/2-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/9/nb3ne10/2-figure0.pdf 
-used on input line 423.
+used on input line 474.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
- [9 <./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf> <./results/FVMpics/
-1diffmdx/o3/6/nb3ne10/1-figure0.pdf>]
-<./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf, id=106, 238.38661pt x 
+ [10 <./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf> <./results/FVMpics
+/1diffmdx/o3/6/nb3ne10/1-figure0.pdf>]
+<./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf, id=109, 238.38661pt x 
 195.83063pt>
 File: ./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf Graphic file (type
  pdf)
  <use ./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf
- used on input line 432.
+ used on input line 483.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
-<./results/FVMpics/1diffmdx/o3/20/nb3ne10/1-figure0.pdf, id=107, 242.37552pt x 
+<./results/FVMpics/1diffmdx/o3/20/nb3ne10/1-figure0.pdf, id=110, 242.37552pt x 
 195.82962pt>
 File: ./results/FVMpics/1diffmdx/o3/20/nb3ne10/1-figure0.pdf Graphic file (type
  pdf)
  <use ./results/FVMpics/1diffmdx/o3/20/nb3ne10/1-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/20/nb3ne10/1-figure0.pdf
- used on input line 433.
+ used on input line 484.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
-<./results/FVMpics/1diffmdx/o3/20/nb3ne10/2-figure0.pdf, id=108, 242.3725pt x 1
+<./results/FVMpics/1diffmdx/o3/20/nb3ne10/2-figure0.pdf, id=111, 242.3725pt x 1
 95.82962pt>
 File: ./results/FVMpics/1diffmdx/o3/20/nb3ne10/2-figure0.pdf Graphic file (type
  pdf)
  <use ./results/FVMpics/1diffmdx/o3/20/nb3ne10/2-figure0.pdf>
 Package pdftex.def Info: ./results/FVMpics/1diffmdx/o3/20/nb3ne10/2-figure0.pdf
- used on input line 434.
+ used on input line 485.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
-[10 <./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf> <./results/FVMpics/
+[11 <./results/FVMpics/1diffmdx/o3/9/nb3ne10/0-figure0.pdf> <./results/FVMpics/
 1diffmdx/o3/9/nb3ne10/1-figure0.pdf> <./results/FVMpics/1diffmdx/o3/9/nb3ne10/2
--figure0.pdf>] [11 <./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf> <./
+-figure0.pdf>] [12 <./results/FVMpics/1diffmdx/o3/20/nb3ne10/0-figure0.pdf> <./
 results/FVMpics/1diffmdx/o3/20/nb3ne10/1-figure0.pdf> <./results/FVMpics/1diffm
-dx/o3/20/nb3ne10/2-figure0.pdf>] [12] (./Serre_ASCE.bbl
+dx/o3/20/nb3ne10/2-figure0.pdf>] [13] (./Serre_ASCE.bbl
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
-) [13] (./Serre_ASCE.aux) ) 
+) [14] (./Serre_ASCE.aux) ) 
 Here is how much of TeX's memory you used:
- 14346 strings out of 493089
- 237905 string characters out of 6134848
- 321002 words of memory out of 5000000
- 17472 multiletter control sequences out of 15000+600000
- 64589 words of font info for 153 fonts, out of 8000000 for 9000
+ 14353 strings out of 493089
+ 238011 string characters out of 6134848
+ 321075 words of memory out of 5000000
+ 17477 multiletter control sequences out of 15000+600000
+ 65965 words of font info for 155 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  53i,27n,92p,1108b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/
@@ -1060,10 +1060,10 @@ fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/t
 imes/utmbi8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr
 8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Serre_ASCE.pdf (13 pages, 953175 bytes).
+Output written on Serre_ASCE.pdf (14 pages, 961313 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
- 201 compressed objects within 3 object streams
+ 249 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

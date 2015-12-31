@@ -735,7 +735,7 @@ deallocPy(hmend_c)
 #Dam Break Chris
 import os
 
-wdir = "../../../data/raw/Cserre/db/o3femstill/"
+wdir = "../../../data/raw/Cserre/db/o3femppm/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -751,7 +751,7 @@ dt = l*dx
 startx = 0.0
 endx = 1000.0 + dx
 startt = 0.0
-endt = 0.3 + dt
+endt = 0.37 + dt
         
 szoomx = startx
 ezoomx = endx

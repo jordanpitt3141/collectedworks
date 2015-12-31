@@ -4,7 +4,7 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from matplotlib2tikz import save as tikz_save
 
-order = "1af"
+order = "2af"
 num = "17"
 wdir = "../../../../data/raw/ndbh/o"+order+"/"
 sdir = "../../../../data/postprocessing/ndbhex/o"+order+"/"+num+"/"
@@ -66,4 +66,4 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.15f\n" %(xt[i]," ",ht[i])
         file1.write(s)
-   
+  

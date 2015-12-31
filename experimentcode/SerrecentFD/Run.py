@@ -74,6 +74,23 @@ def solitoninit(n,a0,a1,g,x,t0,dx):
     
     return h,u
     
+def soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx):
+    h = zeros(n)
+    u = zeros(n)
+    c1 = sqrt(g*(a0 + a11))
+    c2 = sqrt(g*(a0 + a11))
+    for i in range(n):
+        if (x[i] > solbeg1 and x[i] < solend1):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg1 + solend1)),t0,g,a0,a11)
+            u[i] = direction1*c1*( (h[i] - a0) / h[i] )
+        elif (x[i] > solbeg2 and x[i] < solend2):
+            h[i] = soliton(abs(x[i] - 0.5*(solbeg2 + solend2)),t0,g,a0,a12)
+            u[i] =  direction2*c2* ((h[i] - a0) / h[i])
+        else:
+            h[i] = a0
+            u[i] = 0.0
+    return h,u  
+    
 def experiment1(x,h0,h1,dx):
     n = len(x)
     u = zeros(n)
@@ -254,6 +271,97 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
 """
+
+##Soliton Collision
+wdir = "../../../data/raw/Cserre/solitonothers/collDMcopyhh/FDc/"
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+dx = 0.01
+
+a0 = 1.0
+a11 = 0.96
+solbeg1 = 100.0
+solend1 = 200.0
+direction1 = 1.0
+a12 = 0.96
+solbeg2 = 200.0
+solend2 = 300.0
+direction2 = -1.0
+
+Cr = 0.5
+#g = 9.81
+g = 1.0
+#l = Cr / (sqrt(g*1.5*(a0 + a11 + a12)))
+dt = 0.1*dx
+startx = 0.0
+endx = 400.0
+startt = 0.0
+endt = 150 + dt
+
+    
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+    
+t0 = 0
+gap = int(0.5/dt)
+
+
+h,u = soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx)
+ph,pu = soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,-dt,dx)
+    
+nBC = 3
+nBCs = 4
+u0 = zeros(nBCs)
+u1 = zeros(nBCs)    
+h0 = a0*ones(nBCs)
+h1 = a0*ones(nBCs)
+    
+h_c = copyarraytoC(h)
+u_c = copyarraytoC(u)
+pubc_c = copyarraytoC(concatenate([u0[-nBC:],pu,u1[:nBC]]))
+phbc_c = copyarraytoC(concatenate([h0[-nBC:],ph,h1[:nBC]]))
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+    
+      
+for i in range(1,len(t)): 
+    if(i % gap == 0 or i ==1):
+        u = copyarrayfromC(u_c,n)
+        h = copyarrayfromC(h_c,n)  
+        s = wdir + "saveoutputts" + str(i) + ".txt"
+        with open(s,'a') as file2:
+            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+            writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'u(m/s)'])        
+                       
+            for j in range(n):
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j])])  
+        
+    evolvewrap(u_c, h_c, pubc_c,phbc_c , h0_c, h1_c,u0_c, u1_c,g,dx,dt,nBC, n,nBCs)    
+    print (t[i])
+
+u = copyarrayfromC(u_c,n)
+h = copyarrayfromC(h_c,n)  
+s = wdir + "saveoutputtslast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+     writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'u(m/s)'])        
+                       
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j])])   
+   
+
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c)
+
 """   
 ## DAM BREAK Smooth ##########################
 wdir = "../../data/t/"
@@ -405,7 +513,7 @@ for ll in range(3,16):
 """
 
 #big smooth targeted
-
+"""
 difflist = [1,6,8,9,12]
 
 deltaxa = [5,6,7,9,10,11,12,13,14,15]
@@ -480,3 +588,4 @@ for lk in range(len(difflist)):
         deallocPy(h1_c)
         deallocPy(u0_c)
         deallocPy(u1_c)
+"""
