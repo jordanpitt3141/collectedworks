@@ -12,18 +12,24 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 
 #wdir = "../../../../data/raw/Joebigsmooth/o1/13/9/"
 
-wdir = "../../../../data/raw/Cserre/solitonothers/collDMcopy/o3/"
+#wdir = "../../../../data/raw/Cserre/solitonothers/collDMcopy/o3/"
+#wdir = "../../../../data/raw/bigsmoothalphainf/o3/10/0/"
+
+#wdir = "../../../../data/raw/DSWalpha/o3/9/1/"
+
+wdir = "../../../../data/raw/bumpChris/dx0p04/o2/"
 
 gap = 1
 g = 9.81
          
-#s = wdir + "outlast.txt"
+s = wdir + "outlast.txt"
  
-s = wdir + "saveoutputtslast.txt"
+#s = wdir + "saveoutputtslast.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
     h = []
+    bed = []
     u = []
     x = []
     ht = []
@@ -37,9 +43,12 @@ with open(s,'r') as file1:
             x.append(float(row[3]))
             h.append(float(row[4]))
             u.append(float(row[6]))
+            bed.append(float(row[7]))
+            #diffuse = float(row[7])
                 
         j = j + 1
     x = array(x)
     u = array(u)
     h = array(h)
+    bed = array(bed)
    

@@ -332,7 +332,6 @@ def solveGfromuh(u,h,hbeg,hend,ubeg,uend,dx):
     G[i] = ai*u[i-2] + bi*u[i-1] + ci*u[i] + di*uend[0] + ei*uend[1]
 
     return G
-    
 
 def dambreak(x,xc,hf,hl):
     n = len(x)
@@ -379,17 +378,23 @@ def experiment1(x,b,h0,h1,dx):
 
     return h,u
  
-"""   
+"""  
 #Dam Break 
 import os
 
-wdir = "../../data/dbh/o3fem/"
+#wdir = "../../data/dbh/o3fem/"
+wdir = "../../../data/raw/Cserre/db/o3femEvalChrisDb10t2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
     
-dx = 1.0
-l = 0.01
+dx = 0.1
+Cr = 0.2
+hf = 1.0
+hl = 2.0 
+g = 9.81
+l = Cr / sqrt(g*hf)
+#l = 0.01
 dt = l*dx
 startx = 0.0
 endx = 1000.0 + dx
@@ -403,23 +408,19 @@ ezoomx = endx
 nfcBC = 4 #for flux calculation
 nGsBC = 2 #for solving G from u,h
 niBC = nGsBC + nfcBC #total
-        
-g = 9.81
     
-gap = int(0.5/dt)
+gap = int(0.1/dt)
         
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
     
-xc = 500
-hf = 1.8
-hl = 1.0    
+xc = 500   
 um,hm = dambreak(x,xc,hf,hl)
                 
 umbegi = zeros(niBC)
 umendi = zeros(niBC)
 hmbegi = ones(niBC)
-hmendi = ones(niBC)    
+hmendi = ones(niBC)
         
 for i in range(niBC):
     umbegi[i] = um[0]
@@ -436,7 +437,7 @@ hmend = hmendi
 cnBC = niBC - nGsBC
         
 umbc = concatenate([umbeg[-cnBC:],um,umend[0:cnBC]]) 
-hmbc = concatenate([hmbeg[-cnBC:],hm,hmend[0:cnBC]])       
+hmbc = concatenate([hmbeg[-cnBC:],hm,hmend[0:cnBC]]) 
 Gmbc = solveGfromuh(umbc,hmbc,hmbeg[0:-cnBC],hmend[-cnBC:],umbeg[0:-cnBC],umend[-cnBC:],dx)  
         
 #calculate averages
@@ -475,11 +476,29 @@ umend_c = copyarraytoC(umend)
 u_c= mallocPy(n)
 G_c = mallocPy(n)
 h_c = mallocPy(n)
+
+
+xbeg = arange(startx - niBC*dx,startx,dx)
+xend = arange(endx + dx,endx + (niBC+1)*dx) 
+
+xbc =  concatenate([xbeg,x,xend])  
+
+xbc_c = copyarraytoC(xbc)
+hbc_c = mallocPy(n + 2*niBC)
+ubc_c = mallocPy(n + 2*niBC)
+Evals = []
     
 for i in range(1,len(t)):
     if(i ==1 or i %gap == 0):
+        
         ca2midpt(ha_c,dx,n,h_c)
         ca2midpt(Ga_c,dx,n,G_c)
+        
+        conc(hmbeg_c , h_c,hmend_c,niBC,n ,niBC , hbc_c)
+        conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)        
+        Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n,niBC,dx)
+        
+        Evals.append(Eval)
             
         G = copyarrayfromC(G_c,n)
         h = copyarrayfromC(h_c,n)
@@ -498,10 +517,10 @@ for i in range(1,len(t)):
         with open(s,'a') as file2:
              writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             
-             writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'G' , 'u(m/s)'])        
+             writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'G' , 'u(m/s)','Eval'])        
                            
              for j in range(n):
-                 writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])    
+                 writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(Eval)])    
     evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC)
     print (t[i])
     
@@ -526,10 +545,10 @@ s = wdir + "outlast.txt"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     
-     writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'G' , 'u(m/s)'])        
+     writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'G' , 'u(m/s)','Evals'])        
                    
      for j in range(n):
-         writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])    
+         writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(Evals)])    
 deallocPy(u_c)   
 deallocPy(h_c)
 deallocPy(G_c)
@@ -689,18 +708,21 @@ for k in range(16):
     deallocPy(hmend_c)
 """    
 
-"""
+
 #soliton 
-wdir = "../../data/test/o3fem/sol/"
-dx = 1.0
+wdir = "../../data/testE/o3fem/sol/"
+dx = 0.5
 l = 0.01
 dt = l*dx
 startx = -500.0
 endx = 1500.0 + dx
 startt = 0.0
-endt = 2*dt
+endt = 30 + dt
 a0 = 10.0
 a1 = 1.0
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
         
 szoomx = startx
 ezoomx = endx
@@ -778,11 +800,27 @@ umend_c = copyarraytoC(umend)
 u_c= mallocPy(n)
 G_c = mallocPy(n)
 h_c = mallocPy(n)
+
+xbeg = arange(startx - niBC*dx,startx,dx)
+xend = arange(endx + dx,endx + (niBC+1)*dx) 
+
+xbc =  concatenate([xbeg,x,xend])  
+
+xbc_c = copyarraytoC(xbc)
+hbc_c = mallocPy(n + 2*niBC)
+ubc_c = mallocPy(n + 2*niBC)
+Evals = []
     
 for i in range(1,len(t)):
     if(i ==1 or i %gap == 0):
         ca2midpt(ha_c,dx,n,h_c)
         ca2midpt(Ga_c,dx,n,G_c)
+        
+        conc(hmbeg_c , h_c,hmend_c,niBC,n ,niBC , hbc_c)
+        conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)        
+        Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n,niBC,dx)
+        
+        Evals.append(Eval)
             
         G = copyarrayfromC(G_c,n)
         h = copyarrayfromC(h_c,n)
@@ -809,16 +847,22 @@ for i in range(1,len(t)):
         with open(s,'a') as file2:
              writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             
-             writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'G' , 'u(m/s)','h(m) exact', 'u exact'])        
+             writefile2.writerow(['dx' ,'dt','time','Evals','cell midpoint', 'height(m)', 'G' , 'u(m/s)','h(m) exact', 'u exact'])        
                            
              for j in range(n):
-                 writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])    
+                 writefile2.writerow([str(dx),str(dt),str(t[i]),str(Eval), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])    
     evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC)
     print (t[i])
     
         
 ca2midpt(ha_c,dx,n,h_c)
 ca2midpt(Ga_c,dx,n,G_c)
+
+conc(hmbeg_c , h_c,hmend_c,niBC,n ,niBC , hbc_c)
+conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)        
+Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n,niBC,dx)
+
+Evals.append(Eval)
             
 G = copyarrayfromC(G_c,n)
 h = copyarrayfromC(h_c,n)
@@ -845,10 +889,10 @@ s = wdir + "outlast.txt"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             
-     writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'G' , 'u(m/s)','h(m) exact', 'u exact'])        
+     writefile2.writerow(['dx' ,'dt','time','Evals','cell midpoint', 'height(m)', 'G' , 'u(m/s)','h(m) exact', 'u exact'])        
                            
      for j in range(n):
-         writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])   
+         writefile2.writerow([str(dx),str(dt),str(t[i]),str(Eval), str(x[j]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])   
 deallocPy(u_c)   
 deallocPy(h_c)
 deallocPy(G_c)
@@ -864,7 +908,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-"""
+
 
 """
 ### Soliton accuracy
@@ -1031,6 +1075,7 @@ for k in range(5):
     deallocPy(hmend_c)
 """
 
+"""
 #Segur and Hammack
 import os
 wdir = "../../data/segur2/o3fem/"
@@ -1199,4 +1244,4 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-   
+"""   

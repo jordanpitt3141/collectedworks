@@ -18,6 +18,7 @@
  extern void weightsum(double a,double *x, double b, double *y, int n, double *z);
  extern void evolve(double *G, double *h, double *u, double g, double dx, double dt,int n, int nBC, double *nh, double *nG);
  extern void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *habeg, double *haend, double *hmbeg, double *hmend, double *uabeg, double *uaend, double *umbeg, double *umend, int nfcBC, int nGsBC, double g, double dx, double dt, int n, int nBCa, int nBCm);
+ extern double HankEnergyall(double *x,double *h,double *u,double g,int n, int nBC,double dx);
  %} 
  extern void conc(double *a , double *b, double *c,int n,int m ,int k, double *d);
  extern double *mallocPy(int n);
@@ -35,3 +36,4 @@
  extern void weightsum(double a,double *x, double b, double *y, int n, double *z);
  extern void evolve(double *G, double *h, double *u, double g, double dx, double dt,int n, int nBC, double *nh, double *nG);
  extern void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *habeg, double *haend, double *hmbeg, double *hmend, double *uabeg, double *uaend, double *umbeg, double *umend, int nfcBC, int nGsBC, double g, double dx, double dt, int n, int nBCa, int nBCm);
+ extern double HankEnergyall(double *x,double *h,double *u,double g,int n, int nBC,double dx);

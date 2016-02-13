@@ -74,6 +74,10 @@ def mallocPy(*args):
   return _Serre1.mallocPy(*args)
 mallocPy = _Serre1.mallocPy
 
+def conc(*args):
+  return _Serre1.conc(*args)
+conc = _Serre1.conc
+
 def writetomem(*args):
   return _Serre1.writetomem(*args)
 writetomem = _Serre1.writetomem
@@ -93,6 +97,10 @@ evolvewrap = _Serre1.evolvewrap
 def getufromG(*args):
   return _Serre1.getufromG(*args)
 getufromG = _Serre1.getufromG
+
+def HankEnergyall(*args):
+  return _Serre1.HankEnergyall(*args)
+HankEnergyall = _Serre1.HankEnergyall
 # This file is compatible with both classic and new-style classes.
 
 

@@ -1,0 +1,31 @@
+\begin{thebibliography}{}
+
+\bibitem[El et~al., 2006]{El-etal-2006}
+El, G., Grimshaw, R. H.~J., and Smyth, N.~F. (2006).
+\newblock Unsteady undular bores in fully nonlinear shallow-water theory.
+\newblock {\em Physics of Fluids}, 18(027104).
+
+\bibitem[Gottlieb et~al., 2009]{Gottlieb-etal-2009-251}
+Gottlieb, S., Ketcheson, D.~I., and Shu, C.~W. (2009).
+\newblock High order strong stability preserving time discretizations.
+\newblock {\em Journal of Scientific Computing}, 38(3):251--289.
+
+\bibitem[Hammack and Segur, 1978]{Hammack-Segur-1978-337}
+Hammack, J.~L. and Segur, H. (1978).
+\newblock The {K}orteweg-de {V}ries equation and water waves. {P}art 3.
+  {O}scillatory waves.
+\newblock {\em Journal of Fluid Mechanics}, 84(2):337--358.
+
+\bibitem[Kurganov et~al., 2002]{Kurganov-etal-2001-707}
+Kurganov, A., Noelle, S., and Petrova, G. (2002).
+\newblock Semidiscrete central-upwind schemes for hyperbolic conservation laws
+  and {H}amilton-{J}acobi equations.
+\newblock {\em Journal of Scientific Computing, Society for Industrial and
+  Applied Mathematics}, 23(3):707--740.
+
+\bibitem[Le~M\'{e}tayer et~al., 2010]{Hank-etal-2010-2034}
+Le~M\'{e}tayer, O., Gavrilyuk, S., and Hank, S. (2010).
+\newblock A numerical scheme for the {G}reen–{N}aghdi model.
+\newblock {\em Journal of Computational Physics}, 229(6):2034--2045.
+
+\end{thebibliography}

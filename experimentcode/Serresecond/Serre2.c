@@ -293,16 +293,18 @@ void evolveBC(double *G, double *h, double *bed, double *h0, double *h1, double 
 void evolve(double *G, double *h, double *u, double *bed, double g, double dx, double dt, int nBC, int n,double *nG, double *nh, double theta)
 {
 
-    double tbx,tbxx, srcr,srcc,srcl;
+    double tux,tbx,tbxx, srcr,srcc,srcl;
     //modifies nh and nG to give the new values of h and G after a single time step
     double idx = 1.0 / dx;
     double ithree = 1.0 / 3.0;
     int i = nBC - 1;
 
+	double wim2 = h[i-2] + bed[i-2];
     double wim1 = h[i-1] + bed[i-1];
     double wi = h[i] + bed[i];
     double wip1 = h[i+1] + bed[i+1];
     double wip2 = h[i+2] + bed[i+2];
+	double wip3 = h[i+3] + bed[i+3];
 
     //calculate gradients
     double dwib = (wi - wim1);
@@ -334,6 +336,12 @@ void evolve(double *G, double *h, double *u, double *bed, double g, double dx, d
     double uir = u[i] + 0.5*dui;
     double bir = wir - hir;
 
+    double hil = h[i] - 0.5*dhi;
+    double wil = wi - 0.5*dwi;
+    double Gil = G[i] - 0.5*dGi;
+    double uil = u[i] - 0.5*dui;
+    double bil = wil - hil;
+
     //calculate values at left of i+1 cell
 
     //calculate gradients
@@ -358,19 +366,90 @@ void evolve(double *G, double *h, double *u, double *bed, double g, double dx, d
     double duip1 = minmod(theta*duip1b, duip1m, theta*duip1f);
     double dGip1 = minmod(theta*dGip1b, dGip1m, theta*dGip1f);
 
+	//LEFT
     double hip1l = h[i+1] - 0.5*dhip1;
     double wip1l = wip1 - 0.5*dwip1;
     double Gip1l = G[i+1] - 0.5*dGip1;
     double uip1l = u[i+1] - 0.5*duip1;
     double bip1l = wip1l - hip1l;
 
+	//RIGHT
+    double hip1r = h[i+1] + 0.5*dhip1;
+    double wip1r = wip1 + 0.5*dwip1;
+    double Gip1r = G[i+1] + 0.5*dGip1;
+    double uip1r = u[i+1] + 0.5*duip1;
+    double bip1r = wip1r - hip1r;
+
+	// want bim1r/uim1r and bip1l/uip1l
+
+    //calculate gradients
+    double dwim1b = (wim1 - wim2);
+    double dwim1m = 0.5*(wi - wim2);
+    double dwim1f = (wi - wim1);
+
+    double dhim1b = (h[i-1] - h[i-2]);
+    double dhim1m = 0.5*(h[i] - h[i-2]);
+    double dhim1f = (h[i] - h[i-1]);
+
+    double duim1b = (u[i-1] - u[i-2]);
+    double duim1m = 0.5*(u[i] - u[i-2]);
+    double duim1f = (u[i] - u[i-1]);
+
+    double dGim1b = (G[i-1] - G[i-2]);
+    double dGim1m = 0.5*(G[i] - G[i-2]);
+    double dGim1f = (G[i] - G[i-1]);
+
+    //calculate values at right of i cell
+    double dwim1 = minmod(theta*dwim1b, dwim1m, theta*dwim1f);
+    double dhim1 = minmod(theta*dhim1b, dhim1m, theta*dhim1f);
+    double duim1 = minmod(theta*duim1b, duim1m, theta*duim1f);
+    double dGim1 = minmod(theta*dGim1b, dGim1m, theta*dGim1f);
+
+    double him1r = h[i-1] + 0.5*dhim1;
+    double wim1r = wim1 + 0.5*dwim1;
+	double Gim1r = G[i-1] + 0.5*dGim1;
+    double uim1r = u[i-1] + 0.5*duim1;
+    double bim1r = wim1r - him1r;
+
+    //calculate gradients
+    double dwip2b = (wip2 - wip1);
+    double dwip2m = 0.5*(wip3 - wip1);
+    double dwip2f = (wip3 - wip2);
+
+    double dhip2b = (h[i+2] - h[i+1]);
+    double dhip2m = 0.5*(h[i+3] - h[i+1]);
+    double dhip2f = (h[i+3] - h[i+2]);
+
+    double duip2b = (u[i+2] - u[i+1]);
+    double duip2m = 0.5*(u[i+3] - u[i+1]);
+    double duip2f = (u[i+3] - u[i+2]);
+
+    double dGip2b = (G[i+2] - G[i+1]);
+    double dGip2m = 0.5*(G[i+3] - G[i+1]);
+    double dGip2f = (G[i+3] - G[i+2]);
+
+    double dwip2 = minmod(theta*dwip2b, dwip2m, theta*dwip2f);
+    double dhip2 = minmod(theta*dhip2b, dhip2m, theta*dhip2f);
+    double duip2 = minmod(theta*duip2b, duip2m, theta*duip2f);
+    double dGip2 = minmod(theta*dGip2b, dGip2m, theta*dGip2f);
+
+    double hip2l = h[i+2] - 0.5*dhip2;
+    double wip2l = wip2 - 0.5*dwip2;
+    double Gip2l = G[i+2] - 0.5*dGip2;
+    double uip2l = u[i+2] - 0.5*duip2;
+    double bip2l = wip2l - hip2l;
+
     //right force
     double nbi  = fmax(bip1l,bir);
     double hihm = fmax(0, wir - nbi);
     double hihp = fmax(0, wip1l -nbi);
 
-    double duer = idx*(u[i+1] - u[i]);
-    double dber = idx*(bed[i+1] - bed[i]);
+	//This is the only difference, change it
+	double duer = idx*(uip2l - uip1l);
+	double dber = idx*(bip2l - bip1l);
+		        
+	double duel = idx*(uir - uim1r);
+	double dbel = idx*(bir - bim1r);
 
     double sqrtghel = sqrt(g* hihm);
     double sqrtgher = sqrt(g* hihp);
@@ -379,7 +458,7 @@ void evolve(double *G, double *h, double *u, double *bed, double g, double dx, d
     double sr = fmax(0,fmax(uir + sqrtghel, uip1l + sqrtgher));
 
     double felh = uir*hihm;
-    double felG = Gir*uir + 0.5*g*hihm*hihm - 2*ithree*hihm*hihm*hihm*duer*duer + hihm*hihm*uir*duer*dber;
+    double felG = Gir*uir + 0.5*g*hihm*hihm - 2*ithree*hihm*hihm*hihm*duel*duel + hihm*hihm*uir*duel*dbel;
     double ferh = uip1l*hihp;
     double ferG = Gip1l*uip1l + 0.5*g*hihp*hihp -2*ithree*hihp*hihp*hihp*duer*duer + hihp*hihp*uip1l*duer*dber;
 
@@ -395,30 +474,55 @@ void evolve(double *G, double *h, double *u, double *bed, double g, double dx, d
     double fiG = foG;
     double himhp = hihp;
 
-    double hil = hip1l;
+    him1r = hir;
+    wim1r = wir;
+    uim1r = uir;
+    bim1r = bir;
 
-    dwi = dwip1;
-    dhi = dhip1;
-    dui = duip1;
-    dGi = dGip1;
+    hil = hip1l;
+    wil = wip1l;
+    bil = bip1l;
+    Gil = Gip1l;
+    uil = uip1l;
+
+    hir = hip1r;
+    wir = wip1r;
+    bir = bip1r;
+    Gir = Gip1r;
+    uir = uip1r;
+
+    hip1l = hip2l;
+    wip1l = wip2l;
+    uip1l = uip2l;
+	Gip1l = Gip2l;
+    bip1l = bip2l;
+
+    dwip1 = dwip2;
+    dhip1 = dhip2;
+    duip1 = duip2;
+    dGip1 = dGip2;
+	
 
     for (i = nBC ; i < n +nBC;i++)
     {
 
-        wim1 = h[i-1] + bed[i-1];
-        wi = h[i] + bed[i];
-        wip1 = h[i+1] + bed[i+1];
-        wip2 = h[i+2] + bed[i+2];
+		wim2 = h[i-2] + bed[i-2];
+		wim1 = h[i-1] + bed[i-1];
+		wi = h[i] + bed[i];
+		wip1 = h[i+1] + bed[i+1];
+		wip2 = h[i+2] + bed[i+2];
+		wip3 = h[i+3] + bed[i+3];
 
         //i right
 
-        hir = h[i] + 0.5*dhi;
-        wir = wi + 0.5*dwi;
-        Gir = G[i] + 0.5*dGi;
-        uir = u[i] + 0.5*dui;
-        bir = wir - hir;
+        hip1r = h[i+1] + 0.5*dhip1;
+        wip1r = wip1 + 0.5*dwip1;
+        Gip1r = G[i+1] + 0.5*dGip1;
+        uip1r = u[i+1] + 0.5*duip1;
+        bip1r = wip1r - hip1r;
 
         //calculate gradients
+		/*
         dwip1b = (wip1 - wi);
         dwip1m = 0.5*(wip2 - wi);
         dwip1f = (wip2 - wip1);
@@ -445,14 +549,53 @@ void evolve(double *G, double *h, double *u, double *bed, double g, double dx, d
         Gip1l = G[i+1] - 0.5*dGip1;
         uip1l = u[i+1] - 0.5*duip1;
         bip1l = wip1l - hip1l;
+		*/
+
+		dwip2b = (wip2 - wip1);
+		dwip2m = 0.5*(wip3 - wip1);
+		dwip2f = (wip3 - wip2);
+
+		dhip2b = (h[i+2] - h[i+1]);
+		dhip2m = 0.5*(h[i+3] - h[i+1]);
+		dhip2f = (h[i+3] - h[i+2]);
+
+		duip2b = (u[i+2] - u[i+1]);
+		duip2m = 0.5*(u[i+3] - u[i+1]);
+		duip2f = (u[i+3] - u[i+2]);
+
+		dGip2b = (G[i+2] - G[i+1]);
+		dGip2m = 0.5*(G[i+3] - G[i+1]);
+		dGip2f = (G[i+3] - G[i+2]);
+
+		dwip2 = minmod(theta*dwip2b, dwip2m, theta*dwip2f);
+		dhip2 = minmod(theta*dhip2b, dhip2m, theta*dhip2f);
+		duip2 = minmod(theta*duip2b, duip2m, theta*duip2f);
+		dGip2 = minmod(theta*dGip2b, dGip2m, theta*dGip2f);
+
+		hip2l = h[i+2] - 0.5*dhip2;
+		wip2l = wip2 - 0.5*dwip2;
+		uip2l = u[i+2] - 0.5*duip2;
+		Gip2l = G[i+2] - 0.5*dGip2;
+		bip2l = wip2l - hip2l;
+
+		//dGip1b = (G[i+1] - G[i]);
+        //dGip1m = 0.5*(G[i+2] - G[i]);
+        //dGip1f = (G[i+2] - G[i+1]);
+
+        //dGip1 = minmod(theta*dGip1b, dGip1m, theta*dGip1f);
+
+        //Gip1l = G[i+1] - 0.5*dGip1;
 
 
         nbi  = fmax(bip1l,bir);
         hihm = fmax(0, wir - nbi);
         hihp = fmax(0, wip1l -nbi);
 
-        duer = idx*(u[i+1] - u[i]);
-        dber = idx*(bed[i+1] - bed[i]);
+		duer = idx*(uip2l - uip1l);
+		dber = idx*(bip2l - bip1l);
+		        
+		duel = idx*(uir - uim1r);
+		dbel = idx*(bir - bim1r);
 
         sqrtghel = sqrt(g*hihm);
         sqrtgher = sqrt(g*hihp);
@@ -461,7 +604,7 @@ void evolve(double *G, double *h, double *u, double *bed, double g, double dx, d
         sr = fmax(0,fmax(uir + sqrtghel, uip1l + sqrtgher));
 
         felh = uir*hihm;
-        felG = Gir*uir + 0.5*g*hihm*hihm - 2*ithree*hihm*hihm*hihm*duer*duer + hihm*hihm*uir*duer*dber;
+        felG = Gir*uir + 0.5*g*hihm*hihm - 2*ithree*hihm*hihm*hihm*duel*duel + hihm*hihm*uir*duel*dbel;
         ferh = uip1l*hihp;
         ferG = Gip1l*uip1l + 0.5*g*hihp*hihp -2*ithree*hihp*hihp*hihp*duer*duer + hihp*hihp*uip1l*duer*dber;
 
@@ -473,25 +616,51 @@ void evolve(double *G, double *h, double *u, double *bed, double g, double dx, d
         foG = isrmsl*(sr*felG - sl*ferG + sl*sr*(Gip1l - Gir));
 
         //source term
-        tbx = 0.5*idx*(bed[i+1] - bed[i-1]);
+        //tbx = 0.5*idx*(bed[i+1] - bed[i-1]);
+		tux = (uil - uir);
+		tbx = (bil - bir);
         tbxx = idx*idx*(bed[i+1] -2*bed[i] + bed[i-1]);
         srcr = g*0.5*(hihm*hihm - hir*hir);
-        srcc = g*h[i]*tbx + 0.5*h[i]*h[i]*u[i]*dui*tbxx -h[i]*u[i]*u[i]*tbx*tbxx;
+        srcc = g*h[i]*tbx + 0.5*h[i]*h[i]*u[i]*tux*tbxx -h[i]*u[i]*u[i]*tbx*tbxx;
         srcl =g*0.5*(hil*hil -himhp*himhp);
+
+		//printf("G[%d] : %f ||", i, G[i]);
 
         nh[i -nBC] = h[i] -dt*idx*(foh - fih);
         nG[i -nBC] = G[i] -dt*idx*(foG -fiG) +dt*idx*(srcr + srcc + srcl);
+		//printf("nG[%d] : %f \n", i, nG[i - nBC]);
 
         fih = foh;
         fiG = foG;
         himhp = hihp;
 
-        hil = hip1l;
+		him1r = hir;
+		wim1r = wir;
+		uim1r = uir;
+		bim1r = bir;
 
-        dwi = dwip1;
-        dhi = dhip1;
-        dui = duip1;
-        dGi = dGip1;   
+		hil = hip1l;
+		wil = wip1l;
+		bil = bip1l;
+		Gil = Gip1l;
+		uil = uip1l;
+
+		hir = hip1r;
+		wir = wip1r;
+		bir = bip1r;
+		Gir = Gip1r;
+		uir = uip1r;
+
+		hip1l = hip2l;
+		wip1l = wip2l;
+		uip1l = uip2l;
+		Gip1l = Gip2l;
+		bip1l = bip2l;
+
+		dwip1 = dwip2;
+		dhip1 = dhip2;
+		duip1 = duip2;
+		dGip1 = dGip2;
  
     }
     
@@ -521,7 +690,6 @@ void evolvewrap(double *G, double *h, double *bed, double *h0, double *h1, doubl
         G[i] = 0.5*(G[i] + Gp[i]);
         h[i] = 0.5*(h[i] + hp[i]);
     }
-
 
     free(Gbc);
     free(hbc);

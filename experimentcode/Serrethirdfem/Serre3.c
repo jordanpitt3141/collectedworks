@@ -17,6 +17,84 @@ void conc(double *a , double *b, double *c,int n,int m ,int k, double *d)
     memcpy(d+n+m,c,k*sizeof(double));
 }
 
+double interpquarticval(double *coeff,double xj,double x)
+{    
+    return coeff[0]*(x -xj)*(x -xj)*(x -xj)*(x -xj) + coeff[1]*(x -xj)*(x -xj)*(x -xj)
+    + coeff[2]*(x -xj)*(x -xj) + coeff[3]*(x -xj)+ coeff[4];
+}  
+  
+double interpquarticgrad(double *coeff,double xj,double x)
+{
+    
+    return 4*coeff[0]*(x -xj)*(x -xj)*(x -xj) + 3*coeff[1]*(x -xj)*(x -xj)
+    + 2*coeff[2]*(x -xj) + coeff[3];
+}    
+void interpquartcoeff(double *q,double *coeff,int j,double dx)
+{
+    double i24 = 1.0 / 24.0;
+    double i12 = 1.0 / 12.0;
+    double idx = 1.0/dx;
+
+    coeff[0] = i24*idx*idx*idx*idx*(q[j+2] - 4*q[j+1] + 6*q[j] - 4*q[j-1] + q[j-2]);
+    coeff[1] = i12*idx*idx*idx*(q[j+2] - 2*q[j+1] + 2*q[j-1] - q[j-2]);
+    coeff[2] = i24*idx*idx*(-q[j+2] + 16*q[j+1] - 30*q[j] + 16*q[j-1] - q[j-2]);
+    coeff[3] = i12*idx*(-q[j+2] + 8*q[j+1] - 8*q[j-1] + q[j-2]);
+    coeff[4] = q[j];
+}
+    
+double HankEnergyacrosscell(double *x,double *h,double *u,double g,int j,double dx)
+{
+    //so we have h,u at midpoints
+    //epsilon and sigma are everywhere
+    double i3 = 1.0/3.0;
+
+	double *ucoeff = malloc(5*sizeof(double));
+	double *hcoeff = malloc(5*sizeof(double));
+	
+
+    //jth cell
+    interpquartcoeff(u,ucoeff,j,dx);
+    interpquartcoeff(h,hcoeff,j,dx);
+    
+    //first gauss point
+    double fgp = 0.5*dx*sqrt(3.0/5.0) + x[j];
+    double fgph = interpquarticval(hcoeff,x[j],fgp);
+    double fgpu = interpquarticval(ucoeff,x[j],fgp);
+    double fgpux = interpquarticgrad(ucoeff,x[j],fgp);
+    
+    double fgpe = fgph*fgpu*fgpu + g*fgph*fgph + i3*(fgph*fgph*fgph)*fgpux*fgpux;
+        
+    //second gauss point
+    double sgp = x[j];
+    double sgph = interpquarticval(hcoeff,x[j],sgp);
+    double sgpu = interpquarticval(ucoeff,x[j],sgp);
+    double sgpux = interpquarticgrad(ucoeff,x[j],sgp);
+    
+    double sgpe = sgph*sgpu*sgpu + g*sgph*sgph + i3*(sgph*sgph*sgph)*sgpux*sgpux;
+
+    //third gauss point
+    double tgp = -0.5*dx*sqrt(3.0/5.0) + x[j];
+    double tgph = interpquarticval(hcoeff,x[j],tgp);
+    double tgpu = interpquarticval(ucoeff,x[j],tgp);
+    double tgpux = interpquarticgrad(ucoeff,x[j],tgp);
+    
+    double tgpe = tgph*tgpu*tgpu + g*tgph*tgph + i3*(tgph*tgph*tgph)*tgpux*tgpux;
+    
+    return 0.5*dx*( (5.0/9.0)*fgpe + (8.0/9.0)*sgpe + (5.0/9.0)*tgpe);
+}
+    
+double HankEnergyall(double *x,double *h,double *u,double g,int n, int nBC,double dx)
+{
+    double sum1 = 0.0;
+	int i;
+	for(i = nBC; i < n - nBC;i++)
+	{
+       sum1 = sum1 + HankEnergyacrosscell(x,h,u,g,i,dx);
+	}
+    return 0.5*sum1; 
+
+}
+
 void TDMA(double *a, double *b, double *c, double *d, int n, double *x)
 {
 	double *alpha = malloc(n*sizeof(double));

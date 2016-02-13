@@ -1048,7 +1048,7 @@ for k in range(16):
     deallocPy(hmend_c)
 """    
 
-
+"""
 #soliton 
 wdir = "../../data/test11/o3fem/sol/"
 if not os.path.exists(wdir):
@@ -1228,7 +1228,7 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c)
-
+"""
 
 """
 ### Soliton accuracy

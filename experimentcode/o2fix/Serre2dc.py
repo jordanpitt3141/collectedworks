@@ -74,6 +74,10 @@ def mallocPy(*args):
   return _Serre2dc.mallocPy(*args)
 mallocPy = _Serre2dc.mallocPy
 
+def conc(*args):
+  return _Serre2dc.conc(*args)
+conc = _Serre2dc.conc
+
 def writetomem(*args):
   return _Serre2dc.writetomem(*args)
 writetomem = _Serre2dc.writetomem
@@ -97,6 +101,10 @@ getufromG = _Serre2dc.getufromG
 def minmod(*args):
   return _Serre2dc.minmod(*args)
 minmod = _Serre2dc.minmod
+
+def HankEnergyall(*args):
+  return _Serre2dc.HankEnergyall(*args)
+HankEnergyall = _Serre2dc.HankEnergyall
 # This file is compatible with both classic and new-style classes.
 
 

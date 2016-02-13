@@ -152,7 +152,124 @@ def dambreaksmooth(x,x0,base,eta0,diffuse,bot,dx):
         h[i] = base + 0.5*eta0*(1 + tanh(diffuse*(x0 - abs(x[i]))))
     
     G = getGfromupy(h,u,bed,0.0,0.0,h[0],h[-1],0.0,0.0,dx)
-    return h,G,bed   
+    return h,G,bed
+
+def powerfunction(r,n):
+    if ( r >= 0 and r<= 1):
+        return (1-r)**n
+    else:
+        return 0
+    
+    
+    
+def flowoverbump(x,stage,center,width,height,vel,l):
+    n = len(x)
+    h = zeros(n)
+    u = zeros(n)
+    bed = zeros(n)
+    
+    for i in range(n): 
+        r = abs(x[i] - center) / width
+        bed[i] = height*(powerfunction(r,l + 2)*((l*l + 4*l + 3)*r*r*(1.0/3) + (l + 2)*r  + 1))
+        h[i] = stage - bed[i]
+        u[i] = vel
+        
+    G = getGfromupy(h,u,bed,u[0],u[-1],h[0],h[-1],bed[0],bed[-1],dx)    
+    
+    
+    return h,G,bed
+    
+### FLOW OVER BUMP ####################
+wdir = "../../../data/bumpChris/dx0p1/o2/"
+
+stage = 1.0
+center = 1000.0
+width = 150
+height = 0.5
+el = 4.0
+vel = 2
+
+g = 9.81
+dx = 0.1
+Cr = 0.5
+l = Cr / (2 + sqrt(g*stage) )
+dt = l*dx
+theta = 1.0
+startx = 0.0
+endx = 2000.0 + dx
+startt = 0.0
+endt = 100 + dt  
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+
+gap = int(0.5/dt)
+    
+h,G,bed = flowoverbump(x,stage,center,width,height,vel,el)
+    
+nBC = 3
+nBCs = 4
+b0 = bed[0]*ones(nBCs)
+b1 = bed[-1]*ones(nBCs)
+u0 = vel*ones(nBCs)
+u1 = vel*ones(nBCs)   
+h0 = h[0]*ones(nBCs)
+h1 = h[-1]*ones(nBCs)
+    
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+bed_c = copyarraytoC(bed)
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+b0_c  = copyarraytoC(b0)
+b1_c  = copyarraytoC(b1)
+u_c = mallocPy(n)
+    
+for i in range(1,len(t)): 
+    if (i == 1 or i%gap == 0):
+        getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
+        u = copyarrayfromC(u_c,n)
+        G = copyarrayfromC(G_c,n)
+        h = copyarrayfromC(h_c,n)
+        s = wdir +  "out" + str(i)+".txt"
+        with open(s,'a') as file2:
+            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+            writefile2.writerow(['dx' ,'dt','time',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+                       
+            for j in range(n):
+                writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
+        
+    evolvewrap(G_c,h_c,bed_c,h0_c,h1_c,u0_c,u1_c,b0_c,b1_c,g,dx,dt,nBC,n,nBCs,theta)
+    print (t[i])
+        
+getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+s = wdir +  "outlast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+     writefile2.writerow(['dx' ,'dt','time',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+                   
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c) 
+
+
+
 """
 dx = 100.0 / (2**13)
 l = 0.01
@@ -424,7 +541,7 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)  
 """
-
+"""
 ## DAM BREAK##########################
 from time import time
 wdir = "../../../data/dbChris/o2/"
@@ -511,7 +628,8 @@ deallocPy(G_c)
 deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
-deallocPy(u1_c)  
+deallocPy(u1_c) 
+""" 
 
 
 """

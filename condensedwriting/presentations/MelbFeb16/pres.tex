@@ -1,9 +1,10 @@
 \documentclass[pdf]{beamer}
 \mode<presentation>{}
 \usetheme{Dresden}
+\usepackage{apalike}
 %% preamble
 \title{Numerically solving the 1D Serre Equations In the Presence of Discontinuities}
-\author{Jordan Pitt}
+\author{Jordan Pitt, Stephen Roberts and Christopher Zoppou}
 
 \begin{document}
 %% title frame
@@ -16,14 +17,14 @@
 
 \begin{frame}{Serre Equations}
 \begin{subequations}\label{eq:Serre_conservative_form}
-\begin{gather}
+\begin{gather*}
 \dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0,
 \label{eq:Serre_continuity}
-\end{gather}
-\begin{gather}
+\end{gather*}
+\begin{gather*}
 \underbrace{\underbrace{\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial}{\partial x} \left ( u^2h + \dfrac{gh^2}{2}\right )}_{\text{Shallow Water Wave Equations}} + \underbrace{\dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} -u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t}\right ] \right )}_{\text{Dispersion Terms}} = 0}_{\text{Serre Equations}}
 \label{eq:Serre_momentum}
-\end{gather}
+\end{gather*}
 \end{subequations}
 \end{frame}
 
@@ -67,7 +68,7 @@ Algorithm:
 \end{array} \right. .\]
 \end{frame}
 
-\begin{frame}{$\mathcal{A}$}
+\begin{frame}{$\mathcal{A}$ : elliptic equation for $G$}
 
 Subscripts represent the spatial cell centre and superscripts represent the time step.
 
@@ -79,7 +80,7 @@ where $x_i - x_{i-1} = \Delta x$ for all $i$.
 In this version of the scheme this represents an appropriate order centered finite difference approximation to \eqref{eq:Gdefinition}.
 \end{frame}
 
-\begin{frame}{$\mathcal{L}$}
+\begin{frame}{$\mathcal{L}$ : conservative update}
 Bar represents the average over the cell so for example
 
 \[\bar{u}^n_i = \frac{1}{\Delta x}\int_{x_i - \frac{\Delta x}{2}}^{x_i + \frac{\Delta x}{2}} u(x,t^n) dx\]
@@ -88,19 +89,19 @@ Bar represents the average over the cell so for example
 
 \[\boldsymbol{\bar{U}}^{n+1} = \mathcal{L}\left(\boldsymbol{\bar{U}}^{n},\boldsymbol{u}^n, \Delta x ,\Delta t\right)\]
 
-This represents an appropriate order Gudonov type finite volume method. In particular we use the the method by Kurganov [].
+This represents an appropriate order Godunov type finite volume method. In particular we use the the method by Kurganov \cite{Kurganov-etal-2001-707}.
 
-\[ u - \sqrt{gh}\le \upsilon_p \le u + \sqrt{gh}\]
+%\[ u - \sqrt{gh}\le \upsilon_p \le u + \sqrt{gh}\]
 \end{frame}
 
-\begin{frame}{$\mathcal{M}$}
+\begin{frame}{$\mathcal{M}$ : nodal values to cell averages}
 \[
 	\boldsymbol{U}^n = \mathcal{M}\left(\boldsymbol{\bar{U}}^n\right) \]
 For first and second order versions this is the identity map.
 \end{frame}
 
 
-\begin{frame}{$\mathcal{H}$}
+\begin{frame}{$\mathcal{H}$ : Euler step}
 \[\mathcal{H}\left(\boldsymbol{\bar{U}}^n,\Delta x ,\Delta t \right) = \left\lbrace 
 \begin{array}{c c c} 
 	\boldsymbol{U}^n &=& \mathcal{M}\left(\boldsymbol{\bar{U}}^n\right) \\
@@ -108,7 +109,7 @@ For first and second order versions this is the identity map.
 	\boldsymbol{\bar{U}}^{n+1} &=& \mathcal{L}\left(\boldsymbol{\bar{U}}^{n},\boldsymbol{u}^n, \Delta x ,\Delta t\right)							
 \end{array} \right. .\]
 
-Need to use strong stability preserving Runge-Kutta [] steps to increase the order of accuracy in time.
+Need to use strong stability preserving Runge-Kutta \cite{Gottlieb-etal-2009-251} steps to increase the order of accuracy in time.
 \end{frame}
 
 \section{Validation}
@@ -134,46 +135,46 @@ Nonlinearity ($\eta$):
 \[\eta = \frac{a_1}{a_0}\]
 \end{frame}
 
+%\begin{frame}{Experiment 1}
+%$a_0 = 10.0\text{m}$ , $a_1 = 1.0\text{m}$ ($\eta = 0.1$) , $\Delta x = 100 /2^{6}\text{m} = 0.15625 \text{m}$, $\Delta t = \frac{0.5}{\sqrt{g (a_0 + a_1)}} \Delta x \; \text{s}$
+
+%First Order:
+
+%\begin{figure}
+%\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o1plotsolh-figure0.pdf}
+%\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o1plotsolu-figure0.pdf}
+%\end{figure}
+%\end{frame}
+
+%\begin{frame}{Experiment 1}
+%Second Order:
+
+%\begin{figure}
+%\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolh-figure0.pdf}
+%\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolu-figure0.pdf}
+%\end{figure}
+%\end{frame}
+
+%\begin{frame}{Experiment 1}
+%Third Order:
+
+%\begin{figure}
+%\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolh-figure0.pdf}
+%\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolu-figure0.pdf}
+%\end{figure}
+%\end{frame}
+
+%\begin{frame}{Experiment 1}
+%Convergence
+
+%\begin{figure}
+%\includegraphics[width=3.9cm]{../pictures/soliton/lownonling10/con/sto1-figure0.pdf}
+%\includegraphics[width=3.9cm]{../pictures/soliton/lownonling10/con/sto2-figure0.pdf}
+%\includegraphics[width=3.9cm]{../pictures/soliton/lownonling10/con/sto3-figure0.pdf}
+%\end{figure}
+%\end{frame}
+
 \begin{frame}{Experiment 1}
-$a_0 = 10.0\text{m}$ , $a_1 = 1.0\text{m}$ ($\eta = 0.1$) , $\Delta x = 100 /2^{6}\text{m} = 0.15625 \text{m}$, $\Delta t = \frac{0.5}{\sqrt{g (a_0 + a_1)}} \Delta x \; \text{s}$
-
-First Order:
-
-\begin{figure}
-\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o1plotsolh-figure0.pdf}
-\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o1plotsolu-figure0.pdf}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Experiment 1}
-Second Order:
-
-\begin{figure}
-\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolh-figure0.pdf}
-\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolu-figure0.pdf}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Experiment 1}
-Third Order:
-
-\begin{figure}
-\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolh-figure0.pdf}
-\includegraphics[width=5.0cm]{../pictures/soliton/lownonling10/ex/o2plotsolu-figure0.pdf}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Experiment 1}
-Convergence
-
-\begin{figure}
-\includegraphics[width=3.9cm]{../pictures/soliton/lownonling10/con/sto1-figure0.pdf}
-\includegraphics[width=3.9cm]{../pictures/soliton/lownonling10/con/sto2-figure0.pdf}
-\includegraphics[width=3.9cm]{../pictures/soliton/lownonling10/con/sto3-figure0.pdf}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Experiment 2}
 $a_0 = 1.0\text{m}$ , $a_1 = 1.0\text{m}$ ($\eta = 1.0$) , $\Delta x = 100 /2^{12}\text{m}$ , $\Delta t = \frac{0.5}{\sqrt{g (a_0 + a_1)}} \Delta x \; \text{s}$
 
 First Order:
@@ -184,7 +185,7 @@ First Order:
 \end{figure}
 \end{frame}
 
-\begin{frame}{Experiment 2}
+\begin{frame}{Experiment 1}
 Second Order:
 
 \begin{figure}
@@ -193,7 +194,7 @@ Second Order:
 \end{figure}
 \end{frame}
 
-\begin{frame}{Experiment 2}
+\begin{frame}{Experiment 1}
 Third Order:
 
 \begin{figure}
@@ -202,7 +203,7 @@ Third Order:
 \end{figure}
 \end{frame}
 
-\begin{frame}{Experiment 2}
+\begin{frame}{Experiment 1}
 Convergence:
 
 \begin{figure}
@@ -215,12 +216,15 @@ Convergence:
 
 \subsection{Experimental Validation}
 
-\begin{frame}{Segur and Hammack}
-Picture of the initial conditions
+\begin{frame}{Hammack and Segur}
+\begin{figure}
+\cite{Hammack-Segur-1978-337}
+\includegraphics[width=7cm]{../pictures/added/hs2.pdf}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Segur and Hammack}
-$\Delta x = 0.1 \text{m}$ , $\Delta t = \frac{0.5}{\sqrt{g 0.1}} \Delta x \text{s}$ \\
+$\Delta x = 0.1 \text{m}$ , $\Delta t = \frac{0.5}{\sqrt{g 0.1}} \Delta x \; \text{s}$ \\
 
 First Order at $x = 10\text{m}$ and $x = 20 \text{m}$
 \begin{figure}
@@ -248,40 +252,45 @@ Third Order at $x = 10\text{m}$ and $x = 20 \text{m}$
 \section{Smooth Dambreak}
 \subsection{Description}
 
+\begin{frame}{Plot}
+$\Delta x = \frac{10}{2^6} \text{m}$
+\begin{figure}
+\includegraphics[width=7.5cm]{../pictures/added/db1.pdf}
+\end{figure}
+%\begin{figure}
+%\includegraphics[width=6cm]{../pictures/added/figure_2.png}
+%\end{figure}
+
+\end{frame}
+
 \begin{frame}{Equations}
 
 \begin{subequations}
 \begin{gather}
-h(x,0) = h_0 + \frac{h_1 - h_0}{2}\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right),
+h(x,0) = h_0 + \frac{h_1 - h_0}{2}\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right) \; \text{m},
 \end{gather}
 \begin{gather}
-u(x,0) = 0.0m/s.
+u(x,0) = 0.0 \text{m}/\text{s}.
 \end{gather}
 \end{subequations}
 \label{eq:sdbi}
 
 Problem of interest:
-$h_0 = 1m$ , $h_1 = 1.8m$ , $x_0 = 500m$, $\Delta t = 0.01 \Delta x$
-\end{frame}
-
-\begin{frame}{Plot}
-
-make a plot for what these things look like.
-
+$h_0 = 1\text{m}$ , $h_1 = 1.8\text{m}$ , $x_0 = 500\text{m}$, $\Delta t = 0.01 \Delta x$
 \end{frame}
 
 \subsection{Varying $\Delta x$ Scenarios}
 
-\begin{frame}{Description}
-It was observed that by taking $\Delta x$ smaller and smaller for a wide array of $\alpha$ values that we can choose $\alpha$ such that it appears our solutions converge to four different scenarios.
-\end{frame}
+%\begin{frame}{Description}
+%It was observed that by taking $\Delta x$ smaller and smaller for a wide array of $\alpha$ values that we can choose $\alpha$ such that it appears our solutions converge to four different scenarios.
+%\end{frame}
 
 \begin{frame}{No oscillations}
 \begin{figure}
 \includegraphics[width=7cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/1/nb3ne10/0-figure0.pdf}
 %diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
 \end{figure}
-$\alpha = 0.025$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
+$\alpha = 0.025$ and $\Delta x = \frac{10}{2^k}  \text{m}$ with $k = [3,4,\cdots,9]$
 \end{frame}
 
 \begin{frame}{Flat middle}
@@ -290,26 +299,28 @@ $\alpha = 0.025$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
 %\includegraphics[width=5.5cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/6/nb3ne10/1-figure0.pdf}
 %diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
 \end{figure}
-$\alpha = 0.5$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
+$\alpha = 0.5$ and $\Delta x = \frac{10}{2^k} \text{m}$ with $k = [3,4,\cdots,9]$
 \end{frame}
 
 \begin{frame}{}
 \begin{figure}
-\includegraphics[width=9cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/6/nb3ne10/1-figure0.pdf}
+\includegraphics[width=7cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/6/nb3ne10/1-figure0.pdf}
 \end{figure}
+\cite{Hank-etal-2010-2034}
 \end{frame}
 
 \begin{frame}{Contact Discontinuity}
 \begin{figure}
 \includegraphics[width=7cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/9/nb3ne10/0-figure0.pdf}
 \end{figure}
-$\alpha = 2.5$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
+$\alpha = 2.5$ and $\Delta x = \frac{10}{2^k} \text{m}$ with $k = [3,4,\cdots,9]$
 \end{frame}
 
 \begin{frame}{}
 \begin{figure}
-\includegraphics[width=9cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/9/nb3ne10/1-figure0.pdf}
+\includegraphics[width=7cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/9/nb3ne10/1-figure0.pdf}
 \end{figure}
+\cite{El-etal-2006}
 \end{frame}
 
 \begin{frame}{}
@@ -322,7 +333,7 @@ $\alpha = 2.5$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
 \begin{figure}
 \includegraphics[width=7cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/10/nb3ne10/0-figure0.pdf}
 \end{figure}
-$\alpha = 5.0$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
+$\alpha = 5.0$ and $\Delta x = \frac{10}{2^k} \text{m}$ with $k = [3,4,\cdots,9]$
 \end{frame}
 
 \begin{frame}{}
@@ -341,7 +352,7 @@ $\alpha = 5.0$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
 \begin{figure}
 \includegraphics[width=7cm]{../pictures/smoothdambreak/dxto0/1diffmdx/paperpics/o3/20/nb3ne10/0-figure0.pdf}
 \end{figure}
-$\alpha = 1000$ and $\Delta x = \frac{10}{2^k} m$ with $k = [3,4,\cdots,9]$
+$\alpha = 1000$ and $\Delta x = \frac{10}{2^k} \text{m}$ with $k = [3,4,\cdots,9]$
 \end{frame}
 
 \begin{frame}{}
@@ -361,13 +372,22 @@ Same results however very steep gradients cause problems
 \begin{figure}
 \includegraphics[width=6cm]{../pictures/smoothdambreak/dxto0/1diffmdx/nepics/examples/4/Joebigsmoothspec/FDcent/10/nbs4/1-figure0.pdf}
 \end{figure}
-$\alpha = 5.0$ $\Delta x = \frac{10}{2^4}m = 0.625m$
+$\alpha = 5.0$ $\Delta x = \frac{10}{2^4}\text{m} = 0.625\text{m}$
 \end{frame}
 
 \subsection{Changing $\alpha$}
 
 \begin{frame}{Changing $\alpha$}
-Can choose  $\Delta x$ such that as $\alpha$ gets larger our solutions converge to the same four scenarios as above.  
+Can choose  $\Delta x$ such that as $\alpha$ gets larger our solutions converge to the same four scenarios as above.
 \end{frame}
+
+\section{References}
+\begin{frame}[allowframebreaks]{References}
+%--------------------------------------------------------------------------------
+\bibliography{pres}
+\bibliographystyle{apalike}
+%--------------------------------------------------------------------------------
+\end{frame}
+
 
 \end{document}

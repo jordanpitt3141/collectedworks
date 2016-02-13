@@ -133,6 +133,10 @@ evolve = _Serre3.evolve
 def evolvewrap(*args):
   return _Serre3.evolvewrap(*args)
 evolvewrap = _Serre3.evolvewrap
+
+def HankEnergyall(*args):
+  return _Serre3.HankEnergyall(*args)
+HankEnergyall = _Serre3.HankEnergyall
 # This file is compatible with both classic and new-style classes.
 
 

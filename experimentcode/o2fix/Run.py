@@ -637,31 +637,30 @@ deallocPy(u1_c)
 
 
 ################################# SOLITON Collision  ####################3
-wdir = "../../../data/raw/Cserre/solitonothers/collDMcopyhh/o2/"
+wdir = "../../../data/raw/Cserre/solitonint/collnonlindx0p01/o2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 dx = 0.01
 
 a0 = 1.0
-a11 = 0.96
+a11 = 1.0
 solbeg1 = 100.0
 solend1 = 200.0
 direction1 = 1.0
-a12 = 0.96
+a12 = 1.0
 solbeg2 = 200.0
 solend2 = 300.0
 direction2 = -1.0
 
-#Cr = 0.5
-#g = 9.81
-g = 1.0
-#l = Cr / (sqrt(g*1.5*(a0 + a11 + a12)))
-dt = 0.1*dx
-startx = 0.0
-endx = 400.0
+Cr = 0.5
+g = 9.81
+l = Cr / (sqrt(g*1.5*(a0 + a11 + a12)))
+dt = l*dx
+startx = -100.0
+endx = 500.0 + dx
 startt = 0.0
-endt = 150 + dt
+endt = 50 + dt
 
 theta = 1.2
 
@@ -689,6 +688,18 @@ u0_c  = copyarraytoC(u0)
 u1_c  = copyarraytoC(u1)
 u_c = mallocPy(n)
 
+niBC = nBC
+
+xbeg = arange(startx - niBC*dx,startx,dx)
+xend = arange(endx + dx,endx + (niBC+1)*dx) 
+
+xbc =  concatenate([xbeg,x,xend])  
+
+xbc_c = copyarraytoC(xbc)
+hbc_c = mallocPy(n + 2*niBC)
+ubc_c = mallocPy(n + 2*niBC)
+Evals = []
+
 
 
 for i in range(1,len(t)):
@@ -698,16 +709,22 @@ for i in range(1,len(t)):
         u = copyarrayfromC(u_c,n)
         G = copyarrayfromC(G_c,n)
         h = copyarrayfromC(h_c,n)
+        
+        conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+        conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)        
+        Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+        
+        Evals.append(Eval)
 
         s = wdir + "saveoutputts" + str(i) + ".txt"
 
         with open(s,'a') as file2:
             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             
-            writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+            writefile2.writerow(['dx' ,'dt','time','Eval','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
                    
             for j in range(n):
-                writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
+                writefile2.writerow([str(dx),str(dt),str(t[i]), str(Eval), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
              
     print t[i]
     print(h[1],G[1])     
@@ -718,14 +735,20 @@ u = copyarrayfromC(u_c,n)
 G = copyarrayfromC(G_c,n)
 h = copyarrayfromC(h_c,n)
 
+conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)      
+Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+
+Evals.append(Eval)
+
 s = wdir + "saveoutputtslast.txt"
 with open(s,'a') as file2:
     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     
-    writefile2.writerow(['dx' ,'dt','time','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+    writefile2.writerow(['dx' ,'dt','time','Eval','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
            
     for j in range(n):
-        writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
+        writefile2.writerow([str(dx),str(dt),str(t[i]), str(Eval), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
     
 deallocPy(u_c)   
 deallocPy(h_c)
