@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations}
+
+The Serre Equations read
+(height/mass)
+\[\frac{\partial h}{\partial t} + \frac{\partial uh}{\partial x} = 0 \]
+
+Phi
+\[\Phi = \frac{\partial b}{\partial x}\left(u \frac{\partial u}{\partial x}\right) + u^2 \frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}\frac{\partial u}{\partial t}\]
+
+Gamma
+\[\Gamma = \left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\]
+
+Pressure
+\[p|_\xi = p_a + \rho g \xi + \frac{\rho}{2}\xi\left(2h - \xi\right)\Gamma + \rho \xi \Phi \]
+
+
+Momentum(velocity)
+x
+\[ \frac{\partial (uh)}{\partial t} + \frac{\partial}{\partial x}\left(u^2 h + \frac{gh^2}{2} + \frac{h^3}{3}\Gamma + \frac{h^2}{2} \Phi\right) + h \frac{\partial b}{\partial x}\left(g + \frac{h}{2}\Gamma + \Phi\right) = 0\]
+
+z
+\[w|_z = \frac{z - b}{h} \frac{\partial h}{\partial t} + u \frac{\partial b}{\partial x}\]
+
+The total energy of the Euler system is $E = \frac{1}{2} |\vec{u}|^2 + \vec{g}z$:
+\[\frac{\partial E}{\partial t} + \nabla \cdot \left(E\vec{u} + p\vec{u}\right) = 0\]
+
+Integrating over depth $s = h + b$
+
+\[ \int_b^s \left(\frac{\partial E}{\partial t} + \nabla \cdot \left(E\vec{u} + p\vec{u}\right)\right) \, dz =0\]
+
+\[ \int_b^s \frac{\partial E}{\partial t} \, dz +  \int_b^s\frac{\partial}{\partial x} \left(Eu + pu\right) \, dz  +  \int_b^s\frac{\partial}{\partial z} \left(Ew + pw\right) \, dz =0\]
+
+\[ \int_b^s \frac{\partial E}{\partial t} \, dz +  \int_b^s\frac{\partial}{\partial x} \left(Eu + pu\right) \, dz +  E(s)w(s) + p(s)w(s) - E(b)w(b) - p(b)w(b)  =0 \]
+
+at b $w = 0$ (no slip) \\
+
+\[ \int_b^{s} \frac{\partial E}{\partial t} \, dz +  \int_b^{s}\frac{\partial}{\partial x} \left(Eu + pu\right) \, dz +  E(s)w(s) + p(s)w(s) = 0\]
+
+First term (Leibeniz):
+\[\int_b^{s} \frac{\partial E}{\partial t} \, dz = \frac{\partial}{\partial t}\int_b^{s}E \, dz - E(s)\frac{\partial(s)}{\partial t} + E(b)\frac{\partial(b)}{\partial t}  \]
+
+\[\int_b^{s} \frac{\partial E}{\partial t} \, dz = \frac{\partial}{\partial t}\int_b^{s}E \, dz - E(s)\frac{\partial h}{\partial t}  \]
+
+So need to calculate the integral of the energy over depth:
+
+\[\int_b^sE \, dz = \int_b^s \frac{1}{2}\left(u^2 + w^2\right) + gz \, dz\]
+
+\[\int_b^s \frac{1}{2}\left(u^2+ w^2\right) + gz \, dz = \frac{1}{2}\left(\bar{u}^2h + \int_b^s  w^2 \, dz \right) + \int_b^s gz \, dz \]
+
+Calculating the P.E first (simplest)
+\[\int_b^s gz \, dz = \left[\frac{1}{2}z^2\right]^s_b = \frac{g}{2}\left(h^2 + 2hb\right)\]
+
+Calculating the vertical velocity
+\[\int_b^s  w^2 \, dz = \int_b^s  \left(\frac{z - b}{h} \frac{\partial h}{\partial t} + u \frac{\partial b}{\partial x}\right)^2 \, dz \]
+
+\[ = \int_b^s  \left(\frac{z - b}{h} \frac{\partial h}{\partial t}\right)^2 + 2\left(\frac{z - b}{h} \frac{\partial h}{\partial t}\right)\left(u \frac{\partial b}{\partial x}\right) + \left( u \frac{\partial b}{\partial x} \right)^2 \, dz  \]
+
+
+%Second term(Leibeniz) $u(b) = 0$:
+
+%\[\int_b^{s}\frac{\partial}{\partial x} \left(Eu + pu\right) \, dz = \frac{\partial}{\partial x}\left(\int_b^{s}Eu + pu \, dz\right) - \left(E(s)u(s) + p(s)u(s)\right)\frac{\partial s}{\partial x} \]
+
+
+
+
+
+\end{document}

@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Non-Dim}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations}
+Dimensional variables have astreicks as superscript
+Scale length: $x^* = \lambda x$, typical depth $h^* = dh$, typical speed $u^* = u\epsilon c$ (Linear theory)
+
+Results: $t^* = t \frac{\lambda}{c}$, $g^* = g \frac{c^2}{\lambda}$, $b^* = bd$
+
+Serre Equations Mass
+\[\frac{\partial h^*}{\partial t^*} +u^*\frac{\partial h^*}{\partial x^*} + h^* \frac{\partial u^*}{\partial x^*}  = 0\]
+
+\[\frac{\partial dh}{\partial t \frac{\lambda}{c}} +u\epsilon c\frac{\partial dh}{\partial \lambda x} + dh \frac{\partial u \epsilon c}{\partial \lambda x}  = 0\]
+
+\[\frac{dc}{\lambda}\frac{\partial h}{\partial t} + \frac{dc}{\lambda} \epsilon u\frac{\partial h}{\partial x} + \frac{dc}{\lambda} \epsilon h \frac{\partial u}{\partial x}  = 0\]
+
+\[\frac{\partial h}{\partial t} + \epsilon u\frac{\partial h}{\partial x} + \epsilon h \frac{\partial u}{\partial x}  = 0\]
+
+Serre Equations Momentum
+\[\frac{\partial u^*}{\partial t^*} + u^*\frac{\partial u^*}{\partial x^*} + g^*\frac{\partial h^*}{\partial x^*} + h^*\frac{\partial h^*}{\partial x^*}\Gamma^*+ \frac{\left(h^*\right)^2}{3}\frac{\partial \Gamma^*}{\partial x^*} + \frac{\partial h^*}{\partial x^*}\Phi^*+ \frac{h^*}{2}\frac{\partial \Phi^*}{\partial x^*} + h^* \frac{\partial b^*}{\partial x^*}\left(g^* + \frac{h^*}{2}\Gamma^* + \Phi^*\right) = 0   \]
+
+\[\Gamma^* = \frac{\partial u^*}{\partial x^*}\frac{\partial u^*}{\partial x^*} - u^*\frac{\partial^2 u^*}{\partial (x^*)^2} - \frac{\partial^2 u^*}{\partial x^* \partial t^*}\]
+
+\[\Phi^* = \frac{\partial b^*}{\partial x^*}\left( \frac{\partial u^*}{\partial t^*} + u^*\frac{\partial u^*}{\partial x^*}\right) + (u^*)^2\frac{\partial^2 b^*}{\partial (x^*)^2} \]
+
+\[\Gamma^* = \frac{\partial u\epsilon c}{\partial \lambda x}\frac{\partial u\epsilon c}{\partial \lambda x} - u\epsilon c\frac{\partial^2 u \epsilon c}{\partial (\lambda x)^2} - \frac{\partial^2 u\epsilon c}{\partial \lambda x \partial t \frac{\lambda}{c}}\]
+
+\[\Gamma^* = \frac{\epsilon^2 c^2}{\lambda^2}\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \frac{\epsilon^3 c^3}{\lambda^2} u\frac{\partial^2 u}{\partial x^2} - \frac{\epsilon^2 c^3}{\lambda^2}\frac{\partial^2 u}{\partial x \partial t }\]
+
+\[\Gamma^* = \frac{\epsilon^2 c^2}{\lambda^2} \left(\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \epsilon c u\frac{\partial^2 u}{\partial x^2} -  c\frac{\partial^2 u}{\partial x \partial t } \right)\]
+
+\[\Gamma^* = \frac{\epsilon^2 c^2}{\lambda^2} \Gamma\]
+
+where
+\[\Gamma = \frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \epsilon c u\frac{\partial^2 u}{\partial x^2} -  c\frac{\partial^2 u}{\partial x \partial t } \]
+
+\[\Phi^* = \frac{\partial b^*}{\partial x^*}\left( \frac{\partial u^*}{\partial t^*} + u^*\frac{\partial u^*}{\partial x^*}\right) + (u^*)^2\frac{\partial^2 b^*}{\partial (x^*)^2} \]
+
+\[\Phi^* = \frac{\partial db}{\partial \lambda x}\left( \frac{\partial u\epsilon c}{\partial t \frac{\lambda}{c}} + u\epsilon c\frac{\partial u\epsilon c}{\partial x\lambda}\right) + (u\epsilon c)^2\frac{\partial^2 db}{\partial (\lambda x)^2} \]
+
+\[\Phi^* = \frac{d}{\lambda} \frac{\partial b}{\partial x}\left( \frac{\epsilon c^2}{\lambda}\frac{\partial u}{\partial t } + \frac{\epsilon^2 c^2}{\lambda} u\frac{\partial u}{\partial x}\right) + \frac{d^2 \epsilon^2 c^2}{\lambda^2} u^2\frac{\partial^2 b}{\partial x^2} \]
+
+\[\Phi^* = \frac{dc^2\epsilon}{\lambda^2} \frac{\partial b}{\partial x}\left( \frac{\partial u}{\partial t } + \epsilon u\frac{\partial u}{\partial x}\right) + \frac{d^2 \epsilon^2 c^2}{\lambda^2} u^2\frac{\partial^2 b}{\partial x^2} \]
+
+\[\Phi^* = \frac{dc^2\epsilon}{\lambda^2}\left( \frac{\partial b}{\partial x}\left( \frac{\partial u}{\partial t } + \epsilon u\frac{\partial u}{\partial x}\right) + d u^2\frac{\partial^2 b}{\partial x^2} \right) \]
+
+\[\Phi^* = \frac{dc^2\epsilon}{\lambda^2}\Phi \]
+
+where
+\[\Phi = \frac{\partial b}{\partial x}\left( \frac{\partial u}{\partial t } + \epsilon u\frac{\partial u}{\partial x}\right) + d u^2\frac{\partial^2 b}{\partial x^2} \]
+
+\[\frac{\partial u^*}{\partial t^*} = \frac{\partial u\epsilon c}{\partial t \frac{\lambda}{c}} = \frac{\epsilon c^2}{\lambda} \frac{\partial u}{\partial t } \]
+
+\[u^*\frac{\partial u^*}{\partial x^*} = u\epsilon c\frac{\partial u\epsilon c}{\partial \lambda x} = \frac{\epsilon^2c^2}{\lambda} u \frac{\partial u}{\partial x}\]
+
+\[g^*\frac{\partial h^*}{\partial x^*} = g \frac{c^2}{\lambda}\frac{\partial dh}{\partial \lambda x} = g \frac{dc^2}{\lambda^2}\frac{\partial h}{\partial x}\]
+
+\[h^*\frac{\partial h^*}{\partial x^*}\Gamma^* = dh\frac{\partial dh}{\partial \lambda x}\frac{\epsilon^2 c^2}{\lambda^2} \left(\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \epsilon c u\frac{\partial^2 u}{\partial x^2} -  c\frac{\partial^2 u}{\partial x \partial t } \right) =  \frac{d^2\epsilon^2 c^2}{\lambda^3} h\frac{\partial h}{\partial x} \left(\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \epsilon c u\frac{\partial^2 u}{\partial x^2} -  c\frac{\partial^2 u}{\partial x \partial t } \right) \]
+
+\[\frac{\left(h^*\right)^2}{3}\frac{\partial \Gamma^*}{\partial x^*} = \frac{h^2d^2}{3}\frac{\partial}{\partial \lambda x}\left( \frac{\epsilon^2 c^2}{\lambda^2} \left(\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \epsilon c u\frac{\partial^2 u}{\partial x^2} -  c\frac{\partial^2 u}{\partial x \partial t } \right)\right) \]
+
+\[ = \frac{d^2 \epsilon^2 c^2}{\lambda^3} \frac{h^2}{3}\frac{\partial}{\partial x} \left(\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \epsilon c u\frac{\partial^2 u}{\partial x^2} -  c\frac{\partial^2 u}{\partial x \partial t } \right) \]
+
+\[\frac{\partial h^*}{\partial x^*}\Phi^* = \frac{\partial dh}{\partial \lambda x}\left(\frac{dc^2\epsilon}{\lambda^2}\left( \frac{\partial b}{\partial x}\left( \frac{\partial u}{\partial t } + \epsilon u\frac{\partial u}{\partial x}\right) + d u^2\frac{\partial^2 b}{\partial x^2} \right) \right)\]
+
+\[= \frac{d^2c^2 \epsilon}{\lambda^3} \frac{\partial h}{\partial x}\left( \frac{\partial b}{\partial x}\left( \frac{\partial u}{\partial t } + \epsilon u\frac{\partial u}{\partial x}\right) + d u^2\frac{\partial^2 b}{\partial x^2}  \right)\]
+
+\[\frac{h^*}{2}\frac{\partial \Phi^*}{\partial x^*} = \frac{dh}{2}\frac{\partial}{\partial x^*}\left(\frac{dc^2\epsilon}{\lambda^2}\left( \frac{\partial b}{\partial x}\left( \frac{\partial u}{\partial t } + \epsilon u\frac{\partial u}{\partial x}\right) + d u^2\frac{\partial^2 b}{\partial x^2} \right)\right)\]
+
+\[ = \frac{d^2c^2\epsilon}{\lambda^2}\frac{h}{2}\frac{\partial}{\partial x^*}\left(\left( \frac{\partial b}{\partial x}\left( \frac{\partial u}{\partial t } + \epsilon u\frac{\partial u}{\partial x}\right) + d u^2\frac{\partial^2 b}{\partial x^2} \right)\right)\]
+
+
+Thus
+
+
+
+
+\begin{equation}
+\begin{split}
+\frac{\partial u^*}{\partial t^*} + u^*\frac{\partial u^*}{\partial x^*} + g^*\frac{\partial h^*}{\partial x^*} + h^*\frac{\partial h^*}{\partial x^*}\Gamma^*+ \frac{\left(h^*\right)^2}{3}\frac{\partial \Gamma^*}{\partial x^*} + \frac{\partial h^*}{\partial x^*}\Phi^*+ \frac{h^*}{2}\frac{\partial \Phi^*}{\partial x^*} \\
+=\frac{\epsilon c^2}{\lambda} \frac{\partial u}{\partial t } +\frac{\epsilon^2c^2}{\lambda} u \frac{\partial u}{\partial x} + g \frac{dc^2}{\lambda^2}\frac{\partial h}{\partial x} \\ + \frac{d^2\epsilon^2 c^2}{\lambda^3} h\frac{\partial h}{\partial x} \Gamma  + \frac{d^2 \epsilon^2 c^2}{\lambda^3} \frac{h^2}{3}\frac{\partial \Gamma}{\partial x}+ \frac{d^2c^2 \epsilon}{\lambda^3} \frac{\partial h}{\partial x}\Phi + \frac{d^2c^2\epsilon}{\lambda^2}\frac{h}{2}\frac{\partial \Phi}{\partial x^*}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+=\frac{1}{\lambda}\left(\epsilon c^2 \frac{\partial u}{\partial t } + \epsilon^2c^2 u \frac{\partial u}{\partial x} + g \frac{dc^2}{\lambda}\frac{\partial h}{\partial x} + \frac{d^2\epsilon^2 c^2}{\lambda^2} h\frac{\partial h}{\partial x} \Gamma  + \frac{d^2 \epsilon^2 c^2}{\lambda^2} \frac{h^2}{3}\frac{\partial \Gamma}{\partial x}+ \frac{d^2c^2 \epsilon}{\lambda^2} \frac{\partial h}{\partial x}\Phi + \frac{d^2c^2\epsilon}{\lambda}\frac{h}{2}\frac{\partial \Phi}{\partial x} \right)
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+=\frac{1}{\lambda}\left(g \frac{dc^2}{\lambda}\frac{\partial h}{\partial x} + \epsilon c^2\left( \frac{\partial u}{\partial t } + \epsilon u \frac{\partial u}{\partial x} + \frac{d^2\epsilon}{\lambda^2} h\frac{\partial h}{\partial x} \Gamma  + \frac{d^2 \epsilon}{\lambda^2} \frac{h^2}{3}\frac{\partial \Gamma}{\partial x}+ \frac{d^2}{\lambda^2} \frac{\partial h}{\partial x}\Phi + \frac{d^2}{\lambda}\frac{h}{2}\frac{\partial \Phi}{\partial x} \right)\right)
+\end{split}
+\end{equation}
+
+\[h^* \frac{\partial b^*}{\partial x^*}\left(g^* + \frac{h^*}{2}\Gamma^* + \Phi^*\right) = d^2h \frac{\partial b}{\partial x}\left(g \frac{c^2}{\lambda} + \frac{dh}{2}\frac{\epsilon^2 c^2}{\lambda^2} \Gamma + \frac{dc^2\epsilon}{\lambda^2}\Phi \right) \]
+
+\[= \frac{d^2 c^2}{\lambda}h \frac{\partial b}{\partial x}\left(g + \frac{dh}{2}\frac{\epsilon^2 }{\lambda} \Gamma + \frac{d\epsilon}{\lambda}\Phi \right) \]
+
+\begin{equation}
+\begin{split}
+\frac{1}{\lambda}\left(g \frac{dc^2}{\lambda}\frac{\partial h}{\partial x} + \epsilon c^2\left( \frac{\partial u}{\partial t } + \epsilon u \frac{\partial u}{\partial x} + \frac{d^2\epsilon}{\lambda^2} h\frac{\partial h}{\partial x} \Gamma  + \frac{d^2 \epsilon}{\lambda^2} \frac{h^2}{3}\frac{\partial \Gamma}{\partial x}+ \frac{d^2}{\lambda^2} \frac{\partial h}{\partial x}\Phi + \frac{d^2}{\lambda}\frac{h}{2}\frac{\partial \Phi}{\partial x} \right)\right) \\ + \frac{d^2 c^2}{\lambda}h \frac{\partial b}{\partial x}\left(g + \frac{dh}{2}\frac{\epsilon^2 }{\lambda} \Gamma + \frac{d\epsilon}{\lambda}\Phi \right) = 0
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\frac{c^2}{\lambda}\left(g \frac{d}{\lambda}\frac{\partial h}{\partial x} + \epsilon\left( \frac{\partial u}{\partial t } + \epsilon u \frac{\partial u}{\partial x} + \frac{d^2\epsilon}{\lambda^2} h\frac{\partial h}{\partial x} \Gamma  + \frac{d^2 \epsilon}{\lambda^2} \frac{h^2}{3}\frac{\partial \Gamma}{\partial x}+ \frac{d^2}{\lambda^2} \frac{\partial h}{\partial x}\Phi + \frac{d^2}{\lambda}\frac{h}{2}\frac{\partial \Phi}{\partial x} \right)\right) \\ + \frac{d^2 c^2}{\lambda}h \frac{\partial b}{\partial x}\left(g + \frac{dh}{2}\frac{\epsilon^2 }{\lambda} \Gamma + \frac{d\epsilon}{\lambda}\Phi \right) = 0
+\end{split}
+\end{equation}
+
+
+$\sigma = d/\lambda$
+\begin{equation}
+\begin{split}
+g \sigma\frac{\partial h}{\partial x} + \epsilon\left( \frac{\partial u}{\partial t } + \epsilon u \frac{\partial u}{\partial x} + \sigma^2 \epsilon h\frac{\partial h}{\partial x} \Gamma  + \sigma \epsilon \frac{h^2}{3}\frac{\partial \Gamma}{\partial x}+ \sigma^2 \frac{\partial h}{\partial x}\Phi + \sigma d\frac{h}{2}\frac{\partial \Phi}{\partial x} \right) \\ + d^2h \frac{\partial b}{\partial x}\left(g + \sigma \epsilon^2 \frac{h}{2} \Gamma + \sigma \epsilon\Phi \right) = 0
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+g \frac{\sigma}{\epsilon}\frac{\partial h}{\partial x} +  \frac{\partial u}{\partial t } + \epsilon u \frac{\partial u}{\partial x} + \sigma^2 \epsilon h\frac{\partial h}{\partial x} \Gamma  + \sigma \epsilon \frac{h^2}{3}\frac{\partial \Gamma}{\partial x}+ \sigma^2 \frac{\partial h}{\partial x}\Phi + \sigma d\frac{h}{2}\frac{\partial \Phi}{\partial x}  \\ + \frac{d^2}{\epsilon}h \frac{\partial b}{\partial x}\left(g + \sigma \epsilon^2 \frac{h}{2} \Gamma + \sigma \epsilon\Phi \right) = 0
+\end{split}
+\end{equation}
+
+
+\end{document}
