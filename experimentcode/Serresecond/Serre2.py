@@ -97,6 +97,22 @@ getufromG = _Serre2.getufromG
 def minmod(*args):
   return _Serre2.minmod(*args)
 minmod = _Serre2.minmod
+
+def MyEnergyall(*args):
+  return _Serre2.MyEnergyall(*args)
+MyEnergyall = _Serre2.MyEnergyall
+
+def conc(*args):
+  return _Serre2.conc(*args)
+conc = _Serre2.conc
+
+def MyCorrectionallcells(*args):
+  return _Serre2.MyCorrectionallcells(*args)
+MyCorrectionallcells = _Serre2.MyCorrectionallcells
+
+def MyCorrectionalltimes(*args):
+  return _Serre2.MyCorrectionalltimes(*args)
+MyCorrectionalltimes = _Serre2.MyCorrectionalltimes
 # This file is compatible with both classic and new-style classes.
 
 

@@ -43,8 +43,8 @@ for ip in range(len(wdirords)):
         cxlim = xlims[l]
         
         gap = gaps[l]
-        wdir = "../../../../data/raw/Cserre/solitonothers/collDMcopyhh/"  +wdirord +"/"
-        sdir = "../../../../data/postprocessing/Cserre/solitonothers/collDMcopyhh/"  +wdirord +"/"
+        wdir = "../../../../data/raw/Cserre/solitonothers/collDMcopy/"  +wdirord +"/"
+        sdir = "../../../../data/postprocessing/Cserre/solitonothersfix/collDMcopy/"  +wdirord +"/"
         if not os.path.exists(sdir):
                 os.makedirs(sdir)
              
@@ -109,6 +109,18 @@ for ip in range(len(wdirords)):
         s = sdir +str(l)+ "leg.png"       
         savefig(s, bbox_inches='tight')        
         clf()
+        
+        n = len(x)
+        s = sdir + "h" +str(l)+ ".dat"
+        with open(s,'w') as file1:
+            for i in range(n):
+                s ="%3.8f%5s%1.15f\n" %(x[i]," ",h[i])
+                file1.write(s)
+        s = sdir + "u" +str(l)+ ".dat"
+        with open(s,'w') as file2:
+            for i in range(n):
+                s ="%3.8f%5s%1.15f\n" %(x[i]," ",u[i])
+                file2.write(s)
     
         """
         \pgfplotsset{compat = newest,

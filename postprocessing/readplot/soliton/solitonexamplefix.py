@@ -4,6 +4,22 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from matplotlib2tikz import save as tikz_save
 
+from Hamil import *
+
+def copyarraytoC(a):
+    n = len(a)
+    b = mallocPy(n)
+    for i in range(n):
+        writetomem(b,i,a[i])
+    return b
+    
+def copyarrayfromC(a,n):
+    b = [0]*n
+    for i in range(n):
+        b[i] = readfrommem(a,i)
+        
+    return b
+
 order = "3"
 dxn = "11"
 #wdir = "../../../../data/raw/solconlong/o"+order+"/" +dxn+ "/"
@@ -16,7 +32,7 @@ dxn = "11"
 #sdir = "../../../../data/postprocessing/solconnonsmallg1n/o"+order+"/" +dxn+ "/"
 
 wdir = "../../../../data/raw/hinonling1/o"+order+"/" +dxn+ "/"
-sdir = "../../../../data/postprocessing/hinonling1ex/o"+order+"/" +dxn+ "/"
+sdir = "../../../../data/postprocessing/ChrisEnerg/hinonling1ex/o"+order+"/" +dxn+ "/"
 
 
 if not os.path.exists(sdir):
@@ -44,7 +60,9 @@ def solitoninit(n,a0,a1,g,x,t0,dx):
         u[i] =  c* ((h[i] - a0) / h[i])
     
     return h,u
-         
+      
+startx = -100
+endx = 100      
 s = wdir + "saveoutputtslast.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -61,14 +79,14 @@ with open(s,'r') as file1:
             t =float(row[2])
             h.append(float(row[3]))
             u.append(float(row[5]))
-                
+               
         j = j + 1
-    x = arange(-100,100+dx,dx)
+    x = arange(startx,endx+dx,dx)
+
 #hig10 -250 to 250
 #lowg10 -200 to 700 ?
 #hig1 -100 to 100 ?
 
-    
 a1 = 1.0
 a0 = 1.0
 #g = 9.81
@@ -77,6 +95,48 @@ t0 = 0.0
 n = len(x) 
 ht,ut = solitoninit(n,a0,a1,g,x,t,dx)   
 hti,uti = solitoninit(n,a0,a1,g,x,t0,dx) 
+
+niBC = 3    
+xbeg = arange(startx - niBC*dx,startx,dx)
+xend = arange(endx + dx,endx + (niBC+1)*dx) 
+hbeg = h[0]*ones(niBC)
+hend = h[-1]*ones(niBC)
+ubeg = u[0]*ones(niBC)
+uend = u[-1]*ones(niBC)   
+
+htbeg = ht[0]*ones(niBC)
+htend = ht[-1]*ones(niBC)
+utbeg = ut[0]*ones(niBC)
+utend = ut[-1]*ones(niBC)  
+
+htibeg = hti[0]*ones(niBC)
+htiend = hti[-1]*ones(niBC)
+utibeg = uti[0]*ones(niBC)
+utiend = uti[-1]*ones(niBC)         
+
+xbc =  concatenate([xbeg,array(x),xend])
+hbc =  concatenate([hbeg,array(h),hend])
+ubc =  concatenate([ubeg,array(u),uend])
+
+htbc =  concatenate([htbeg,array(ht),htend])
+utbc =  concatenate([utbeg,array(ut),utend])
+
+htibc =  concatenate([htibeg,array(hti),htiend])
+utibc =  concatenate([utibeg,array(uti),utiend])
+
+xbc_c = copyarraytoC(xbc)
+hbc_c = copyarraytoC(hbc)
+ubc_c = copyarraytoC(ubc)
+htbc_c = copyarraytoC(htbc)
+utbc_c = copyarraytoC(utbc)
+htibc_c = copyarraytoC(htibc)
+utibc_c = copyarraytoC(utibc)
+
+Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)    
+Evalt = HankEnergyall(xbc_c,htbc_c,utbc_c,g,n + 2*niBC,niBC,dx)
+Evalti = HankEnergyall(xbc_c,htibc_c,utibc_c,g,n + 2*niBC,niBC,dx)    
+
+    
 
 xbeg = int((-50 - x[0])/dx)
 xend = int((250 - x[0])/dx)
@@ -127,7 +187,23 @@ with open(s,'w') as file2:
     for i in range(n):
         s ="%3.8f%5s%1.15f\n" %(xte[i]," ",utie[i])
         file2.write(s)
-
+        
+s = sdir + "E.dat"
+with open(s,'w') as file1:
+    s ="%20s%5s%1.15f\n" %("Eval: "," ",Eval)
+    file1.write(s)
+    s ="%20s%5s%1.15f\n" %("Evalt: ", " ",Evalt)
+    file1.write(s)
+    s ="%20s%5s%1.15f\n" %("Evalti: "," ",Evalti)
+    file1.write(s)
+    s ="%20s%5s%1.15f\n" %("E - Eti: "," ",Eval - Evalti)
+    file1.write(s)
+    s ="%20s%5s%1.15f\n" %("E - Eti/Eti: "," ",(Eval - Evalti)/Evalti)
+    file1.write(s)
+    s ="%20s%5s%1.15f\n" %("E - Et: "," ",Eval - Evalt)
+    file1.write(s)
+    s ="%20s%5s%1.15f\n" %("E - Et/Et: "," ",(Eval - Evalt)/Evalt)
+    file1.write(s)
 
 #Didnt like that
 """

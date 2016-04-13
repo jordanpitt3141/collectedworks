@@ -179,36 +179,71 @@ def flowoverbump(x,stage,center,width,height,vel,l):
     
     return h,G,bed
     
-### FLOW OVER BUMP ####################
-wdir = "../../../data/bumpChris/dx0p1/o2/"
-
-stage = 1.0
-center = 1000.0
+def soloverbump(x,a0,a1,solbeg,solend,t0,g,stage,center,width,height,vel,l):
+    n = len(x)
+    h = zeros(n)
+    u = zeros(n)
+    bed = zeros(n)
+    
+    c = sqrt(g*(a0 + a1))
+    for i in range(n):
+        
+        if (x[i] > solbeg and x[i] < solend):
+            r = abs(x[i] - center) / width
+            bed[i] = height*(powerfunction(r,l + 2)*((l*l + 4*l + 3)*r*r*(1.0/3) + (l + 2)*r  + 1))
+            h[i] = soliton(x[i],t0,g,a0,a1) - bed[i]
+            u[i] =  c* ((h[i] - a0) / h[i])
+        else:
+            r = abs(x[i] - center) / width
+            bed[i] = height*(powerfunction(r,l + 2)*((l*l + 4*l + 3)*r*r*(1.0/3) + (l + 2)*r  + 1))
+            h[i] = stage - bed[i]
+            u[i] =  vel
+            
+        
+    G = getGfromupy(h,u,bed,u[0],u[-1],h[0],h[-1],bed[0],bed[-1],dx)    
+    
+    
+    return h,G,bed
+    
+### Energy Test ####################
+"""
+wdir = "../../../data/raw/bumpEnergthighbumpbigsol/dx0p05/o2/"
+stage = 1
+center = 300.0
 width = 150
-height = 0.5
+height = 0.9
 el = 4.0
-vel = 2
+vel = 0
+
+velend = 1.5217391304347825
+hend = 0.92
+#vel = 0
+
+a0 = 1.0
+a1 = 1.0
 
 g = 9.81
-dx = 0.1
+dx = 0.005
 Cr = 0.5
 l = Cr / (2 + sqrt(g*stage) )
 dt = l*dx
 theta = 1.0
-startx = 0.0
-endx = 2000.0 + dx
+startx = -800
+endx = 800.0 + dx
 startt = 0.0
-endt = 100 + dt  
+endt = 150 + 3*dt  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
+m = len(t)
 
 gap = int(0.5/dt)
     
-h,G,bed = flowoverbump(x,stage,center,width,height,vel,el)
+#h,G,bed = flowoverbump(x,stage,center,width,height,vel,el)
+h,G,bed = soloverbump(x,a0,a1,-20,20,0.0,g,stage,center,width,height,vel,el)
     
 nBC = 3
 nBCs = 4
@@ -229,18 +264,45 @@ u1_c  = copyarraytoC(u1)
 b0_c  = copyarraytoC(b0)
 b1_c  = copyarraytoC(b1)
 u_c = mallocPy(n)
+
+xbeg = arange(startx - nBC*dx,startx,dx)
+xend = arange(endx + dx,endx + (nBC+1)*dx) 
+
+xbc =  concatenate([xbeg,x,xend]) 
+
+xbc_c = copyarraytoC(xbc)
+hbc_c = mallocPy(n + 2*nBC)
+ubc_c = mallocPy(n + 2*nBC)
+bedbc_c = mallocPy(n + 2*nBC)
+conc(b0_c , bed_c,b1_c,nBC,n ,nBC , bedbc_c)
+Evals = []
+Etimes = []
+
+tBC = 2
+#initial conditions for time steps
     
 for i in range(1,len(t)): 
+
     if (i == 1 or i%gap == 0):
+        ki = i
         getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
         u = copyarrayfromC(u_c,n)
         G = copyarrayfromC(G_c,n)
         h = copyarrayfromC(h_c,n)
+        
+        conc(h0_c , h_c,h1_c,nBC,n ,nBC , hbc_c)
+        conc(u0_c , u_c,u1_c,nBC,n ,nBC , ubc_c)  
+        Eval = MyEnergyall(xbc_c,hbc_c,ubc_c,bedbc_c,g,n + 2*nBC,nBC,dx)
+        
+        
+        Evals.append(Eval)
+        Etimes.append(t[i-1])
+        
         s = wdir +  "out" + str(i)+".txt"
         with open(s,'a') as file2:
             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    
-            writefile2.writerow(['dx' ,'dt','time',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+        
+            writefile2.writerow(['dx' ,'dt','time','Eval',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
                        
             for j in range(n):
                 writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
@@ -252,14 +314,32 @@ getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
 u = copyarrayfromC(u_c,n)
 G = copyarrayfromC(G_c,n)
 h = copyarrayfromC(h_c,n)
+
+conc(h0_c , h_c,h1_c,nBC,n ,nBC , hbc_c)
+conc(u0_c , u_c,u1_c,nBC,n ,nBC , ubc_c)        
+Eval = MyEnergyall(xbc_c,hbc_c,ubc_c,bedbc_c,g,n + 2*nBC,nBC,dx)
+
+Evals.append(Eval)
+Etimes.append(t[-1])
 s = wdir +  "outlast.txt"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     
-     writefile2.writerow(['dx' ,'dt','time',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+     writefile2.writerow(['dx' ,'dt','time','Eval',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
                    
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
+
+
+print("start: Time | Energy")
+print(Etimes[0],Evals[0])
+print("final: Time | Energy")
+print(Etimes[-2],Evals[-2])
+print("Energy Difference")
+print(Evals[-2] - Evals[0])
+
+
+
 deallocPy(u_c)   
 deallocPy(h_c)
 deallocPy(G_c)
@@ -267,6 +347,339 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c) 
+"""
+
+#### Flow over bump E Test
+wdir = "../../../data/raw/ChrisEnergbump/dx0p1/o2/"
+stage = 1
+center = 1000.0
+width = 150
+height = 0.5
+el = 4.0
+vel = 2
+
+
+g = 9.81
+dx = 0.1
+Cr = 0.5
+l = Cr / (2 + sqrt(g*stage) )
+dt = l*dx
+theta = 1.0
+startx = 800
+endx = 1200.0 + dx
+startt = 0.0
+endt = 10 + 3*dt  
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+m = len(t)
+
+gap = int(10/dt)
+    
+h,G,bed = flowoverbump(x,stage,center,width,height,vel,el)
+#h,G,bed = soloverbump(x,a0,a1,-20,20,0.0,g,stage,center,width,height,vel,el)
+    
+nBC = 3
+nBCs = 4
+b0 = bed[0]*ones(nBCs)
+b1 = bed[-1]*ones(nBCs)
+u0 = vel*ones(nBCs)
+u1 = vel*ones(nBCs)   
+h0 = h[0]*ones(nBCs)
+h1 = h[-1]*ones(nBCs)
+    
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+bed_c = copyarraytoC(bed)
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+b0_c  = copyarraytoC(b0)
+b1_c  = copyarraytoC(b1)
+u_c = mallocPy(n)
+
+xbeg = arange(startx - nBC*dx,startx,dx)
+xend = arange(endx + dx,endx + (nBC+1)*dx) 
+
+xbc =  concatenate([xbeg,x,xend]) 
+
+xbc_c = copyarraytoC(xbc)
+hbc_c = mallocPy(n + 2*nBC)
+ubc_c = mallocPy(n + 2*nBC)
+bedbc_c = mallocPy(n + 2*nBC)
+conc(b0_c , bed_c,b1_c,nBC,n ,nBC , bedbc_c)
+Evals = []
+Etimes = []
+Corrs = []
+
+tBC = 2
+#initial conditions for time steps
+
+getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+ubc = concatenate([u0,u,u1]) 
+pubc = concatenate([u0,u,u1]) 
+ppubc = concatenate([u0,u,u1]) 
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+
+ut = (3*ubc - 4*pubc + ppubc)/(2*dt)
+
+conc(h0_c , h_c,h1_c,nBC,n ,nBC , hbc_c)
+ubc_c = copyarraytoC(ubc)    
+ut_c = copyarraytoC(ut) 
+Eval = MyEnergyall(xbc_c,hbc_c,ubc_c,bedbc_c,g,n + 2*nBC,nBC,dx)
+Corr = MyCorrectionallcells(xbc_c,hbc_c,ubc_c, ut_c, bedbc_c,g,n,nBC,dx)
+Corrs.append(Corr)
+Evals.append(Eval)
+Etimes.append(t[-1])
+
+s = wdir +  "outfirst.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+     writefile2.writerow(['dx' ,'dt','time','Eval',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+                   
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[0]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
+    
+for i in range(1,len(t)): 
+
+    ki = i
+    getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
+    u = copyarrayfromC(u_c,n)
+    
+    ppubc = pubc
+    pubc = ubc 
+    ubc = concatenate([u0,u,u1]) 
+    
+    ut = (3*ubc - 4*pubc + ppubc)/(2*dt)
+    
+    ubc_c = copyarraytoC(ubc)    
+    ut_c = copyarraytoC(ut) 
+    
+    G = copyarrayfromC(G_c,n)
+    h = copyarrayfromC(h_c,n)
+    
+    
+    conc(h0_c , h_c,h1_c,nBC,n ,nBC , hbc_c)
+    Eval = MyEnergyall(xbc_c,hbc_c,ubc_c,bedbc_c,g,n + 2*nBC,nBC,dx)
+    Corr = MyCorrectionallcells(xbc_c,hbc_c,ubc_c, ut_c, bedbc_c,g,n,nBC,dx)
+    
+    Corrs.append(Corr)
+    Evals.append(Eval)
+    Etimes.append(t[i-1])
+        
+        
+    evolvewrap(G_c,h_c,bed_c,h0_c,h1_c,u0_c,u1_c,b0_c,b1_c,g,dx,dt,nBC,n,nBCs,theta)
+    print (t[i])
+        
+getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+
+ppubc = pubc
+pubc = ubc 
+ubc = concatenate([u0,u,u1]) 
+
+ut = (3*ubc - 4*pubc + ppubc)/(2*dt)
+
+ubc_c = copyarraytoC(ubc)    
+ut_c = copyarraytoC(ut) 
+
+print(ppubc)
+print(pubc)
+print(ubc)
+
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+
+
+conc(h0_c , h_c,h1_c,nBC,n ,nBC , hbc_c)
+Eval = MyEnergyall(xbc_c,hbc_c,ubc_c,bedbc_c,g,n + 2*nBC,nBC,dx)
+Corr = MyCorrectionallcells(xbc_c,hbc_c,ubc_c, ut_c, bedbc_c,g,n,nBC,dx)
+
+Corrs.append(Corr)
+Evals.append(Eval)
+Etimes.append(t[i-1])
+m = len(t)
+
+tbeg = arange(startt - tBC*dt,startt,dt)
+tend = arange(endx + dt,endt + (tBC+1)*dt) 
+
+tbc =  concatenate([tbeg,t,tend]) 
+
+tbc_c = copyarraytoC(tbc)
+Corrintx_c = copyarraytoC(Corrs)
+FinCorrect = MyCorrectionalltimes(tbc_c,Corrintx_c,tBC, m - tBC,dt)
+s = wdir +  "outlast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+     writefile2.writerow(['dx' ,'dt','time','Eval',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+                   
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
+
+
+print("start: Time | Energy")
+print(Etimes[0],Evals[0])
+print("final: Time | Energy")
+print(Etimes[-2],Evals[-2])
+print("Energy Difference")
+print(Evals[-2] - Evals[0])
+
+
+
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c) 
+
+"""
+#### Flow over bump
+wdir = "../../../data/raw/ChrisEnergbump/dx0p1/o2/"
+stage = 1
+center = 1000.0
+width = 150
+height = 0.5
+el = 4.0
+vel = 2
+
+
+g = 9.81
+dx = 0.1
+Cr = 0.5
+l = Cr / (2 + sqrt(g*stage) )
+dt = l*dx
+theta = 1.0
+startx = -1000
+endx = 3000.0 + dx
+startt = 0.0
+endt = 100 + dt  
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+    
+x,t = makevar(startx,endx,dx,startt,endt,dt)
+n = len(x)
+m = len(t)
+
+gap = int(10/dt)
+    
+h,G,bed = flowoverbump(x,stage,center,width,height,vel,el)
+#h,G,bed = soloverbump(x,a0,a1,-20,20,0.0,g,stage,center,width,height,vel,el)
+    
+nBC = 3
+nBCs = 4
+b0 = bed[0]*ones(nBCs)
+b1 = bed[-1]*ones(nBCs)
+u0 = vel*ones(nBCs)
+u1 = vel*ones(nBCs)   
+h0 = h[0]*ones(nBCs)
+h1 = h[-1]*ones(nBCs)
+    
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+bed_c = copyarraytoC(bed)
+h0_c  = copyarraytoC(h0)
+h1_c  = copyarraytoC(h1)
+u0_c  = copyarraytoC(u0)
+u1_c  = copyarraytoC(u1)
+b0_c  = copyarraytoC(b0)
+b1_c  = copyarraytoC(b1)
+u_c = mallocPy(n)
+
+xbeg = arange(startx - nBC*dx,startx,dx)
+xend = arange(endx + dx,endx + (nBC+1)*dx) 
+
+xbc =  concatenate([xbeg,x,xend]) 
+
+xbc_c = copyarraytoC(xbc)
+hbc_c = mallocPy(n + 2*nBC)
+ubc_c = mallocPy(n + 2*nBC)
+bedbc_c = mallocPy(n + 2*nBC)
+conc(b0_c , bed_c,b1_c,nBC,n ,nBC , bedbc_c)
+Evals = []
+Etimes = []
+
+tBC = 2
+#initial conditions for time steps
+    
+for i in range(1,len(t)): 
+
+    if (i == 1 or i%gap == 0):
+        ki = i
+        getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
+        u = copyarrayfromC(u_c,n)
+        G = copyarrayfromC(G_c,n)
+        h = copyarrayfromC(h_c,n)
+        
+        conc(h0_c , h_c,h1_c,nBC,n ,nBC , hbc_c)
+        conc(u0_c , u_c,u1_c,nBC,n ,nBC , ubc_c)  
+        Eval = MyEnergyall(xbc_c,hbc_c,ubc_c,bedbc_c,g,n + 2*nBC,nBC,dx)
+        
+        
+        Evals.append(Eval)
+        Etimes.append(t[i-1])
+        
+        s = wdir +  "out" + str(i)+".txt"
+        with open(s,'a') as file2:
+            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+            writefile2.writerow(['dx' ,'dt','time','Eval',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+                       
+            for j in range(n):
+                writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
+        
+    evolvewrap(G_c,h_c,bed_c,h0_c,h1_c,u0_c,u1_c,b0_c,b1_c,g,dx,dt,nBC,n,nBCs,theta)
+    print (t[i])
+        
+getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+
+conc(h0_c , h_c,h1_c,nBC,n ,nBC , hbc_c)
+conc(u0_c , u_c,u1_c,nBC,n ,nBC , ubc_c)        
+Eval = MyEnergyall(xbc_c,hbc_c,ubc_c,bedbc_c,g,n + 2*nBC,nBC,dx)
+
+Evals.append(Eval)
+Etimes.append(t[-1])
+s = wdir +  "outlast.txt"
+with open(s,'a') as file2:
+     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+     writefile2.writerow(['dx' ,'dt','time','Eval',"cell midpoint" ,'height(m)', 'G' , 'u(m/s)','bed' ])        
+                   
+     for j in range(n):
+         writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
+
+
+print("start: Time | Energy")
+print(Etimes[0],Evals[0])
+print("final: Time | Energy")
+print(Etimes[-2],Evals[-2])
+print("Energy Difference")
+print(Evals[-2] - Evals[0])
+
+
+
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+deallocPy(h0_c)
+deallocPy(h1_c)
+deallocPy(u0_c)
+deallocPy(u1_c) 
+"""
+
 
 
 
@@ -300,6 +713,7 @@ s = "actual"
 plot(x,h,label=s)
 legend()
 """
+
 """
 ## smooth DAM BREAK time##########################
 from time import time

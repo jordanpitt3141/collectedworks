@@ -492,7 +492,7 @@ def DSWsmooth(x,x0,base,eta0,diffuse,dx):
 
     return h,u      
 
-
+"""
 #Dispersive Shockwaves
 #diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
 diffuses = [0.025,0.5,2.5,5.0,1000.0]
@@ -671,6 +671,7 @@ for ll in dxlist:
         deallocPy(hmend_c)
 
 
+"""
 """
 #Dam Break
 import os
@@ -1586,15 +1587,15 @@ with open(s,'a') as file2:
 for i in range(1,len(Evals)):
     print(Evals[0] - Evals[i])
 """
-
-######### Colliding Soliton Experiments
 """
-wdir = "../../../data/raw/Cserre/solitonint/collnonlindx0p01/o3/"
+######### Colliding Soliton Experiments
+
+wdir = "../../../data/raw/Cserre/solitonint/collnonlindx0p1N/o3/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-dx = 0.01
+dx = 0.1
 
 a0 = 1.0
 a11 = 1.0
@@ -1874,10 +1875,10 @@ with open(s,'a') as file2:
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j]),str(normh),str(normu), str(timeelapse),str(len(t) - 1) , str((1.0*timeelapse)/ (len(t) - 1) )])
 """
 
-"""
+
 ##Accuracy Test
 ### Soliton Accuracy ################
-wdir = "../../../data/raw/solconnonsmallg1/o3/"
+wdir = "../../../data/raw/solconnonsmallg10test/o3/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -1886,19 +1887,19 @@ s = wdir + "savenorms.txt"
 with open(s,'a') as file1:
     writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-    writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
+    writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity','Hamiltonian Difference'])
     
 for k in range(6,21):
     dx = 100.0 / (2**k)
     a0 = 1.0
     a1 = 1.0
-    #g = 9.81
-    g = 1.0
+    g = 9.81
+    #g = 1.0
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -100.0
-    endx = 100.0 + dx
+    startx = -50.0
+    endx = 250.0 + dx
     startt = 0.0
     endt = 50.0 + dt
         
@@ -1972,6 +1973,16 @@ for k in range(6,21):
     G_c = mallocPy(n)
     h_c = mallocPy(n)
     
+    xbeg = arange(startx - niBC*dx,startx,dx)
+    xend = arange(endx + dx,endx + (niBC+1)*dx) 
+    
+    xbc =  concatenate([xbeg,x,xend])  
+    
+    xbc_c = copyarraytoC(xbc)
+    hbc_c = mallocPy(n + 2*niBC)
+    ubc_c = mallocPy(n + 2*niBC)
+    Evals = []
+    
     for i in range(1,len(t)):
         
         if(i % gap == 0 or i ==1):
@@ -1979,6 +1990,12 @@ for k in range(6,21):
             ca2midpt(ha_c,dx,n,h_c)
             ca2midpt(Ga_c,dx,n,G_c)
             ufromGh(G_c,h_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,niBC, u_c)
+            
+            conc(hmbeg_c , h_c,hmend_c,niBC,n ,niBC , hbc_c)
+            conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)        
+            Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+            
+            Evals.append(Eval)
             u = copyarrayfromC(u_c,n)
             G = copyarrayfromC(G_c,n)
             h = copyarrayfromC(h_c,n)
@@ -1998,10 +2015,10 @@ for k in range(6,21):
             with open(s,'a') as file2:
                 writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     
-                #writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity'  ])        
+                writefile2.writerow(['dx' ,'dt','time','xi','Eval', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity'  ])        
                    
                 for j in range(n):
-                    writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])  
+                    writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]),str(Eval), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])  
                  
             
         evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC)
@@ -2012,6 +2029,12 @@ for k in range(6,21):
     ca2midpt(ha_c,dx,n,h_c)
     ca2midpt(Ga_c,dx,n,G_c)
     ufromGh(G_c,h_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,niBC, u_c)
+    
+    conc(hmbeg_c , h_c,hmend_c,niBC,n ,niBC , hbc_c)
+    conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)        
+    Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    
+    Evals.append(Eval)
     u = copyarrayfromC(u_c,n)
     G = copyarrayfromC(G_c,n)
     h = copyarrayfromC(h_c,n)
@@ -2028,19 +2051,21 @@ for k in range(6,21):
     with open(s,'a') as file2:
          writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     
-         writefile2.writerow(['dx' ,'dt','time', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+         writefile2.writerow(['dx' ,'dt','time','xi','Eval', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity'  ])        
                    
          for j in range(n):
-             writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])]) 
+             writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]),str(Eval), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])  
+     
     normhdiffi = norm(h - htrue,ord=1) / norm(htrue,ord=1)
-    normudiffi = norm(u -utrue,ord=1) / norm(utrue,ord=1)  
+    normudiffi = norm(u -utrue,ord=1) / norm(utrue,ord=1)
+    normHamdiff = (Evals[-1] - Evals[0])/ Evals[0]
 
     s = wdir + "savenorms.txt"
     with open(s,'a') as file1:
         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-        writefile.writerow([str(dx),str(normhdiffi), str(normudiffi)])
-"""
+        writefile.writerow([str(dx),str(normhdiffi), str(normudiffi),str(normHamdiff)])
+
 
 """
 ##### SEGUR AND HAMMACK EXPERIMENT 1

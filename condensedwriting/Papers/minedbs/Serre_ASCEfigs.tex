@@ -254,32 +254,7 @@ Combining this with the update formula for $u$ [] gives a full finite difference
 %--------------------------------------------------------------------------------
 In this section the methods introduced in this paper will be validated by using them to approximate an analytic solution of the Serre equations, this will also be used to verify their order of accuracy. Then an in depth comparison of using these methods for a smooth approximation to the discontinuous dam break problem will be provided to investigate the behaviour of these equations in the presence of discontinuities. This is a problem that so far has only received a proper treatment in \cite{El-etal-2006}, with other research giving only a cursory look into the topic. 
 
-%--------------------------------------------------------------------------------
-\section{Soliton}
-\label{section:Convergence Rate}
-%--------------------------------------------------------------------------------
-Currently cnoidal waves are the only family of analytic solutions to the Serre equations \cite{Carter-Cienfuegos-2010-259}. Solitons are a particular instance of cnoidal waves that travel without deformation and have been used to verify the convergence rates of the described methods in this paper. 
 
-For the Serre equations the solitons have the following form
-\begin{linenomath*}
-\begin{subequations}
-\begin{gather}
-h\left(x,t\right) = a_0 + a_1\text{sech}^2\left( \kappa\left(x - ct\right)\right),
-\end{gather}
-\begin{gather}
-u\left(x,t\right) = c\left(1 - \dfrac{a_0}{h(x,t)} \right),
-\end{gather}
-\begin{gather}
-\kappa = \dfrac{\sqrt{3a_1}}{2a_0 \sqrt{ a_0 + a_1}}
-\end{gather}
-and
-\begin{gather}
-c = \sqrt{g \left(a_0 + a_1\right)}
-\end{gather}
-\end{subequations}
-\label{eq:sol}
-\end{linenomath*}
-where $a_0$ and $a_1$ are input parameters that determine the depth of the quiescent water and the maximum height of the soliton above that respectively. In the simulation $a_0 = 10\text{m}$, $a_1 = 1\text{m}$ for $x\in\left[-500\text{m},1500\text{m}\right]$ and $t\in\left[0\text{s},100\text{s}\right]$. With $\Delta t = 0.01 \Delta x$ which satisfies [] and $\theta = 1.2$ for the second-order finite difference-volume method.
 
 %We have that the FD method gives full 2nd order convergence, while Grimshaw gives 1.5 order
 %this is because Lax-Wendroff is 2nd order at different points than the FD method, so we dont recover full second order. 

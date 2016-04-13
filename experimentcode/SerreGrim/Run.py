@@ -100,9 +100,9 @@ def experiment1(x,h0,h1,dx):
             h[i] = h0
 
     return h,u
-"""
+
 #solitonaccuracy
-wdir = "../../../data/solcononesec/grim/"
+wdir = "../../../data/raw/solconnonsmallg10/grim/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
@@ -111,18 +111,22 @@ s = wdir + "savenorms.txt"
 with open(s,'a') as file1:
     writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-    writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
+    writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity', 'Eval Error'])
 
-for k in range(20):
+for k in range(6,21):
     dx = 100.0 / (2**k)
-    l = 0.01
-    dt = l*dx
-    startx = -500.0
-    endx = 1500.0 + dx
-    startt = 0.0
-    endt = 1 + dt 
-        
+    Cr = 0.5
+    
     g = 9.81
+    a0 = 1.0
+    a1 = 1.0
+    
+    l = 1.0 / (sqrt(g*(a0 + a1)))
+    dt = Cr*l*dx
+    startx = -50.0
+    endx = 250.0 + dx
+    startt = 0
+    endt = 50 + dt
         
     x,t = makevar(startx,endx,dx,startt,endt,dt)
     n = len(x)
@@ -130,14 +134,12 @@ for k in range(20):
     
     gap = max(5,int(0.5/dt))
     
-    a0 = 10.0
-    a1 = 1.0
-    
     
     h,u = solitoninit(n,a0,a1,g,x,0.0,dx)
     ph,pu = solitoninit(n,a0,a1,g,x,-dt,dx)
         
     nBC = 3
+    niBC = nBC
     nBCs = 4
     u0 = zeros(nBCs)
     u1 = zeros(nBCs)    
@@ -147,16 +149,33 @@ for k in range(20):
     h_c = copyarraytoC(h)
     u_c = copyarraytoC(u)
     pubc_c = copyarraytoC(concatenate([u0[-nBC:],pu,u1[:nBC]]))
+    phbc_c = copyarraytoC(concatenate([h0[-nBC:],ph,h1[:nBC]]))
     h0_c  = copyarraytoC(h0)
     h1_c  = copyarraytoC(h1)
     u0_c  = copyarraytoC(u0)
     u1_c  = copyarraytoC(u1)
-        
+    
+    xbeg = arange(startx - niBC*dx,startx,dx)
+    xend = arange(endx + dx,endx + (niBC+1)*dx) 
+    
+    xbc =  concatenate([xbeg,x,xend])  
+    
+    xbc_c = copyarraytoC(xbc)
+    hbc_c = mallocPy(n + 2*niBC)
+    ubc_c = mallocPy(n + 2*niBC)
+    Evals = []
+   
+    conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+    conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)         
+    Evali = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)     
           
     for i in range(1,len(t)):            
         evolvewrap(u_c, h_c, pubc_c, h0_c, h1_c,u0_c, u1_c,g,dx,dt,nBC, n,nBCs)    
         print (t[i])
     
+    conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+    conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)         
+    Evalf = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
     u = copyarrayfromC(u_c,n)
     h = copyarrayfromC(h_c,n)  
     he,ue = solitoninit(n,a0,a1,g,x,t[i],dx)
@@ -168,10 +187,10 @@ for k in range(20):
     with open(s,'a') as file2:
          writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             
-         writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'u(m/s)',"he","ue"])        
+         writefile2.writerow(['dx' ,'dt','time','Evali','Evalf','Eval Error','cell midpoint', 'height(m)', 'u(m/s)',"he","ue"])        
                            
          for j in range(n):
-             writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j]), str(he[j]),str(ue[j])]) 
+             writefile2.writerow([str(dx),str(dt),str(t[i]), str(Evali), str(Evalf), str(abs(Evali - Evalf)/ abs(Evali)), str(x[j]), str(h[j]) , str(u[j]), str(he[j]),str(ue[j])]) 
              
     normhdiffi = norm(h - he,ord=1) / norm(he,ord=1)
     normudiffi = norm(u -ue,ord=1) / norm(ue,ord=1)  
@@ -180,7 +199,7 @@ for k in range(20):
     with open(s,'a') as file1:
         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-        writefile.writerow([str(dx),str(normhdiffi), str(normudiffi)])
+        writefile.writerow([str(dx),str(normhdiffi), str(normudiffi), str(abs(Evali - Evalf)/ abs(Evali))])
     
     deallocPy(u_c)   
     deallocPy(h_c)
@@ -188,7 +207,8 @@ for k in range(20):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-"""
+
+
 
 """
 ##Soliton
@@ -268,7 +288,7 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
 """
-
+"""
 ##Soliton Collision
 wdir = "../../../data/raw/Cserre/solitonothers/collDMcopyhh/grim/"
 if not os.path.exists(wdir):
@@ -355,7 +375,7 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
-
+"""
 
 
 

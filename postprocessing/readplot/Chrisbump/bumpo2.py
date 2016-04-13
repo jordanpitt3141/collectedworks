@@ -19,15 +19,19 @@ wdirord = "o2"
 #filename = "out1.txt"
 #filename = "out10251.txt"
 #filename = "out20553.txt"
-#filename = "outlast.txt"
+#filename = "out30804.txt"
+#filename = "out41055.txt"
+#filename = "out51306.txt"
+#filename = "out61608.txt"
+filename = "outlast.txt"
 
     
 cylim = [0.0,2.0]
 cxlim = [500,1500]
 gap = 1
 
-wdir = "../../../../data/raw/bumpChris/dx0p1/o2/"
-sdir = "../../../../data/postprocessing/bumpChris/dx0p1/o2/t300/"
+wdir = "../../../../data/raw/bumpChrislonger/dx0p1/o2/"
+sdir = "../../../../data/postprocessing/bumpChrislongerfix/dx0p1/o2/t700/"
 if not os.path.exists(sdir):
         os.makedirs(sdir)
      
@@ -51,8 +55,8 @@ with open(s,'r') as file1:
             bed.append(float(row[7]))
          j = j + 1
      igap = int(gap)
-     xbeg = int(cxlim[0]/dx)
-     xend = int(cxlim[1]/dx)
+     xbeg = int((cxlim[0] + 1000)/dx)
+     xend = int((cxlim[1] + 1000)/dx)
      xt = x[xbeg:xend:igap]
      ht = h[xbeg:xend:igap]
      bedt = bed[xbeg:xend:igap]
@@ -82,6 +86,18 @@ legend()
 s = sdir +"bleg.png"       
 savefig(s, bbox_inches='tight')        
 clf()
+
+n = len(x)
+s = sdir + "b.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.15f\n" %(x[i]," ",bed[i])
+        file1.write(s)
+s = sdir + "w.dat"
+with open(s,'w') as file2:
+    for i in range(n):
+        s ="%3.8f%5s%1.15f\n" %(x[i]," ",h[i] + bed[i])
+        file2.write(s)
 
 
 #make the tex file to create the document

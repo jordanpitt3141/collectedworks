@@ -5,6 +5,12 @@
 
 //put in slope limiting.
 
+const double i24 = 1.0/24.0;
+const double i48 = 1.0/48.0;
+const double i12 = 1.0/12.0;
+const double i3 = 1.0/3.0;
+const double i8 = 1.0/8.0;
+
 double minmod(double a, double b, double c)
 {
     if((a > 0) && (b>0) && (c>0))
@@ -17,6 +23,237 @@ double minmod(double a, double b, double c)
     }
         return 0.0;
 }
+
+double interpquarticval(double *coeff,double xj,double x)
+{    
+    return coeff[0]*(x -xj)*(x -xj)*(x -xj)*(x -xj) + coeff[1]*(x -xj)*(x -xj)*(x -xj)
+    + coeff[2]*(x -xj)*(x -xj) + coeff[3]*(x -xj)+ coeff[4];
+}  
+  
+double interpquarticgrad(double *coeff,double xj,double x)
+{
+    
+    return 4*coeff[0]*(x -xj)*(x -xj)*(x -xj) + 3*coeff[1]*(x -xj)*(x -xj)
+    + 2*coeff[2]*(x -xj) + coeff[3];
+}
+
+double interpquarticHess(double *coeff,double xj,double x)
+{
+    
+    return 12*coeff[0]*(x -xj)*(x -xj)+ 6*coeff[1]*(x -xj)
+    + 2*coeff[2];
+}
+   
+void interpquartcoeff(double *q,double *coeff,int j,double dx)
+{
+    double idx = 1.0/dx;
+
+    coeff[0] = i24*idx*idx*idx*idx*(q[j+2] - 4*q[j+1] + 6*q[j] - 4*q[j-1] + q[j-2]);
+    coeff[1] = i12*idx*idx*idx*(q[j+2] - 2*q[j+1] + 2*q[j-1] - q[j-2]);
+    coeff[2] = i24*idx*idx*(-q[j+2] + 16*q[j+1] - 30*q[j] + 16*q[j-1] - q[j-2]);
+    coeff[3] = i12*idx*(-q[j+2] + 8*q[j+1] - 8*q[j-1] + q[j-2]);
+    coeff[4] = q[j];
+}
+    
+double MyEnergyacrosscell(double *x,double *h,double *u, double *b,double g,int j,double dx)
+{
+    //so we have h,u at midpoints
+    //epsilon and sigma are everywhere
+
+	double *ucoeff = malloc(5*sizeof(double));
+	double *hcoeff = malloc(5*sizeof(double));
+	double *bcoeff = malloc(5*sizeof(double));
+	
+
+    //jth cell
+    interpquartcoeff(u,ucoeff,j,dx);
+    interpquartcoeff(h,hcoeff,j,dx);
+    interpquartcoeff(b,bcoeff,j,dx);
+    
+    //first gauss point
+    double fgp = 0.5*dx*sqrt(3.0/5.0) + x[j];
+    double fgph = interpquarticval(hcoeff,x[j],fgp);
+    double fgpu = interpquarticval(ucoeff,x[j],fgp);
+    double fgpux = interpquarticgrad(ucoeff,x[j],fgp);
+	double fgpb = interpquarticval(bcoeff,x[j],fgp);
+    
+    double fgpe = fgph*fgpu*fgpu + 2*g*fgph*(0.5*fgph + fgpb) + i12*(fgph*fgph*fgph)*fgpux*fgpux + fgph*(0.5*fgph + fgpb);
+        
+    //second gauss point
+    double sgp = x[j];
+    double sgph = interpquarticval(hcoeff,x[j],sgp);
+    double sgpu = interpquarticval(ucoeff,x[j],sgp);
+    double sgpux = interpquarticgrad(ucoeff,x[j],sgp);
+	double sgpb = interpquarticval(bcoeff,x[j],sgp);
+    
+    double sgpe = sgph*sgpu*sgpu + 2*g*sgph*(0.5*sgph + sgpb) + i12*(sgph*sgph*sgph)*sgpux*sgpux + sgph*(0.5*sgph + sgpb);
+
+    //third gauss point
+    double tgp = -0.5*dx*sqrt(3.0/5.0) + x[j];
+    double tgph = interpquarticval(hcoeff,x[j],tgp);
+    double tgpu = interpquarticval(ucoeff,x[j],tgp);
+    double tgpux = interpquarticgrad(ucoeff,x[j],tgp);
+	double tgpb = interpquarticval(bcoeff,x[j],tgp);
+    
+    double tgpe = tgph*tgpu*tgpu + 2*g*tgph*(0.5*tgph + tgpb) + i12*(tgph*tgph*tgph)*tgpux*tgpux + tgph*(0.5*tgph + tgpb);
+
+	free(ucoeff);
+	free(hcoeff);
+	free(bcoeff);
+    
+    return 0.5*dx*( (5.0/9.0)*fgpe + (8.0/9.0)*sgpe + (5.0/9.0)*tgpe);
+}
+    
+double MyEnergyall(double *x,double *h,double *u, double *b,double g,int n, int nBC,double dx)
+{
+	//include approximations to H(a)u(a) + p(a)u(a) - H(b)u(b) - p(b)u(b) (a end, b beg)
+    double sum1 = 0.0;
+	int i;
+	for(i = nBC; i < n - nBC;i++)
+	{
+       sum1 = sum1 + MyEnergyacrosscell(x,h,u,b,g,i,dx);
+	}
+	sum1 = 0.5*sum1;
+
+    return sum1; 
+
+}
+
+double MyCorrectionacrosstimestep(double *t,double *Corrintx,int j,double dt)
+{
+    //so we have h,u at midpoints
+    //epsilon and sigma are everywhere
+
+	double *Corrintxcoeff = malloc(5*sizeof(double));
+	
+
+    //jth cell
+    interpquartcoeff(Corrintx,Corrintxcoeff,j,dt);
+    
+    //first gauss point
+    double fgp = 0.5*dt*sqrt(3.0/5.0) + t[j];
+    double fgpe = interpquarticval(Corrintxcoeff,t[j],fgp);
+        
+    //second gauss point
+    double sgp = t[j];
+  
+    double sgpe = interpquarticval(Corrintxcoeff,t[j],sgp);
+
+    //third gauss point
+    double tgp = -0.5*dt*sqrt(3.0/5.0) + t[j];
+	  
+    double tgpe = interpquarticval(Corrintxcoeff,t[j],tgp);
+
+	free(Corrintxcoeff);
+    
+    return 0.5*dt*( (5.0/9.0)*fgpe + (8.0/9.0)*sgpe + (5.0/9.0)*tgpe);
+}
+
+double MyCorrectionalltimes(double *t,double *Corrintx, int startj, int endj,double dt)
+{
+	//include approximations to H(a)u(a) + p(a)u(a) - H(b)u(b) - p(b)u(b) (a end, b beg)
+    double sum1 = 0.0;
+	int i;
+	for(i = startj; i < endj;i++)
+	{
+       sum1 = sum1 + MyCorrectionacrosstimestep(t,Corrintx,i,dt);
+	}
+    return sum1; 
+
+}
+
+double MyCorrectacrosscell(double *x,double *h,double *u, double *ut, double *b,double g,int j,double dx)
+{
+    //so we have h,u at midpoints
+    //epsilon and sigma are everywhere
+
+	double *ucoeff = malloc(5*sizeof(double));
+	double *utcoeff = malloc(5*sizeof(double));
+	double *hcoeff = malloc(5*sizeof(double));
+	double *bcoeff = malloc(5*sizeof(double));
+	
+
+    //jth cell
+    interpquartcoeff(u,ucoeff,j,dx);
+	interpquartcoeff(ut,utcoeff,j,dx);	
+    interpquartcoeff(h,hcoeff,j,dx);
+    interpquartcoeff(b,bcoeff,j,dx);
+    
+    //first gauss point
+    double fgp = 0.5*dx*sqrt(3.0/5.0) + x[j];
+    double fgph = interpquarticval(hcoeff,x[j],fgp);
+    double fgpu = interpquarticval(ucoeff,x[j],fgp);
+	double fgput = interpquarticval(utcoeff,x[j],fgp);
+	double fgputx = interpquarticgrad(utcoeff,x[j],fgp);
+    double fgpux = interpquarticgrad(ucoeff,x[j],fgp);
+	double fgpuxx = interpquarticHess(ucoeff,x[j],fgp);
+	double fgpb = interpquarticval(bcoeff,x[j],fgp);
+	double fgpbx = interpquarticgrad(bcoeff,x[j],fgp);
+	double fgpbxx = interpquarticHess(bcoeff,x[j],fgp);
+    
+	double fgpGam = fgpux*fgpux - fgpu*fgpuxx - fgputx;
+	double fgpPhi = fgpbx*(fgput + fgpu*fgpux) + fgpu*fgpu*fgpbxx;
+	double fgppbar = g*fgph + 0.5*fgph*fgph*fgpGam + fgph*fgpPhi;
+    double fgpe = fgppbar*(-fgpbx*fgpu + 0.5*fgph + fgpb + 0.5*fgph*fgpux);
+        
+    //second gauss point
+    fgp = x[j];
+    fgph = interpquarticval(hcoeff,x[j],fgp);
+    fgpu = interpquarticval(ucoeff,x[j],fgp);
+	fgput = interpquarticval(utcoeff,x[j],fgp);
+	fgputx = interpquarticgrad(utcoeff,x[j],fgp);
+    fgpux = interpquarticgrad(ucoeff,x[j],fgp);
+	fgpuxx = interpquarticHess(ucoeff,x[j],fgp);
+	fgpb = interpquarticval(bcoeff,x[j],fgp);
+	fgpbx = interpquarticgrad(bcoeff,x[j],fgp);
+	fgpbxx = interpquarticHess(bcoeff,x[j],fgp);
+    
+	fgpGam = fgpux*fgpux - fgpu*fgpuxx - fgputx;
+	fgpPhi = fgpbx*(fgput + fgpu*fgpux) + fgpu*fgpu*fgpbxx;
+	fgppbar = g*fgph + 0.5*fgph*fgph*fgpGam + fgph*fgpPhi;
+    double sgpe = fgppbar*(-fgpbx*fgpu + 0.5*fgph + fgpb + 0.5*fgph*fgpux);
+
+    //third gauss point
+    fgp = -0.5*dx*sqrt(3.0/5.0) + x[j];
+    fgph = interpquarticval(hcoeff,x[j],fgp);
+    fgpu = interpquarticval(ucoeff,x[j],fgp);
+	fgput = interpquarticval(utcoeff,x[j],fgp);
+	fgputx = interpquarticgrad(utcoeff,x[j],fgp);
+    fgpux = interpquarticgrad(ucoeff,x[j],fgp);
+	fgpuxx = interpquarticHess(ucoeff,x[j],fgp);
+	fgpb = interpquarticval(bcoeff,x[j],fgp);
+	fgpbx = interpquarticgrad(bcoeff,x[j],fgp);
+	fgpbxx = interpquarticHess(bcoeff,x[j],fgp);
+    
+	fgpGam = fgpux*fgpux - fgpu*fgpuxx - fgputx;
+	fgpPhi = fgpbx*(fgput + fgpu*fgpux) + fgpu*fgpu*fgpbxx;
+	fgppbar = g*fgph + 0.5*fgph*fgph*fgpGam + fgph*fgpPhi;
+    double tgpe = fgppbar*(-fgpbx*fgpu + 0.5*fgph + fgpb + 0.5*fgph*fgpux);
+
+	free(ucoeff);
+	free(hcoeff);
+	free(bcoeff);
+    
+    return 0.5*dx*( (5.0/9.0)*fgpe + (8.0/9.0)*sgpe + (5.0/9.0)*tgpe);
+}
+
+
+double MyCorrectionallcells(double *x,double *h,double *u, double *ut, double *b,double g,int n, int nBC,double dx)
+{
+	//include approximations to H(a)u(a) + p(a)u(a) - H(b)u(b) - p(b)u(b) (a end, b beg)
+    double sum1 = 0.0;
+	int i;
+	for(i = nBC; i < n - nBC;i++)
+	{
+       sum1 = sum1 + MyCorrectacrosscell(x,h,u,ut,b,g,i,dx);
+	}
+	sum1 = sum1;
+
+    return sum1; 
+
+}
+
+
 
 void TDMA(double *a, double *b, double *c, double *d, int n, double *x)
 {

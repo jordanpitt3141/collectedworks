@@ -89,6 +89,14 @@ deallocPy = _Serre2GR.deallocPy
 def evolvewrap(*args):
   return _Serre2GR.evolvewrap(*args)
 evolvewrap = _Serre2GR.evolvewrap
+
+def HankEnergyall(*args):
+  return _Serre2GR.HankEnergyall(*args)
+HankEnergyall = _Serre2GR.HankEnergyall
+
+def conc(*args):
+  return _Serre2GR.conc(*args)
+conc = _Serre2GR.conc
 # This file is compatible with both classic and new-style classes.
 
 

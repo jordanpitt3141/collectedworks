@@ -17,7 +17,9 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 
 #wdir = "../../../../data/raw/DSWalpha/o3/9/1/"
 
-wdir = "../../../../data/raw/bumpChris/dx0p04/o2/"
+wdir = "../../../../data/bumpChrislonger/dx0p1/o2/"
+
+
 
 gap = 1
 g = 9.81
@@ -37,6 +39,17 @@ with open(s,'r') as file1:
     j = -1
     for row in readfile:       
         if (j >= 0):
+            """
+            dx =float(row[0])
+            dt =float(row[1])
+            t =float(row[2])
+            x.append(float(row[3]))
+            h.append(float(row[4]))
+            u.append(float(row[6]))
+            bed.append(float(row[7]))
+            #diffuse = float(row[7])
+            
+            """
             dx =float(row[0])
             dt =float(row[1])
             t =float(row[2])
@@ -47,6 +60,7 @@ with open(s,'r') as file1:
             #diffuse = float(row[7])
                 
         j = j + 1
+        
     x = array(x)
     u = array(u)
     h = array(h)

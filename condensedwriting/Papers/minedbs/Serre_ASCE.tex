@@ -77,7 +77,7 @@ The Serre equations can derived as an approximation to the full Euler equations 
 \caption{The notation used for one-dimensional flow governed by the Serre equation.}
 \label{fig:Notation}
 \end{figure}
-The set up of the scenario under which the Serre approximation is made consists of a two dimensional $\textbf{x} = (x,z)$ fluid over a bottom topography as in Figure \ref{fig:Notation} acting under gravity. Consider a fluid particle at depth  $\xi(\textbf{x},t) = z - h(x,t) - z_b(x)$ below the water surface, see Figure \ref{fig:Notation}. Where the water depth is $h(x,t)$ and $z_b(x)$ is the bed elevation. The fluid particle is subject to the pressure, $p(\textbf{x},t)$ and  gravitational acceleration, $\textbf{g} = (0,g)^T$ and has a velocity $\textbf{u} = (u(\textbf{x},t),w(\textbf{x},t))$,  where $u(\textbf{x},t)$ is the velocity in the $x$-coordinate and $w(\textbf{x},t)$ is the velocity in the $z$-coordinate and $t$ is time. Assuming that $z_b(x)$ is constant the Serre equations read \cite{Guyenne-etal-2014-169}
+The set up of the scenario under which the Serre approximation is made consists of a two dimensional $\textbf{x} = (x,z)$ fluid over a bottom topography as in Figure \ref{fig:Notation} acting under gravity. Consider a fluid particle at depth  $\xi(\textbf{x},t) = h(x,t) + z_b(x) - z$ below the water surface, see Figure \ref{fig:Notation}. Where the water depth is $h(x,t)$ and $z_b(x)$ is the bed elevation. The fluid particle is subject to the pressure, $p(\textbf{x},t)$ and  gravitational acceleration, $\textbf{g} = (0,g)^T$ and has a velocity $\textbf{u} = (u(\textbf{x},t),w(\textbf{x},t))$,  where $u(\textbf{x},t)$ is the velocity in the $x$-coordinate and $w(\textbf{x},t)$ is the velocity in the $z$-coordinate and $t$ is time. Assuming that $z_b(x)$ is constant the Serre equations read \cite{Guyenne-etal-2014-169}
 \begin{linenomath*}
 \begin{subequations}\label{eq:Serre_nonconservative_form}
 \begin{gather}
@@ -90,11 +90,21 @@ The set up of the scenario under which the Serre approximation is made consists 
 \end{gather}
 \end{subequations}
 \end{linenomath*}
-Where $\bar{u}$ means the average of $u$ over the depth of water.
+Where $\bar{u}$ is the average of $u$ over the depth of water. 
+
+\subsection{Hamiltonian}
+
+The Serre equations admits a Hamiltonian which is the same as the energy \cite{Li-Y-2002,Hank-etal-2010-2034}. The Hamiltonian is:
+\begin{equation}
+\label{eqn:Hamildef}
+\mathcal{H} = \frac{1}{2}\int_{-\infty}^{\infty} hu^2 + gh^2 + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^3\, dx
+\end{equation}
+We can calculate this numerically by partitioning the total integral into cell-wise integrals. The cell-wise integral can then be calculated by quartic interpolation utilising neighbouring cells and then applying Gaussian quadrature with 3 points over the cell to get a sufficiently high order method to calculate the Hamiltonian for our purposes, in particular our method is at least third order accurate for the $\partial u / \partial x$ term. 
 %--------------------------------------------------------------------------------
-\section{Direct Numerical Methods}
+\section{Direct Numerical Methods} 
+\label{sec:DirNumMet}
 %--------------------------------------------------------------------------------
-Due to the presence of the mixed spatial and temporal derivatives in the conservation of momentum equation \eqref{eq:Serre_momentum} the choices of methods for these particular equations are limited. Thus the two direct numerical methods presented in this paper will begin by approximating \eqref{eq:Serre_momentum} by finite differences. To facilitate this a uniform grid in space will be used with $\Delta x  = x_{i+1} - x_i$ for all $i$ and quantities evaluated at these grid points will be denoted by subscripts for example $h_i = h(x_i)$. The grid in time will be denoted by superscripts for example $h^n = h(t^n)$, noting that $h^n$ is a function in space. 
+The presence of the mixed spatial temporal derivatives in the momentum equation \eqref{eq:Serre_momentum} makes the Serre equations difficult to solve directly with standard numerical methods. A naive way to avoid this is to approximate \eqref{eq:Serre_momentum} by finite differences and the results of this are presented here. To facilitate this a uniform grid in space will be used with $\Delta x  = x_{i+1} - x_i$ for all $i$ and quantities evaluated at these grid points will be denoted by subscripts for example $h_i = h(x_i)$. The grid in time will be denoted by superscripts for example $h^n = h(t^n)$, noting that $h^n$ is a function in space. 
 \subsection{Finite Difference Appximation to Conservation of Momentum Equation} 
 In [][Zoppou thesis/my work] it was demonstrated that an efficient numerical scheme for the Serre equations must be at least second-order accurate thus the derivatives in \eqref{eq:Serre_momentum} will be approximated by second-order finite differences. Firstly \eqref{eq:Serre_momentum} must be expanded, making use of \eqref{eq:Serre_continuity} one obtains
 \begin{linenomath*}
@@ -209,7 +219,7 @@ In particular this is an explicit numerical method for \eqref{eq:Serre_momentum}
 
 \subsection{The Lax Wendroff Method for Conservation of Mass Equation}
 \label{section:}
-Because the conservation of mass equation \eqref{eq:Serre_continuity} has no mixed derivative term a wider range of numerical methods can be used. This paper will use two, one using the Lax Wendroff method as was done by \citeN{El-etal-2006} and the other will use the same process as []. Both of these are theoretically second-order accurate. To make these methods precise they will be presented here in sufficient replicable detail.
+Because the conservation of mass equation \eqref{eq:Serre_continuity} has no mixed derivative term standard techniques of conservation laws can be used. This paper will use two, one using the Lax Wendroff method as was done by \citeN{El-etal-2006} and the other will use the same finite difference approximation process as the above section. Both of these are theoretically second-order accurate. To make these methods precise they will be presented here in sufficient replicable detail.
 
 Note that \eqref{eq:Serre_continuity} is in conservative law form for $h$ where the Jacobian is $u$. Thus using the previously defined spatio-temporal discretisation the lax-wendroff update for $h$ is
 \begin{linenomath*}
@@ -288,66 +298,12 @@ and
 \subsection{A Hybrid Finite Difference-Volume Method for Serre Equations in Conservative Form}
 \label{section:hybridmethod}
 %--------------------------------------------------------------------------------
-The conservative form \eqref{eq:Serrecon} allows for a wider range of numerical techniques such as finite element methods \cite{Guyenne-etal-2014-169} and finite volume methods \cite{Hank-etal-2010-2034,Zoppou-2014}. In this paper the finite volume methods will be used and so our full solution scheme $\mathcal{H}$ will be composed of a scheme $\mathcal{A}$ that given $h$ and $G$ solves \eqref{eq:Gdefinition} for $u$ and a scheme $\mathcal{L}$ that given all three quantities solves \eqref{eq:Serrecon} giving $h$ and $G$ at some later time. 
-
-\subsection{Finite Difference Approximation for $\mathcal{A}$}
-\label{section:ellipticA}
-In this paper the scheme $\mathcal{A}$ will be given by approximating all the derivatives in \eqref{eq:Gdefinition} by finite differences [this was done above for second order] in particular second- and fourth-order centred finite differences and then rearranging into a matrix equation of the form
-\begin{linenomath*}
-\begin{gather*}
-\left[\begin{array}{c}
-  u_0 \\
-  \vdots \\
-  u_m \end{array}\right] = A^{-1}\left(h\right)
-\left[\begin{array}{c}
- G_0 \\
- \vdots \\
- G_m \end{array}\right] =: \mathcal{A}(\boldsymbol{h},\boldsymbol{G}). 
-\end{gather*}
-\end{linenomath*}
-For a second-order approximation $A\left(h\right)$ is tri-diagonal while for a fourth-order approximation $A\left(h\right)$ is penta-diagonal.
-%use A for two different matrices, change that
-
-\subsection{Finite Volume Method for $\mathcal{L}$}
-\label{section:conservativeL}
-Finite volume methods work with cell averages which are the value of a quantity averaged over a cell and is denoted by a bar and a spatial subscript corresponding to the centre of the cell. For example
-\begin{linenomath*}
-\begin{gather*}
-\bar{h}_i = \dfrac{1}{\Delta x} \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}} h(x,t) \, dx 
-\end{gather*}
-\end{linenomath*}
-is the averaged water depth in the cell with centre $x_i$ spanning $\left[x_{i - 1/2} , x_{i + 1/2}\right]$ where $x_{i \pm 1/2} = x_i \pm \Delta x/2$. Finite volume methods update these cell averages in time using the formula
-\begin{linenomath*}
-\begin{gather}\label{eq:FVMupdate}
-\bar{U}^{n+1}_i = \bar{U}^{n}_i - \dfrac{\Delta t}{\Delta x} \left(F^n_{i+ \frac{1}{2}} - F^n_{i - \frac{1}{2}} \right)
-\end{gather}
-\end{linenomath*}
-where for \eqref{eq:Serrecon} $\bar{U}^{n}_i = \left[ \bar{h}^{n}_i \; \bar{G}^{n}_i \right] ^T$ is an approximation of the vector of the conserved quantities averaged over the cell at time $t^n$. While $F^n_{i\pm 1/2}$ is an approximation of the average flux over the time interval $[t^n, t^{n+1}]$ at the respective cell boundary $x_{i \pm 1/2 }$, which is obtained by solving a local Riemann problem at the cell boundaries.  In \citeN{Kurganov-etal-2001-707} $F^n_{i\pm 1/2}$ is given by
-\begin{linenomath*}
-\begin{gather}\label{eq:HLL_flux}
-F_{i+\frac{1}{2}} = \dfrac{a^+_{i+\frac{1}{2}} f\left(q^-_{i+\frac{1}{2}}\right) - a^-_{i+\frac{1}{2}} f\left(q^+_{i+\frac{1}{2}}\right)}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}}  + \dfrac{a^+_{i+\frac{1}{2}} \, a^-_{i+\frac{1}{2}}}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
-\end{gather}
-\end{linenomath*}
-where $f$ is the instantaneous flux of the conserved quantity $q$ evaluated using the reconstructed values from the cells adjacent to the cell interface $x_{i + 1/2}$. While $a^-_{i+1/2}$ and $a^+_{i+1/2}$ are given by
-\begin{linenomath*}
-\begin{gather*}
-a^-_{i+\frac{1}{2}} = \min \left[\lambda_1\left(q^-_{i + \frac{1}{2}}\right), \lambda_1\left(q^+_{i + \frac{1}{2}}\right), 0 \right]
-%\label{eq:aatcelledgep}
-\end{gather*}
-\end{linenomath*}
-and
-\begin{linenomath*}
-\begin{gather*}
-a^+_{i+\frac{1}{2}} = \max \left[\lambda_2\left(q^-_{i + \frac{1}{2}}\right), \lambda_2\left(q^+_{i + \frac{1}{2}}\right), 0 \right].
-%\label{eq:aatcelledgem}
-\end{gather*}
-\end{linenomath*}
-where $\lambda_1 = u - \sqrt{gh}$ and $\lambda_2 = u + \sqrt{gh}$ since it was demonstrated in \citeN{Zoppou-2014} that these are bounds on the phase speed of the Serre equations.
+The conservative form \eqref{eq:Serrecon} allows for a wider range of numerical techniques such as finite element methods \cite{Guyenne-etal-2014-169} and finite volume methods \cite{Hank-etal-2010-2034,Zoppou-2014}. In this paper the first-, second- and third-order finite difference-volume methods of [] will be used. These have been well validated and their order of accuracy has been confirmed.  
 
 \section{Numerical Simulations}
 \label{section:Numerical Simulations}
 %--------------------------------------------------------------------------------
-In this section the methods introduced in this paper will be validated by using them to approximate an analytic solution of the Serre equations, this will also be used to verify their order of accuracy. Then an in depth comparison of using these methods for a smooth approximation to the discontinuous dam break problem will be provided to investigate the behaviour of these equations in the presence of discontinuities. This is a problem that so far has only received a proper treatment in \cite{El-etal-2006}, with other research giving only a cursory look into the topic. 
+In this section the methods introduced in this paper will be validated by using them to approximate an analytic solution of the Serre equations, this will also be used to verify their order of accuracy. Then an in depth comparison of these methods for a smooth approximation to the discontinuous dam break problem will be provided to investigate the behaviour of these equations in the presence of discontinuities. This is a problem that so far has only received a proper treatment in \cite{El-etal-2006}, with other research giving only a cursory look into the topic. 
 
 %--------------------------------------------------------------------------------
 \section{Soliton}
@@ -374,52 +330,19 @@ c = \sqrt{g \left(a_0 + a_1\right)}
 \end{subequations}
 \label{eq:sol}
 \end{linenomath*}
-where $a_0$ and $a_1$ are input parameters that determine the depth of the quiescent water and the maximum height of the soliton above that respectively. In the simulation $a_0 = 10\text{m}$, $a_1 = 1\text{m}$ for $x\in\left[-500\text{m},1500\text{m}\right]$ and $t\in\left[0\text{s},100\text{s}\right]$. With $\Delta t = 0.01 \Delta x$ which satisfies [] and $\theta = 1.2$ for the second-order finite difference-volume method.
+where $a_0$ and $a_1$ are input parameters that determine the depth of the quiescent water and the maximum height of the soliton above that respectively. In the simulation $a_0 = 1\text{m}$, $a_1 = 1\text{m}$ for $x\in\left[-50\text{m},250\text{m}\right]$ and $t\in\left[0\text{s},50\text{s}\right]$. With $\Delta t = 0.5 C_r \Delta x$ where $C_r = 1 / \sqrt{g \left(a_0 + a_1\right)}$ which satisfies the CFL condition. 
 
-%We have that the FD method gives full 2nd order convergence, while Grimshaw gives 1.5 order
-%this is because Lax-Wendroff is 2nd order at different points than the FD method, so we dont recover full second order. 
-
-%\subfiglabelskip=0pt
-%\begin{figure}
-%\centering
-%\subfigure[][]{\label{fig:solitoneo1h}\includegraphics[width=7.0cm]{./results/soliton/ex/newo1-figure0.pdf}}
-%\subfigure[][]{\label{fig:solitoneo1u}\includegraphics[width=7.0cm]{./results/soliton/ex/newo1u-figure0.pdf}}
-%\subfigure[][]{\label{fig:solitoneo2h}\includegraphics[width=7.0cm]{./results/soliton/ex/newo2-figure0.pdf}}
-%\subfigure[][]{\label{fig:solitoneo2u}\includegraphics[width=7.0cm]{./results/soliton/ex/newo2u-figure0.pdf}}
-%\subfigure[][]{\label{fig:solitoneo3h}\includegraphics[width=7.0cm]{./results/soliton/ex/newo3-figure0.pdf}}
-%\subfigure[][]{\label{fig:solitoneo3u}\includegraphics[width=7.0cm]{./results/soliton/ex/newo3u-figure0.pdf}}
-%\caption{The first-, second- and third-order simulation of a soliton with $\Delta x = %100 /2^{6}\text{m}$ ($\circ$) plotted against the analytic solution of \eqref{eq:sol} %(\---) with black for $t =0\text{s}$ and blue for $t=100\text{s}$.}
-%\label{fig:solitone}
-%\end{figure}
-%\begin{figure}
-%\centering
-%\subfigure[][]{\label{fig:solitoncono1}\includegraphics[width=7.0cm]{./results/soliton/con/sto1-figure0.pdf}}
-%\subfigure[][]{\label{fig:solitoncono2}\includegraphics[width=7.0cm]{./results/soliton/con/sto2-figure0.pdf}}
-%\subfigure[][]{\label{fig:solitoncono3}\includegraphics[width=7.0cm]{./results/soliton/con/sto3-figure0.pdf}}
-%\caption{Convergence of relative error using $L_1$ norm for analytic soliton solution for both $h$ ($\circ$) and $u$ ($\diamond$) for the; (a) first-, (b) second- and (c) third-order schemes.}
-%\label{fig:solitoncon}
-%\end{figure} 
-
-%Figure \ref{fig:solitone} demonstrates the superiority of the second- and third-order methods compared to the first-order method. With the first-order method there is significant attenuation of the wave due to its diffusive behaviour which creates a wider wave profile and some smaller trailing waves. However, the first-order method does produce the correct speed of the wave with a small phase error. While the second- and third-order methods demonstrate no noticeable deformation resolving the soliton solution well on a relatively coarse grid with less than $500$ cells defining the actual wave.
-
-%The relative error as measured by the $L_1$-norm of the method can be seen in Figure \ref{fig:solitoncon}. For a vector $\boldsymbol{q}$ and an approximation to it $\boldsymbol{q}^*$ the relative error as measured by the $L_1$-norm is
-%\begin{linenomath*}
-%\begin{gather*}
-%L_1 \left(\boldsymbol{q},\boldsymbol{q}^*\right) = \frac{\sum_{i=1}^{m} |q_i - q^*_i|}{\sum_{i=1}^{m} |q_i|}.
-%\end{gather*}
-%\end{linenomath*}
-
-%Figure \ref{fig:solitoncon} demonstrates that the schemes all have the correct order of convergence in both time and space. However, this order of convergence is not uniform over all $\Delta x$. When $\Delta x$ is large the actual problem is not discretised well since the cells are too large to adequately resolve the problem; this causes the observed suboptimal rate of convergence in Figure \ref{fig:solitoncon}. When $\Delta x$ is sufficiently small the numerical errors become small enough that floating point errors are significant and this can also lead to suboptimal rates of convergence as can be seen for the third-order method in Figure \ref{fig:solitoncono3}. Therefore, the order of convergence for all methods is confirmed.
-
-%Figure \ref{fig:solitoncon} also demonstrates the superiority of the second- and third-order schemes over the first-order scheme for accuracy. The third-order scheme is also better than the second-order scheme in this respect although this difference is less pronounced. These differences have a significant impact on run-time if one wishes to run a simulation up to a desired accuracy. For instance to run a second- or third-order scheme as accurate as the highest accuracy first-order scheme for $h$ takes significantly less time as can be seen in Table \ref{table:runtime}. This is computationally restrictive 
-
-%Figure \ref{fig:solitoncono2} and Figure \ref{fig:solitoncono3} demonstrate that the second- and third-order schemes both have similar errors and Figure \ref{fig:solitone} shows that these schemes resolve the problem well. Therefore, the extra effort in running a third-order scheme compared to a second-order scheme is not justified in this case. While the effort required to go from a first-order to a second-order scheme is justified since attaining a similar accuracy between them requires a restrictively small $\Delta x$ for a first-order method.   
+%--------------------------------------------------------------------------------
+\subsection{Results}
+%--------------------------------------------------------------------------------
+This numerical experiment and its results have been reported by []. Thus in this paper only the results for the two methods introduced in this paper are given. 
+  
 
 %--------------------------------------------------------------------------------
 \section{Smoothed Dam-Break}
 \label{section:smootheddambreak}
 %--------------------------------------------------------------------------------
-The discontinuous dam-break problem can be approximated by a smooth function using the hyperbolic tangent function. Such an approximation will be called a smoothed dam-break problem and will be defined as such
+The discontinuous dam-break problem can be approximated smoothly using the hyperbolic tangent function. Such an approximation will be called a smoothed dam-break problem and will be defined as such
 \begin{linenomath*}
 \begin{subequations}
 \begin{gather}
@@ -431,18 +354,20 @@ u(x,0) = 0.0m/s.
 \end{subequations}
 \label{eq:sdbi}
 \end{linenomath*}
-Where $a$ is given and controls the width of the transition between the two dam-break heights of $h_0$ and $h_1$. For large $\alpha$ the width is small and vice versa. For a fixed $\Delta x$ there are large enough $\alpha$ values such that the transition width is zero. This experiment was run for both of the methods described in this paper and the 3 different order finite difference-volume methods described in []. In this particular simulation $h_0 = 1.0m$, $h_1 = 1.8m$ on $x \in [0m,1000m]$ for $t \in [0s,30s]$ with $x_0 = 500m$. The simulations were run changing both $\Delta x$ and $\alpha$ and for stability $\Delta t = 0.01 \Delta x$ while for the second-order finite volume method $\theta = 1.2$. Since this experiment involves a very large amount of data the analysis will be broken up into three sections: decreasing $\Delta x$, increasing $\alpha$ and finally differences between the methods. 
+Where $a$ is given and controls the width of the transition between the two dam-break heights of $h_0$ and $h_1$. For large $\alpha$ the width is small and vice versa. For a fixed $\Delta x$ there are large enough $\alpha$ values such that the transition width is zero. This experiment was run for both of the methods described in this paper and the 3 different order finite difference-volume methods described in []. In this particular simulation $h_0 = 1.0m$, $h_1 = 1.8m$ on $x \in [0m,1000m]$ for $t \in [0s,30s]$ with $x_0 = 500m$. The simulations were run changing both $\Delta x$ and $\alpha$. To ensure stability $\Delta t = 0.01 \Delta x$ while for the second-order finite volume method $\theta = 1.2$. Since this experiment involves a very large amount of data the analysis will be broken up into three sections: decreasing $\Delta x$, increasing $\alpha$ and finally differences between the methods. 
 
 %--------------------------------------------------------------------------------
 \subsection{Changing $\Delta x$}
 %--------------------------------------------------------------------------------
-Decreasing $\Delta x$ allows the numerical method to better approximate the analytic solution to the equations. So for our valid [] numerical methods it would be expected that smaller $\Delta x$'s provide a closer approximation to the analytic solution This was demonstrated for smooth problems [] above.
+Decreasing $\Delta x$ allows the numerical method to better approximate the analytic solution to the equations. So for our valid [] numerical methods it would be expected that smaller $\Delta x$'s provide a closer approximation to the analytic solution. This was demonstrated for smooth problems [] above.
 
-In this comparison we pick an $\alpha$ and a method and investigate the result of decreasing $\Delta x$. Because the smoothness of the initial conditions depends on both $\Delta x$ and $\alpha$ one must be careful that the initial conditions do not change from discontinuous to smooth as $\Delta x$ is altered as then we are no longer comparing smooth problems. This is of particular importance for the two finite difference methods as they do not correctly handle discontinuos initial conditions. [] 
+In this comparison we pick an $\alpha$ and a method and investigate the result of decreasing $\Delta x$. Because the smoothness of the initial conditions depends on both $\Delta x$ and $\alpha$ one must be careful that the initial conditions do not change from discontinuous to smooth as $\Delta x$ is altered as then we are no longer comparing smooth problems. This is of particular importance for the two finite difference methods as they do not correctly handle discontinuous initial conditions.
 
-The first and most important observation is that there are four types of behaviour as $\Delta x \rightarrow 0$ of the problem depending on the $\alpha$ and the numerical method. It was found that the second- and third-order methods had similar $\alpha$ ranges determining the trending behaviour while the first-order had very different ranges, because of this large difference the term higher-order will be used to refer to all second- and third- order methods. Also for the purposes of simplicity these scenario's will be demonstrated by solutions of the FDVM as they are better for illustrative purposes. The four scenarios are identified by the behaviour of the solutions when $\Delta x$ is small and they correspond to different results in the literature. 
+The first and most important observation is that there are four types of behaviour as $\Delta x \rightarrow 0$ depending on the $\alpha$ and the numerical method. It was found that the second- and third-order methods had similar $\alpha$ ranges determining the behaviour while the first-order had very different ranges, because of this large difference the term higher-order will be used to refer to all second- and third- order methods. Also for the purposes of simplicity these scenario's will be demonstrated by solutions of the FDVM as they are better for illustrative purposes. The four scenarios are identified by the behaviour of the solutions when $\Delta x$ is small and they correspond to different results in the literature. 
 
-The first behaviour which will be referred to as the non-oscillatory scenario has such smooth initial conditions that there are no introduced oscillations. This scenario ends at $\alpha = 0.025$ and should in theory extend down to the trivial $\alpha = 0$, in these ranges the smoothed dam-break problem is a very poor approximation to the dam-break problem. This behaviour was observed for all methods when $\alpha = 0.025$ and an example case for the third-order method is plotted in Figure \ref{fig:o3a1dxlimflatexp}. This example demonstrates rapid convergence with all the solutions being graphically identical. This scenario resembles the solution of the shallow water wave equations in that it contains only a rarefaction and a shock with no dispersion. 
+The first behaviour which will be referred to as the non-oscillatory scenario has such smooth initial conditions that there are no introduced oscillations. This scenario has a highest $\alpha$ of $0.025$ with lowest unknown, in these ranges the smoothed dam-break problem is a very poor approximation to the dam-break problem. This behaviour was observed for all methods when $\alpha = 0.025$ and an example case for the third-order method is plotted in Figure \ref{fig:o3a1dxlimflatexp}. This example demonstrates rapid convergence with all the solutions being graphically identical. This scenario resembles the solution of the shallow water wave equations in that it contains only a rarefaction and a shock with no dispersive waves.
+
+For the results in Figure \ref{fig:o3a1dxlimflatexp} the Hamiltonian was calculated numerically to be $10335.9175488$(units) for the initial conditions and $10335.9175485$ (units) for the final time of the third-order method with $\Delta x = 10/2^{10}$ was $7.3744593423e-06 \times 10^{-6}$. This gives a relative error of $3.55675452797 \times 10^{-11}$ for the conservation of the Hamiltonian. This low relative error suggests that our numerical method is solving the equations appropriately validating our results. 
 
 \begin{figure}
 \centering
@@ -452,20 +377,26 @@ The first behaviour which will be referred to as the non-oscillatory scenario ha
 \label{fig:o3a1dxlimflatexp}
 \end{figure}
 
-The second will be referred to as the flat scenario due to the presence of a constant height state between the oscillations at the shock and rarefaction fan. This scenario emerges at $\alpha = 0.05 $ and continues to $\alpha = 1$ for the higher-order methods and occurs from $\alpha = 0.05 $ to $\alpha = 1000 $ for the first-order method (so far). This scenario corresponds to the results presented by \citeN{Hank-etal-2010-2034} and \citeN{Mitsotakis-etal-2014}. 
+The second will be referred to as the flat scenario due to the presence of a constant height state between the oscillations at the shock and rarefaction fan. This scenario occurs between at least $\alpha = 0.05 $ and $\alpha = 1$ for the higher-order methods and occurs from at least $\alpha = 0.05 $ to $\alpha = 1000 $ for the first-order method (so far). This scenario corresponds to the results presented by \citeN{Hank-etal-2010-2034} and \citeN{Mitsotakis-etal-2014}. 
 
-An example plot demonstrating this scenario for the third-order method with $\alpha = 0.5$ can be seen in Figure \ref{fig:o3a6dxlimflatexp}. As $\Delta x$ decreases the solutions converge which is sensible since for the $\Delta x$ in Figure [] the initial conditions are smooth as can be seen in Figure [] and these methods have been verified for smooth problems. So that by $\Delta x = 10 / 2^8$ the solutions for higher $\Delta x$ are graphically identical. 
+An example plot demonstrating this scenario for the third-order method with $\alpha = 0.5$ can be seen in Figure \ref{fig:o3a6dxlimflatexp}. As $\Delta x$ decreases the solutions converge which is sensible since for the $\Delta x$ in Figure [] the initial conditions are smooth as can be seen in Figure [] and these methods have been verified for smooth problems. So that by $\Delta x = 10 / 2^8$ the solutions for higher $\Delta x$ are visually identical. 
+
+For the results in Figure \ref{fig:o3a1dxlimflatexp} the Hamiltonian of the initial conditions was calculated numerically to be $10395.5623489$(units).  The relative error for the conservation of the Hamiltonian by the third order method with $\Delta x = 10/2^{10}$ was $6.12566742634 \times 10^{-9}$. This low relative error suggests that our numerical method is solving the equations appropriately validating our results. We are however seeing the trend that will continue further on that our relative error is increasing as we better approximate the discontinuous initial conditions of the dam break problem.  
+
 
 \begin{figure}
 \centering
 %\subfigure[][]{\label{fig:o3a6dxlim}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb4ne11/0-figure0.pdf}}
 \subfigure[][]{\label{fig:o3a6dxlimz1}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb3ne10/0-figure0.pdf}}
 \subfigure[][]{\label{fig:o3a6dxlimz2}\includegraphics[width=7cm]{./results/FVMpics/1diffmdx/o3/6/nb3ne10/1-figure0.pdf}}
-\caption{Smooth dam break problem for o3 [] with $\alpha = 0.5$ for $\Delta x = 10/2^{10}$ (blue), $\Delta x = 10/2^9$ (green), $\Delta x = 10/2^8$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^6$ (magenta), $\Delta x = 10/2^7$ (yellow), $\Delta x = 10/2^{8}$ (black)}
+\caption{Smooth dam break problem for o3 [] [wrong ones] with $\alpha = 0.5$ for $\Delta x = 10/2^{10}$ (blue), $\Delta x = 10/2^9$ (green), $\Delta x = 10/2^8$ (red), $\Delta x = 10/2^7$ (cyan), $\Delta x = 10/2^6$ (magenta), $\Delta x = 10/2^5$ (yellow), $\Delta x = 10/2^{4}$ (black)}
 \label{fig:o3a6dxlimflatexp}
 \end{figure}
 
 The third scenario will be referred to as the contact discontinuity scenario due to the use of that term to describe it by \citeN{El-etal-2006}. For the higher-order methods it occurs at $\alpha = 2.5$ and so far has not occurred for the first order method[]. The contact discontinuity scenarios main feature is that the oscillations from the rarefaction fan and the shock decay and appear to meet at a point as can be seen in Figure \ref{fig:o3a9dxlimcdexp}. For the experiments performed this doesn't appear to be an actual centre point but rather that the oscillations decay so quickly around the `contact discontinuity' that it appears to be the case. All the higher order methods so far have not shown a converged solution as $\Delta x$ decreases. However it does appear that convergence is likely with the solutions getting closer together. 
+
+For the results in Figure \ref{fig:o3a9dxlimcdexp} the Hamiltonian of the initial conditions was calculated numerically to be $10398.0737089$(units). The relative error for the conservation of the Hamiltonian by the third order method with $\Delta x = 10/2^{10}$ was $2.01012400037 \times 10^{-8}$. This shows that we are still accurately capturing the behaviour of the equations validating the of \citeN{El-etal-2006}. 
+
 
 \begin{figure}
 \centering
@@ -476,7 +407,10 @@ The third scenario will be referred to as the contact discontinuity scenario due
 \label{fig:o3a9dxlimcdexp}
 \end{figure}
 
-The fourth scenario will be referred to as the bump scenario due to the oscillations no longer decaying down towards a point but rather growing around where the contact discontinuity was in the previous scenario as can be seen in Figure \ref{fig:o3a20dxlimcdexp}. This behaviour has hitherto not been presented and is certainly not an expected result. There are some important observations, changing $\alpha$ does increase the height of the bump for the lowest resolution methods although after [] increasing $\alpha$ has no effect[huh?]. The behaviour of these solutions in Figure \ref{fig:o3a20dxlimcdexp} do not clearly show convergence, although it doesn't appear that there is a rapid divergence which suggests that this behaviour is not unstable. Also the lack of convergence is only around the contact discontinuity with other parts of the solution showing convergence. 
+The fourth scenario will be referred to as the bump scenario due to the oscillations no longer decaying down towards a point but rather growing around where the contact discontinuity was in the previous scenario as can be seen in Figure \ref{fig:o3a20dxlimcdexp}. This behaviour has hitherto not been published and is certainly not an expected result. There are some important observations. Firstly changing $\alpha$ does increase the height of the bump for the lowest resolution methods although after [] increasing $\alpha$ has no effect[huh?]. The behaviour of these solutions in Figure \ref{fig:o3a20dxlimcdexp} do not clearly show convergence.
+
+For the results in Figure \ref{fig:o3a9dxlimcdexp} the Hamiltonian of the initial conditions was calculated numerically to be $10398.6937378$(units). The relative error for the conservation of the Hamiltonian by the third order method with $\Delta x = 10/2^{10}$ was $7.3744593423e-06 \times 10^{-6}$. This shows that we are still accurately capturing the behaviour of the equations validating the of \citeN{El-etal-2006}.
+
 
 \begin{figure}
 \centering

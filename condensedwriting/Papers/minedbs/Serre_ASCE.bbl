@@ -12,13 +12,6 @@ El, G., Grimshaw, R. H.~J., and Smyth, N.~F. (2006).
 \newblock ``Unsteady undular bores in fully nonlinear shallow-water theory.''\
   {\em Physics of Fluids}, 18(027104).
 
-\bibitem[\protect\citeauthoryear{}{Kurganov
-  et~al.\@}{2002}]{Kurganov-etal-2001-707}
-Kurganov, A., Noelle, S., and Petrova, G. (2002).
-\newblock ``Semidiscrete central-upwind schemes for hyperbolic conservation
-  laws and {H}amilton-{J}acobi equations.''\ {\em Journal of Scientific
-  Computing, Society for Industrial and Applied Mathematics}, 23(3), 707--740.
-
 \bibitem[\protect\citeauthoryear{}{Lannes and
   Bonneton}{2009}]{Bonneton-Lannes-2009-16601}
 Lannes, D. and Bonneton, P. (2009).''\ {\em Physics of Fluids}, 21(1),
@@ -35,6 +28,12 @@ Li, M., Guyenne, P., Li, F., and Xu, L. (2014).
 \newblock ``High order well-balanced {CDG-FE} methods for shallow water waves
   by a {G}reen-{N}aghdi model.''\ {\em Journal of Computational Physics}, 257,
   169--192.
+
+\bibitem[\protect\citeauthoryear{}{Li}{2002}]{Li-Y-2002}
+Li, Y.~A. (2002).
+\newblock ``{H}amiltonian {S}tructure and {L}inear {S}tability of {S}olitary
+  {W}aves of the {G}reen-{N}aghdi {E}quations.''\ {\em Journal of Nonlinear
+  Mathematical Physics}, 9, 99--105.
 
 \bibitem[\protect\citeauthoryear{}{Mitsotakis
   et~al.\@}{2014}]{Mitsotakis-etal-2014}

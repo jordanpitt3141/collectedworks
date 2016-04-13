@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.24)  13 DEC 2015 12:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.24)  12 APR 2016 15:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -960,7 +960,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/0-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/0-figure
-0.pdf used on input line 345.
+0.pdf used on input line 320.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/1-figure0.pdf, id=41, 238.38661p
@@ -970,7 +970,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/1-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/1-figure
-0.pdf used on input line 346.
+0.pdf used on input line 321.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/2-figure0.pdf, id=42, 242.37552p
@@ -980,7 +980,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/2-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/2-figure
-0.pdf used on input line 347.
+0.pdf used on input line 322.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/3-figure0.pdf, id=43, 242.3725pt
@@ -990,7 +990,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/3-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/3-figure
-0.pdf used on input line 348.
+0.pdf used on input line 323.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/0-figure0.pdf, id=44, 241.57152pt 
@@ -999,7 +999,7 @@ File: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/0-figure0.pdf Graphic file (t
 ype pdf)
  <use ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/0-figure0.
-pdf used on input line 355.
+pdf used on input line 330.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/1-figure0.pdf, id=45, 238.38661pt 
@@ -1008,7 +1008,7 @@ File: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/1-figure0.pdf Graphic file (t
 ype pdf)
  <use ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/1-figure0.
-pdf used on input line 356.
+pdf used on input line 331.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/2-figure0.pdf, id=46, 242.37552pt 
@@ -1017,7 +1017,7 @@ File: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/2-figure0.pdf Graphic file (t
 ype pdf)
  <use ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/2-figure0.
-pdf used on input line 357.
+pdf used on input line 332.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/3-figure0.pdf, id=47, 242.3725pt x
@@ -1026,7 +1026,7 @@ File: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/3-figure0.pdf Graphic file (t
 ype pdf)
  <use ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/6/nb2ne9/3-figure0.
-pdf used on input line 358.
+pdf used on input line 333.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/0-figure0.pdf, id=48, 241.57152pt x
@@ -1035,7 +1035,7 @@ File: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/0-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/0-figure0.p
-df used on input line 365.
+df used on input line 340.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/1-figure0.pdf, id=49, 238.38661pt x
@@ -1044,7 +1044,7 @@ File: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/1-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/1-figure0.p
-df used on input line 366.
+df used on input line 341.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/2-figure0.pdf, id=50, 242.37552pt x
@@ -1053,7 +1053,7 @@ File: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/2-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/2-figure0.p
-df used on input line 367.
+df used on input line 342.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/3-figure0.pdf, id=51, 242.3725pt x 
@@ -1062,7 +1062,7 @@ File: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/3-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/6/nb6ne13/3-figure0.p
-df used on input line 368.
+df used on input line 343.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o2/6/nb6ne13/0-figure0.pdf, id=52, 241.57152pt x
@@ -1071,7 +1071,7 @@ File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/0-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/0-figure0.p
-df used on input line 375.
+df used on input line 350.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.pdf, id=53, 238.38661pt x
@@ -1080,7 +1080,7 @@ File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.p
-df used on input line 376.
+df used on input line 351.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.pdf, id=54, 242.37552pt x
@@ -1089,7 +1089,7 @@ File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.p
-df used on input line 377.
+df used on input line 352.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.pdf, id=55, 242.3725pt x 
@@ -1098,7 +1098,7 @@ File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.p
-df used on input line 378.
+df used on input line 353.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o3/6/nb6ne13/0-figure0.pdf, id=56, 241.57152pt x
@@ -1107,7 +1107,7 @@ File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/0-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/0-figure0.p
-df used on input line 385.
+df used on input line 360.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.pdf, id=57, 238.38661pt x
@@ -1116,7 +1116,7 @@ File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.p
-df used on input line 386.
+df used on input line 361.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.pdf, id=58, 242.37552pt x
@@ -1125,7 +1125,7 @@ File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.p
-df used on input line 387.
+df used on input line 362.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.pdf, id=59, 242.3725pt x 
@@ -1134,7 +1134,7 @@ File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.p
-df used on input line 388.
+df used on input line 363.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/0-figure0.pdf, id=60, 241.57152
@@ -1144,7 +1144,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/0-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/0-figur
-e0.pdf used on input line 395.
+e0.pdf used on input line 370.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/1-figure0.pdf, id=61, 238.38661
@@ -1154,7 +1154,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/1-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/1-figur
-e0.pdf used on input line 396.
+e0.pdf used on input line 371.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/2-figure0.pdf, id=62, 242.37552
@@ -1164,7 +1164,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/2-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/2-figur
-e0.pdf used on input line 397.
+e0.pdf used on input line 372.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/3-figure0.pdf, id=63, 242.3725p
@@ -1174,7 +1174,7 @@ File: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/3-figure0.pdf Graphic file
 
 <use ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/3-figur
-e0.pdf used on input line 398.
+e0.pdf used on input line 373.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/0-figure0.pdf, id=64, 241.57152pt
@@ -1184,7 +1184,7 @@ type pdf)
 
 <use ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/0-figure0
-.pdf used on input line 405.
+.pdf used on input line 380.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/1-figure0.pdf, id=65, 238.38661pt
@@ -1194,7 +1194,7 @@ type pdf)
 
 <use ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/1-figure0
-.pdf used on input line 406.
+.pdf used on input line 381.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/2-figure0.pdf, id=66, 242.37552pt
@@ -1204,7 +1204,7 @@ type pdf)
 
 <use ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/2-figure0
-.pdf used on input line 407.
+.pdf used on input line 382.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/3-figure0.pdf, id=67, 242.3725pt 
@@ -1214,7 +1214,7 @@ type pdf)
 
 <use ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/grim/8/nb3ne10/3-figure0
-.pdf used on input line 408.
+.pdf used on input line 383.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/0-figure0.pdf, id=68, 241.57152pt x
@@ -1223,7 +1223,7 @@ File: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/0-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/0-figure0.p
-df used on input line 415.
+df used on input line 390.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 
 <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/1-figure0.pdf, id=69, 238.38661pt x
@@ -1232,7 +1232,7 @@ File: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/1-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/1-figure0.p
-df used on input line 416.
+df used on input line 391.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 
 <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/2-figure0.pdf, id=70, 242.37552pt x
@@ -1241,7 +1241,7 @@ File: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/2-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/2-figure0.p
-df used on input line 417.
+df used on input line 392.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 
 <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/3-figure0.pdf, id=71, 242.3725pt x 
@@ -1250,91 +1250,91 @@ File: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/3-figure0.pdf Graphic file (ty
 pe pdf)
  <use ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o1/8/nb6ne13/3-figure0.p
-df used on input line 418.
+df used on input line 393.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/0-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/0-figure0.p
-df used on input line 425.
+df used on input line 400.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.p
-df used on input line 426.
+df used on input line 401.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.p
-df used on input line 427.
+df used on input line 402.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 File: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.p
-df used on input line 428.
+df used on input line 403.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/0-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/0-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/0-figure0.p
-df used on input line 435.
+df used on input line 410.
 (pdftex.def)             Requested size: 199.16928pt x 162.58286pt.
 File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.p
-df used on input line 436.
+df used on input line 411.
 (pdftex.def)             Requested size: 199.16928pt x 163.62106pt.
 File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.p
-df used on input line 437.
+df used on input line 412.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
 File: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.pdf Graphic file (ty
 pe pdf)
 
 <use ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.pdf>
 Package pdftex.def Info: ./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.p
-df used on input line 438.
+df used on input line 413.
 (pdftex.def)             Requested size: 199.16928pt x 160.93092pt.
-
-(./Serre_ASCEfigs.bbl [6] [7 <./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/0-f
-igure0.pdf> <./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/1-figure0.pdf> <./re
-sults/normaldiff/1dxmdiff/FDcent/6/nb2ne9/2-figure0.pdf> <./results/normaldiff/
-1dxmdiff/FDcent/6/nb2ne9/3-figure0.pdf>]) [8 <./results/normaldiff/1dxmdiff/gri
-m/6/nb2ne9/0-figure0.pdf> <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/1-figure
-0.pdf> <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/2-figure0.pdf> <./results/n
-ormaldiff/1dxmdiff/grim/6/nb2ne9/3-figure0.pdf>] [9 <./results/normaldiff/1dxmd
-iff/o1/6/nb6ne13/0-figure0.pdf> <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/1-f
-igure0.pdf> <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/2-figure0.pdf> <./resul
-ts/normaldiff/1dxmdiff/o1/6/nb6ne13/3-figure0.pdf>] [10 <./results/normaldiff/1
-dxmdiff/o2/6/nb6ne13/0-figure0.pdf> <./results/normaldiff/1dxmdiff/o2/6/nb6ne13
-/1-figure0.pdf> <./results/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.pdf> <./r
-esults/normaldiff/1dxmdiff/o2/6/nb6ne13/3-figure0.pdf>] [11 <./results/normaldi
-ff/1dxmdiff/o3/6/nb6ne13/0-figure0.pdf> <./results/normaldiff/1dxmdiff/o3/6/nb6
-ne13/1-figure0.pdf> <./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.pdf> 
-<./results/normaldiff/1dxmdiff/o3/6/nb6ne13/3-figure0.pdf>] [12 <./results/norm
-aldiff/1dxmdiff/FDcent/8/nb3ne10/0-figure0.pdf> <./results/normaldiff/1dxmdiff/
-FDcent/8/nb3ne10/1-figure0.pdf> <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10
-/2-figure0.pdf> <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/3-figure0.pdf>]
-[13 <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/0-figure0.pdf> <./results/nor
-maldiff/1dxmdiff/grim/8/nb3ne10/1-figure0.pdf> <./results/normaldiff/1dxmdiff/g
-rim/8/nb3ne10/2-figure0.pdf> <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/3-fi
-gure0.pdf>] [14 <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/0-figure0.pdf> <./r
-esults/normaldiff/1dxmdiff/o1/8/nb6ne13/1-figure0.pdf> <./results/normaldiff/1d
-xmdiff/o1/8/nb6ne13/2-figure0.pdf> <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/
-3-figure0.pdf>] [15] [16] (./Serre_ASCEfigs.aux)
+ [6 <./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/0-figure0.pdf> <./results/no
+rmaldiff/1dxmdiff/FDcent/6/nb2ne9/1-figure0.pdf> <./results/normaldiff/1dxmdiff
+/FDcent/6/nb2ne9/2-figure0.pdf> <./results/normaldiff/1dxmdiff/FDcent/6/nb2ne9/
+3-figure0.pdf>]
+(./Serre_ASCEfigs.bbl [7 <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/0-figure0
+.pdf> <./results/normaldiff/1dxmdiff/grim/6/nb2ne9/1-figure0.pdf> <./results/no
+rmaldiff/1dxmdiff/grim/6/nb2ne9/2-figure0.pdf> <./results/normaldiff/1dxmdiff/g
+rim/6/nb2ne9/3-figure0.pdf>] [8 <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/0-f
+igure0.pdf> <./results/normaldiff/1dxmdiff/o1/6/nb6ne13/1-figure0.pdf> <./resul
+ts/normaldiff/1dxmdiff/o1/6/nb6ne13/2-figure0.pdf> <./results/normaldiff/1dxmdi
+ff/o1/6/nb6ne13/3-figure0.pdf>]) [9 <./results/normaldiff/1dxmdiff/o2/6/nb6ne13
+/0-figure0.pdf> <./results/normaldiff/1dxmdiff/o2/6/nb6ne13/1-figure0.pdf> <./r
+esults/normaldiff/1dxmdiff/o2/6/nb6ne13/2-figure0.pdf> <./results/normaldiff/1d
+xmdiff/o2/6/nb6ne13/3-figure0.pdf>] [10 <./results/normaldiff/1dxmdiff/o3/6/nb6
+ne13/0-figure0.pdf> <./results/normaldiff/1dxmdiff/o3/6/nb6ne13/1-figure0.pdf> 
+<./results/normaldiff/1dxmdiff/o3/6/nb6ne13/2-figure0.pdf> <./results/normaldif
+f/1dxmdiff/o3/6/nb6ne13/3-figure0.pdf>] [11 <./results/normaldiff/1dxmdiff/FDce
+nt/8/nb3ne10/0-figure0.pdf> <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/1-f
+igure0.pdf> <./results/normaldiff/1dxmdiff/FDcent/8/nb3ne10/2-figure0.pdf> <./r
+esults/normaldiff/1dxmdiff/FDcent/8/nb3ne10/3-figure0.pdf>] [12 <./results/norm
+aldiff/1dxmdiff/grim/8/nb3ne10/0-figure0.pdf> <./results/normaldiff/1dxmdiff/gr
+im/8/nb3ne10/1-figure0.pdf> <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/2-fig
+ure0.pdf> <./results/normaldiff/1dxmdiff/grim/8/nb3ne10/3-figure0.pdf>]
+[13 <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/0-figure0.pdf> <./results/norma
+ldiff/1dxmdiff/o1/8/nb6ne13/1-figure0.pdf> <./results/normaldiff/1dxmdiff/o1/8/
+nb6ne13/2-figure0.pdf> <./results/normaldiff/1dxmdiff/o1/8/nb6ne13/3-figure0.pd
+f>] [14] [15] (./Serre_ASCEfigs.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1342,7 +1342,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  14500 strings out of 493089
  245537 string characters out of 6134848
- 328660 words of memory out of 5000000
+ 323660 words of memory out of 5000000
  17620 multiletter control sequences out of 15000+600000
  64589 words of font info for 153 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1362,10 +1362,10 @@ uhvr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/lo
 cal/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texliv
 e/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Serre_ASCEfigs.pdf (16 pages, 2165164 bytes).
+Output written on Serre_ASCEfigs.pdf (15 pages, 2162919 bytes).
 PDF statistics:
- 580 PDF objects out of 1000 (max. 8388607)
- 506 compressed objects within 6 object streams
+ 577 PDF objects out of 1000 (max. 8388607)
+ 504 compressed objects within 6 object streams
  0 named destinations out of 1000 (max. 500000)
  166 words of extra memory for PDF output out of 10000 (max. 10000000)
 

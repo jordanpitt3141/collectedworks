@@ -86,9 +86,17 @@ def deallocPy(*args):
   return _Serre2FDC.deallocPy(*args)
 deallocPy = _Serre2FDC.deallocPy
 
+def conc(*args):
+  return _Serre2FDC.conc(*args)
+conc = _Serre2FDC.conc
+
 def evolvewrap(*args):
   return _Serre2FDC.evolvewrap(*args)
 evolvewrap = _Serre2FDC.evolvewrap
+
+def HankEnergyall(*args):
+  return _Serre2FDC.HankEnergyall(*args)
+HankEnergyall = _Serre2FDC.HankEnergyall
 # This file is compatible with both classic and new-style classes.
 
 
