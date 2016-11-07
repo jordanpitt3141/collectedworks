@@ -42,7 +42,7 @@ def makevar(sx,ex,dx,st,et,dt):
     return x,t 
 
 dxw = "3"
-wdirord = "o3"
+wdirord = "o1"
 wdatadir = "../../../../../data/raw/bigsmoothtargetted/"  +wdirord +"/"
 
 
@@ -50,7 +50,7 @@ dxws = listdir(wdatadir)
 dxws.sort(key=int)
 Evals = []
 
-sdir1 = "../../../../../data/postprocessing/dbEnergy/" + wdirord+  "/"
+sdir1 = "../../../../../data/postprocessing/dbEnergyRED/" + wdirord+  "/"
 if not os.path.exists(sdir1):
     os.makedirs(sdir1)
 
@@ -58,7 +58,7 @@ s = sdir1 + "Evals.txt"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-     writefile2.writerow(['dx' ,'beta','Evalinit', "Evalfin", "Eval Abs Diff", "Eval Rel Diff"])        
+     writefile2.writerow(['dx' ,'beta', "Evalfin"])        
 
 for dxw in dxws:
     wdatadirn = wdatadir + dxw + "/" 
@@ -66,7 +66,7 @@ for dxw in dxws:
     nums.sort(key=int)
     for k in nums:
         wdir = wdatadirn  + str(k) + "/" 
-        sdir = "../../../../../data/postprocessing/dbEnergy/" + wdirord+  "/" + dxw + "/" + str(k) + "/"
+        sdir = "../../../../../data/postprocessing/dbEnergyRED/" + wdirord+  "/" + dxw + "/" + str(k) + "/"
         #if not os.path.exists(sdir):
         #    os.makedirs(sdir) 
              
@@ -81,7 +81,7 @@ for dxw in dxws:
              for row in readfile:       
                  if (j >= 0):
                     #FVM 
-                    
+                    """
                     dx = float(row[0])
                     dt = float(row[1])
                     t = float(row[2])
@@ -99,7 +99,7 @@ for dxw in dxws:
                     h.append(float(row[4]))
                     u.append(float(row[5])) 
                     beta = float(row[6])
-                    """
+                    
                     
                  j = j + 1
              x = array(x)
@@ -126,47 +126,15 @@ for dxw in dxws:
         
         Evalfin = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
         
-        l = 0.01
-        dt = l*dx
-        startx = 0.0
-        endx = 1000.0 + dx
-        startt = 0.0
-        endt = 30.0+(dt*0.9)   
-        g = 9.81
-                    
-        x,t = makevar(startx,endx,dx,startt,endt,dt)
-        n = len(x)
-            
-        bot = 0.0
-        hf = 1.8
-        hl = 1.0
-        base = hl
-        eta0 = hf - hl
-        x0 = 500
-        diffuse = beta
-         
-        niBC = 3     
-        h,u= dambreaksmooth(x,x0,base,eta0,diffuse,dx)  
-        xbeg = arange(startx - niBC*dx,startx,dx)
-        xend = arange(endx + dx,endx + (niBC+1)*dx) 
-        hbeg = h[0]*ones(niBC)
-        hend = h[-1]*ones(niBC)
-        ubeg = u[0]*ones(niBC)
-        uend = u[-1]*ones(niBC)
-        xbc =  concatenate([xbeg,array(x),xend])
-        hbc =  concatenate([hbeg,array(h),hend])
-        ubc =  concatenate([ubeg,array(u),uend])
-        
-        xbc_c = copyarraytoC(xbc)
-        hbc_c = copyarraytoC(hbc)
-        ubc_c = copyarraytoC(ubc)
-        
-        Evalinit= HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+        deallocPy(xbc_c)
+        deallocPy(hbc_c)
+        deallocPy(ubc_c)
         
         s = sdir1 + "Evals.txt"
         with open(s,'a') as file2:
              writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
-             writefile2.writerow([str(dx) ,str(beta),str(Evalinit), str(Evalfin), str(abs(Evalinit - Evalfin)) , str(abs(Evalinit - Evalfin) / abs(Evalinit))])   
+             writefile2.writerow([str(dx) ,str(beta), str(Evalfin)])   
+             
         
         

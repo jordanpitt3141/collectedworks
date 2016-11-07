@@ -48,10 +48,13 @@ dxws = range(1,513)
 
 
 
-wdirords = ["o3","o2"]
-ordsubtup = [[6,7], [6,8]]
-removeint = [[515,545],[515,545]]
-nums = [1,6,8,9,12]
+#wdirords = ["o3","o2","o1"]
+#ordsubtup = [[6,7], [6,8],[6,7]]
+wdirords = ["o3"]
+ordsubtup = [[6,7]]
+#removeint = [[515,545],[515,545],[515,545]]
+removeint = [[515,545]]
+nums = [12]
 dxws =  range(2,6) + range(6,14)[::2] +   range(16,513)
 
 """
@@ -81,7 +84,7 @@ for ip in range(len(wdirords)):
                     
         for k in dxws:
             wdir = "../../../../../data/raw/bigsmoothtargetted/"  +wdirord +"/" + str(k)+ "/" + diff + "/"
-            sdir = "../../../../../data/postprocessing/smoothdbtarget/1/1diffmdxcomreal/" + wdirord + "/" +diff+ "/"
+            sdir = "../../../../../data/postprocessing/smoothdbtarget/NEWmida10/1diffmdxcomreal/" + wdirord + "/" +diff+ "/"
             if not os.path.exists(sdir):
                    os.makedirs(sdir)
             

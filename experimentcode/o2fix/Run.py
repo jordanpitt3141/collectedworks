@@ -80,8 +80,7 @@ def getGfromupy(h,u,u0,u1,h0,h1,dx):
 
     G[i] = ai*u[i-1] + bi*u[i] + ci*u1
             
-    return G  
-    
+    return G      
 
 def dambreak(x,hf,hc,hl,dx):
     n = len(x)
@@ -147,6 +146,174 @@ def experiment1(x,b,h0,h1,dx):
     G = getGfromupy(h,u,0.0,0.0,h1,h1,dx)
 
     return h,G
+    
+def dambreaksmooth(x,x0,base,eta0,diffuse,dx):
+    from numpy import tanh
+    n = len(x)
+    h = zeros(n)
+    u = zeros(n)
+    
+    for i in range(n):
+        h[i] = base + 0.5*eta0*(1 + tanh(diffuse*(x0 - abs(x[i]))))
+    
+    G = getGfromupy(h,u,0.0,0.0,h[0],h[-1],dx)
+    return h,G 
+    
+def dambreaksmoothChris(x,x0,dx):
+    from numpy import tanh
+    n = len(x)
+    h = zeros(n)
+    u = zeros(n)
+    
+    for i in range(n):
+        h[i] = 1.5 + 0.5*(tanh((x0 -x[i])))
+    
+    G = getGfromupy(h,u,0.0,0.0,h[0],h[-1],dx)
+    return h,G 
+"""
+###Chris Theta Dambreak with Hamiltonian
+wdirbase = "../../../data/raw/NoLimiter/o2/"
+
+#thetas = [0,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0]
+thetas = [0]
+
+for thetk in range(len(thetas)):
+    theta = thetas[thetk]
+    wdir = wdirbase + str(theta) + "/"
+    if not os.path.exists(wdir):
+        os.makedirs(wdir)
+        
+    
+    hf = 2.0
+    g = 9.81
+    
+    dx = 100.0 /(2**13)
+    Cr = 0.5
+    lam = 1.0 /(sqrt(g*hf))
+    dt = Cr*lam*dx
+    startx = 0.0
+    endx = 1000.0 + dx
+    startt = 0.0
+    endt = 100.0 + dt 
+        
+    x,t = makevar(startx,endx,dx,startt,endt,dt)
+    n = len(x)
+        
+    gap = int(0.5/dt)
+    
+    
+    hl = 1.0
+    
+    base = hl
+    eta0 = hf - hl
+    x0 = 500
+    diffuse = 1.0
+    h,G = dambreaksmooth(x,x0,base,eta0,diffuse,dx)    
+      
+    nBC = 3
+    nBCs = 4
+    niBC = nBCs
+    u0 = zeros(nBCs)
+    u1 = zeros(nBCs)    
+    h0 = hf*ones(nBCs)
+    h1 = hl*ones(nBCs)
+        
+    h_c = copyarraytoC(h)
+    G_c = copyarraytoC(G)
+    h0_c  = copyarraytoC(h0)
+    h1_c  = copyarraytoC(h1)
+    u0_c  = copyarraytoC(u0)
+    u1_c  = copyarraytoC(u1)
+    
+    u_c = mallocPy(n)
+    
+    xbeg = arange(startx - niBC*dx,startx,dx)
+    xend = arange(endx + dx,endx + (niBC+1)*dx,dx) 
+    
+    xbc =  concatenate([xbeg,x,xend])  
+    
+    hbc =  concatenate([h0,h,h1]) 
+    
+    xbc_c = copyarraytoC(xbc)
+    hbc_c = copyarraytoC(hbc)
+    ubc_c = mallocPy(n + 2*niBC)
+    
+    getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+                
+    conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+    conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)        
+    Evalin = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    
+    Evals = []
+    ts = []
+    Evals.append(Evalin)
+    ts.append(0.0)
+    
+    
+    jtrack = 0
+    for i in range(1,len(t)):  
+        if(i == 1 or i%gap ==0):
+            getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+            conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+            conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)        
+            Evalfn = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+            u = copyarrayfromC(u_c,n)
+            G = copyarrayfromC(G_c,n)
+            h = copyarrayfromC(h_c,n)
+            
+            Evals.append(Evalfn)
+            ts.append(t[i])
+            
+            s = wdir + "out" + str(jtrack) +".txt"
+            with open(s,'a') as file2:
+                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            
+                writefile2.writerow(['dx' ,'dt','time' ,"Evalin" , "Evalfn" ,"cell midpoint", 'height(m)', 'G' , 'u(m/s)'])        
+                       
+                for j in range(n):
+                    writefile2.writerow([str(dx),str(dt),str(t[i]), str(Evalin), str(Evalfn),str(x[j]) ,str(h[j]) , str(G[j]) , str(u[j])])   
+            jtrack = jtrack + 1
+        evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs,theta)
+        print t[i]
+            
+    getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+    conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+    conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)        
+    Evalfn = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    u = copyarrayfromC(u_c,n)
+    G = copyarrayfromC(G_c,n)
+    h = copyarrayfromC(h_c,n)
+    
+    s = wdir + "outlast.txt"
+    with open(s,'a') as file2:
+        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+        writefile2.writerow(['dx' ,'dt','time' ,"Evalin" , "Evalfn" ,"cell midpoint", 'height(m)', 'G' , 'u(m/s)'])        
+               
+        for j in range(n):
+            writefile2.writerow([str(dx),str(dt),str(t[i]), str(Evalin), str(Evalfn),str(x[j]) ,str(h[j]) , str(G[j]) , str(u[j])])     
+            
+    s = wdir + "Hamil.txt"
+    with open(s,'a') as file2:
+        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+        writefile2.writerow(['dx' ,'theta','time' ,"Hamil"])        
+               
+        for j in range(len(Evals)):
+            writefile2.writerow([str(dx),str(theta),str(ts[j]), str(Evals[j])])   
+            
+    
+    deallocPy(u_c)   
+    deallocPy(h_c)
+    deallocPy(G_c)
+    deallocPy(h0_c)
+    deallocPy(h1_c)
+    deallocPy(u0_c)
+    deallocPy(u1_c)
+
+"""
+
+
 
 """
 ## DAM BREAK time##########################
@@ -214,33 +381,37 @@ deallocPy(u1_c)
 
 """
 ## Dam break##########################
-wdir = "../../../data/raw/Chrisdb/o2/"
+wdir = "../../data/trackleadsol/o2/"
 if not os.path.exists(wdir):
     os.makedirs(wdir)
     
-hf = 10.0
-hl = 1.0
-g = 9.81
 
-dx = 0.1#100.0 / (2**10)
-Cr = 0.2
-l = Cr / sqrt(g*hf)
+
+dx = 10.0 /(2**10)
+l = 0.01
 dt = l*dx
-
-theta = 2.0
+theta = 1.2
 startx = 0.0
 endx = 1000.0 + dx
 startt = 0.0
-endt = 30.0 + dt 
+endt = 100 + dt 
     
 g = 9.81
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
     
-gap = 10.0/dt
-    
-h,G = dambreak(x,hf,500,hl,dx)
+gap = int(0.5/dt)
+
+
+hf = 1.8
+hl = 1.0
+
+base = hl
+eta0 = hf - hl
+x0 = 500
+diffuse = 1000
+h,G = dambreaksmooth(x,x0,base,eta0,diffuse,dx)    
     
 nBC = 3
 nBCs = 4
@@ -257,12 +428,24 @@ u0_c  = copyarraytoC(u0)
 u1_c  = copyarraytoC(u1)
 u_c = mallocPy(n)
 
+aplus = []
+aplusx = []
+aplust = []
+
 for i in range(1,len(t)):
     if(i == 1 or i%gap ==0):
         getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
         u = copyarrayfromC(u_c,n)
         G = copyarrayfromC(G_c,n)
         h = copyarrayfromC(h_c,n)
+        
+        mi = n - 2
+        for mi in range(n-1,-1,-1):
+            if(h[mi -1] < h[mi]) and (h[mi] > 1.1 ):
+                break
+        aplus.append(h[mi])
+        aplusx.append(x[mi])
+        aplust.append(t[i])
         s = wdir + "out" + str(i) + ".txt"
         with open(s,'a') as file2:
             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -278,14 +461,33 @@ getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
 u = copyarrayfromC(u_c,n)
 G = copyarrayfromC(G_c,n)
 h = copyarrayfromC(h_c,n)
+
+mi = n - 2
+for mi in range(n-1,-1,-1):
+    if(h[mi -1] < h[mi]) and (h[mi] > 1.1 ):
+        break
+aplus.append(h[mi])
+aplusx.append(x[mi])
+aplust.append(t[i])
 s = wdir + "outlast.txt"
 with open(s,'a') as file2:
-     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    
-     writefile2.writerow(['dx' ,'dt','time' ,"cell midpoint", 'height(m)', 'G' , 'u(m/s)'])        
-                   
-     for j in range(n):
-         writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]) ,str(h[j]) , str(G[j]) , str(u[j])])         
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+    writefile2.writerow(['dx' ,'dt','time' ,"cell midpoint", 'height(m)', 'G' , 'u(m/s)'])        
+           
+    for j in range(n):
+        writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]) ,str(h[j]) , str(G[j]) , str(u[j])])      
+        
+s = wdir + "aplus.txt"
+with open(s,'a') as file2:
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+    writefile2.writerow(['x' ,'t','aplus' ,"Grim"])        
+           
+    for j in range(len(aplus)):
+        writefile2.writerow([str(aplusx[j]),str(aplust[j]),str(aplus[j]),str(0.739976603390100695296990254)]) 
+        
+        
 
 deallocPy(u_c)   
 deallocPy(h_c)
@@ -295,6 +497,7 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
 """
+
 
 """
 ## Dam break Accuracy##########################
@@ -398,7 +601,10 @@ for k in range(20):
 
 
 ################################# SOLITON Accuracy ####################3
-wdir = "../../../data/raw/solconnonsmallg10test/o2/"
+wdir = "../../../data/raw/Solnon0p7/o2/"
+
+#thetas = [0.0,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0]
+#thetas = [0.0]
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -407,23 +613,23 @@ s = wdir + "savenorms.txt"
 with open(s,'a') as file1:
     writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-    writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity','Hamiltonian Difference'])
-    
+    writefile.writerow(['dx',"theta",'Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity','Hamiltonian Difference'])
+#for k in range(6,7):    
 for k in range(6,21):
     dx = 100.0 / (2**k)
     a0 = 1.0
-    a1 = 1.0
+    a1 = 0.7
     g = 9.81
     #g = 1.0
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -50.0
+    startx = -250.0
     endx = 250.0 + dx
     startt = 0
     endt = 50 + dt
     
-    wdatadir = wdir+ str(k) + "/"
+    wdatadir = wdir+ str(k) + "/" 
     if not os.path.exists(wdatadir):
         os.makedirs(wdatadir)
     
@@ -539,7 +745,7 @@ for k in range(6,21):
     with open(s,'a') as file1:
         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-        writefile.writerow([str(dx),str(normhdiffi), str(normudiffi),str(normHamdiff)])      
+        writefile.writerow([str(dx),str(theta),str(normhdiffi), str(normudiffi),str(normHamdiff)])      
         
     deallocPy(u_c)   
     deallocPy(h_c)
@@ -781,6 +987,149 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
+"""
+
+"""
+################################# SOLITON Collision Convergence  ####################3
+wdatadir = "../../../data/raw/Cserre/solitonint0m3/o2/"
+
+s = wdatadir + "norms.txt"
+
+if not os.path.exists(wdatadir):
+    os.makedirs(wdatadir)
+
+with open(s,'a') as filen:
+    writefilen = csv.writer(filen, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+    writefilen.writerow(['dx' ,'rel Eval'])        
+           
+
+for k in range(6,19,3):
+    wdir = wdatadir +str(k) + "/"
+    if not os.path.exists(wdir):
+        os.makedirs(wdir)
+    dx = 100.0 / (2**k)
+    a0 = 1.0
+    a11 = 1.0
+    solbeg1 = 100.0
+    solend1 = 200.0
+    direction1 = 1.0
+    a12 = 1.0
+    solbeg2 = 200.0
+    solend2 = 300.0
+    direction2 = -1.0
+    
+    Cr = 0.5
+    g = 9.81
+    l = Cr / (sqrt(g*1.5*(a0 + a11 + a12)))
+    dt = l*dx
+    startx = -100.0
+    endx = 500.0 + dx
+    startt = 0.0
+    endt = 50 + dt
+    
+    theta = 1.2
+    
+    x,t = makevar(startx,endx,dx,startt,endt,dt)
+    n = len(x)
+    
+    t0 = 0
+    bot = 0
+    gap = int(10.0/dt)
+    
+    h,G = soliton2interactinit(n,a0,a11,solbeg1,solend1,direction1,a12,solbeg2,solend2,direction2,g,x,t0,dx)
+    
+    nBC = 3
+    nBCs = 4
+    u0 = zeros(nBCs)
+    u1 = zeros(nBCs)    
+    h0 = h[0]*ones(nBCs)
+    h1 = h[-1]*ones(nBCs)
+    
+    h_c = copyarraytoC(h)
+    G_c = copyarraytoC(G)
+    h0_c  = copyarraytoC(h0)
+    h1_c  = copyarraytoC(h1)
+    u0_c  = copyarraytoC(u0)
+    u1_c  = copyarraytoC(u1)
+    u_c = mallocPy(n)
+    
+    niBC = nBC
+    
+    xbeg = arange(startx - niBC*dx,startx,dx)
+    xend = arange(endx + dx,endx + (niBC+1)*dx) 
+    
+    xbc =  concatenate([xbeg,x,xend])  
+    
+    xbc_c = copyarraytoC(xbc)
+    hbc_c = mallocPy(n + 2*niBC)
+    ubc_c = mallocPy(n + 2*niBC)
+    Evals = []
+    
+    
+    
+    for i in range(1,len(t)):
+        
+        if(i % gap == 0 or i ==1):
+            getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+            u = copyarrayfromC(u_c,n)
+            G = copyarrayfromC(G_c,n)
+            h = copyarrayfromC(h_c,n)
+            
+            conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+            conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)        
+            Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+            
+            Evals.append(Eval)
+    
+            s = wdir + "saveoutputts" + str(i) + ".txt"
+    
+            with open(s,'a') as file2:
+                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                
+                writefile2.writerow(['dx' ,'dt','time','Eval','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+                       
+                for j in range(n):
+                    writefile2.writerow([str(dx),str(dt),str(t[i]), str(Eval), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])])  
+                 
+        print t[i]
+        print(h[1],G[1])     
+        evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs,theta)
+        
+    getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
+    u = copyarrayfromC(u_c,n)
+    G = copyarrayfromC(G_c,n)
+    h = copyarrayfromC(h_c,n)
+    
+    conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
+    conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)      
+    Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    
+    Evals.append(Eval)
+    
+    s = wdir + "saveoutputtslast.txt"
+    with open(s,'a') as file2:
+        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+        writefile2.writerow(['dx' ,'dt','time','Eval','x value', 'height(m)', 'G' , 'u(m/s)','true height', 'true velocity' ])        
+               
+        for j in range(n):
+            writefile2.writerow([str(dx),str(dt),str(t[i]), str(Eval), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])]) 
+    
+    relEval = abs(Evals[0] - Evals[-1]) /  abs(Evals[0])      
+    s = wdatadir + "norms.txt"
+    with open(s,'a') as filen:
+        writefilen = csv.writer(filen, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+        writefilen.writerow([str(dx) ,str(relEval)]) 
+        
+    deallocPy(u_c)   
+    deallocPy(h_c)
+    deallocPy(G_c)
+    deallocPy(h0_c)
+    deallocPy(h1_c)
+    deallocPy(u0_c)
+    deallocPy(u1_c)
 """
 
 """

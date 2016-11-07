@@ -27,7 +27,7 @@ def copyarrayfromC(a,n):
     return b
 
 dxw = "3"
-wdirord = "o1"
+wdirord = "o3"
 wdatadir = "../../../../data/raw/bigsmoothtargetted/"  +wdirord +"/"
 
 
@@ -35,7 +35,7 @@ dxws = listdir(wdatadir)
 dxws.sort(key=int)
 Evals = []
 
-sdir1 = "../../../../data/postprocessing/dbEnergy/" + wdirord+  "/"
+sdir1 = "../../../../data/postprocessing/dbEnergyN/" + wdirord+  "/"
 if not os.path.exists(sdir1):
     os.makedirs(sdir1)
 
@@ -51,7 +51,7 @@ for dxw in dxws:
     nums.sort(key=int)
     for k in nums:
         wdir = wdatadirn  + str(k) + "/" 
-        sdir = "../../../../data/postprocessing/dbEnergy/" + wdirord+  "/" + dxw + "/" + str(k) + "/"
+        sdir = "../../../../data/postprocessing/dbEnergyN/" + wdirord+  "/" + dxw + "/" + str(k) + "/"
         if not os.path.exists(sdir):
             os.makedirs(sdir) 
              

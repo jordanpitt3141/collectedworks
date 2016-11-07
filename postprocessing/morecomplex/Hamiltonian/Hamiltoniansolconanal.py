@@ -88,12 +88,14 @@ def Hamiltonianall(x,h,u,epsilon,sigma,nBC,dx):
 dxw = "15"
 wdirord = "o3"
 
-stx = -600
-etx = 600
+stx = -50
+etx = 250
 
     
-wdir = "../../../../data/raw/Joesolconnon/"  +wdirord +"/" + dxw + "/"
-sdir = "../../../../data/postprocessing/Joesolconnon/"  +wdirord +"/" + dxw + "/"
+#wdir = "../../../../data/raw/Joesolconnon/"  +wdirord +"/" + dxw + "/"
+#sdir = "../../../../data/postprocessing/Joesolconnon/"  +wdirord +"/" + dxw + "/"
+wdir = "../../../../data/raw/hinonling10/"  +wdirord +"/" + dxw + "/"
+sdir = "../../../../data/postprocessing/hinonling10/"  +wdirord +"/" + dxw + "/"
 if not os.path.exists(sdir):
         os.makedirs(sdir)
      

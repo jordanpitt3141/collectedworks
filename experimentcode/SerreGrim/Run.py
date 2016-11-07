@@ -9,6 +9,7 @@ from scipy import *
 import csv
 import os
 from numpy.linalg import norm  
+from numpy import tanh, arctanh
 
 def copyarraytoC(a):
     n = len(a)
@@ -53,6 +54,26 @@ def dambreaksmooth(x,x0,base,eta0,diffuse,dx):
         h[i] = base + 0.5*eta0*(1 + tanh(diffuse*(x0 - abs(x[i]))))
 
     return h,u       
+
+def Soliton(d):
+    AB = -22.6552*arctanh(0.707107*tanh(0.612372*(-50 - d))) + 32.0393*tanh(0.612372*(-50 - d))
+    AE = -22.6552*arctanh(0.707107*tanh(0.612372*(250 + d))) + 32.0393*tanh(0.612372*(250 + d))
+    
+    BB = 9.81*(-50 - d) + (42.7191 + 5.33989*sech2(0.612372*(-50 - d)))*tanh(0.612372*(-50 - d))
+    BE = 9.81*(250 + d) + (42.7191 + 5.33989*sech2(0.612372*(250 + d)))*tanh(0.612372*(250 + d))
+    
+    CB = -22.6552*arctanh(0.707107*tanh(0.612372*(-50 - d))) + (21.3595 - 5.33988*sech2(0.612372*(-50 - d)))*tanh(0.612372*(-50 - d))
+    CE = -22.6552*arctanh(0.707107*tanh(0.612372*(250 + d))) + (21.3595 - 5.33988*sech2(0.612372*(250 + d)))*tanh(0.612372*(250 + d))
+    
+
+    
+    A = AE - AB  
+    B = BE - BB    
+    C = CE - CB
+
+
+    #1527.68293
+    return 0.5*(A + B + C)
 
 def sech2 (x):
   a = 2./(exp(x) + exp(-x))
@@ -102,7 +123,8 @@ def experiment1(x,h0,h1,dx):
     return h,u
 
 #solitonaccuracy
-wdir = "../../../data/raw/solconnonsmallg10/grim/"
+"""
+wdir = "../../../data/raw/FDredo/grim/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
@@ -113,7 +135,7 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx','Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity', 'Eval Error'])
 
-for k in range(6,21):
+for k in range(6,20):
     dx = 100.0 / (2**k)
     Cr = 0.5
     
@@ -167,7 +189,8 @@ for k in range(6,21):
    
     conc(h0_c , h_c,h1_c,niBC,n ,niBC , hbc_c)
     conc(u0_c , u_c,u1_c,niBC,n ,niBC , ubc_c)         
-    Evali = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)     
+    Evali = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx) 
+    Evalia = Soliton(dx)    
           
     for i in range(1,len(t)):            
         evolvewrap(u_c, h_c, pubc_c, h0_c, h1_c,u0_c, u1_c,g,dx,dt,nBC, n,nBCs)    
@@ -187,10 +210,10 @@ for k in range(6,21):
     with open(s,'a') as file2:
          writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             
-         writefile2.writerow(['dx' ,'dt','time','Evali','Evalf','Eval Error','cell midpoint', 'height(m)', 'u(m/s)',"he","ue"])        
+         writefile2.writerow(['dx' ,'dt','time','Evalia','Evalf','Eval Error','cell midpoint', 'height(m)', 'u(m/s)',"he","ue"])        
                            
          for j in range(n):
-             writefile2.writerow([str(dx),str(dt),str(t[i]), str(Evali), str(Evalf), str(abs(Evali - Evalf)/ abs(Evali)), str(x[j]), str(h[j]) , str(u[j]), str(he[j]),str(ue[j])]) 
+             writefile2.writerow([str(dx),str(dt),str(t[i]), str(Evalia), str(Evalf), str(abs(Evalia - Evalf)/ abs(Evalia)), str(x[j]), str(h[j]) , str(u[j]), str(he[j]),str(ue[j])]) 
              
     normhdiffi = norm(h - he,ord=1) / norm(he,ord=1)
     normudiffi = norm(u -ue,ord=1) / norm(ue,ord=1)  
@@ -199,7 +222,7 @@ for k in range(6,21):
     with open(s,'a') as file1:
         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-        writefile.writerow([str(dx),str(normhdiffi), str(normudiffi), str(abs(Evali - Evalf)/ abs(Evali))])
+        writefile.writerow([str(dx),str(normhdiffi), str(normudiffi), str(abs(Evalia - Evalf)/ abs(Evalia))])
     
     deallocPy(u_c)   
     deallocPy(h_c)
@@ -207,87 +230,10 @@ for k in range(6,21):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
-
-
 """
-##Soliton
-wdir = "../../data/t/"
-dx = 0.1
-l = 0.01
-dt = l*dx
-startx = -500.0
-endx = 1500.0 + dx
-startt = 0.0
-endt = 100 + dt  
-    
-g = 9.81
-    
-x,t = makevar(startx,endx,dx,startt,endt,dt)
-n = len(x)
-    
-
-gap = max(5,int(0.5/dt))
-
-a0 = 10.0
-a1 = 1.0
 
 
-h,u = solitoninit(n,a0,a1,g,x,0.0,dx)
-    
-nBC = 3
-nBCs = 4
-u0 = zeros(nBCs)
-u1 = zeros(nBCs)    
-h0 = a0*ones(nBCs)
-h1 = a0*ones(nBCs)
-    
-h_c = copyarraytoC(h)
-u_c = copyarraytoC(u)
-pubc_c = copyarraytoC(concatenate([u0[-nBC:],u,u1[:nBC]]))
-h0_c  = copyarraytoC(h0)
-h1_c  = copyarraytoC(h1)
-u0_c  = copyarraytoC(u0)
-u1_c  = copyarraytoC(u1)
-    
-      
-for i in range(1,len(t)): 
-    if(i % gap == 0 or i ==1):
-        u = copyarrayfromC(u_c,n)
-        h = copyarrayfromC(h_c,n)  
-        he,ue = solitoninit(n,10.0,1.0,g,x,t[i],dx)
-        s = wdir + "saveoutputts" + str(i) + ".txt"
-        with open(s,'a') as file2:
-            writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        
-            writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'u(m/s)',"he","ue"])        
-                       
-            for j in range(n):
-                writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j]), str(he[j]),str(ue[j])])  
-        
-    evolvewrap(u_c, h_c, pubc_c, h0_c, h1_c,u0_c, u1_c,g,dx,dt,nBC, n,nBCs)    
-    print (t[i])
 
-u = copyarrayfromC(u_c,n)
-h = copyarrayfromC(h_c,n)  
-he,ue = solitoninit(n,a0,a1,g,x,t[i],dx)
-s = wdir + "outlast.txt"
-with open(s,'a') as file2:
-     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        
-     writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'u(m/s)',"he","ue"])        
-                       
-     for j in range(n):
-         writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j]), str(he[j]),str(ue[j])])   
-   
-
-deallocPy(u_c)   
-deallocPy(h_c)
-deallocPy(h0_c)
-deallocPy(h1_c)
-deallocPy(u0_c)
-deallocPy(u1_c)
-"""
 """
 ##Soliton Collision
 wdir = "../../../data/raw/Cserre/solitonothers/collDMcopyhh/grim/"
@@ -379,16 +325,18 @@ deallocPy(u1_c)
 
 
 
-"""   
+   
 ## DAM BREAK Smooth ##########################
-wdir = "../../data/t/"
-dx = 0.1
+wdir = "../../data/raw/longtimedambreak/grim/"
+if not os.path.exists(wdir):
+    os.makedirs(wdir) 
+dx = 10.0 /(2**9)
 l = 0.01
 dt = l*dx
-startx = 0.0
-endx = 1000.0 + dx
+startx = -900.0
+endx = 1800.0 + dx
 startt = 0.0
-endt = 30 + dt  
+endt = 1 + dt 
     
 g = 9.81
     
@@ -400,7 +348,7 @@ hf = 1.8
 hl = 1.0
 gap = max(5,int(0.5/dt))
 
-diffuse = 0.5
+diffuse = 10
 base = hl
 eta0 = hf - hl
 x0 = 500
@@ -420,25 +368,18 @@ h0_c  = copyarraytoC(h0)
 h1_c  = copyarraytoC(h1)
 u0_c  = copyarraytoC(u0)
 u1_c  = copyarraytoC(u1)
-    
+
+aplus = []
+aplusx = []
+aplust = []    
       
 for i in range(1,len(t)):
-    if(i % gap == 0 or i ==1):
-        u = copyarrayfromC(u_c,n)
-        h = copyarrayfromC(h_c,n)
-        s = wdir + "saveoutputts" + str(i) + ".txt"
-        with open(s,'a') as file2:
-             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                
-             writefile2.writerow(['dx' ,'dt','time','cell midpoint', 'height(m)', 'u(m/s)'])        
-                               
-             for j in range(n):
-                 writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j])])  
     evolvewrap(u_c, h_c, pubc_c, h0_c, h1_c,u0_c, u1_c,g,dx,dt,nBC, n,nBCs)    
     print (t[i])
 
 u = copyarrayfromC(u_c,n)
 h = copyarrayfromC(h_c,n)
+
 s = wdir + "outlast.txt"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -448,13 +389,14 @@ with open(s,'a') as file2:
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j])])     
 
+
 deallocPy(u_c)   
 deallocPy(h_c)
 deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
-"""
+
 #big smooth targetted
 """
 difflist = [1,6,8,9,12]
@@ -536,35 +478,38 @@ for lk in range(len(difflist)):
 #big smooth
 
 """
-diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-wdirb = "../../data/bigsmooth/grim/"
-for ll in range(3,16):
+#unfinished
+#diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
+diffuses = [2.0]
+wdirb = "../../data/bigsmoothTEST/grim/"
+for ll in range(7,8):
     for k in range(len(diffuses)):
         wdir = wdirb + str(ll) + "/" + str(k) + "/"
         if not os.path.exists(wdir):
             os.makedirs(wdir) 
         dx = 10.0 / (2**ll)
-        l = 0.01
+        Cr = 0.5
+        g = 9.81
+        hf = 1.3
+        l = 1.0 / sqrt(g*hf)
         dt = l*dx
         startx = 0.0
-        endx = 1000.0 + dx
+        endx = 3000.0 + dx
         startt = 0.0
-        endt = 30.0+(dt*0.9) 
+        endt = 300+(dt*0.9) 
         
-        g = 9.81
         
         x,t = makevar(startx,endx,dx,startt,endt,dt)
         n = len(x)
             
         bot = 0.0
-        hf = 1.8
         hl = 1.0
         gap = max(1,int(0.02/dt))
         
         diffuse = diffuses[k]
         base = hl
         eta0 = hf - hl
-        x0 = 500
+        x0 = 1000
         h,u = dambreaksmooth(x,x0,base,eta0,diffuse,dx)   
             
         nBC = 3

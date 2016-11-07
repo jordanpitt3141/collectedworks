@@ -42,26 +42,32 @@ base = 1.0
 eta0 = 0.8
 x0 = 500
 
+sdir = "../../../data/postprocessing/dbsmoothFin/"
+
+if not os.path.exists(sdir):
+        os.makedirs(sdir)
+
 diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-listalp = [1,6,9,10]
+listalp = [1,6,9,12]
 for i in listalp:
     diffuse = diffuses[i]
     hh,uu = dambreaksmooth(x,x0,base,eta0,diffuse,dx)
     s = str(diffuse)
-    plot(x,hh,label=s)   
+    plot(x,hh,label=s)  
+    
+    s = sdir + str(diffuse) + "h.dat"
+    with open(s,'w') as file1:
+        for i in range(n):
+            s ="%3.8f%5s%1.15f\n" %(x[i]," ",hh[i])
+            file1.write(s)
 
-
-sdir = "../../../data/postprocessing/dbsmooth/"
-
-if not os.path.exists(sdir):
-        os.makedirs(sdir)
 #s = "Initial Conditions Dam Break: dx = " + str(dx)
 #title(s)
-ylim([0.8,2])
-xlim([350,650])
+ylim([1.0,1.8])
+xlim([300,700])
 xlabel("$x$ ($m$)")
 ylabel("$h$ ($m$)")
-legend()
+#legend()
 
 stikz = sdir +"bump.tikz" 
 tikz_save(stikz);

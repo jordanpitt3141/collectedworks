@@ -22,15 +22,15 @@ wdirord = "o3"
 #wdirords = ["o3","o2","o1"]
 #ordsubtup = [[6,7],[6,8], [6,7]]
 
-wdirords = ["FDcent","grim"]
-ordsubtup = [[5,6],[5,6]]
+wdirords = ["FDcent"]
+ordsubtup = [[5,6]]
 
 #wdirords = ["o1"]
 #ordsubtup = [[6,7]]
 
 
 #diffws = [6,9,10,12]
-diffws = [9,10]
+diffws = [1,6,9,20]
 
 for ip in range(len(wdirords)):
     for jp in diffws:
@@ -43,35 +43,20 @@ for ip in range(len(wdirords)):
         numend = 11
         incr = 1
         nums = range(numbeg,numend,incr)
-
+        
         ylims = [[0.0,2],[1.0,1.8],[1.3,1.45],[1.3,1.45],[1.3,1.45]]
         xlims = [[0,1000],[300,700],[500,560],[520,540],[528,536]]
-        #gaps = [[2,4,6,8,10,12,14],[1,1,2,6,10,14,14],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]
-        #zoom = [True,True,False,False,False]
-        #zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
-        #zoomgap = [2,1,1,1,1] 
         
-        #gaps = [[100,100*2,100*2**2,100*2**3,100*2**4,100*2**5,100*2**5], \
-        #        [50,100,100*2,100*2**2,100*2**3,100*2**4,100*2**5], \
-        #        [25,50,100,100*2,100*2**2,100*2**3,100*2**4], \
-        #        [1,1,2,2,4,4,8], \
-        #        [1,1,1,1,1,1,1]]
-        #zoom = [True,True,True,False,False]
-        #zoomints = [[350,650],[350,650],[350,650],[350,650],[350,650]]
-        #zoomgap = [[2,2**2,2**3,2**4,2**5,2**6,2**7], \
-        #            [2,2**2,2**3,2**4,2**5,2**6,2**7], \
-        #            [2,2**2,2**3,2**4,2**5,2**6,2**7],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]  
-        
-        gaps = [[100*2**(-2),100*2**(-1),100,100*2**1,100*2**2,100*2**3,100*2**4], \
-                [100*2**(-2),100*2**(-1),100,100*2**1,100*2**2,100*2**3,100*2**4], \
-                [100*2**(-2),100*2**(-1),100,100*2**1,100*2**2,100*2**3,100*2**4], \
+        gaps = [[8,8*2,8*2**2,8*2**3,8*2**4,8*2**5,8*2**6], \
+                [2,2,2*2,2*2**2,2*2**3,2*2**4,2*2**5], \
                 [1,1,1,2,2,4,4], \
+                [1,1,1,1,1,2,2], \
                 [1,1,1,1,1,1,1]]
-        zoom = [True,True,True,False,False]
+        zoom = [True,True,False,False,False]
         zoomints = [[350,650],[350,650],[350,650],[350,650],[350,650]]
-        zoomgap = [[1,2,4,6,8,10,12], \
-                    [1,2,4,6,8,10,12], \
-                    [1,2,4,6,8,10,12],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]  
+        zoomgap = [[1,2,4,2**3,2**4,2**5,2**6], \
+                    [1,1,2,2**2,2**3,2**4,2**5], \
+                    [1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]  
         
         
         for l in range(len(ylims)):
@@ -87,7 +72,7 @@ for ip in range(len(wdirords)):
                 
                 wdir = "../../../../../../data/raw/Joebigsmooth/"  +wdirord +"/" + str(k) + "/" + diffw + "/"
                 sdirend = "nb" + str(numbeg) + "ne" + str(numend) + "/"
-                sdir = "../../../../../../data/postprocessing/smoothdball/4t/Joebigsmooth/" + wdirord + "/" +str(diffw)+ "/" + sdirend
+                sdir = "../../../../../../data/postprocessing/smoothdball/FDcon/" + wdirord + "/" +str(diffw)+ "/" + sdirend
                 if not os.path.exists(sdir):
                         os.makedirs(sdir)
                      
@@ -134,6 +119,11 @@ for ip in range(len(wdirords)):
                 xlim(cxlim)
                 xlabel("$x$ ($m$)")
                 ylabel("$h$ ($m$)")
+                m = len(x)
+                ap = 1.739975
+                const = ap*ones(m)
+                s = str(dx)
+                plot(x,const,"--k" ,label="ref")
                 #legend()
                     
                 """

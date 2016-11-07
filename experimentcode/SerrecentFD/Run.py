@@ -50,7 +50,7 @@ def dambreaksmooth(x,x0,base,eta0,diffuse,dx):
     u = zeros(n)
     
     for i in range(n):
-        h[i] = base + 0.5*eta0*(1 + tanh(diffuse*(x0 - abs(x[i]))))
+        h[i] = base + 0.5*eta0*(1 + tanh(diffuse*(x0 -x[i])))
 
     return h,u       
 
@@ -101,6 +101,7 @@ def experiment1(x,h0,h1,dx):
 
     return h,u
 
+"""
 #solitonaccuracy
 wdir = "../../../data/raw/solconnonsmallg10/FDcent/"
 
@@ -207,7 +208,7 @@ for k in range(6,21):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
+"""
 
 """
 ##Soliton
@@ -380,16 +381,18 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
 """
-"""   
+  
 ## DAM BREAK Smooth ##########################
-wdir = "../../data/t/"
-dx = 0.1
+wdir = "../../data/raw/longtimedambreak/FDc/"
+if not os.path.exists(wdir):
+    os.makedirs(wdir) 
+dx = 10.0 /(2**9)
 l = 0.01
 dt = l*dx
-startx = 0.0
-endx = 1000.0 + dx
+startx = -900
+endx = 1800.0 + dx
 startt = 0.0
-endt = 30 + dt  
+endt = 300 + dt
     
 g = 9.81
     
@@ -399,7 +402,7 @@ n = len(x)
 bot = 0.0
 hf = 1.8
 hl = 1.0
-gap = max(5,int(0.5/dt))
+gap = int(0.5/dt)
 
 diffuse = 0.5
 base = hl
@@ -422,12 +425,23 @@ h0_c  = copyarraytoC(h0)
 h1_c  = copyarraytoC(h1)
 u0_c  = copyarraytoC(u0)
 u1_c  = copyarraytoC(u1)
-    
+   
+aplus = []
+aplusx = []
+aplust = []   
       
 for i in range(1,len(t)):
     if(i % gap == 0 or i ==1):
         u = copyarrayfromC(u_c,n)
         h = copyarrayfromC(h_c,n)
+        
+        mi = n - 2
+        for mi in range(n-1,-1,-1):
+            if(h[mi -1] < h[mi]) and (h[mi] > 1.1 ):
+                break
+        aplus.append(h[mi])
+        aplusx.append(x[mi])
+        aplust.append(t[i])
         s = wdir + "saveoutputts" + str(i) + ".txt"
         with open(s,'a') as file2:
              writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -441,6 +455,14 @@ for i in range(1,len(t)):
 
 u = copyarrayfromC(u_c,n)
 h = copyarrayfromC(h_c,n)
+
+mi = n - 2
+for mi in range(n-1,-1,-1):
+    if(h[mi -1] < h[mi]) and (h[mi] > 1.1 ):
+        break
+aplus.append(h[mi])
+aplusx.append(x[mi])
+aplust.append(t[i])
 s = wdir + "outlast.txt"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -450,44 +472,60 @@ with open(s,'a') as file2:
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(x[j]), str(h[j]) , str(u[j])])     
 
+s = wdir + "aplus.txt"
+with open(s,'a') as file2:
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+    writefile2.writerow(['x' ,'t','aplus' ,"Grim"])        
+           
+    for j in range(len(aplus)):
+        writefile2.writerow([str(aplusx[j]),str(aplust[j]),str(aplus[j]),str(0.739976603390100695296990254)]) 
+
 deallocPy(u_c)   
 deallocPy(h_c)
 deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
+
+
 """
-#big smooth
-"""
-diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-wdirb = "../../data/bigsmooth/grim/"
-for ll in range(3,16):
+#big smooth NEW
+
+
+#TEST
+
+#diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
+diffuses = [2]
+wdirb = "../../data/bigsmoothTEST/FDc/"
+for ll in range(9,10):
     for k in range(len(diffuses)):
         wdir = wdirb + str(ll) + "/" + str(k) + "/"
         if not os.path.exists(wdir):
             os.makedirs(wdir) 
         dx = 10.0 / (2**ll)
-        l = 0.01
+        Cr = 0.5
+        g = 9.81
+        hf = 1.3
+        l = 1.0 / sqrt(g*hf)
         dt = l*dx
         startx = 0.0
-        endx = 1000.0 + dx
+        endx = 1200.0 + dx
         startt = 0.0
-        endt = 30.0+(dt*0.9) 
+        endt = 150.0+(dt*0.9) 
         
-        g = 9.81
         
         x,t = makevar(startx,endx,dx,startt,endt,dt)
         n = len(x)
             
         bot = 0.0
-        hf = 1.8
         hl = 1.0
         gap = max(1,int(0.02/dt))
         
         diffuse = diffuses[k]
         base = hl
         eta0 = hf - hl
-        x0 = 500
+        x0 = 600
         h,u = dambreaksmooth(x,x0,base,eta0,diffuse,dx)   
             
         nBC = 3

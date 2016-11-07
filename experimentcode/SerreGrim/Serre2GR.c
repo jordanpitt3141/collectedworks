@@ -184,7 +184,7 @@ void addBC(double *h, double *h0, double *h1, int nBC, int n, int nBCs, double *
     free(he);  
 
 }
-
+/*
 void evolveh(double *h, double *u, double g, double dx, double dt, int nBC, int n,double *nh)
 {
     //modifies nh and nG to give the new values of h and G after a single time step
@@ -202,9 +202,36 @@ void evolveh(double *h, double *u, double g, double dx, double dt, int nBC, int 
             + 0.5*dt*dt*idx*idx*(aiph*(u[i+1]*h[i+1] - u[i]*h[i]) - aimh*(u[i]*h[i] - u[i-1]*h[i-1])); 
  
     }    
+
+
    
 }
+*/
 
+void evolveh(double *h, double *u, double *pu, double g, double dx, double dt, int nBC, int n,double *nh)
+{
+    //modifies nh and nG to give the new values of h and G after a single time step
+    double idx = 1.0 / dx;
+    int i = nBC - 1;
+    double hiph,himh, uiph,uimh;
+
+    //calculate gradients
+
+    for (i = nBC ; i < n +nBC;i++)
+    {
+        hiph = 0.5*(h[i+1] + h[i]) - 0.5*(dt*idx)*(u[i+1]*h[i+1] - u[i]*h[i]);
+        himh = 0.5*(h[i] + h[i-1]) - 0.5*(dt*idx)*(u[i]*h[i] - u[i-1]*h[i-1]);
+
+		uiph = 0.5*(0.5*(u[i+1] + pu[i+1]) + 0.5*(u[i] + pu[i]));
+		uimh = 0.5*(0.5*(u[i] + pu[i]) + 0.5*(u[i-1] + pu[i-1]));
+
+        nh[i -nBC] = h[i] - dt*idx*(hiph*uiph -  himh*uimh); 
+ 
+    }    
+
+
+   
+}
 void evolveu(double *h, double *u, double *pu, double g, double dx, double dt, int nBC, int n,double *fu)
 {
     //modifies nh and nG to give the new values of h and G after a single time step
@@ -305,12 +332,13 @@ void evolvewrap(double *u, double *h, double *pubc, double *h0, double *h1, doub
     double *hbc = malloc((n + 2*nBC)*sizeof(double));
     addBC(h, h0, h1,nBC, n,nBCs,hbc);
     addBC(u, u0, u1,nBC, n,nBCs,ubc);
-
-    evolveh(hbc, ubc,g,dx, dt,nBC, n,h); 
-    evolveu(hbc, ubc,pubc,g,dx,dt,nBC,n,u);
-   
-
+    evolveu(hbc, ubc,pubc,g,dx,dt,nBC,n,u); 
     memcpy(pubc,ubc,(n + 2*nBC)*sizeof(double));
+
+
+	addBC(u, u0, u1,nBC, n,nBCs,ubc);
+
+	evolveh(hbc, ubc,pubc,g,dx, dt,nBC, n,h); 
     free(ubc);
     free(hbc);
 

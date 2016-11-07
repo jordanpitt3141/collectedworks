@@ -20,8 +20,8 @@ def copyarrayfromC(a,n):
         
     return b
 
-order = "3"
-dxn = "11"
+order = "grim"
+dxn = "12"
 #wdir = "../../../../data/raw/solconlong/o"+order+"/" +dxn+ "/"
 #sdir = "../../../../data/postprocessing/solconlong/o"+order+"/" +dxn+ "/"
 
@@ -31,15 +31,15 @@ dxn = "11"
 #wdir = "../../../../data/raw/solconnonsmallg1n/o"+order+"/" +dxn+ "/"
 #sdir = "../../../../data/postprocessing/solconnonsmallg1n/o"+order+"/" +dxn+ "/"
 
-wdir = "../../../../data/raw/hinonling1/o"+order+"/" +dxn+ "/"
-sdir = "../../../../data/postprocessing/ChrisEnerg/hinonling1ex/o"+order+"/" +dxn+ "/"
+wdir = "../../../../data/raw/solconnonsmallg10FDall/"+order+"/" +dxn+ "/"
+sdir = "../../../../data/postprocessing/solconnonsmallg10FDall/ex/"+order+"/" +dxn+ "/"
 
 
 if not os.path.exists(sdir):
     os.makedirs(sdir)
 
-gap = 2
-gaps = 1
+gap = 4
+gaps = 2
 
 def sech2 (x):
   a = 2./(exp(x) + exp(-x))
@@ -61,9 +61,10 @@ def solitoninit(n,a0,a1,g,x,t0,dx):
     
     return h,u
       
-startx = -100
-endx = 100      
-s = wdir + "saveoutputtslast.txt"
+startx = -50
+endx = 250      
+#s = wdir + "saveoutputtslast.txt"
+s = wdir + "outlast.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
@@ -77,8 +78,8 @@ with open(s,'r') as file1:
             dx =float(row[0])
             dt =float(row[1])
             t =float(row[2])
-            h.append(float(row[3]))
-            u.append(float(row[5]))
+            h.append(float(row[7]))
+            u.append(float(row[8]))
                
         j = j + 1
     x = arange(startx,endx+dx,dx)
@@ -89,8 +90,8 @@ with open(s,'r') as file1:
 
 a1 = 1.0
 a0 = 1.0
-#g = 9.81
-g= 1.0
+g = 9.81
+#g= 1.0
 t0 = 0.0
 n = len(x) 
 ht,ut = solitoninit(n,a0,a1,g,x,t,dx)   

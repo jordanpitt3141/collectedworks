@@ -8,7 +8,7 @@ Created on Wed Sep 23 16:53:37 2015
 import csv
 from numpy.linalg import norm
 from scipy import *
-from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
+from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog, xticks,yticks
 from matplotlib2tikz import save as tikz_save
 import os
 from subprocess import call
@@ -25,11 +25,16 @@ wdirord = "o3"
 #wdirords = ["FDcent","grim"]
 #ordsubtup = [[5,6],[5,6]]
 
-wdirords = ["o1"]
+wdirords = ["o3"]
 ordsubtup = [[6,7]]
 
+#wdirords = ["o3","FDcent","grim","o2","o1"]
+#ordsubtup = [[6,7],[5,6],[5,6], [6,8], [6,7]]
 
-diffws = [6,9,10,12]
+diffs = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
+
+
+diffws = [1,6,9,13]
 #diffws = [6]
 
 for ip in range(len(wdirords)):
@@ -39,8 +44,8 @@ for ip in range(len(wdirords)):
         wdirord = wdirords[ip]
 
         #reverse
-        numbeg = 13
-        numend = 6
+        numbeg = 10
+        numend = 3
         incr = -1
         nums = range(numbeg,numend,incr)
 
@@ -51,16 +56,16 @@ for ip in range(len(wdirords)):
         #zoomints = [[500,560],[500,560],[500,560],[500,560],[530,540]]
         #zoomgap = [2,1,1,1,1] 
         
-        gaps = [[100*2**6,100*2**5,100*2**4,100*2**3,100*2**2,100*2,100], \
-                [100*2*5,100*2**4,100*2**3,100*2**2,100*2**1,100,50], \
-                [100*2*4,100*2**3,100*2**2,100*2**1,100,50,25], \
-                [8,4,4,2,2,1,1], \
+        gaps = [[8*2**6,8*2**5,8*2**4,8*2**3,8*2**2,8*2,8], \
+                [2*2**5,2*2**4,2*2**3,2*2**2,2*2,2,2], \
+                [4,4,2,2,1,1,1], \
+                [2,2,1,1,1,1,1], \
                 [1,1,1,1,1,1,1]]
-        zoom = [True,True,True,False,False]
+        zoom = [True,True,False,False,False]
         zoomints = [[350,650],[350,650],[350,650],[350,650],[350,650]]
-        zoomgap = [[2**7,2**6,2**5,2**4,8,4,2], \
-                    [2**7,2**6,2**5,2**4,8,4,2], \
-                    [2**7,2**6,2**5,2**4,8,4,2],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]  
+        zoomgap = [[2**6,2**5,2**4,2**3,4,2,1], \
+                    [2**5,2**4,2**3,2**2,2,1,1], \
+                    [1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]  
         
         
         for l in range(len(ylims)):
@@ -76,7 +81,7 @@ for ip in range(len(wdirords)):
                 
                 wdir = "../../../../../../data/raw/Joebigsmooth/"  +wdirord +"/" + str(k) + "/" + diffw + "/"
                 sdirend = "nb" + str(numbeg) + "ne" + str(numend) + "/"
-                sdir = "../../../../../../data/postprocessing/smoothdball/1/Joebigsmooth/" + wdirord + "/" +str(diffw)+ "/" + sdirend
+                sdir = "../../../../../../data/postprocessing/smoothdball/a10redo/" + wdirord + "/" +str(diffw)+ "/" + sdirend
                 if not os.path.exists(sdir):
                         os.makedirs(sdir)
                      
@@ -116,26 +121,22 @@ for ip in range(len(wdirords)):
                          ht = h[xbeg:xend:igap]
                      x = array(xt)
                      h = array(ht)     
-              
+                m = len(x)
+                ap = 1.736397786
+                h2 = 1.36898
+                const = ap*ones(m)
                 s = str(dx) 
                 plot(x,h ,label=s)
+                plot(x,const,"--k" ,label="a ref")
+                
                 ylim(cylim)
                 xlim(cxlim)
+                eyticks = [h2]
+                yticks(list(yticks()[0]) + eyticks)               
                 xlabel("$x$ ($m$)")
                 ylabel("$h$ ($m$)")
                 #legend()
-                    
-                """
-                plot(x,u ,'-b')
-                ylim([-0.1,2])
-                xlim([0,1000])
-                s = "Dam Break: " + wdirord + " dx = " + str(dx)
-                title(s)
-                xlabel("x (m)")
-                ylabel("u (m/s)")
-                """
             
-                
             stikz = sdir +str(l)+ ".tikz" 
             tikz_save(stikz);
             s = "Dam Break: " + wdirord + " diff = " + str(beta)
@@ -147,11 +148,6 @@ for ip in range(len(wdirords)):
             savefig(s, bbox_inches='tight')        
             clf()
             
-            """
-            \pgfplotsset{compat = newest,
-        	every x tick label/.append style={font=\scriptsize, yshift=0.5ex},
-        	every y tick label/.append style={font=\scriptsize, xshift=0.5ex}}
-            """
         
             #make the tex file to create the document
             s = "\\documentclass[]{article}\n\\usepackage{tikz} \n\\usepackage{amsmath} \n" \
@@ -163,11 +159,6 @@ for ip in range(len(wdirords)):
         
             #print(s)
             filen = sdir +str(l)+ ".tex" 
-            """
-            if not os.path.exists(filen):
-                with open(filen,'a') as file1:
-                    print("created" +filen)
-            """
             file1 = open(filen, 'w')
             file1.write(s)
             file1.close() 
@@ -190,4 +181,4 @@ for ip in range(len(wdirords)):
         file1 = open(filen, 'w')
         file1.write(s)
         file1.close()  
-        call(['make','-C',sdir,'all'])         
+        call(['make','-C',sdir,'all'])

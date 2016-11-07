@@ -40,7 +40,7 @@ for dxw in dxws:
     nums = listdir(wdatadirn)
     for k in nums:
         wdir = wdatadirn  + str(k) + "/" 
-        sdir = "../../../results/dbEnergy/" +wdirord +"/" + dxw + "/" + str(k) + "/"
+        sdir = "../../../results/dbEnergyN/" +wdirord +"/" + dxw + "/" + str(k) + "/"
         if not os.path.exists(sdir):
             os.makedirs(sdir) 
              

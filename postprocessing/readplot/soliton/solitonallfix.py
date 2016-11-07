@@ -25,8 +25,8 @@ def copyarrayfromC(a,n):
 #hig1 -100 to 100 ?
 #orders = ["1","2","3"]
 orders = ["1","2","3"]
-#dxns = ["6","7","8","9","10","11","12","13","14","15","16","17","18"]
-dxns = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"]
+dxns = ["6","7","8","9","10","11","12","13","14","15","16","17","18"]
+#dxns = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"]
 
 def sech2 (x):
   a = 2./(exp(x) + exp(-x))
@@ -60,9 +60,9 @@ for order in orders:
     for dxn in dxns:
 
 
-        wdir = "../../../../data/raw/lononling10/o"+order+"/" +dxn+ "/"
-        sdir = "../../../../data/postprocessing/ChrisEnerg/lononling10/o"+order+"/" +dxn+ "/"
-        sdirfront = "../../../../data/postprocessing/ChrisEnerg/lononling10/o"+order+"/"
+        wdir = "../../../../data/raw/hinonling10/o"+order+"/" +dxn+ "/"
+        sdir = "../../../../data/postprocessing/newEnerg/hinonling10/o"+order+"/" +dxn+ "/"
+        sdirfront = "../../../../data/postprocessing/newEnerg/hinonling10/o"+order+"/"
         
         
         if not os.path.exists(sdir):
@@ -71,8 +71,8 @@ for order in orders:
         gap = 2
         gaps = 1
               
-        startx = -500
-        endx = 1000     
+        startx = -250
+        endx = 250     
         s = wdir + "saveoutputtslast.txt"
         with open(s,'r') as file1:
             readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -94,7 +94,7 @@ for order in orders:
             x = arange(startx,endx+0.9*dx,dx)
         
         a1 = 1.0
-        a0 = 10.0
+        a0 = 1.0
         g = 9.81
         #g= 1.0
         t0 = 0.0
@@ -140,7 +140,7 @@ for order in orders:
         
         Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)    
         Evalt = HankEnergyall(xbc_c,htbc_c,utbc_c,g,n + 2*niBC,niBC,dx)
-        Evalti = HankEnergyall(xbc_c,htibc_c,utibc_c,g,n + 2*niBC,niBC,dx)   
+        Evalti = 1527.68293#HankEnergyall(xbc_c,htibc_c,utibc_c,g,n + 2*niBC,niBC,dx)   
         
         normh = norm(array(h) - ht,ord=1) / norm(ht,ord=1)    
         normu = norm(array(u) - ut,ord=1) / norm(ut,ord=1) 

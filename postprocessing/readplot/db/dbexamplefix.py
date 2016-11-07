@@ -4,10 +4,8 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from matplotlib2tikz import save as tikz_save
 
-order = "2af"
-num = "17"
-wdir = "../../../../data/raw/ndbh/o"+order+"/"
-sdir = "../../../../data/postprocessing/ndbhex/o"+order+"/"+num+"/"
+wdir = "../../../../data/raw/DBSWanew100s/o3/10/10.0/"
+sdir = "../../../../data/postprocessing/DBSWfront/o3/10/10.0/"
 
 if not os.path.exists(sdir):
     os.makedirs(sdir)
@@ -16,13 +14,13 @@ if not os.path.exists(sdir):
 #sdir = "../../../../written/exportpic/dambreak/ex/"
 
 #gap = 50
-gap = 30
+gap = 1
 
 h0 = 0.1
 g = 9.81
 
          
-s = wdir + num+".txt"
+s = wdir + "outlast.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
@@ -35,16 +33,16 @@ with open(s,'r') as file1:
             dx =float(row[0])
             dt =float(row[1])
             t =float(row[2])
-            x.append(float(row[3]))
-            h.append(float(row[4]))
-            u.append(float(row[6]))
+            x.append(float(row[4]))
+            h.append(float(row[5]))
+            u.append(float(row[7]))
                 
         j = j + 1
     x = array(x)
     u = array(u)
     h = array(h)
 
-xbeg = int((350)/dx)
+xbeg = int((550)/dx)
 xend = int((650)/dx)
 xt =x[xbeg:xend:gap]
 ht =h[xbeg:xend:gap]
@@ -61,7 +59,7 @@ ylabel("$h$ ($m$)")
 #clf();
 
 n = len(xt)
-s = sdir + "h.dat"
+s = sdir + "hz.dat"
 with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.15f\n" %(xt[i]," ",ht[i])

@@ -161,75 +161,11 @@ def dambreaksmooth(x,x0,base,eta0,diffuse,dx):
     return h,G       
     
             
-"""         
-## DB TIME
-from time import time
-samp = 100
-wdir = "../../data/time/o1/"
-dx = 0.001
-l = 0.01
-dt = l*dx
-startx = 0.0
-endx = 1000.0 + dx
-startt = 0.0
-endt = samp*dt   
-g = 9.81
-    
-x,t = makevar(startx,endx,dx,startt,endt,dt)
-n = len(x)
-    
-bot = 0.0
-hf = 1.8
-hl = 1.0
-    
-h,G= dambreak(x,hf,500,hl,bot,dx)
-   
-nBC = 3
-nBCs = 4
-u0 = zeros(nBCs)
-u1 = zeros(nBCs)    
-h0 = hf*ones(nBCs)
-h1 = hl*ones(nBCs)
-
-gap = max(5, 5.0/dt)
-    
-h_c = copyarraytoC(h)
-G_c = copyarraytoC(G)
-h0_c  = copyarraytoC(h0)
-h1_c  = copyarraytoC(h1)
-u0_c  = copyarraytoC(u0)
-u1_c  = copyarraytoC(u1)
-u_c = mallocPy(n)
-    
-    
-tim1 =time()    
-for i in range(1,len(t)):
-    evolvewrap(G_c,h_c,h0_c,h1_c,u0_c,u1_c,g,dx,dt,nBC,n,nBCs)
-    print t[i]
-tim2 =time()
-tt = tim2 - tim1  
-        
-s = wdir + "outlast.txt"
-with open(s,'a') as file2:
-     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    
-     writefile2.writerow(['samp' ,'total time(s)','average time(s)'])        
-     writefile2.writerow([str(samp), str(tt), str(tt/float(samp))])   
-             
-deallocPy(u_c)   
-deallocPy(h_c)
-deallocPy(G_c)
-deallocPy(h0_c)
-deallocPy(h1_c)
-deallocPy(u0_c)
-deallocPy(u1_c)
-"""
-
 """
 ## DB
 from time import time
 
-wdir = "../../../data/raw/db/o1/"
+wdir = "../../data/trackleadsol/o1/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -238,25 +174,27 @@ hf = 1.8
 hl = 1.0
 g = 9.81
 
-dx = 100.0 / (2**10)
+dx = 10.0 /(2**10)
 Cr = 0.5
-l = Cr / sqrt(g*hf)
+l = 0.01
 
 dt = l*dx
 
 startx = 0.0
 endx = 1000.0 + dx
 startt = 0.0
-endt = 30 + dt   
+endt = 100 + dt  
     
 x,t = makevar(startx,endx,dx,startt,endt,dt)
 n = len(x)
     
 bot = 0.0
-hf = 1.8
-hl = 1.0
     
-h,G= dambreak(x,hf,500,hl,bot,dx)
+diffuse = 1000
+base = hl
+eta0 = hf - hl
+x0 = 500
+h,G = dambreaksmooth(x,x0,base,eta0,diffuse,dx)     
    
 nBC = 3
 nBCs = 4
@@ -265,7 +203,7 @@ u1 = zeros(nBCs)
 h0 = hf*ones(nBCs)
 h1 = hl*ones(nBCs)
 
-gap = max(5, 5.0/dt)
+gap = int(0.5/dt)
     
 h_c = copyarraytoC(h)
 G_c = copyarraytoC(G)
@@ -274,7 +212,10 @@ h1_c  = copyarraytoC(h1)
 u0_c  = copyarraytoC(u0)
 u1_c  = copyarraytoC(u1)
 u_c = mallocPy(n)
-    
+
+aplus = []
+aplusx = []
+aplust = [] 
     
 tim1 =time()    
 for i in range(1,len(t)):
@@ -283,6 +224,14 @@ for i in range(1,len(t)):
         u = copyarrayfromC(u_c,n)
         G = copyarrayfromC(G_c,n)
         h = copyarrayfromC(h_c,n)
+        
+        mi = n - 2
+        for mi in range(n-1,-1,-1):
+            if(h[mi -1] < h[mi]) and (h[mi] > 1.1 ):
+                break
+        aplus.append(h[mi])
+        aplusx.append(x[mi])
+        aplust.append(t[i])
         s = wdir + "out" + str(i) + ".txt"
         with open(s,'a') as file2:
             writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -298,6 +247,14 @@ getufromG(h_c,G_c,u0[-1],u1[0],h0[-1],h1[0], dx ,n,u_c)
 u = copyarrayfromC(u_c,n)
 G = copyarrayfromC(G_c,n)
 h = copyarrayfromC(h_c,n)
+
+mi = n - 2
+for mi in range(n-1,-1,-1):
+    if(h[mi -1] < h[mi]) and (h[mi] > 1.1 ):
+        break
+aplus.append(h[mi])
+aplusx.append(x[mi])
+aplust.append(t[i])
 s = wdir + "outlast.txt"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -306,7 +263,15 @@ with open(s,'a') as file2:
                    
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]) ,str(h[j]) , str(G[j]) , str(u[j])])   
-             
+
+s = wdir + "aplus.txt"
+with open(s,'a') as file2:
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+    writefile2.writerow(['x' ,'t','aplus' ,"Grim"])        
+           
+    for j in range(len(aplus)):
+        writefile2.writerow([str(aplusx[j]),str(aplust[j]),str(aplus[j]),str(0.739976603390100695296990254)])              
 deallocPy(u_c)   
 deallocPy(h_c)
 deallocPy(G_c)
@@ -585,7 +550,7 @@ for lk in range(len(difflist)):
 ################################# SOLITON Accuracy ####################3
 #dxs = [100.0,90.0,80.0,70.0,60.0,50.0,40.0,30.0,20.0,10.0,9.0,8.0,7.0,6.0,5.0,4.0,3.0,2.0,1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0.09,0.08,0.07 \
 #,0.06,0.05,0.04,0.03,0.02,0.01]
-wdir = "../../../data/raw/solconnonsmallg10/o1/"
+wdir = "../../../data/raw/Solnon0p7/o1/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -599,13 +564,13 @@ with open(s,'a') as file1:
 for k in range(6,21):
     dx = 100.0 / (2**k)
     a0 = 1.0
-    a1 = 1.0
+    a1 = 0.7
     g = 9.81
     #g = 1
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -50.0
+    startx = -250.0
     endx = 250.0 + dx
     startt = 0
     endt = 50 + dt
@@ -619,7 +584,7 @@ for k in range(6,21):
     
     t0 = 0
     bot = 0
-    gap = max(1,int(10.0/dt))
+    gap =int(10.0/dt)
     
     h,G= solitoninit(n,a0,a1,g,x,t0,dx)
     
