@@ -350,6 +350,15 @@ def DingFlume(x,dx):
 
     G = getGfromupy(h,u,bed,0,0,0.4,h[-1],0,bed[-1],dx)
     return h,u,G,bed
+    
+    
+def Flat(x,h0,dx):
+    n = len(x)
+    bed = zeros(n)
+    h = h0*ones(n)
+    u = zeros(n)
+    G = getGfromupy(h,u,bed,0,0,h0,h0,0,0,dx)
+    return h,u,G,bed
 
 def BejiEdge(x,hc0,vc0,ft):
     n = len(x)
@@ -358,38 +367,48 @@ def BejiEdge(x,hc0,vc0,ft):
     v = zeros(n)
     hb = 0.4
     
-    #sln
-    #k = 1.32585
-    #omega = k*sqrt(9.81*hb) * sqrt(3.0 / (k*k*hb*hb*hb + 3))
+    #SH
+    k = 3.06218
 
-    h1 = hb
     
     i = n-1
     et = ft
-    c1 = sqrt(g*(hb+ et))
-    ut = (c1*et) / (hb + et)
+    #c1 = sqrt(g*(hb+ et))
+    h1 = hb + et
+    c1 = 1.641496 #sqrt(9.81*hb) * sqrt(3.0 / (k*k*hb*hb+ 3))
+    ut = (c1*et) / (h1)
     eta[i] = et
     v[i] = ut
     
     #linear extrapolation
     i = n - 2
     et = 2*ft - (hc0 - hb)
-    c1 = sqrt(g*(hb+ et))
-    ut = (c1*et) / (hb + et)
+    h1 = hb + et
+    c1 = 1.641496
+    ut = (c1*et) / (h1)
+    #c1 = sqrt(g*(hb+ et))
+    #ut = (c1*et) / (hb + et)
     eta[i] = et
     v[i] = ut
     
     for i in range(n-3,-1,-1):
         et = 2*(eta[i+1]) - (eta[i+2])
-        c1 = sqrt(g*(hb+ et))
-        ut = (c1*et) / (hb + et)
+        #c1 = sqrt(g*(hb+ et))
+        #ut = (c1*et) / (hb + et)
+        
+        h1 = hb + et
+        c1 = 1.641496
+        ut = (c1*et) / (h1)
         eta[i] = et
         v[i] = ut
         
     i = -1
     et = 2*(eta[i+1]) - (eta[i+2])
-    c1 = sqrt(g*(hb+ et))
-    ut = (c1*et) / (hb + et)
+    h1 = hb + et
+    c1 = 1.641496
+    ut = (c1*et) / (h1)
+    #c1 = sqrt(g*(hb+ et))
+    #ut = (c1*et) / (hb + et)
     e0 = et
     v0 = ut 
     h0 = hb + e0
@@ -449,7 +468,10 @@ def SolitonEdge(x,g,d1,a0,c0,t0):
     
 def lineinterp(y0,y1,x0,x1,xi):
     return y0  + (xi)*(y1 - y0)/(x1 - x0)
-    
+
+def CELLRECON(y0,y1,y2,x0,x1,x2,xi):
+    #return y1  + (xi)*(y2 - y1)/(x2 - x1)  
+    return y1  + (xi)*(y2 - y0)/(x2 - x0)    
     
    
 """
@@ -714,9 +736,9 @@ l = Cr / (sqrt(g*(0.5) ))
 dt = l*dx
 theta = 2
 startx = 0
-endx = 1000
+endx = 500
 startt = 0.0
-endt = 400 + dt  
+endt = 1 + dt  
 
 wdir = wdatadir
 
@@ -744,7 +766,7 @@ t0 = 0.0
 
 #initial conditions for time steps
 tij = 0.0
-h,u,G,bed = DingFlume(x,a0,c0,dx)
+h,u,G,bed =  Flat(x,c0,dx)
 
 b0 = zeros(nBC)
 b1 = zeros(nBC)
@@ -754,11 +776,10 @@ u1 = zeros(nBC)
 G1 = G[-1]*ones(nBC)
 
 #first do just h at edges
-h0,u0,G0 =  CosineEdge(xbeg,a0,c0,tij)
-
-#h0,u0,G0 = SolitonEdge(xbeg,g,0.01,a0,c0,tij)
-h0h,u0h,G0h =  CosineEdge(xbeg,a0,c0,tij+dt)
-#h0h,u0h,G0h  = SolitonEdge(xbeg,g,0.01,a0,c0,tij +dt)
+#h0,u0,G0 =  CosineEdge(xbeg,a0,c0,tij)
+h0,u0,G0 = SolitonEdge(xbeg,g,0.01,a0,c0,tij)
+#h0h,u0h,G0h =  CosineEdge(xbeg,a0,c0,tij+dt)
+h0h,u0h,G0h  = SolitonEdge(xbeg,g,0.01,a0,c0,tij +dt)
 
 #hc,Gc = CosineEdge(x,u,u[0],u[-1],a0,c0,0)
 
@@ -815,8 +836,8 @@ for i in range(1,len(t)):
     copywritearraytoC(h0h,h0_c)
     copywritearraytoC(u0h,u0_c)
     copywritearraytoC(G0h,G0_c)
-    h0h,u0h,G0h =  CosineEdge(xbeg,a0,c0,tij+dt)
-    #h0h,u0h,G0h = SolitonEdge(xbeg,g,0.01,a0,c0,tij +dt)
+    #h0h,u0h,G0h =  CosineEdge(xbeg,a0,c0,tij+dt)
+    h0h,u0h,G0h = SolitonEdge(xbeg,g,0.01,a0,c0,tij +dt)
     copywritearraytoC(h0h,h0h_c)
     copywritearraytoC(u0h,u0h_c)
     copywritearraytoC(G0h,G0h_c)
@@ -1128,9 +1149,11 @@ deallocPy(b0_c)
 deallocPy(b1_c) 
 """
 
+
+
 #94
 ### Dingemans results
-wdatadir = "../../../data/raw/Beji94/o2/"
+wdatadir = "../../../data/raw/Beji94/o2WS2/"
 
 expdir = "../../../data/Experimental/Data 1994 Paper/CSV/"
 
@@ -1153,7 +1176,7 @@ theta = 1.2
 startx = 5.7 + dx
 endx = 300
 startt = 0
-endt = 180 + dt  
+endt = 60 + dt  #180
 
 wdir = wdatadir + exp + "/"
 
@@ -1277,11 +1300,11 @@ copywritearraytoC(G0h,G0h_c)
 
 tts.append(t[0])
 hts.append((h[0] - hb)) 
-wg2i = int((10.5 - startx) / dx )
-wg3i = int((12.5 - startx) / dx )
-wg4i = int((13.5 - startx) / dx )
-wg5i = int((14.5 - startx) / dx )
-wg6i = int((15.7 - startx) / dx )
+wg2i = int((10.5 - startx) / dx ) #good one
+wg3i = int((12.5 - startx) / dx ) #G
+wg4i = int((13.5 - startx) / dx ) #G
+wg5i = int((14.5 - startx) / dx ) + 1 #
+wg6i = int((15.7 - startx) / dx ) + 1
 wg7i = int((17.3 - startx) / dx )
 nwg1s.append(0)
 nwg2s.append(0)  
@@ -1292,25 +1315,35 @@ nwg6s.append(0)
 nwg7s.append(0) 
 
 hbwg1 = h0[-1]
+wg2im1h = readfrommem(h_c,wg2i - 1) 
 wg2ih = readfrommem(h_c,wg2i) 
 wg2ip1h = readfrommem(h_c,wg2i + 1) 
-hbwg2 = lineinterp(wg2ih,wg2ip1h,x[wg2i],x[wg2i + 1],10.5 - x[wg2i])    
+hbwg2 = CELLRECON(wg2im1h,wg2ih,wg2ip1h,x[wg2i-1],x[wg2i],x[wg2i + 1],10.5 - x[wg2i])   
+
+wg3im1h = readfrommem(h_c,wg3i - 1) 
 wg3ih = readfrommem(h_c,wg3i) 
 wg3ip1h = readfrommem(h_c,wg3i + 1) 
-hbwg3 = lineinterp(wg3ih,wg3ip1h,x[wg3i],x[wg3i + 1],12.5 - x[wg3i])
+hbwg3 = CELLRECON(wg3im1h,wg3ih,wg3ip1h,x[wg3i-1],x[wg3i],x[wg3i + 1],12.5 - x[wg3i])   
+
+wg4im1h = readfrommem(h_c,wg4i - 1) 
 wg4ih = readfrommem(h_c,wg4i) 
 wg4ip1h = readfrommem(h_c,wg4i + 1) 
-hbwg4 = lineinterp(wg4ih,wg4ip1h,x[wg4i],x[wg4i + 1],13.5 - x[wg4i])
+hbwg4 = CELLRECON(wg4im1h,wg4ih,wg4ip1h,x[wg4i-1],x[wg4i],x[wg4i + 1],13.5 - x[wg4i])  
+
+wg5im1h = readfrommem(h_c,wg5i - 1) 
 wg5ih = readfrommem(h_c,wg5i) 
 wg5ip1h = readfrommem(h_c,wg5i + 1) 
-hbwg5 = lineinterp(wg2ih,wg5ip1h,x[wg5i],x[wg5i + 1],14.5 - x[wg5i])
+hbwg5 = CELLRECON(wg5im1h,wg5ih,wg5ip1h,x[wg5i-1],x[wg5i],x[wg5i + 1],14.5 - x[wg5i])  
+
+wg6im1h = readfrommem(h_c,wg6i - 1) 
 wg6ih = readfrommem(h_c,wg6i) 
 wg6ip1h = readfrommem(h_c,wg6i + 1) 
-hbwg6 = lineinterp(wg6ih,wg6ip1h,x[wg6i],x[wg6i + 1],15.7 - x[wg6i])  
+hbwg6 = CELLRECON(wg6im1h,wg6ih,wg6ip1h,x[wg6i-1],x[wg6i],x[wg6i + 1],15.7 - x[wg6i])  
+
+wg7im1h = readfrommem(h_c,wg7i - 1) 
 wg7ih = readfrommem(h_c,wg7i) 
 wg7ip1h = readfrommem(h_c,wg7i + 1) 
-hbwg7 = lineinterp(wg7ih,wg7ip1h,x[wg7i],x[wg7i + 1],17.3 - x[wg7i])  
-
+hbwg7 = CELLRECON(wg7im1h,wg7ih,wg7ip1h,x[wg7i-1],x[wg7i],x[wg7i + 1],17.3 - x[wg7i])  
 
 for i in range(1,len(t)):     
     
@@ -1322,24 +1355,35 @@ for i in range(1,len(t)):
     uc0 = readfrommem(u_c,0)
     hc0 = readfrommem(h_c,0) 
     
+    wg2im1h = readfrommem(h_c,wg2i - 1) 
     wg2ih = readfrommem(h_c,wg2i) 
     wg2ip1h = readfrommem(h_c,wg2i + 1) 
-    wg2h = lineinterp(wg2ih,wg2ip1h,x[wg2i],x[wg2i + 1],10.5 - x[wg2i])    
+    wg2h = CELLRECON(wg2im1h,wg2ih,wg2ip1h,x[wg2i-1],x[wg2i],x[wg2i + 1],10.5 - x[wg2i])   
+    
+    wg3im1h = readfrommem(h_c,wg3i - 1) 
     wg3ih = readfrommem(h_c,wg3i) 
     wg3ip1h = readfrommem(h_c,wg3i + 1) 
-    wg3h = lineinterp(wg3ih,wg3ip1h,x[wg3i],x[wg3i + 1],12.5 - x[wg3i])
+    wg3h = CELLRECON(wg3im1h,wg3ih,wg3ip1h,x[wg3i-1],x[wg3i],x[wg3i + 1],12.5 - x[wg3i])   
+    
+    wg4im1h = readfrommem(h_c,wg4i - 1) 
     wg4ih = readfrommem(h_c,wg4i) 
     wg4ip1h = readfrommem(h_c,wg4i + 1) 
-    wg4h = lineinterp(wg4ih,wg4ip1h,x[wg4i],x[wg4i + 1],13.5 - x[wg4i])
+    wg4h = CELLRECON(wg4im1h,wg4ih,wg4ip1h,x[wg4i-1],x[wg4i],x[wg4i + 1],13.5 - x[wg4i])  
+    
+    wg5im1h = readfrommem(h_c,wg5i - 1) 
     wg5ih = readfrommem(h_c,wg5i) 
     wg5ip1h = readfrommem(h_c,wg5i + 1) 
-    wg5h = lineinterp(wg2ih,wg5ip1h,x[wg5i],x[wg5i + 1],14.5 - x[wg5i])
+    wg5h = CELLRECON(wg5im1h,wg5ih,wg5ip1h,x[wg5i-1],x[wg5i],x[wg5i + 1],14.5 - x[wg5i])  
+    
+    wg6im1h = readfrommem(h_c,wg6i - 1) 
     wg6ih = readfrommem(h_c,wg6i) 
     wg6ip1h = readfrommem(h_c,wg6i + 1) 
-    wg6h = lineinterp(wg6ih,wg6ip1h,x[wg6i],x[wg6i + 1],15.7 - x[wg6i])  
+    wg6h = CELLRECON(wg6im1h,wg6ih,wg6ip1h,x[wg6i-1],x[wg6i],x[wg6i + 1],15.7 - x[wg6i])  
+    
+    wg7im1h = readfrommem(h_c,wg7i - 1) 
     wg7ih = readfrommem(h_c,wg7i) 
     wg7ip1h = readfrommem(h_c,wg7i + 1) 
-    wg7h = lineinterp(wg7ih,wg7ip1h,x[wg7i],x[wg7i + 1],17.3 - x[wg7i])
+    wg7h = CELLRECON(wg7im1h,wg7ih,wg7ip1h,x[wg7i-1],x[wg7i],x[wg7i + 1],17.3 - x[wg7i]) 
     
     
     tts.append(t[i])
@@ -1412,6 +1456,7 @@ deallocPy(G0_c)
 deallocPy(G1_c)
 deallocPy(b0_c)
 deallocPy(b1_c) 
+
 
 
     
@@ -1912,12 +1957,11 @@ for ij in range(7,8):
 
 
 
-
 """
 ###Soliton over bump scenario
 ### Energy Test ####################
 
-wdatadir = "../../../data/raw/solbumpEnergucontfullfix0m3/o2/"
+wdatadir = "../../../data/raw/solbumpex/o2/"
 
 if not os.path.exists(wdatadir):
     os.makedirs(wdatadir)
@@ -1931,7 +1975,7 @@ with open(s,'a') as file3:
 
 
 
-for k in range(6,19,3):
+for k in range(16,17):
     stage = 1
     center = 50.0
     width = 25
@@ -1941,7 +1985,7 @@ for k in range(6,19,3):
     
     
     a0 = 1.0
-    a1 = 1.0
+    a1 = 0.7
     
     g = 9.81
     dx = 100.0 / (2**k)
@@ -1970,9 +2014,12 @@ for k in range(6,19,3):
         
     nBC = 3
     nBCs = 4
+    nBCn = nBCs
     b0 = bed[0]*ones(nBCs)
     b1 = bed[-1]*ones(nBCs)
     u0 = vel*ones(nBCs)
+    G0 = vel*ones(nBCs) #wathc out
+    G1 = vel*ones(nBCs) #wathc out
     u1 = vel*ones(nBCs)   
     h0 = h[0]*ones(nBCs)
     h1 = h[-1]*ones(nBCs)
@@ -1984,6 +2031,8 @@ for k in range(6,19,3):
     h1_c  = copyarraytoC(h1)
     u0_c  = copyarraytoC(u0)
     u1_c  = copyarraytoC(u1)
+    G0_c  = copyarraytoC(G0)
+    G1_c  = copyarraytoC(G1)
     b0_c  = copyarraytoC(b0)
     b1_c  = copyarraytoC(b1)
     u_c = mallocPy(n)
@@ -2001,6 +2050,10 @@ for k in range(6,19,3):
     #HEvals = []
     GNEvals = []
     Etimes = []
+    
+    hn_c = mallocPy(n)
+    un_c = mallocPy(n)
+    Gn_c = mallocPy(n)
     
     tBC = 2
     #initial conditions for time steps
@@ -2034,7 +2087,9 @@ for k in range(6,19,3):
                 for j in range(n):
                     writefile2.writerow([str(dx),str(dt),str(t[i]), str(GNEval),str(x[j]), str(h[j]) , str(G[j]) , str(u[j]),str(bed[j])])
             
-        evolvewrap(G_c,h_c,bed_c,h0_c,h1_c,u0_c,u1_c,b0_c,b1_c,g,dx,dt,n,nBCs,theta)
+        #evolvewrap(G_c,h_c,bed_c,h0_c,h1_c,u0_c,u1_c,b0_c,b1_c,g,dx,dt,n,nBCs,theta)
+        evolvewrapBCSponge(G_c,h_c,bed_c,h0_c,h1_c,u0_c,u1_c,G0_c,G1_c,h0_c,h1_c,u0_c,u1_c,G0_c,G1_c,b0_c,b1_c,g,dx,dt,n,nBC,nBCn,theta,hn_c, Gn_c,un_c)
+
         print (t[i])
             
     getufromG(h_c,G_c,bed_c,u0[-1],u1[0],h0[-1],h1[0], b0[-1], b1[0], dx ,n,u_c)

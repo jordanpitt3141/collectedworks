@@ -3,8 +3,8 @@ from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 
-wdir = "../../../../data/raw/solconnonsmallg10FDall/FDcent/"
-sdir = "../../../../data/postprocessing/solconnonsmallg10FDall/FDcent/"
+wdir = "../../../../data/raw/FDreredo/grim/"
+sdir = "../../../../data/postprocessing/FDreredo/grim/L1/"
 
 if not os.path.exists(sdir):
     os.makedirs(sdir) 

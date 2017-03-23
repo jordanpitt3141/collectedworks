@@ -546,7 +546,7 @@ for lk in range(len(difflist)):
         deallocPy(u1_c)
 """
 
-
+"""
 ################################# SOLITON Accuracy ####################3
 #dxs = [100.0,90.0,80.0,70.0,60.0,50.0,40.0,30.0,20.0,10.0,9.0,8.0,7.0,6.0,5.0,4.0,3.0,2.0,1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0.09,0.08,0.07 \
 #,0.06,0.05,0.04,0.03,0.02,0.01]
@@ -698,7 +698,7 @@ for k in range(6,21):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
+"""
 
 """ 
 ##### SOLITON
@@ -807,20 +807,20 @@ deallocPy(u0_c)
 deallocPy(u1_c)  
 """
 
-"""
+
 ##### SOLITON INTERACTION
-wdir = "../../../data/raw/Cserre/solitonint/collnonlindx0p1N/o1/"
+wdir = "../../../data/raw/SolColAGNH/o1/"
 if not os.path.exists(wdir):
     os.makedirs(wdir)
     
-dx = 0.1
+dx = 100.0/ (2**11)
 
 a0 = 1.0
-a11 = 1.0
+a11 = 0.7
 solbeg1 = 100.0
 solend1 = 200.0
 direction1 = 1.0
-a12 = 1.0
+a12 = 0.7
 solbeg2 = 200.0
 solend2 = 300.0
 direction2 = -1.0
@@ -927,7 +927,7 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)  
-"""
+
 
 """
 ##### SOLITON time

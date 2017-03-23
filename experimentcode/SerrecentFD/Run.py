@@ -101,9 +101,9 @@ def experiment1(x,h0,h1,dx):
 
     return h,u
 
-"""
+
 #solitonaccuracy
-wdir = "../../../data/raw/solconnonsmallg10/FDcent/"
+wdir = "../../../data/raw/FDreredo/FDcent/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
@@ -120,7 +120,7 @@ for k in range(6,21):
     
     g = 9.81
     a0 = 1.0
-    a1 = 1.0
+    a1 = 0.7
     
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
@@ -208,7 +208,7 @@ for k in range(6,21):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-"""
+
 
 """
 ##Soliton
@@ -381,14 +381,14 @@ deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
 """
-  
+"""
 ## DAM BREAK Smooth ##########################
-wdir = "../../data/raw/longtimedambreak/FDc/"
+wdir = "../../data/raw/longtimedambreakDTfix/FDc/"
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
 dx = 10.0 /(2**9)
 l = 0.01
-dt = l*dx
+dt = l*dx*dx
 startx = -900
 endx = 1800.0 + dx
 startt = 0.0
@@ -404,7 +404,7 @@ hf = 1.8
 hl = 1.0
 gap = int(0.5/dt)
 
-diffuse = 0.5
+diffuse = 10
 base = hl
 eta0 = hf - hl
 x0 = 500
@@ -487,7 +487,7 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
-
+"""
 
 """
 #big smooth NEW

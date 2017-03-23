@@ -5,6 +5,7 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 from matplotlib2tikz import save as tikz_save
 
 from Hamil import *
+import os
 
 def copyarraytoC(a):
     n = len(a)
@@ -31,9 +32,11 @@ dxn = "12"
 #wdir = "../../../../data/raw/solconnonsmallg1n/o"+order+"/" +dxn+ "/"
 #sdir = "../../../../data/postprocessing/solconnonsmallg1n/o"+order+"/" +dxn+ "/"
 
-wdir = "../../../../data/raw/solconnonsmallg10FDall/"+order+"/" +dxn+ "/"
-sdir = "../../../../data/postprocessing/solconnonsmallg10FDall/ex/"+order+"/" +dxn+ "/"
+#wdir = "../../../../data/raw/solconnonsmallg10FDall/"+order+"/" +dxn+ "/"
+#sdir = "../../../../data/postprocessing/solconnonsmallg10FDall/ex/"+order+"/" +dxn+ "/"
 
+wdir = "../../../../data/raw/FDreredo/"+order+"/" +dxn+ "/"
+sdir = "../../../../data/postprocessing/FDreredo/exsol/"+order+"/" +dxn+ "/"
 
 if not os.path.exists(sdir):
     os.makedirs(sdir)
@@ -88,7 +91,7 @@ with open(s,'r') as file1:
 #lowg10 -200 to 700 ?
 #hig1 -100 to 100 ?
 
-a1 = 1.0
+a1 = 0.7
 a0 = 1.0
 g = 9.81
 #g= 1.0

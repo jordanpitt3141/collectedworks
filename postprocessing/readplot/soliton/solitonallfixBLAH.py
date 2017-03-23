@@ -3,6 +3,7 @@ from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 from matplotlib2tikz import save as tikz_save
+import os
 
 from Hamil import *
 
@@ -24,9 +25,12 @@ def copyarrayfromC(a,n):
 #lowg10 -200 to 700 ?
 #hig1 -100 to 100 ?
 #orders = ["1","2","3"]
+#orders = ["1","2","3"]
+#dxns = ["6","7","8","9","10","11","12","13","14","15","16","17","18"]
+
 orders = ["1","2","3"]
-dxns = ["6","7","8","9","10","11","12","13","14","15","16","17","18"]
-#dxns = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"]
+dxns = ["6","7","8","9","10","11","12","13","14","15","16","17","18","19"]
+
 
 def sech2 (x):
   a = 2./(exp(x) + exp(-x))
@@ -60,15 +64,19 @@ for order in orders:
     for dxn in dxns:
 
 
-        wdir = "../../../../data/raw/hinonling10/o"+order+"/" +dxn+ "/"
-        sdir = "../../../../data/postprocessing/newEnerg/hinonling10/o"+order+"/" +dxn+ "/"
-        sdirfront = "../../../../data/postprocessing/newEnerg/hinonling10/o"+order+"/"
+        #wdir = "../../../../data/raw/hinonling10/o"+order+"/" +dxn+ "/"
+        #sdir = "../../../../data/postprocessing/newEnerg/hinonling10/o"+order+"/" +dxn+ "/"
+        #sdirfront = "../../../../data/postprocessing/newEnerg/hinonling10/o"+order+"/"
+
+        wdir = "../../../../data/raw/Solnon0p7NEW/o"+order+"/" +dxn+ "/"
+        sdir = "../../../../data/postprocessing/Solnon0p7NEW/o"+order+"/" +dxn+ "/"
+        sdirfront = "../../../../data/postprocessing/Solnon0p7NEW/o"+order+"/"
         
         
         if not os.path.exists(sdir):
             os.makedirs(sdir)
         
-        gap = 2
+        gap = 1
         gaps = 1
               
         startx = -250
@@ -81,19 +89,20 @@ for order in orders:
             u = []
             ht = []
             ut = []
+            x = []
             j = -1
             for row in readfile:       
                 if (j >= 0):
                     dx =float(row[0])
                     dt =float(row[1])
                     t =float(row[2])
-                    h.append(float(row[3]))
-                    u.append(float(row[5]))
+                    x.append(float(row[3]))
+                    h.append(float(row[5]))
+                    u.append(float(row[7]))
                        
                 j = j + 1
-            x = arange(startx,endx+0.9*dx,dx)
         
-        a1 = 1.0
+        a1 = 0.7
         a0 = 1.0
         g = 9.81
         #g= 1.0
@@ -104,7 +113,7 @@ for order in orders:
         
         niBC = 3    
         xbeg = arange(startx - niBC*dx,startx,dx)
-        xend = arange(endx + dx,endx + (niBC+1)*dx) 
+        xend = arange(endx + dx,endx + (niBC+1)*dx,dx) 
         hbeg = h[0]*ones(niBC)
         hend = h[-1]*ones(niBC)
         ubeg = u[0]*ones(niBC)
@@ -119,17 +128,10 @@ for order in orders:
         htiend = hti[-1]*ones(niBC)
         utibeg = uti[0]*ones(niBC)
         utiend = uti[-1]*ones(niBC)   
-        
-        xbeg = int((-50 - x[0])/dx)
-        xend = int((250 - x[0])/dx)
-        xbc = x[xbeg - niBC:xend + niBC]
-        ubc = u[xbeg- niBC:xend+ niBC]
-        hbc = h[xbeg- niBC:xend+ niBC]
-
-        
-        #xbc =  concatenate([xbeg,array(xe),xend])
-        #hbc =  concatenate([hbeg,array(he),hend])
-        #ubc =  concatenate([ubeg,array(ue),uend])
+                
+        xbc =  concatenate([xbeg,array(x),xend])
+        hbc =  concatenate([hbeg,array(h),hend])
+        ubc =  concatenate([ubeg,array(u),uend])
         
         htbc =  concatenate([htbeg,array(ht),htend])
         utbc =  concatenate([utbeg,array(ut),utend])
@@ -146,8 +148,8 @@ for order in orders:
         utibc_c = copyarraytoC(utibc)
         
         Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)    
-        #Evalt = HankEnergyall(xbc_c,htbc_c,utbc_c,g,n + 2*niBC,niBC,dx)
-        Evalti = 1527.68293#HankEnergyall(xbc_c,htibc_c,utibc_c,g,n + 2*niBC,niBC,dx)   
+        Evalt = HankEnergyall(xbc_c,htbc_c,utbc_c,g,n + 2*niBC,niBC,dx)
+        Evalti = HankEnergyall(xbc_c,htibc_c,utibc_c,g,n + 2*niBC,niBC,dx)   
         
         normh = norm(array(h) - ht,ord=1) / norm(ht,ord=1)    
         normu = norm(array(u) - ut,ord=1) / norm(ut,ord=1) 
@@ -163,16 +165,14 @@ for order in orders:
         
             
         
-        xbeg = int((-50 - x[0])/dx)
-        xend = int((250 - x[0])/dx)
-        xe = x[xbeg:xend:gap]
-        ue = u[xbeg:xend:gap]
-        he = h[xbeg:xend:gap]
-        ute = ut[xbeg:xend:gaps]
-        hte = ht[xbeg:xend:gaps]
-        utie = uti[xbeg:xend:gaps]
-        htie = hti[xbeg:xend:gaps]
-        xte = x[xbeg:xend:gaps]
+        xe = x
+        ue = u
+        he = h
+        ute = ut
+        hte = ht
+        utie = uti
+        htie = hti
+        xte = x
         
         ue = array(ue)
         he = array(he)

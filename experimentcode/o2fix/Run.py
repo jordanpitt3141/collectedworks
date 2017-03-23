@@ -599,7 +599,7 @@ for k in range(20):
 """
 
 
-
+"""
 ################################# SOLITON Accuracy ####################3
 wdir = "../../../data/raw/Solnon0p7/o2/"
 
@@ -754,7 +754,7 @@ for k in range(6,21):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
+"""
 
 """
 ################################# SOLITON  ####################3
@@ -865,20 +865,20 @@ deallocPy(u0_c)
 deallocPy(u1_c)
 """
 
-"""
+
 ################################# SOLITON Collision  ####################3
-wdir = "../../../data/raw/Cserre/solitonint/collnonlindx0p1N/o2/"
+wdir = "../../../data/raw/SolColAGNH/o2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
-dx = 0.1
+dx = 100.0/ (2**11)
 
 a0 = 1.0
-a11 = 1.0
+a11 = 0.7
 solbeg1 = 100.0
 solend1 = 200.0
 direction1 = 1.0
-a12 = 1.0
+a12 = 0.7
 solbeg2 = 200.0
 solend2 = 300.0
 direction2 = -1.0
@@ -987,7 +987,7 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
-"""
+
 
 """
 ################################# SOLITON Collision Convergence  ####################3

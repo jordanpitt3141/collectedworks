@@ -4,9 +4,9 @@ from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 import os
 
-wdatadir = "../../../../data/raw/Beji94/o2/"
+wdatadir = "../../../../data/raw/Beji94/o2CR/"
 sdatadir = "../../../../data/postprocessing/Beji94Chris/o2/"
-exp = "sl"
+exp = "sh"
 wdir = wdatadir + exp+ "/"
 sexpdir = sdatadir + exp + "/"
 

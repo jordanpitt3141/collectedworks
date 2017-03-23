@@ -22,11 +22,14 @@ wdirbase = "../../../../../data/raw/longcontactdiscdx8diff10fileio/o3/8/0/"
 for diff in diffs:
 
     #full crop front front back middez middle zz
-    ylims = [[1.0,1.8],[1.355,1.385],[1.0,1.8] ,[1.355,1.385],[1.355,1.385]]
-    xlims = [[-450,1800],[-300,100],[1400,1800],[800,850] , [600, 1000]]
+    #ylims = [[1.0,1.8],[1.355,1.385],[1.0,1.8] ,[1.355,1.385],[1.355,1.385]]
+    #xlims = [[-450,1800],[-300,100],[1400,1800],[800,850] , [600, 1000]]
+    xlims =[[-900,1800]]
+    ylims =[[-900,1800]]
     
     
-    gaps = [10,2,2,1,2]
+    #gaps = [10,2,2,1,2]
+    gaps = [1]
     
     
     
@@ -117,7 +120,7 @@ for diff in diffs:
         hDBc = array(ht)  
         uDBc = array(ut)
         
-
+"""
         m = len(x)
         s = str(dx) 
         plot(xDBf,hDBf,label=s)
@@ -264,3 +267,4 @@ for diff in diffs:
         file1.write(s)
         file1.close()  
         call(['make','-C',sdirf,'all'])
+"""

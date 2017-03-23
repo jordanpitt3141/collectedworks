@@ -9,7 +9,6 @@ import csv
 from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog, xticks,yticks
-from matplotlib2tikz import save as tikz_save
 import os
 from subprocess import call
 
@@ -27,7 +26,7 @@ ordsubtup = [[6,7],[5,6],[5,6], [6,8], [6,7]]
 diffs = [10]
 
 
-diffws = [10]
+diffws = [12]
 dxs = [10]
 #diffws = [6]
 
@@ -59,7 +58,7 @@ for k in dxs:
             cylim = ylims[l]
             cxlim = xlims[l]
             
-            sdir = "../../../../../../data/postprocessing/smoothdball/allmodels/"+str(diffw)+ "/"
+            sdir = "../../../../../../data/postprocessing/smoothdball/allmodelsREDO/"+str(diffw)+ "/"
             if not os.path.exists(sdir):
                 os.makedirs(sdir)
             

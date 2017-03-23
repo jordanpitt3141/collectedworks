@@ -1977,22 +1977,22 @@ with open(s,'a') as file2:
 for i in range(1,len(Evals)):
     print(Evals[0] - Evals[i])
 """
-"""
-######### Colliding Soliton Experiments
 
-wdir = "../../../data/raw/Cserre/solitonint/collnonlindx0p1N/o3/"
+######### Colliding Soliton Experiments
+"""
+wdir = "../../../data/raw/SolColAGNH/o3/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-dx = 0.1
+dx = 100.0/ (2**11)
 
 a0 = 1.0
-a11 = 1.0
+a11 = 0.7
 solbeg1 = 100.0
 solend1 = 200.0
 direction1 = 1.0
-a12 = 1.0
+a12 = 0.7
 solbeg2 = 200.0
 solend2 = 300.0
 direction2 = -1.0
@@ -2142,7 +2142,7 @@ with open(s,'a') as file2:
            
     for j in range(n):
         writefile2.writerow([str(dx),str(dt),str(t[i]),str(Eval), str(x[j]), str(h[j]) , str(G[j]) , str(u[j])]) 
-"""
+
 
 """
 #Soliton Time
@@ -2263,7 +2263,7 @@ with open(s,'a') as file2:
                
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j]),str(normh),str(normu), str(timeelapse),str(len(t) - 1) , str((1.0*timeelapse)/ (len(t) - 1) )])
-"""
+
 
 """
 ##Accuracy Test
@@ -2610,7 +2610,7 @@ deallocPy(hmbeg_c)
 deallocPy(hmend_c)       
 """
 
-
+"""
 ##### Chanson
 tl = 300
 b = 0.61
@@ -2769,3 +2769,4 @@ deallocPy(umbeg_c)
 deallocPy(umend_c)
 deallocPy(hmbeg_c)
 deallocPy(hmend_c) 
+"""

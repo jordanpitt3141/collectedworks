@@ -6,7 +6,7 @@ Created on Sat Jul 25 23:36:31 2015
 """
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
-from matplotlib2tikz import save as tikz_save
+import os
 
 def makevar(sx,ex,dx,st,et,dt): 
     x = arange(sx, ex, dx)
@@ -25,12 +25,12 @@ def dambreaksmooth(x,x0,base,eta0,diffuse,dx):
 
     return h,u
    
-dx = 10.0 / (2**6)
+dx = 10.0 / (2**8)
 l = 0.01
 dt = l*dx
 theta = 1.2
-startx = 0.0
-endx = 1000.0 + dx
+startx = 400
+endx = 600.0 + dx
 startt = 0.0
 endt = dt  
     
@@ -42,7 +42,7 @@ base = 1.0
 eta0 = 0.8
 x0 = 500
 
-sdir = "../../../data/postprocessing/dbsmoothFin/"
+sdir = "../../../data/postprocessing/dbsmoothFinAGN/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
@@ -69,16 +69,6 @@ xlabel("$x$ ($m$)")
 ylabel("$h$ ($m$)")
 #legend()
 
-stikz = sdir +"bump.tikz" 
-tikz_save(stikz);
-s = "Bump " 
-title(s)
-s = sdir +"b.png"       
-savefig(s, bbox_inches='tight')
-legend()
-s = sdir +"bleg.png"       
-savefig(s, bbox_inches='tight')        
-clf()
 
 #make the tex file to create the document
 s = "\\documentclass[]{article}\n\\usepackage{tikz} \n\\usepackage{amsmath} \n" \
@@ -109,6 +99,7 @@ filen =sdir + "Makefile"
 file1 = open(filen, 'w')
 file1.write(s)
 file1.close()
+
 
 
 """

@@ -13,10 +13,10 @@ import os
 from subprocess import call
 
 wdirbase = "../../../../../data/raw/longcontactdiscdx9diff10fileio/o3/9/0/"
-sdirbase = "../../../../../data/postprocessing/RealLongTime/o3/9/300s/"
+sdirbase = "../../../../../data/postprocessing/RLTPRes/o3/9/300s/"
 
 ylims = [[1.0,1.8], [1,1.8],[1.35,1.4],[1.355,1.385],[1,1.8]]
-xlims = [[-900,1800], [900,1800],[-400,700],[760,880],[1650,1750]]
+xlims = [[-900,1800], [900,1800],[-400,700],[760,880],[1650,1800]]
 
 gaps = [10,5,5,1,2]
 timefix = 300
@@ -204,3 +204,4 @@ for l in range(len(ylims)):
     file1.write(s)
     file1.close()  
     call(['make','-C',sdirf,'all'])
+    """

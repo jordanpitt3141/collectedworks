@@ -124,7 +124,7 @@ def experiment1(x,h0,h1,dx):
 
 #solitonaccuracy
 """
-wdir = "../../../data/raw/FDredo/grim/"
+wdir = "../../../data/raw/FDreredo/grim/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
@@ -141,7 +141,7 @@ for k in range(6,20):
     
     g = 9.81
     a0 = 1.0
-    a1 = 1.0
+    a1 = 0.7
     
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
@@ -325,18 +325,18 @@ deallocPy(u1_c)
 
 
 
-   
+"""   
 ## DAM BREAK Smooth ##########################
-wdir = "../../data/raw/longtimedambreak/grim/"
+wdir = "../../data/raw/longtimedambreakDTfix/grim/"
 if not os.path.exists(wdir):
     os.makedirs(wdir) 
 dx = 10.0 /(2**9)
 l = 0.01
-dt = l*dx
+dt = l*dx*dx
 startx = -900.0
 endx = 1800.0 + dx
 startt = 0.0
-endt = 1 + dt 
+endt = 300 + dt 
     
 g = 9.81
     
@@ -396,16 +396,17 @@ deallocPy(h0_c)
 deallocPy(h1_c)
 deallocPy(u0_c)
 deallocPy(u1_c)
+"""
 
 #big smooth targetted
-"""
-difflist = [1,6,8,9,12]
 
-deltaxa = [5,6,7,9,10,11,12,13,14,15]
-dxlist = [deltaxa,deltaxa,deltaxa,deltaxa,deltaxa]
+difflist = [12]
+
+deltaxa = [10]
+dxlist = [deltaxa]
 
 diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-wdirb = "../../data/bigsmoothtargetted/grim/"
+wdirb = "../../data/bigsmoothtargettedREDO/grim/"
 for lk in range(len(difflist)):
     for ll in dxlist[lk]:
         wdir = wdirb + str(ll) + "/" + str(difflist[lk]) + "/"
@@ -474,7 +475,7 @@ for lk in range(len(difflist)):
         deallocPy(h1_c)
         deallocPy(u0_c)
         deallocPy(u1_c)
-"""
+
 #big smooth
 
 """
