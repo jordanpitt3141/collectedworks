@@ -339,7 +339,8 @@ def wactual(k,g,h0):
 
 h = 1.8
 u = 1.08
-k = 1
+k = 10
+alpha = 1.0
 
 g = 9.81
 
@@ -351,7 +352,7 @@ v2 = w2/k
 
 
 #this then measures the dispersion relation from the highest resolution soliton problem until 0.5
-dxs = arange(1,0.005,-0.005) 
+dxs = arange(0.1,0.00005,-0.00005) 
 n = len(dxs)
 
 Ms= []
@@ -359,6 +360,7 @@ Ns = []
 Ps = []
 Qs = []
 Rs = []
+dts = []
 for i in range(n):
     dx = dxs[i]
     Cr = 0.5
@@ -378,17 +380,19 @@ for i in range(n):
     Ns.append(n) 
     Ps.append(p)
     Rs.append(r)
+    dts.append(dt)
 
     #print("dx",dx,"M",norm(M,ord=inf), "N",norm(N,ord=inf) ,"P",norm(P,ord=inf) ,"Q",norm(Q,ord=inf))
 
   
 xlabel("dx")
 ylabel("Growth Factor")
-plot(dxs,Ps,label="o1")
-plot(dxs,Rs,label="o2")
-plot(dxs,Ns,label="o3")
+#plot(dxs,Ps,label="o1")
+#plot(dxs,Rs,label="o2")
+#plot(dxs,Ns,label="o3")
 plot(dxs,Ms,label="Naive FD")
 plot(dxs,Qs,label="Lax Wendroff")
+plot(dxs, 1 + alpha*array(dts) ,label="Stability Condition")
 legend(loc="lower left")    
 
     

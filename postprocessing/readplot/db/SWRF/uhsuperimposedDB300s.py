@@ -14,7 +14,7 @@ from subprocess import call
 
 
 diffs = [10.0]
-sdirbase = "../../../../../data/postprocessing/uhcomp300sPAPN/DB/o3/"
+sdirbase = "../../../../../data/postprocessing/uhcomp300sPAPNrel/DB/o3/"
 #cwdirbase = "../../../../../data/raw/longcontactdiscdx9diff10fileio/o3/9/0/"
 cwdirbase = "../../../../../data/raw/longcontactdiscdx9diff10fileio/o3/9/0/"
 
@@ -71,8 +71,8 @@ for diff in diffs:
                     dt = float(row[1])
                     t = float(row[2])
                     x.append(float(row[3]))
-                    h.append(float(row[4]) - h2)
-                    u.append(float(row[6]) - u2)
+                    h.append((float(row[4]) - h2)/h2)
+                    u.append((float(row[6]) - u2)/u2)
                  j = j + 1
                  
         igap = int(gap)

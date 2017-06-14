@@ -473,6 +473,25 @@ def CELLRECON(y0,y1,y2,x0,x1,x2,xi):
     #return y1  + (xi)*(y2 - y1)/(x2 - x1)  
     return y1  + (xi)*(y2 - y0)/(x2 - x0)    
     
+def FourierDamBreak(x,h0,h1,l,k):
+    from scipy import pi,sin
+    n = len(x)
+    h = zeros(n)
+    u = zeros(n)
+    bed = zeros(n)
+    
+    
+    for i in range(n):
+        sumh = 0
+        for j in range(k):
+            jk = 2*j + 1
+            sumh = sumh + (1.0/jk)*sin((jk*pi*x[i]) / l)
+        h[i] = 0.5*(h0 + h1 ) + 0.5*(h1 - h0)*(4*sumh / pi)
+        
+    G = getGfromupy(h,u,bed,u[0],u[-1],h[0],h[-1],bed[0],bed[-1],dx)  
+        
+    return h,u,G,bed
+            
    
 """
 ### Cnoidal wave with BC
@@ -1153,6 +1172,7 @@ deallocPy(b1_c)
 
 #94
 ### Dingemans results
+"""
 wdatadir = "../../../data/raw/Beji94/o2WS2/"
 
 expdir = "../../../data/Experimental/Data 1994 Paper/CSV/"
@@ -1456,7 +1476,7 @@ deallocPy(G0_c)
 deallocPy(G1_c)
 deallocPy(b0_c)
 deallocPy(b1_c) 
-
+"""
 
 
     
@@ -2138,3 +2158,97 @@ for k in range(16,17):
     deallocPy(u0_c)
     deallocPy(u1_c) 
 """
+
+####Fourier Approximation To Dam-break
+
+wdatadir = "../../../data/raw/FCdam/o2/"
+
+h0 = 1.0
+h1 = 1.8
+k = 75
+
+Length = 1000
+
+### WAVE LENGTH
+g = 9.81
+dx = 10.0 / (2**7)
+l = 0.01
+dt = l*dx
+theta = 1.2
+startx = 0.5*Length - 0.5*dx
+endx = 2.5*Length + 0.5*dx
+startt = 0.0
+endt = 100 + dt  
+
+wdir = wdatadir
+
+if not os.path.exists(wdir):
+    os.makedirs(wdir)
+
+
+nBCn = 3
+nBC = 3
+    
+xbc,t = makevar(startx - nBCn*dx,endx + nBCn*dx,dx,startt,endt,dt)
+
+x = xbc[nBCn: -nBCn]
+xbeg = x[:nBCn]
+xend = x[-nBCn:] 
+
+n = len(x)
+m = len(t)
+
+gap = int(10.0/dt)
+
+t0 = 0.0
+    
+
+#initial conditions for time steps
+tij = 0.0
+
+hBC,uBC,GBC,bedBC = FourierDamBreak(xbc,h0,h1,Length,k)
+h = hBC[nBCn:-nBCn]
+u = uBC[nBCn:-nBCn]
+G = GBC[nBCn:-nBCn]
+bed = bedBC[nBCn:-nBCn]
+   
+ 
+h_c = copyarraytoC(h)
+G_c = copyarraytoC(G)
+bed_c = copyarraytoC(bed)
+x_c = copyarraytoC(x)
+u_c = mallocPy(n)
+
+un_c = mallocPy(n+2*nBCn)
+Gn_c = mallocPy(n+2*nBCn)
+hn_c = mallocPy(n+2*nBCn)
+    
+for i in range(1,len(t)):  
+    evolvewrapperiodic(G_c,h_c,bed_c,g,dx,dt,n,nBCn,theta,hn_c, Gn_c,un_c);    
+    print (t[i])
+        
+    tij = t[i]
+
+getufromGperiodic(h_c,G_c,bed_c, dx ,n,u_c)
+u = copyarrayfromC(u_c,n)
+G = copyarrayfromC(G_c,n)
+h = copyarrayfromC(h_c,n)
+
+un = copyarrayfromC(un_c,n+2*nBCn)
+Gn = copyarrayfromC(Gn_c,n+2*nBCn)
+hn = copyarrayfromC(hn_c,n+2*nBCn)
+
+s = wdir + "outlast.txt"
+with open(s,'a') as file2:
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+    writefile2.writerow(['dx' ,'dt','time' ,"cell midpoint", 'height(m)', 'G' , 'u(m/s)'])        
+           
+    for j in range(n):
+        writefile2.writerow([str(dx),str(dt),str(t[-1]),str(x[j]) ,str(h[j]) , str(G[j]) , str(u[j])])     
+
+    
+deallocPy(u_c)   
+deallocPy(h_c)
+deallocPy(G_c)
+

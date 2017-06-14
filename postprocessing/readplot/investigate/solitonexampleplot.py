@@ -11,8 +11,6 @@ from numpy import ones
 #wdir = "../../../../data/dbchris/o3femh110h01testsmallt/"
 
 
-wdir = "../../../../data/raw/Joebigsmooth/o2/10/12/"
-
 #wdir = "../../../../data/raw/Cserre/solitonothers/collDMcopy/o3/"
 #wdir = "../../../../data/raw/bigsmoothalphainf/o3/10/0/"
 
@@ -34,6 +32,12 @@ wdir = "../../../../data/raw/Joebigsmooth/o2/10/12/"
 #wdir = "../../../../data/raw/DBSTEEPNoLimiter/o2/0/"
 
 #wdir = "../../../../data/raw/longtimedambreakNEW/FDc/"
+
+#wdir = "../../../../data/raw/Joebigsmooth/FDcent/14/12/"
+
+wdir = "../../../../data/raw/bigsmooth3s/o3/13/24/"
+
+#wdir = "../../../data/bigsmoothtargettedNEW1/FDcent/13/12/"
 
 timeinsecs = 30
 
@@ -66,11 +70,11 @@ with open(s,'r') as file1:
             t =float(row[2])
             x.append(float(row[3]))
             h.append(float(row[4]))
-            u.append(float(row[5]))
+            u.append(float(row[6]))
             #he.append(float(row[8]))
             #ue.append(float(row[9]))
             #bed.append(float(row[7]))
-            diffuse = float(row[6])
+            diffuse = float(row[7])
             
             
             """
@@ -105,4 +109,8 @@ with open(s,'r') as file1:
     u = array(u)
     h = array(h)
     bed = array(bed)
+    
+u2 = 1.074975
+h2 = 1.36898
+x2 = 500 + 30*u2
    

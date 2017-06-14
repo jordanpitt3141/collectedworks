@@ -402,11 +402,11 @@ deallocPy(u1_c)
 
 difflist = [12]
 
-deltaxa = [10]
-dxlist = [deltaxa]
+deltaxa = [12,13,14]
+dxlist = [deltaxa,deltaxa]
 
 diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-wdirb = "../../data/bigsmoothtargettedREDO/grim/"
+wdirb = "../../data/bigsmoothtargettedNEW1/grim/"
 for lk in range(len(difflist)):
     for ll in dxlist[lk]:
         wdir = wdirb + str(ll) + "/" + str(difflist[lk]) + "/"
@@ -414,7 +414,7 @@ for lk in range(len(difflist)):
         if not os.path.exists(wdir):
             os.makedirs(wdir) 
         
-        dx = ll*(10.0 / (2**12))
+        dx = (10.0 / (2**ll))
         l = 0.01
         dt = l*dx
         startx = 0.0

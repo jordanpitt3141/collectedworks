@@ -324,11 +324,11 @@ alphas = []
 diffi= "12"
 g = 9.81
 
-sdir = "../../../../data/postprocessing/CONuhHNA/"+ diffi + "/"
+sdir = "../../../../data/postprocessing/CONuhHNAT/"+ diffi + "/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
-for ki in range(1,10):
+for ki in range(1,2):
     
     #Nonlinear Soliton
     dxw = str(2**ki)

@@ -101,7 +101,7 @@ def experiment1(x,h0,h1,dx):
 
     return h,u
 
-
+"""
 #solitonaccuracy
 wdir = "../../../data/raw/FDreredo/FDcent/"
 
@@ -208,7 +208,7 @@ for k in range(6,21):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-
+"""
 
 """
 ##Soliton
@@ -569,20 +569,20 @@ for ll in range(9,10):
 """
 
 #big smooth targeted
-"""
-difflist = [1,6,8,9,12]
 
-deltaxa = [5,6,7,9,10,11,12,13,14,15]
+difflist = [12]
+
+deltaxa = [12,13,14]
 dxlist = [deltaxa,deltaxa,deltaxa,deltaxa,deltaxa]
 
 diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-wdirb = "../../data/bigsmoothtargetted/FDcent/"
+wdirb = "../../data/bigsmoothtargettedNEW1/FDcent/"
 for lk in range(len(difflist)):
     for ll in dxlist[lk]:
         wdir = wdirb + str(ll) + "/" + str(difflist[lk]) + "/"
         if not os.path.exists(wdir):
             os.makedirs(wdir) 
-        dx = ll*(10.0 / (2**12))
+        dx = (10.0 / (2**ll))
         l = 0.01
         dt = l*dx
         startx = 0.0
@@ -644,4 +644,3 @@ for lk in range(len(difflist)):
         deallocPy(h1_c)
         deallocPy(u0_c)
         deallocPy(u1_c)
-"""

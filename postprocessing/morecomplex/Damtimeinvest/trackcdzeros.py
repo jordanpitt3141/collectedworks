@@ -9,13 +9,12 @@ import csv
 from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog, xticks,yticks
-from matplotlib2tikz import save as tikz_save
 import os
 from subprocess import call
 
 
 diffs = [10.0]
-sdirbase = "../../../../data/postprocessing/uhcomp/DB/o3/10/"
+sdirbase = "../../../../data/postprocessing/uhcompTEST/DB/o3/10/"
 wdirbase = "../../../../data/raw/trackleadsola10new/o3/"
 #wdirbase = "../../../../data/raw/DBASPECTRAT/o3/10/10/8.0/"
 
@@ -103,8 +102,8 @@ hps = []
 ups = []
 ts = [] 
 tol = 0.1  
-for i in range(5120,1024000,5120):
-#for i in range(5120,2*5120,5120):
+#for i in range(5120,1024000,5120):
+for i in range(153600-3*5120,153600-2*5120,5120):
 #for i in range(0,1):
         
     s = wdirbase + "out" + str(i) + ".txt"

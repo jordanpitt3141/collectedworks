@@ -91,7 +91,7 @@ def TDMApy(a,b,c,d):
     return array(x)
     
 def uhacrosscell(x,h,u,j,dx): 
-    return dx*dx*h[j]*u[j]
+    return dx*h[j]*u[j]
     
 def hacrosscell(x,h,j,dx): 
     return dx*h[j]
@@ -159,19 +159,19 @@ RelEs = []
 RelMs = []
 RelPs = []
 #range(6,19)
-diff = "1"
+diff = "20"
 g = 9.81
 
-sdir = "../../../../data/postprocessing/CONuhHN/"+ diff + "/"
+sdir = "../../../../data/postprocessing/CONuhHNT/"+ diff + "/"
 if not os.path.exists(sdir):
         os.makedirs(sdir)
-for ki in range(1,10):
+for ki in range(1,2):
     
     #Nonlinear Soliton
     dxw = str(2**ki)
     
         
-    wdir = wdirb + "/" + dxw + "/" + diff + "/"
+    wdir = wdirb + dxw + "/" + diff + "/"
          
     s = wdir + "outlast.txt"
     with open(s,'r') as file1:

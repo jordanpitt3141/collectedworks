@@ -20,14 +20,15 @@ wdirord = "o3"
 
 
 
-wdirords = ["o3","FDcent","grim","o2","o1"]
-ordsubtup = [[6,7],[5,6],[5,6], [6,8], [6,7]]
-
-diffs = [10]
+#wdirords = ["o3","FDcent","grim","o2","o1"]
+#ordsubtup = [[6,7],[5,6],[5,6], [6,8], [6,7]]
 
 
-diffws = [12]
-dxs = [10]
+wdirords = ["o3","FDcent","o2","o1"]
+ordsubtup = [[6,7],[5,6], [6,8], [6,7]]
+
+diffws = [9]
+dxs = [11]
 #diffws = [6]
 
 for k in dxs:
@@ -58,7 +59,7 @@ for k in dxs:
             cylim = ylims[l]
             cxlim = xlims[l]
             
-            sdir = "../../../../../../data/postprocessing/smoothdball/allmodelsREDO/"+str(diffw)+ "/"
+            sdir = "../../../../../../data/postprocessing/smoothdball/allmodelsREDONEW/"+str(diffw)+ "/"
             if not os.path.exists(sdir):
                 os.makedirs(sdir)
             

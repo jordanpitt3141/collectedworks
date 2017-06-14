@@ -9,11 +9,10 @@ import csv
 from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
-from matplotlib2tikz import save as tikz_save
 import os
 
-dxw = "5"
-diff = "5"
+dxw = "11"
+diff = "9"
 wdirords = ["o1","o2","o3","FDcent"]
 ordsubtup = [[6,7],[6,8], [6,7], [5,6]]
 ylims = [[0.0,2],[1.0,1.8],[1.3,1.45],[1.3,1.45],[1.3,1.45]]
@@ -32,8 +31,8 @@ for l in range(len(ylims)):
     gap = gaps[l]
     
     for k in range(len(wdirords)):
-        wdir = "../../../../../../data/Joesmooth/bigsmooth/"  + wdirords[k] +"/" + dxw + "/" + str(k) + "/"
-        sdir = "../../../../../results/smoothdb/1/1dx1diffmords/" + diff + "/" +dxw+ "/"
+        wdir = "../../../../../../data/raw/Joebigsmooth/"  + wdirords[k] +"/" + dxw + "/" + diff + "/"
+        sdir = "../../../../../results/smoothdb/1/1dx1diffmordsNEW/" + diff + "/" +dxw+ "/"
         if not os.path.exists(sdir):
                 os.makedirs(sdir)
              

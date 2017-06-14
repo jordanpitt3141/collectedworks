@@ -2,11 +2,11 @@ import csv
 from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
-from matplotlib2tikz import save as tikz_save
 from numpy import zeros
+import os
 
-wdir = "../../../../data/raw/trackleadsola10new/o3/"
-sdir = "../../../../data/postprocessing/trackleadsola10new/o3/"
+wdir = "../../../../data/raw/trackleadsol/o3/"
+sdir = "../../../../data/postprocessing/RLAplusRel/o3/"
 
 if not os.path.exists(sdir):
     os.makedirs(sdir)
@@ -34,7 +34,7 @@ with open(s,'r') as file1:
             x.append(float(row[0]))
             t.append(float(row[1]))
             a.append(float(row[2]))
-            g.append(1.736397786)
+            g.append(1.7399758)
                 
         j = j + 1
     x = array(x)
@@ -50,7 +50,7 @@ for i in range(1,n):
 s = sdir + "a.dat"
 with open(s,'w') as file1:
     for i in range(n):
-        s ="%3.8f%5s%1.15f\n" %(t[i]," ",a[i])
+        s ="%3.8f%5s%1.15f\n" %(t[i]," ",(a[i] - g[i])/g[i] )
         file1.write(s)
         
 s = sdir + "s.dat"

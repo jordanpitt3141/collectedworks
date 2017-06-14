@@ -573,17 +573,18 @@ def DBSREVsmooth(x,x0,baseh,etah,baseu,etau,diffuse,dx):
     print(x[102],ddu[102],diffuse*diffuse*tanh(diffuse*(x0 - x[102]))*sech2(diffuse*(x0 - x[102])))
 
     return h,u,G 
+
 """
 #DB Smooth ASPECT
 #diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
 diffuses = [10]
 #diffuses = [0.025]
-dxlist = [10]
+dxlist = [11]
 
 #diffuses = [2.5]
 #dxlist = [5]
-wdirb = "../../../data/raw/DBASPECTRAT/o3/"
-hf = 8.0
+wdirb = "../../../data/raw/DBASPECTRAT2/o3/"
+hf = 9
 #for ll in range(3,16):
 for ll in dxlist:
     for k in range(len(diffuses)):
@@ -593,10 +594,10 @@ for ll in dxlist:
         dx = 10.0 / (2**ll)
         l = 0.01
         dt = l*dx
-        startx = -600.0
-        endx = 1400.0 + dx
+        startx = 0.0
+        endx = 1000.0 + dx
         startt = 0.0
-        endt = 100 + (dt*0.9)  
+        endt = 30 + (dt*0.9)  
                 
         szoomx = startx
         ezoomx = endx
@@ -1128,9 +1129,9 @@ for ll in dxlist:
 #Dam Break Much Longer
 import os
 #diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-diffuses = [10.0]
-dxlist = [8]
-wdirb = "../../../data/raw/longcontactdiscdx8diff10fileio/o3/"
+diffuses = [0.025]
+dxlist = [6]
+wdirb = "../../../data/raw/lcdsmallalpha1/o3/"
 #for ll in range(3,16):
 for ll in dxlist:
     for k in range(len(diffuses)):
@@ -1143,10 +1144,10 @@ for ll in dxlist:
         hf = 1.8
         l = 1.0 / sqrt(g*hf)
         dt = 0.01*dx#Cr*l*dx
-        startx = -900
-        endx = 1800.0 + dx
+        startx = -500
+        endx = 1200.0 + dx
         startt = 0.0
-        endt = 300.0+(dt*0.9)  
+        endt = 100.0+(dt*0.9)  
                 
         szoomx = startx
         ezoomx = endx
@@ -1284,28 +1285,32 @@ for ll in dxlist:
         deallocPy(hmend_c)
 """
 
-"""
-#Dam Break targetted
-difflist = [20]
 
-deltaxa = [1]
-dxlist = [deltaxa]
+#Dam Break targetted
+#difflist = [14,16,18,20,21,22,23,24,25]
+
+#difflist = [40,41,42,43,44,45,46]
+difflist = [33,34,35,36,37,38,39]
+
+deltaxa = [13]
+dxlist = [deltaxa,deltaxa,deltaxa,deltaxa,deltaxa,deltaxa,deltaxa]
 
 import os
-diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0]
-wdirb = "../../data/raw/bigsmoothTEST/o3/"
+diffuses = [0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1.0,2.5,5.0,7.5,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0,5*10**3,10**4,5*10**4,10**5,5*10**5,1.0/(0.03),1.0/(0.04),1.0/(0.05),1.0/(0.06),1.0/(0.07),1.0/(0.08),1.0/(0.09) \
+            ,1.0/(0.003),1.0/(0.004),1.0/(0.005),1.0/(0.006),1.0/(0.007),1.0/(0.008),1.0/(0.009),1.0/(0.0003),1.0/(0.0004),1.0/(0.0005),1.0/(0.0006),1.0/(0.0007),1.0/(0.0008),1.0/(0.0009)]
+wdirb = "../../data/raw/bigsmooth3s/o3/"
 for lk in range(len(difflist)):
     for ll in dxlist[lk]:
         wdir = wdirb + str(ll) + "/" + str(difflist[lk]) + "/"
-        dx = ll*(10.0 / (2**10))
+        dx = (10.0 / (2**ll))
         if not os.path.exists(wdir):
             os.makedirs(wdir) 
         l = 0.01
         dt = l*dx
-        startx = -100
-        endx = 1100.0 + dx
+        startx = 470
+        endx = 530.0 + dx
         startt = 0.0
-        endt = 100.0+(dt*0.9)  
+        endt = 3+(dt*0.9)  
                 
         szoomx = startx
         ezoomx = endx
@@ -1439,7 +1444,7 @@ for lk in range(len(difflist)):
         deallocPy(umend_c)
         deallocPy(hmbeg_c)
         deallocPy(hmend_c)
-"""
+
 
 """
 #Dam Break 
@@ -2145,6 +2150,7 @@ with open(s,'a') as file2:
 
 
 """
+"""
 #Soliton Time
 from time import time
 import os
@@ -2263,7 +2269,7 @@ with open(s,'a') as file2:
                
      for j in range(n):
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j]),str(normh),str(normu), str(timeelapse),str(len(t) - 1) , str((1.0*timeelapse)/ (len(t) - 1) )])
-
+"""
 
 """
 ##Accuracy Test

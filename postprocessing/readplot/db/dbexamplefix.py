@@ -2,10 +2,11 @@ import csv
 from numpy.linalg import norm
 from scipy import *
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
-from matplotlib2tikz import save as tikz_save
+import os
+wdir = "../../../../data/raw/Joebigsmooth/o3/11/12/"
 
-wdir = "../../../../data/raw/DBSWanew100s/o3/10/10.0/"
-sdir = "../../../../data/postprocessing/DBSWfront/o3/10/10.0/"
+wdir2 = "../../../../data/raw/Joebigsmooth/o3/11/20/"
+sdir = "../../../../data/postprocessing/PRES/DBstruct/12/"
 
 if not os.path.exists(sdir):
     os.makedirs(sdir)
@@ -14,7 +15,7 @@ if not os.path.exists(sdir):
 #sdir = "../../../../written/exportpic/dambreak/ex/"
 
 #gap = 50
-gap = 1
+gap = 8
 
 h0 = 0.1
 g = 9.81
@@ -33,20 +34,47 @@ with open(s,'r') as file1:
             dx =float(row[0])
             dt =float(row[1])
             t =float(row[2])
-            x.append(float(row[4]))
-            h.append(float(row[5]))
-            u.append(float(row[7]))
+            x.append(float(row[3]))
+            h.append(float(row[4]))
+            u.append(float(row[6]))
                 
         j = j + 1
     x = array(x)
     u = array(u)
     h = array(h)
 
-xbeg = int((550)/dx)
-xend = int((650)/dx)
+xbeg = int((300)/dx)
+xend = int((700)/dx)
 xt =x[xbeg:xend:gap]
 ht =h[xbeg:xend:gap]
+"""
+s = wdir2 + "outlast.txt"
+with open(s,'r') as file1:
+    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+    h = []
+    u = []
+    x = []
+    j = -1
+    for row in readfile:       
+        if (j >= 0):
+            dx =float(row[0])
+            dt =float(row[1])
+            t =float(row[2])
+            x.append(float(row[3]))
+            h.append(float(row[4]))
+            u.append(float(row[6]))
+                
+        j = j + 1
+    x = array(x)
+    u = array(u)
+    h = array(h)
 
+xbeg = int((350)/dx)
+xend = int((650)/dx)
+xt1 =x[xbeg:xend:gap]
+ht1 =h[xbeg:xend:gap]
+"""
 """
 plot(xt,ht ,'-b')
 xlim([350,650])
